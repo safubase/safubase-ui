@@ -1,0 +1,15 @@
+:root {
+  --mobile-breakpoint: 650px;
+  --tablet-breakpoint: 750px;
+  --desktop-breakpoint: 1050px;
+
+  --max-main-width: 2000px;
+
+  --screen-width: 1500px;
+
+  --border-radius-medium: 6px;
+
+  --component-sidebar-width: 120px;
+  --component-sidebar-open-width: 220px;
+  --component-header-height: 60px;
+}

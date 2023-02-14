@@ -1,0 +1,14 @@
+.flxctrctr {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.displaynone {
+  display: none;
+}
+
+.visuallyhidden {
+  visibility: hidden;
+}
+
