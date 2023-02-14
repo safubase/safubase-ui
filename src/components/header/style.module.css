@@ -1,13 +1,11 @@
 .header {
   display: none;
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: var(--component-header-height);
-  background-color: white;
-  padding: 0 1rem;
+  top: 0; left: 0;
+  width: 100%; height: var(--component-header-height);
+  padding:  1rem;
   box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
+  background-color: black;
 }
 
 @media only screen and (max-width: 650px) {
@@ -18,12 +16,18 @@
   }
 }
 
-.header-hamicon {
-
+.header-hamburgericon > svg {
+  font-size: 1.6rem; font-weight: bold;
+  cursor: pointer;
+  color: white;
 }
 
-.header-hamicon > svg {
-  font-size: 1.4rem;
-  font-weight: bold;
+.header-logo {
+  width: 120px;
+}
+
+.header-notificationicon  > svg {
+  font-size: 1.6rem; font-weight: bold;
   cursor: pointer;
+  color: white;
 }

@@ -26,14 +26,22 @@ class UserLayout extends React.Component {
   }
 
   componentDidMount() {
-    UTILS_API.get_profile(1, this.context);
+    //UTILS_API.get_profile(1, this.context);
   }
 
   render() {
     return (
       <>
         <Header />
-        <main className={cn(style['main'])}>{this.props.children}</main>
+        <Sidebar />
+        <main
+          className={cn(
+            style['main'],
+            this.context.state.sidebar_open ? style['sidebaropen'] : null
+          )}
+        >
+          {this.props.element || this.props.children}
+        </main>
         <Footer />
       </>
     );

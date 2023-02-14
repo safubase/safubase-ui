@@ -4,6 +4,7 @@ import cn from 'classnames';
 
 // COMPONENTS
 import HamburgerIcon from '../icons/hamburger';
+import NotificationIcon from '../icons/notification';
 
 // CONTEXT
 import { Context } from '../../context';
@@ -27,15 +28,19 @@ class Header extends React.Component {
     return (
       <header className={cn(style['header'])}>
         <div
-          onClick={() => {
-            this.context.set_state({
-              ...this.context.state,
-              sidebar_open: !this.context.state.sidebar_open,
-            });
-          }}
-          className={cn(style['header-hamicon'], 'flxctrctr')}
+          onClick={() => {}}
+          className={cn(style['header-hamburgericon'], 'flxctrctr')}
         >
           <HamburgerIcon />
+        </div>
+
+        <img className={cn(style['header-logo'])} src="/mobile_logo.png" />
+
+        <div
+          onClick={() => {}}
+          className={cn(style['header-notificationicon'], 'flxctrctr')}
+        >
+          <NotificationIcon />
         </div>
       </header>
     );

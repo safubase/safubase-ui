@@ -21,7 +21,7 @@ class Sidebar extends React.Component {
       <aside
         className={cn(
           style['sidebar'],
-          this.context.state.sidebar_open ? style['sidebar-open'] : null
+          this.context.state.sidebar_open ? style['sidebaropen'] : null
         )}
         onMouseOver={() => {
           if (window.innerWidth < 650) return;

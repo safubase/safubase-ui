@@ -1,6 +1,7 @@
 // MODULES
 import React from 'react';
 import cn from 'classnames';
+import { Murecho } from '@next/font/google';
 
 // CONTEXT
 import { Provider } from '../context';

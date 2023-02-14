@@ -1,0 +1,116 @@
+.sectiondash {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin-top: 1.2rem;
+}
+
+@media only screen and (max-width: 1150px) {
+  .sectiondash {
+    display: block;
+  }  
+}
+
+@media only screen and (max-width: 650px) {
+  .sectiondash {
+    margin-top: 0;
+  }  
+}
+
+.sectiondash-left {
+  width: 50%;
+  margin-right: 2rem;
+}
+
+@media only screen and (max-width: 1150px) {
+  .sectiondash-left {
+    width: auto;
+    margin-right: 0;
+  }
+}
+
+.sectiondash-right {
+  width: 50%;
+}
+
+@media only screen and (max-width: 1150px) {
+  .sectiondash-right {
+    width: auto;
+    margin-top: 1rem;
+  }
+}
+
+/*
+*
+* HELLO COMPONENT
+*
+*/
+.comphello {
+  height: 170px;
+  border-radius: 12px;
+  background-color: rgb(235, 235, 235);
+  display: flex; justify-content: flex-start; align-items: center;
+  position: relative;
+}
+
+@media only screen and (max-width: 650px) {
+  .comphello {
+    height: 120px;
+  }
+}
+
+.comphello-textarea {
+  margin-left: 2rem;
+}
+
+@media only screen and (max-width: 650px) {
+  .comphello-textarea {
+    margin-left: 1rem;
+  }
+}
+
+.comphello-textarea-title {
+  font-size: 30px; font-weight: bold;
+}
+
+@media only screen and (max-width: 1450px) {
+  .comphello-textarea-title {
+    font-size: 20px;
+  }
+}
+
+@media only screen and (max-width: 650px) {
+  .comphello-textarea-title {
+    font-size: 16px;
+  }
+}
+
+.comphello-textarea-desc {
+  font-size: 18px; font-weight: 400;
+}
+
+@media only screen and (max-width: 1450px) {
+  .comphello-textarea-desc {
+    font-size: 16px;
+  }
+}
+
+@media only screen and (max-width: 650px) {
+  .comphello-textarea-desc {
+    font-size: 13px;
+  }
+}
+
+.comphello-manimg {
+  width: 170px;
+  position: absolute;
+  right: 10%;
+  bottom: 0;
+}
+
+@media only screen and (max-width: 650px) {
+  .comphello-manimg {
+    width: 110px;
+    right: 8%;
+  }
+}
