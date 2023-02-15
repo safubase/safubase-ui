@@ -97,7 +97,7 @@ export async function signup(body, version = 1, context) {
 
 /**
  *
- * LOGIN Use this to let the user log into server
+ * LOGIN Use this to log the user into server
  */
 export async function login(body, version = 1, context) {
   if (!Number(version)) {
