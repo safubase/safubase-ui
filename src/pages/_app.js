@@ -1,10 +1,12 @@
 // MODULES
 import React from 'react';
 import cn from 'classnames';
-import { Murecho } from '@next/font/google';
 
 // CONTEXT
 import { Provider } from '../context';
+
+// PAGES
+import ErrorPage from '../components/error';
 
 // STYLES
 import '../styles/index.css';
@@ -20,7 +22,11 @@ class App extends React.Component {
   render() {
     return (
       <Provider>
-        <this.props.Component {...this.props.pageProps} />
+        {this.props.pageProps.statusCode ? (
+          <ErrorPage statusCode={this.props.pageProps.statusCode} />
+        ) : (
+          <this.props.Component {...this.props.pageProps} />
+        )}
       </Provider>
     );
   }

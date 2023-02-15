@@ -1,20 +1,16 @@
 // MODULES
 import React from 'react';
-import { IoMdNotifications, IoMdNotificationsOutline } from 'react-icons/io';
+import { MdOutlineLogin } from 'react-icons/md';
 
-class Notification extends React.Component {
+class LoginIcon extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
   }
 
   render() {
-    return this.props.active ? (
-      <IoMdNotifications />
-    ) : (
-      <IoMdNotificationsOutline />
-    );
+    return this.props.active ? <MdOutlineLogin /> : <MdOutlineLogin />;
   }
 }
 
-export default Notification;
+export default LoginIcon;

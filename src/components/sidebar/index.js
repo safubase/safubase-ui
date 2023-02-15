@@ -8,6 +8,7 @@ import { Context } from '../../context';
 // COMPONENTS
 import HomeIcon from '../icons/home';
 import ProfileIcon from '../icons/profile';
+import SettingsIcon from '../icons/settings';
 import LoginIcon from '../icons/login';
 import LogoutIcon from '../icons/logout';
 
@@ -19,7 +20,16 @@ class Sidebar extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      pathname: '',
+    };
+  }
+
+  componentDidMount() {
+    this.setState({
+      ...this.state,
+      pathname: window.location.pathname,
+    });
   }
 
   render() {
@@ -48,24 +58,63 @@ class Sidebar extends React.Component {
       >
         <div className={cn(style['ctr-sidebar'])}>
           <div className={cn(style['ctr-sidebar-top'])}>
-            <a className={cn(style['ctr-sidebar-top-iconctr'])} href="#">
-              <HomeIcon />{' '}
-              {this.context.state.sidebar_open ? <span>Home</span> : null}
+            <a className={cn(style['ctr-sidebar-top-iconctr'])} href="/">
+              <HomeIcon active={this.state.pathname === '/' ? true : false} />
+              <span
+                className={cn(
+                  this.context.state.sidebar_open
+                    ? style['ctr-sidebar-top-iconctr-spanactive']
+                    : null
+                )}
+              >
+                Home
+              </span>
+            </a>
+
+            <a className={cn(style['ctr-sidebar-top-iconctr'])} href="/profile">
+              <ProfileIcon
+                active={this.state.pathname === '/profile' ? true : false}
+              />
+              <span
+                className={cn(
+                  this.context.state.sidebar_open
+                    ? style['ctr-sidebar-top-iconctr-spanactive']
+                    : null
+                )}
+              >
+                Profile
+              </span>
+            </a>
+
+            <a
+              className={cn(style['ctr-sidebar-top-iconctr'])}
+              href="/settings"
+            >
+              <SettingsIcon
+                active={this.state.pathname === '/settings' ? true : false}
+              />
+              <span
+                className={cn(
+                  this.context.state.sidebar_open
+                    ? style['ctr-sidebar-top-iconctr-spanactive']
+                    : null
+                )}
+              >
+                Settings
+              </span>
             </a>
 
             <a className={cn(style['ctr-sidebar-top-iconctr'])} href="#">
-              <ProfileIcon />{' '}
-              {this.context.state.sidebar_open ? <span>Profile</span> : null}
-            </a>
-
-            <a className={cn(style['ctr-sidebar-top-iconctr'])} href="#">
-              <HomeIcon />{' '}
-              {this.context.state.sidebar_open ? <span>Home</span> : null}
-            </a>
-
-            <a className={cn(style['ctr-sidebar-top-iconctr'])} href="#">
-              <HomeIcon />{' '}
-              {this.context.state.sidebar_open ? <span>Home</span> : null}
+              <HomeIcon />
+              <span
+                className={cn(
+                  this.context.state.sidebar_open
+                    ? style['ctr-sidebar-top-iconctr-spanactive']
+                    : null
+                )}
+              >
+                Home
+              </span>
             </a>
           </div>
 
@@ -73,13 +122,29 @@ class Sidebar extends React.Component {
             <div className={cn(style['ctr-sidebar-bottom-iconctr'])}>
               {this.context.state.auth ? (
                 <>
-                  <LogoutIcon />{' '}
-                  {this.context.state.sidebar_open ? <span>Logout</span> : null}
+                  <LogoutIcon />
+                  <span
+                    className={cn(
+                      this.context.state.sidebar_open
+                        ? style['ctr-sidebar-bottom-iconctr-spanactive']
+                        : null
+                    )}
+                  >
+                    Logout
+                  </span>
                 </>
               ) : (
                 <>
-                  <LogoutIcon />{' '}
-                  {this.context.state.sidebar_open ? <span>Login</span> : null}
+                  <LoginIcon />
+                  <span
+                    className={cn(
+                      this.context.state.sidebar_open
+                        ? style['ctr-sidebar-bottom-iconctr-spanactive']
+                        : null
+                    )}
+                  >
+                    Login
+                  </span>
                 </>
               )}
             </div>

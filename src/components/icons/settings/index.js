@@ -1,6 +1,6 @@
 // MODULES
 import React from 'react';
-import { IoSettingsSharp, IoSettingsOutline } from 'react-icons/io';
+import { RiSettings4Fill, RiSettings4Line } from 'react-icons/ri';
 
 class Settings extends React.Component {
   constructor(props) {
@@ -9,7 +9,7 @@ class Settings extends React.Component {
   }
 
   render() {
-    return this.props.active ? <IoSettingsSharp /> : <IoSettingsOutline />;
+    return this.props.active ? <RiSettings4Fill /> : <RiSettings4Line />;
   }
 }
 

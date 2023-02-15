@@ -5,13 +5,17 @@ const initial_state = {
   user: {
     // current user info
     id: '',
-    username: 'ruzgarataozkan',
+    username: '',
     email: '',
     email_verified: false,
     api_key: '',
   },
-  auth: true, // false = logged out, true = logged in, null = waiting for the server response
+  auth: null, // false = logged out, true = logged in, null = waiting for the server response
   sidebar_open: false,
+  modals: {
+    login: false,
+    signup: false,
+  },
 };
 
 function reducer(value = state, action) {
