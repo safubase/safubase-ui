@@ -176,7 +176,7 @@ class CompInput extends React.Component {
             onClick={this.on_search}
             className={cn(style['compinput-bg-btn'])}
           >
-            CHECK
+            AUDIT
           </button>
         </div>
       </div>
@@ -210,6 +210,20 @@ class Home extends React.Component {
                 <div className={cn(style['sectiondash-left'])}>
                   <CompHello />
                   <div className={cn(style['sectiondash-left-inputarea'])}>
+                    <div
+                      className={cn(style['sectiondash-left-inputarea-live'])}
+                    >
+                      <div
+                        className={cn(
+                          style['sectiondash-left-inputarea-live-logo']
+                        )}
+                      >
+                        LIVE
+                      </div>
+                      You can quickly check the
+                      <strong> token smart contract</strong> here. This is a
+                      quick Audit option.
+                    </div>
                     <CompInput />
                   </div>
                 </div>
