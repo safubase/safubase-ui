@@ -74,6 +74,7 @@ class CompInput extends React.Component {
     super(props);
     this.state = {
       dd_open: false, // dropdown open
+      address: '',
       network: {
         img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Binance_Logo.svg/2048px-Binance_Logo.svg.png',
         name: 'Binance Smart Chain',
@@ -164,6 +165,10 @@ class CompInput extends React.Component {
             <input
               className={cn(style['compinput-bg-inputarea-input'])}
               placeholder="0x90741BD5C2c928Ad19a58157987e11b2dE07c15B"
+              value={this.state.address}
+              onChange={(e) => {
+                this.setState({ ...this.state, address: e.target.value });
+              }}
             ></input>
           </div>
 
