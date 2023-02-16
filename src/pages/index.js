@@ -31,7 +31,7 @@ export async function getServerSideProps({ req }) {
  * HELLO COMPONENT
  *
  */
-class HelloComp extends React.Component {
+class CompHello extends React.Component {
   static contextType = Context;
 
   constructor(props) {
@@ -67,6 +67,118 @@ class HelloComp extends React.Component {
   }
 }
 
+class CompInput extends React.Component {
+  static contextType = Context;
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      dd_open: false, // dropdown open
+      network: {
+        img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Binance_Logo.svg/2048px-Binance_Logo.svg.png',
+        name: 'Binance Smart Chain',
+        chain_id: 56,
+      }, // default selected network
+      networks: [
+        {
+          img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Binance_Logo.svg/2048px-Binance_Logo.svg.png',
+          name: 'Binance Smart Chain',
+          chain_id: 56,
+        },
+        {
+          img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Ethereum_logo_2014.svg/1257px-Ethereum_logo_2014.svg.png',
+          name: 'Ethereum Mainnet',
+          chain_id: 1,
+        },
+        {
+          img: 'https://cryptologos.cc/logos/polygon-matic-logo.png',
+          name: 'Polygon falan filan',
+        },
+      ],
+    };
+
+    this.on_search = this.on_search.bind(this);
+  }
+
+  async on_search() {}
+
+  render() {
+    return (
+      <div className={cn(style['compinput'])}>
+        <div className={cn(style['compinput-bg'])}>
+          <div className={cn(style['compinput-bg-inputarea'])}>
+            <div
+              onClick={() => {
+                this.setState({
+                  ...this.state,
+                  dd_open: !this.state.dd_open,
+                });
+              }}
+              className={cn(style['compinput-bg-inputarea-dd'])}
+            >
+              <img src={this.state.network.img} />
+            </div>
+
+            <div
+              className={cn(
+                style['compinput-bg-inputarea-ddoptions'],
+                this.state.dd_open
+                  ? style['compinput-bg-inputarea-ddoptionsopen']
+                  : null
+              )}
+            >
+              {this.state.networks.map((curr, index) => {
+                return (
+                  <div
+                    key={index}
+                    onClick={() => {
+                      this.setState({
+                        ...this.state,
+                        network: curr,
+                        dd_open: false,
+                      });
+                    }}
+                    className={cn(
+                      style['compinput-bg-inputarea-ddoptions-item']
+                    )}
+                  >
+                    <img
+                      className={cn(
+                        style['compinput-bg-inputarea-ddoptions-item-img']
+                      )}
+                      src={curr.img}
+                    />
+
+                    <div
+                      className={cn(
+                        style['compinput-bg-inputarea-ddoptions-item-name']
+                      )}
+                    >
+                      {curr.name}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+
+            <input
+              className={cn(style['compinput-bg-inputarea-input'])}
+              placeholder="0x90741BD5C2c928Ad19a58157987e11b2dE07c15B"
+            ></input>
+          </div>
+
+          <button
+            onClick={this.on_search}
+            className={cn(style['compinput-bg-btn'])}
+          >
+            CHECK
+          </button>
+        </div>
+      </div>
+    );
+  }
+}
+
 /**
  *
  * * * PAGE
@@ -88,12 +200,17 @@ class Home extends React.Component {
         <Head title="safubase" desc="safubase" />
         <UserLayout
           element={
-            <section className={cn('section', style['sectiondash'])}>
-              <div className={cn(style['sectiondash-left'])}>
-                <HelloComp />
-              </div>
-              <div className={cn(style['sectiondash-right'])}></div>
-            </section>
+            <>
+              <section className={cn('section', style['sectiondash'])}>
+                <div className={cn(style['sectiondash-left'])}>
+                  <CompHello />
+                  <div className={cn(style['sectiondash-left-inputarea'])}>
+                    <CompInput />
+                  </div>
+                </div>
+                <div className={cn(style['sectiondash-right'])}></div>
+              </section>
+            </>
           }
         />
       </>
@@ -102,5 +219,3 @@ class Home extends React.Component {
 }
 
 export default Home;
-
-//test

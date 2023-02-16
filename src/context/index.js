@@ -18,7 +18,7 @@ const initial_state = {
   },
 };
 
-function reducer(value = state, action) {
+function reducer(value = initial_state, action) {
   return {
     ...action,
   };
