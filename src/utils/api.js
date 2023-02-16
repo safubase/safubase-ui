@@ -6,7 +6,7 @@ import config from '../config';
 
 /**
  *
- * AXIOS Axios configuration
+ * AXIOS INSTANCE configuration
  *
  */
 const instance = axios.create({
