@@ -356,10 +356,16 @@ class CompLastAdt extends React.Component {
 
         <div className={cn(style['complastadts-audits'])}>
           {this.props.data.map((curr, index) => {
+            console.log(index % 2 === 0);
             return (
               <div
                 key={index}
-                className={cn(style['complastadts-audits-item'])}
+                className={cn(
+                  style['complastadts-audits-item'],
+                  index % 2 === 0
+                    ? style['complastadts-audits-itemwhitebg']
+                    : null
+                )}
               >
                 <div
                   className={cn(
@@ -457,7 +463,7 @@ class Home extends React.Component {
         ...this.state,
         audits: audits,
       });
-    }, 3000);
+    }, 7000);
   }
 
   render() {

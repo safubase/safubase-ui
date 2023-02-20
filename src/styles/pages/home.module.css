@@ -347,17 +347,21 @@
 .complastadts-audits-item {
   display: flex; justify-content: space-between; align-items: center;
   border-radius: var(--border-radius-small);
-  background-color: rgb(235, 235, 235);
+  background-color: rgb(230, 230, 230);
   padding: .4rem 1rem .4rem .4rem;
   height: 55px;
   margin-bottom: .6rem;
   font-size: 15px;
 }
 
+.complastadts-audits-itemwhitebg {
+  background-color: rgb(247, 247, 247);
+
+}
+
 .complastadts-audits-item-imgnamesymbol {
   height: 100%;
   display: flex; justify-content: flex-start; align-items: center;
-
 }
 
 .complastadts-audits-item-imgnamesymbol-img {
