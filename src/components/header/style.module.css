@@ -2,8 +2,8 @@
   display: none;
   position: fixed;
   top: 0; left: 0;
-  width: 100%; height: var(--component-header-height);
-  padding:  1rem;
+  width: 100%; height: var(--comp-header-height);
+  padding: 0 1rem;
   box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
   background-color: black;
   z-index: 10;
@@ -17,6 +17,10 @@
   }
 }
 
+.header-hamburgericon {
+  display: flex; justify-content: center; align-items: center;
+}
+
 .header-hamburgericon > svg {
   font-size: 1.6rem; font-weight: bold;
   cursor: pointer;
@@ -25,6 +29,10 @@
 
 .header-logo {
   width: 120px;
+}
+
+.header-notificationicon {
+  display: flex; justify-content: center; align-items: center;
 }
 
 .header-notificationicon  > svg {
