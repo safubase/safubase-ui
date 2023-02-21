@@ -26,7 +26,7 @@ class UserLayout extends React.Component {
   }
 
   componentDidMount() {
-    UTILS_API.get_profile(1, this.context);
+    //UTILS_API.get_profile(1, this.context);
   }
 
   render() {

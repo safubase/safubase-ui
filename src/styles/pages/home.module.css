@@ -320,7 +320,6 @@
   }
 }
 
-
 .complastadts-cats-item {
   color: rgba(0, 0, 0, 0.4);
   font-size: 15px; font-weight: 500;
@@ -347,16 +346,20 @@
 .complastadts-audits-item {
   display: flex; justify-content: space-between; align-items: center;
   border-radius: var(--border-radius-small);
-  background-color: rgb(230, 230, 230);
+  background-color: rgb(233, 233, 233);
   padding: .4rem 1rem .4rem .4rem;
   height: 55px;
   margin-bottom: .6rem;
   font-size: 15px;
+  transition: all .3s ease-in;
 }
 
 .complastadts-audits-itemwhitebg {
   background-color: rgb(247, 247, 247);
+}
 
+.complastadts-audits-itemani {
+  animation: 1s ease 0s ani-complastadts-audits-item;
 }
 
 .complastadts-audits-item-imgnamesymbol {
@@ -405,5 +408,17 @@
   background-color: black;
   color: white;
   cursor: pointer;
+}
+
+@keyframes ani-complastadts-audits-item {
+  from {
+    opacity: .4;
+    transform: translateX(10rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 

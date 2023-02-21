@@ -264,16 +264,42 @@ class CompInput extends React.Component {
  * LATEST AUDITS COMPONENT
  *
  */
-class CompLastAdt extends React.Component {
+class CompLastAdts extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       category: 'all',
       audits: [],
+      animation: false,
     };
+
+    this.audits_ref = React.createRef();
   }
 
-  componentDidUpdate() {}
+  componentDidUpdate() {
+    if (!this.state.animation) {
+      this.setState({
+        ...this.state,
+        animation: true,
+      });
+
+      setTimeout(() => {
+        this.state.animation = false;
+
+        const class_list = this.audits_ref.current.children[0].classList;
+        let ani_class = '';
+
+        for (let i = 0; i < class_list.length; i++) {
+          if (class_list[i].includes('itemani')) {
+            // include param must be included in the class name in css
+            ani_class = class_list[i];
+          }
+        }
+
+        class_list.remove(ani_class);
+      }, 1000);
+    }
+  }
 
   componentDidMount() {}
 
@@ -354,9 +380,8 @@ class CompLastAdt extends React.Component {
           </div>
         </div>
 
-        <div className={cn(style['complastadts-audits'])}>
+        <div ref={this.audits_ref} className={cn(style['complastadts-audits'])}>
           {this.props.data.map((curr, index) => {
-            console.log(index % 2 === 0);
             return (
               <div
                 key={index}
@@ -364,6 +389,9 @@ class CompLastAdt extends React.Component {
                   style['complastadts-audits-item'],
                   index % 2 === 0
                     ? style['complastadts-audits-itemwhitebg']
+                    : null,
+                  index === 0 && this.state.animation
+                    ? style['complastadts-audits-itemani']
                     : null
                 )}
               >
@@ -496,7 +524,7 @@ class Home extends React.Component {
                     <CompInput />
                   </div>
 
-                  <CompLastAdt data={this.state.audits} />
+                  <CompLastAdts data={this.state.audits} />
                 </div>
 
                 <div className={cn(style['sectiondash-right'])}></div>
