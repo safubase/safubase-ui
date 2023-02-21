@@ -36,7 +36,7 @@ function sort_audits_by_date(data) {
 
 /**
  *
- * SERVER SIDE data processing layer
+ * SERVER SIDE data processing layer, But it is better to do the math calculations in client side.
  *
  */
 export async function getServerSideProps({ req }) {
