@@ -591,7 +591,7 @@ class Home extends React.Component {
 
                   <CompLastAdts
                     data={this.props.latest_audits}
-                    interval={10000}
+                    interval={1000000}
                   />
                 </div>
 
