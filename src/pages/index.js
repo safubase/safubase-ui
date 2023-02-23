@@ -494,7 +494,12 @@ class CompLastAdts extends React.Component {
   }
 }
 
-// PROFILE INPUT ON RIGHT COMPONENT
+/**
+ *
+ * PROFILE INPUT ON RIGHT COMPONENT
+ *
+ *
+ * */
 class CompProfileInput extends React.Component {
   constructor(props) {
     super(props);
@@ -608,7 +613,7 @@ class Home extends React.Component {
                           style['sectiondash-right-boxes-box-desc']
                         )}
                       >
-                        sarmaz test anan baban zaa ahah olm cok iyi lan
+                        Lorem ipsum dolor
                       </div>
                     </div>
 
@@ -626,7 +631,7 @@ class Home extends React.Component {
                           style['sectiondash-right-boxes-box-desc']
                         )}
                       >
-                        sarmaz test anan baban zaa ahah olm cok iyi lan
+                        Lorem ipsum dolor
                       </div>
                     </div>
                   </div>

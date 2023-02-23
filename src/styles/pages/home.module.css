@@ -96,7 +96,7 @@
   width: 220px;
   padding: 1rem;
   border-radius: var(--border-radius-large);
-  display: flex; justify-content: center; align-items: flex-start;
+  display: flex; justify-content: center; align-items: center;
   background-color: rgb(233, 233, 233);
   margin-right: 1rem;
   margin-bottom: 1rem;
