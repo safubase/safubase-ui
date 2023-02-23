@@ -5,6 +5,9 @@ import cn from 'classnames';
 // COMPONENTS
 import Head from '../components/head';
 import UserLayout from '../components/layouts/user';
+import SearchIcon from '../components/icons/search';
+import NotificationIcon from '../components/icons/notification';
+import IconArrow from '../components/icons/arrow';
 
 // CONTEXT
 import { Context } from '../context';
@@ -40,7 +43,7 @@ function sort_audits_by_date(data) {
  *
  */
 export async function getServerSideProps({ req }) {
-  const data = [
+  const latest_audits = [
     {
       name: 'oldest',
       symbol: 'ETH',
@@ -79,18 +82,18 @@ export async function getServerSideProps({ req }) {
     },
   ];
 
-  sort_audits_by_date(data);
+  sort_audits_by_date(latest_audits);
 
   // humanize created at value
-  for (let i = 0; i < data.length; i++) {
-    data[i].created_at = new Date(data[i].created_at)
+  for (let i = 0; i < latest_audits.length; i++) {
+    latest_audits[i].created_at = new Date(latest_audits[i].created_at)
       .toISOString()
       .split('T')[0];
   }
 
   return {
     props: {
-      data: data,
+      latest_audits: latest_audits,
     },
   };
 }
@@ -269,39 +272,78 @@ class CompLastAdts extends React.Component {
     super(props);
     this.state = {
       category: 'all',
-      audits: [],
-      animation: false,
+      audits: props.data,
+      animation: true,
     };
 
     this.audits_ref = React.createRef();
+
+    this.animate = this.animate.bind(this);
+  }
+
+  animate() {
+    if (!this.state.animation) {
+      return;
+    }
+
+    this.audits_ref.current.children[0].classList.add(
+      style['complastadts-audits-itemani']
+    );
+
+    setTimeout(() => {
+      let ani_class = '';
+
+      const class_list = this.audits_ref.current.children[0].classList;
+
+      for (let i = 0; i < class_list.length; i++) {
+        if (class_list[i].includes('complastadts-audits-itemani')) {
+          // include param must be included in the class name in css
+          ani_class = class_list[i];
+        }
+      }
+
+      if (!ani_class) {
+        return;
+      }
+
+      class_list.remove(ani_class);
+
+      this.setState({
+        ...this.state,
+        animation: false,
+      });
+    }, 1000);
   }
 
   componentDidUpdate() {
-    if (!this.state.animation) {
-      this.setState({
-        ...this.state,
-        animation: true,
-      });
-
-      setTimeout(() => {
-        this.state.animation = false;
-
-        const class_list = this.audits_ref.current.children[0].classList;
-        let ani_class = '';
-
-        for (let i = 0; i < class_list.length; i++) {
-          if (class_list[i].includes('itemani')) {
-            // include param must be included in the class name in css
-            ani_class = class_list[i];
-          }
-        }
-
-        class_list.remove(ani_class);
-      }, 1000);
-    }
+    this.animate();
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+    // Fetch latest audits once in a while
+    setInterval(() => {
+      const audits = [
+        ...this.state.audits,
+        {
+          name: 'test',
+          symbol: 'ETH',
+          img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Binance_Logo.svg/2048px-Binance_Logo.svg.png',
+          address: '0x123',
+          score: 3.4,
+          created_at: new Date().toISOString().split('T')[0],
+          network: 'ETH',
+        },
+      ];
+
+      sort_audits_by_date(audits);
+
+      this.setState({
+        ...this.state,
+        audits: audits,
+        animation: true,
+      });
+    }, this.props.interval);
+  }
 
   render() {
     return (
@@ -381,7 +423,7 @@ class CompLastAdts extends React.Component {
         </div>
 
         <div ref={this.audits_ref} className={cn(style['complastadts-audits'])}>
-          {this.props.data.map((curr, index) => {
+          {this.state.audits.map((curr, index) => {
             return (
               <div
                 key={index}
@@ -389,9 +431,6 @@ class CompLastAdts extends React.Component {
                   style['complastadts-audits-item'],
                   index % 2 === 0
                     ? style['complastadts-audits-itemwhitebg']
-                    : null,
-                  index === 0 && this.state.animation
-                    ? style['complastadts-audits-itemani']
                     : null
                 )}
               >
@@ -455,6 +494,51 @@ class CompLastAdts extends React.Component {
   }
 }
 
+// PROFILE INPUT ON RIGHT COMPONENT
+class CompProfileInput extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      search_value: '',
+    };
+  }
+
+  componentDidMount() {}
+
+  render() {
+    return (
+      <div className={cn(style['compprofileinput'])}>
+        <div className={cn(style['compprofileinput-input'])}>
+          <SearchIcon />
+
+          <input
+            value={this.state.search_value}
+            onChange={(e) => {
+              this.setState({
+                ...this.state,
+                search_value: e.target.value,
+              });
+            }}
+            placeholder="Search..."
+          />
+        </div>
+
+        <div className={cn(style['compprofileinput-profile'])}>
+          <div className={cn(style['compprofileinput-profile-notification'])}>
+            <NotificationIcon />
+          </div>
+
+          <img src="https://media.licdn.com/dms/image/D4D03AQFdaUP5KE6pnA/profile-displayphoto-shrink_200_200/0/1664026280191?e=1682553600&v=beta&t=ey_rNY4aX_XdTaOky1eZsviijJMO5gGC094xv2UaHro" />
+
+          <div className={cn(style['compprofileinput-profile-arrow'])}>
+            <IconArrow dir="down" />
+          </div>
+        </div>
+      </div>
+    );
+  }
+}
+
 /**
  *
  * * * PAGE
@@ -465,34 +549,10 @@ class Home extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      audits: this.props.data,
-    };
+    this.state = {};
   }
 
-  componentDidMount() {
-    setInterval(() => {
-      const audits = [
-        ...this.state.audits,
-        {
-          name: 'test',
-          symbol: 'ETH',
-          img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Binance_Logo.svg/2048px-Binance_Logo.svg.png',
-          address: '0x123',
-          score: 3.4,
-          created_at: new Date().toISOString().split('T')[0],
-          network: 'ETH',
-        },
-      ];
-
-      sort_audits_by_date(audits);
-
-      this.setState({
-        ...this.state,
-        audits: audits,
-      });
-    }, 7000);
-  }
+  componentDidMount() {}
 
   render() {
     return (
@@ -524,10 +584,53 @@ class Home extends React.Component {
                     <CompInput />
                   </div>
 
-                  <CompLastAdts data={this.state.audits} />
+                  <CompLastAdts
+                    data={this.props.latest_audits}
+                    interval={10000}
+                  />
                 </div>
 
-                <div className={cn(style['sectiondash-right'])}></div>
+                <div className={cn(style['sectiondash-right'])}>
+                  <CompProfileInput />
+
+                  <div className={cn(style['sectiondash-right-boxes'])}>
+                    <div className={cn(style['sectiondash-right-boxes-box'])}>
+                      <div
+                        className={cn(
+                          style['sectiondash-right-boxes-box-title']
+                        )}
+                      >
+                        11
+                      </div>
+
+                      <div
+                        className={cn(
+                          style['sectiondash-right-boxes-box-desc']
+                        )}
+                      >
+                        sarmaz test anan baban zaa ahah olm cok iyi lan
+                      </div>
+                    </div>
+
+                    <div className={cn(style['sectiondash-right-boxes-box'])}>
+                      <div
+                        className={cn(
+                          style['sectiondash-right-boxes-box-title']
+                        )}
+                      >
+                        6
+                      </div>
+
+                      <div
+                        className={cn(
+                          style['sectiondash-right-boxes-box-desc']
+                        )}
+                      >
+                        sarmaz test anan baban zaa ahah olm cok iyi lan
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </section>
             </>
           }
