@@ -573,10 +573,6 @@ class CompProfileInput extends React.Component {
             >
               <NotificationIcon />
             </div>
-
-            <div className={cn(style["compprofileinput-left-profile-arrow"])}>
-              <IconArrow dir="down" />
-            </div>
           </div>
         </div>
 
@@ -688,6 +684,24 @@ class Home extends React.Component {
                         )}
                       >
                         11
+                      </div>
+
+                      <div
+                        className={cn(
+                          style["sectiondash-right-boxes-box-desc"]
+                        )}
+                      >
+                        Lorem ipsum dolor
+                      </div>
+                    </div>
+
+                    <div className={cn(style["sectiondash-right-boxes-box"])}>
+                      <div
+                        className={cn(
+                          style["sectiondash-right-boxes-box-title"]
+                        )}
+                      >
+                        6
                       </div>
 
                       <div

@@ -108,13 +108,19 @@
 .sectiondash-right-boxes {
   margin-top: 1rem;
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
 }
 
+@media only screen and (max-width: 650px) {
+  .sectiondash-right-boxes {
+    display: none;
+  }
+}
+
 .sectiondash-right-boxes-box {
-  width: 220px;
+  width: 30%;
   padding: 1rem;
   border-radius: var(--border-radius-large);
   display: flex;
@@ -159,6 +165,7 @@
 @media only screen and (max-width: 650px) {
   .comphello {
     height: 120px;
+    margin-top: 1rem;
   }
 }
 
@@ -653,6 +660,7 @@
 
 .compprofileinput-right-buynow-bottom-title {
   width: 100%;
+  color: rgba(255, 255, 255, 0.6);
 }
 
 .compprofileinput-right-conwallet {
