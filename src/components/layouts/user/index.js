@@ -34,14 +34,17 @@ class UserLayout extends React.Component {
     UTILS.wallet_update(this.context);
 
     // WALLET EVENTS
-    ethereum.on('accountsChanged', (accounts) => {
-      if (!accounts.length || !accounts) {
-        UTILS.wallet_clear(this.context);
-        return;
-      }
 
-      UTILS.wallet_update(this.context);
-    });
+    if (window.ethereum) {
+      ethereum.on('accountsChanged', (accounts) => {
+        if (!accounts.length || !accounts) {
+          UTILS.wallet_clear(this.context);
+          return;
+        }
+
+        UTILS.wallet_update(this.context);
+      });
+    }
   }
 
   render() {
