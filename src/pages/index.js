@@ -276,7 +276,7 @@ class CompLastAdts extends React.Component {
     this.state = {
       category: "all",
       audits: props.data,
-      animation: true,
+      animation: false,
     };
 
     this.audits_ref = React.createRef();
@@ -486,7 +486,7 @@ class CompLastAdts extends React.Component {
                 </div>
 
                 <button className={cn(style["complastadts-audits-item-btn"])}>
-                  AUDIT
+                  VIEW
                 </button>
               </div>
             );
@@ -669,7 +669,7 @@ class Home extends React.Component {
 
                   <CompLastAdts
                     data={this.props.latest_audits}
-                    interval={1000000}
+                    interval={100000}
                   />
                 </div>
 

@@ -127,7 +127,7 @@
   justify-content: center;
   align-items: center;
   background-color: rgb(233, 233, 233);
-  margin-right: 1rem;
+
   margin-bottom: 1rem;
 }
 
@@ -476,6 +476,7 @@
 }
 
 .complastadts-audits-item-imgnamesymbol-namesymbol {
+  width: 100px;
   margin-left: 1rem;
 }
 
@@ -489,6 +490,7 @@
 }
 
 .complastadts-audits-item-date {
+  width: 100px;
 }
 
 @media only screen and (max-width: 650px) {
