@@ -48,6 +48,10 @@ export function str_remove_extra_space(str, mode = 0) {
  *
  */
 export async function wallet_update(context) {
+  if (!window.ethereum) {
+    return;
+  }
+
   let address = null;
 
   const accounts = await ethereum.request({
@@ -68,6 +72,10 @@ export async function wallet_update(context) {
 }
 
 export async function wallet_connect({ chain_id = 56 }, context) {
+  if (!window.ethereum) {
+    return;
+  }
+
   const chains = {
     // Ethereum Mainnet
     1: {
