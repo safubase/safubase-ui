@@ -83,6 +83,15 @@ export async function getServerSideProps({ req }) {
       created_at: new Date(1676903315821 + 12323232212122).toString(),
       network: "ETH",
     },
+    {
+      name: "newest newest",
+      symbol: "ETH",
+      img: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Binance_Logo.svg/2048px-Binance_Logo.svg.png",
+      address: "0x123",
+      score: 3.4,
+      created_at: new Date(1676903315821 + 12323232212122).toString(),
+      network: "ETH",
+    },
   ];
 
   sort_audits_by_date(latest_audits);
