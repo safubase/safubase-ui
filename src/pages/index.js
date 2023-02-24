@@ -12,6 +12,9 @@ import IconArrow from '../components/icons/arrow';
 // CONTEXT
 import { Context } from '../context';
 
+// UTILS
+import UTILS_HELPERS from '../utils/helpers';
+
 // STYLES
 import style from '../styles/pages/home.module.css';
 
@@ -496,7 +499,7 @@ class CompLastAdts extends React.Component {
 
 /**
  *
- * PROFILE INPUT ON RIGHT COMPONENT
+ * PROFILE & INPUT ON RIGHT COMPONENT
  *
  *
  * */
@@ -513,31 +516,46 @@ class CompProfileInput extends React.Component {
   render() {
     return (
       <div className={cn(style['compprofileinput'])}>
-        <div className={cn(style['compprofileinput-input'])}>
-          <SearchIcon />
+        <div className={cn(style['compprofileinput-left'])}>
+          <div className={cn(style['compprofileinput-left-input'])}>
+            <SearchIcon />
 
-          <input
-            value={this.state.search_value}
-            onChange={(e) => {
-              this.setState({
-                ...this.state,
-                search_value: e.target.value,
-              });
-            }}
-            placeholder="Search..."
-          />
+            <input
+              value={this.state.search_value}
+              onChange={(e) => {
+                this.setState({
+                  ...this.state,
+                  search_value: e.target.value,
+                });
+              }}
+              placeholder="Search..."
+            />
+          </div>
+
+          <div className={cn(style['compprofileinput-left-profile'])}>
+            <div
+              className={cn(
+                style['compprofileinput-left-profile-notification']
+              )}
+            >
+              <NotificationIcon />
+            </div>
+
+            <img src="https://as1.ftcdn.net/v2/jpg/02/99/04/20/1000_F_299042079_vGBD7wIlSeNl7vOevWHiL93G4koMM967.jpg" />
+
+            <div className={cn(style['compprofileinput-left-profile-arrow'])}>
+              <IconArrow dir="down" />
+            </div>
+          </div>
         </div>
 
-        <div className={cn(style['compprofileinput-profile'])}>
-          <div className={cn(style['compprofileinput-profile-notification'])}>
-            <NotificationIcon />
-          </div>
-
-          <img src="https://media.licdn.com/dms/image/D4D03AQFdaUP5KE6pnA/profile-displayphoto-shrink_200_200/0/1664026280191?e=1682553600&v=beta&t=ey_rNY4aX_XdTaOky1eZsviijJMO5gGC094xv2UaHro" />
-
-          <div className={cn(style['compprofileinput-profile-arrow'])}>
-            <IconArrow dir="down" />
-          </div>
+        <div className={cn(style['compprofileinput-right'])}>
+          <button
+            className={cn(style['compprofileinput-right-btn'])}
+            onClick={UTILS_HELPERS.connect_wallet}
+          >
+            Connect Wallet
+          </button>
         </div>
       </div>
     );

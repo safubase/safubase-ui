@@ -16,6 +16,10 @@ const initial_state = {
     login: false,
     signup: false,
   },
+  wallet: {
+    // Metamask or Trust Wallet data
+    address: '',
+  },
 };
 
 function reducer(value = initial_state, action) {
