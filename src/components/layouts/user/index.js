@@ -11,7 +11,7 @@ import Sidebar from '../../sidebar';
 import { Context } from '../../../context';
 
 // UTILS
-import UTILS_HELPER from '../../../utils/helpers.js';
+import UTILS from '../../../utils';
 import UTILS_API from '../../../utils/api.js';
 
 // STYLES
@@ -25,8 +25,23 @@ class UserLayout extends React.Component {
     this.state = {};
   }
 
+  /**
+   *
+   * LAYOUT INIT, event listener registrations, update wallet, many more
+   *
+   */
   componentDidMount() {
-    //UTILS_API.get_profile(1, this.context);
+    UTILS.wallet_update(this.context);
+
+    // WALLET EVENTS
+    ethereum.on('accountsChanged', (accounts) => {
+      if (!accounts.length || !accounts) {
+        UTILS.wallet_clear(this.context);
+        return;
+      }
+
+      UTILS.wallet_update(this.context);
+    });
   }
 
   render() {

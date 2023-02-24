@@ -4,21 +4,17 @@ import React from 'react';
 const initial_state = {
   user: {
     // current user info
-    id: '',
+    _id: '',
     username: '',
     email: '',
     email_verified: false,
-    api_key: '',
   },
   auth: null, // false = logged out, true = logged in, null = waiting for the server response
   sidebar_open: false,
-  modals: {
-    login: false,
-    signup: false,
-  },
+  modals: {},
   wallet: {
     // Metamask or Trust Wallet data
-    address: '',
+    address: null,
   },
 };
 

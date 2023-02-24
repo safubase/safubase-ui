@@ -13,7 +13,7 @@ import IconArrow from '../components/icons/arrow';
 import { Context } from '../context';
 
 // UTILS
-import UTILS_HELPERS from '../utils/helpers';
+import UTILS from '../utils';
 
 // STYLES
 import style from '../styles/pages/home.module.css';
@@ -504,11 +504,44 @@ class CompLastAdts extends React.Component {
  *
  * */
 class CompProfileInput extends React.Component {
+  static contextType = Context;
+
   constructor(props) {
     super(props);
     this.state = {
       search_value: '',
+      address: '',
     };
+  }
+
+  componentDidUpdate() {
+    if (!this.context.state.wallet.address && this.state.address) {
+      this.setState({
+        ...this.state,
+        address: '',
+      });
+
+      return;
+    }
+
+    if (this.context.state.wallet.address && !this.state.address) {
+      let address = this.context.state.wallet.address;
+
+      address =
+        address[0] +
+        address[1] +
+        address[2] +
+        address[3] +
+        '...' +
+        address[address.length - 3] +
+        address[address.length - 2] +
+        address[address.length - 1];
+
+      this.setState({
+        ...this.state,
+        address: address,
+      });
+    }
   }
 
   componentDidMount() {}
@@ -541,8 +574,6 @@ class CompProfileInput extends React.Component {
               <NotificationIcon />
             </div>
 
-            <img src="https://as1.ftcdn.net/v2/jpg/02/99/04/20/1000_F_299042079_vGBD7wIlSeNl7vOevWHiL93G4koMM967.jpg" />
-
             <div className={cn(style['compprofileinput-left-profile-arrow'])}>
               <IconArrow dir="down" />
             </div>
@@ -550,11 +581,37 @@ class CompProfileInput extends React.Component {
         </div>
 
         <div className={cn(style['compprofileinput-right'])}>
+          <button className={cn(style['compprofileinput-right-buynow'])}>
+            <div className={cn(style['compprofileinput-right-buynow-top'])}>
+              <span
+                className={cn(style['compprofileinput-right-buynow-top-token'])}
+              >
+                SAFUBASE
+              </span>
+
+              <span
+                className={cn(style['compprofileinput-right-buynow-top-price'])}
+              >
+                Presale
+              </span>
+            </div>
+
+            <div
+              className={cn(
+                style['compprofileinput-right-buynow-bottom-buynow']
+              )}
+            >
+              BUY NOW
+            </div>
+          </button>
+
           <button
-            className={cn(style['compprofileinput-right-btn'])}
-            onClick={UTILS_HELPERS.connect_wallet}
+            className={cn(style['compprofileinput-right-conwallet'])}
+            onClick={() => {
+              UTILS.wallet_connect({ chain_id: 56 }, this.context);
+            }}
           >
-            Connect Wallet
+            {this.state.address || 'Connect Wallet'}
           </button>
         </div>
       </div>
@@ -574,6 +631,8 @@ class Home extends React.Component {
     super(props);
     this.state = {};
   }
+
+  componentDidUpdate() {}
 
   componentDidMount() {}
 
@@ -604,6 +663,7 @@ class Home extends React.Component {
                       <strong> token smart contract</strong> here. This is a
                       quick Audit option.
                     </div>
+
                     <CompInput />
                   </div>
 

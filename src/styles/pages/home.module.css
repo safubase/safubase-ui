@@ -14,6 +14,8 @@
 @media only screen and (max-width: 650px) {
   .sectiondash {
     margin-top: 0;
+    display: flex;
+    flex-direction: column-reverse;
   }  
 }
 
@@ -24,7 +26,7 @@
 
 @media only screen and (max-width: 1150px) {
   .sectiondash-left {
-    width: auto;
+    width: 100%;
     margin-right: 0;
   }
 }
@@ -59,12 +61,13 @@
 
 .sectiondash-left-inputarea-live-logo {
   background-color: brown;
-  width: 34px; height: 34px;
+  width: 30px; height: 30px;
   display: flex; justify-content: center; align-items: center;
   border-radius: 50%;
+  font-size: 10px;
   color: white;
   position: absolute;
-  left: -17px; top: -17px;
+  left: -12px; top: -12px;
 }
 
 @media only screen and (max-width: 650px) {
@@ -73,7 +76,6 @@
     font-size: 9px;
     left: -6px; top: -6px;
   }
-  
 }
 
 .sectiondash-right {
@@ -82,8 +84,15 @@
 
 @media only screen and (max-width: 1150px) {
   .sectiondash-right {
-    width: auto;
+    width: 100%;
     margin-top: 1rem;
+  }
+}
+
+@media only screen and (max-width: 650px) {
+  .sectiondash-right {
+
+    margin-top: 0;
   }
 }
 
@@ -467,8 +476,6 @@
 
 .compprofileinput {
   display: flex; justify-content: space-between; align-items: center;
-
-
 }
 
 @media only screen and (max-width: 650px) {
@@ -484,13 +491,18 @@
   width: 100%;
 }
 
+@media only screen and (max-width: 650px) {
+  .compprofileinput-left {
+    width: 100%;
+  }
+}
+
 .compprofileinput-left-input {
   border-radius: var(--border-radius-small);
   background-color: rgb(235, 235, 235);
   display: flex; justify-content: flex-start; align-items: center;
   padding: .4rem .8rem;
   width: 100%; height: 40px;
-
 }
 
 .compprofileinput-left-input > input {
@@ -525,21 +537,37 @@
 }
 
 .compprofileinput-right {
-  margin-left: 1.4rem;
+  margin-left: 1rem;
+  display: flex; justify-content: center; align-items: center;
 }
 
 @media only screen and (max-width: 650px) {
   .compprofileinput-right {
     margin-top: 1rem;
     margin-left: 0;
-
   }
 }
 
-.compprofileinput-right-btn {
+.compprofileinput-right-buynow {
   white-space: nowrap;
   height: 40px;
-  padding: 0 1rem;
+  padding: 0 .4rem;
+  border: 1px solid rgba(223, 219, 219, 0.4);
+  border-radius: var(--border-radius-small);
+}
+
+.compprofileinput-right-buynow-top {
+
+}
+
+.compprofileinput-right-buynow-top-price {
+  margin-left: 1rem;
+}
+
+.compprofileinput-right-conwallet {
+  white-space: nowrap;
+  height: 40px;
+  padding: 0 1.4rem;
   font-size: 16px; font-weight: 500;
   border-radius: var(--border-radius-small);
   color: white;
@@ -547,11 +575,8 @@
   cursor: pointer;
 }
 
-
 @media only screen and (max-width: 650px) {
-
-  .compprofileinput-right-btn {
+  .compprofileinput-right-conwallet {
    width: 100%;
   }
-  
 }

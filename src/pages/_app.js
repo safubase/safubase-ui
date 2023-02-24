@@ -5,7 +5,7 @@ import cn from 'classnames';
 // CONTEXT
 import { Provider } from '../context';
 
-// PAGES
+// COMPONENTS
 import ErrorPage from '../components/error';
 
 // STYLES

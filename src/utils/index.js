@@ -5,7 +5,7 @@ import Web3 from 'web3';
 // CONFIG
 import config from '../config';
 
-export function remove_extra_space(str, mode = 0) {
+export function str_remove_extra_space(str, mode = 0) {
   if (!str || typeof str !== 'string') {
     return '';
   }
@@ -42,11 +42,32 @@ export function remove_extra_space(str, mode = 0) {
   return '';
 }
 
-export async function connect_wallet({ chain_id = 56 }) {
-  if (!window.ethereum) {
-    throw new Error('Web3 lib is not imported');
+/**
+ *
+ * WALLET UPDATE, get wallet info e.g. address from web3 lib, put them in global context
+ *
+ */
+export async function wallet_update(context) {
+  let address = null;
+
+  const accounts = await ethereum.request({
+    method: 'eth_requestAccounts',
+  });
+
+  if (accounts[0]) {
+    address = accounts[0];
   }
 
+  context.set_state({
+    ...context.state,
+    wallet: {
+      ...context.state.wallet,
+      address: address,
+    },
+  });
+}
+
+export async function wallet_connect({ chain_id = 56 }, context) {
   const chains = {
     // Ethereum Mainnet
     1: {
@@ -69,26 +90,72 @@ export async function connect_wallet({ chain_id = 56 }) {
     },
   };
 
-  const accounts = await ethereum.request({
-    method: 'eth_requestAccounts',
-  });
+  let accounts = null;
 
   try {
+    accounts = await ethereum.request({
+      method: 'eth_requestAccounts',
+    });
+
+    context.set_state({
+      ...context.state,
+      wallet: {
+        ...context.state.wallet,
+        address: accounts[0],
+      },
+    });
+
     await ethereum.request({
       method: 'wallet_switchEthereumChain',
       params: [{ chainId: Web3.utils.toHex(chain_id) }],
+    });
+
+    accounts = await ethereum.request({
+      method: 'eth_requestAccounts',
+    });
+
+    context.set_state({
+      ...context.state,
+      wallet: {
+        ...context.state.wallet,
+        address: accounts[0],
+      },
     });
   } catch (err) {
     await ethereum.request({
       method: 'wallet_addEthereumChain',
       params: [chains[chain_id]],
     });
+
+    accounts = await ethereum.request({
+      method: 'eth_requestAccounts',
+    });
+
+    context.set_state({
+      ...context.state,
+      wallet: {
+        ...context.state.wallet,
+        address: accounts[0],
+      },
+    });
   }
 
   return accounts;
 }
 
+export function wallet_clear(context) {
+  context.set_state({
+    ...context.state,
+    wallet: {
+      ...context.state.wallet,
+      address: null,
+    },
+  });
+}
+
 export default {
-  remove_extra_space,
-  connect_wallet,
+  str_remove_extra_space,
+  wallet_update,
+  wallet_connect,
+  wallet_clear,
 };
