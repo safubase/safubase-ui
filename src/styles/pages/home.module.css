@@ -684,3 +684,178 @@
     width: 100%;
   }
 }
+
+/*
+*
+* COMPONENT WHALE TRACKER
+*
+*/
+
+.compwhaletracker {
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  border-radius: var(--border-radius-large);
+  font-size: 15px;
+  overflow: hidden;
+}
+
+@media only screen and (max-width: 650px) {
+  .compwhaletracker {
+    margin-top: 1rem;
+  }
+}
+
+.compwhaletracker-config {
+  padding: .6rem 1rem;
+  display: flex; justify-content: space-between; align-items: center;
+}
+
+.compwhaletracker-config-title {
+  display: flex; justify-content: center; align-items: center;
+  font-weight: 500;
+}
+
+.compwhaletracker-config-title-i {
+  margin-left: 1rem;
+  position: relative;
+  cursor: pointer;
+}
+
+.compwhaletracker-config-title-i-modal {
+  display: none;
+  position: absolute;
+  left: -110px;
+  top: 140%;
+  background-color: black;
+  color: white;
+  width: 240px;
+  font-size: 11px;
+  padding: .4rem .8rem;
+  border-radius: var(--border-radius-small);
+  transition: all .2s ease-in;
+}
+
+.compwhaletracker-config-title-i-modalactive {
+  display: block;
+}
+
+.compwhaletracker-config-chaindd {
+  position: relative;
+}
+
+.compwhaletracker-config-chaindd-selected {
+  display: flex; justify-content: center; align-items: center;
+  cursor: pointer;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  padding: .2rem .4rem;
+  border-radius: var(--border-radius-small);
+}
+
+.compwhaletracker-config-chaindd-selected > img {
+  display: block;
+  width: 20px;
+}
+
+.compwhaletracker-config-chaindd-selected > svg {
+  width: 20px; height: 20px;
+  margin-left: .4rem;
+}
+
+.compwhaletracker-config-chaindd-options {
+  position: absolute;
+  right: 0;
+  top: 120%;
+  border-radius: var(--border-radius-small);
+  overflow: hidden;
+  display: none;
+  transition: all .2s ease;
+  background-color: white;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.compwhaletracker-config-chaindd-optionsactive {
+  display: block;
+}
+
+.compwhaletracker-config-chaindd-options-item {
+  display: flex; justify-content: flex-start; align-items: center;
+  padding: .6rem .6rem;
+  cursor: pointer;
+}
+
+.compwhaletracker-config-chaindd-options-item:hover {
+  background-color: rgb(231, 231, 231);
+}
+
+.compwhaletracker-config-chaindd-options-item > img {
+  width: 18px; height: 18px;
+  object-fit: cover;
+}
+
+.compwhaletracker-config-chaindd-options-item-name {
+  white-space: nowrap;
+  margin-left: .6rem;
+  width: 80px;
+  font-size: 13px; font-weight: 500;
+  color: black;
+}
+
+.compwhaletracker-config-chaindd-options-item-check {
+  margin-left: .6rem;
+  outline: non;
+  border: none;
+  background-color: aliceblue;
+}
+
+.compwhaletracker-titles {
+  padding: .6rem 1rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.3);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: 14px; font-weight: 500; 
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.compwhaletracker-rows {
+  border: 1px solid red;
+  min-height: 300px;
+}
+
+.compwhaletracker-rows-row {
+  padding: .6rem 1rem;
+  display: flex; justify-content: space-between; align-items: center;
+}
+
+.compwhaletracker-rows-rowredbg {
+  background-color: rgba(255, 96, 96, 0.2);
+}
+
+.compwhaletracker-rows-rowgreenbg {
+  background-color: rgba(170, 255, 114, 0.2);
+}
+
+.compwhaletracker-rows-row-imgnamesymbol {
+  display: flex; justify-content: flex-start; align-items: center;
+}
+
+.compwhaletracker-rows-row-imgnamesymbol > img {
+  display: block;
+  width: 34px; height: 34px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1.5px solid white;
+}
+
+.compwhaletracker-rows-row-imgnamesymbol-namesymbol {
+  margin-left: .6rem;
+  font-size: 13px;
+}
+
+.compwhaletracker-rows-row-imgnamesymbol-namesymbol-symbol {
+  font-weight: bold;
+}
+
+.compwhaletracker-rows-row-imgnamesymbol-namesymbol-name {
+  font-weight: 500;
+}
+
+

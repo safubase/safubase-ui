@@ -19,12 +19,12 @@ class Arrow extends React.Component {
     switch (dir) {
       case 'down':
         return <MdKeyboardArrowDown />;
-
       case 'left':
         return <MdKeyboardArrowLeft />;
       case 'right':
         return <MdKeyboardArrowRight />;
-
+      case 'up':
+        return <MdKeyboardArrowUp />;
       default:
         return <MdKeyboardArrowUp />;
     }
