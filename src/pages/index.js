@@ -17,6 +17,7 @@ import { Context } from '../context';
 
 // UTILS
 import UTILS from '../utils';
+import UTILS_API from '../utils/api';
 
 // STYLES
 import style from '../styles/pages/home.module.css';
@@ -682,22 +683,16 @@ class CompWhaleTracker extends React.Component {
     };
   }
 
-  componentDidUpdate() {
-    console.log('hello');
-  }
+  componentDidUpdate() {}
 
   componentDidMount() {
     axios
-      .get(
-        'https://dexcheck.io/eth-api/whale_watcher?amount_min=10000&chain=' +
-          this.state.chain.chain +
-          '&exclude_stable=true&size=20&exclude_bots=0&page=1'
-      )
+      .get('https://api.safubase.com/v1/blockchain/whales?chain=bsc')
       .then((res) => {
         this.setState({
           ...this.state,
           chains: [...this.state.chains],
-          api_data: res.data.trs,
+          api_data: res.data,
         });
       });
   }
@@ -773,18 +768,22 @@ class CompWhaleTracker extends React.Component {
                       style['compwhaletracker-config-chaindd-options-item']
                     )}
                     onClick={async () => {
-                      const res = await axios.get(
-                        'https://dexcheck.io/eth-api/whale_watcher?amount_min=10000&chain=' +
-                          curr.chain +
-                          '&exclude_stable=true&size=20&exclude_bots=0&page=1'
+                      const res = await UTILS_API.blockchain_get_whales(
+                        curr.chain,
+                        1,
+                        this.context
                       );
+
+                      if (res === null) {
+                        return;
+                      }
 
                       this.setState({
                         ...this.state,
                         chains: [...this.state.chains],
                         chain: curr,
                         chain_dd_open: false,
-                        api_data: [...res.data.trs],
+                        api_data: res.data,
                       });
                     }}
                   >

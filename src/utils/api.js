@@ -132,8 +132,34 @@ export async function login(body, version = 1, context) {
   }
 }
 
+export async function blockchain_get_whales(
+  chain = 'bsc',
+  version = 1,
+  context
+) {
+  if (!Number(version)) {
+    throw new Error('Invalid api version specified in signup');
+  }
+
+  if (!context) {
+    throw new Error('Body or Context not provided in signup');
+  }
+
+  const url =
+    config.api_url + '/v' + version + '/blockchain/whales?chain=' + chain;
+
+  try {
+    const res = await instance.get(url);
+
+    return res;
+  } catch (err) {
+    return null;
+  }
+}
+
 export default {
   get_profile,
   signup,
   login,
+  blockchain_get_whales,
 };
