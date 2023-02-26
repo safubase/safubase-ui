@@ -1,6 +1,7 @@
 // MODULES
 import React from 'react';
 import cn from 'classnames';
+import axios from 'axios';
 
 // COMPONENTS
 import Head from '../components/head';
@@ -641,9 +642,15 @@ class CompWhaleTracker extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      main_info_hover: false,
+      info_main_hover: false,
       chain_dd_open: false,
-      chain: { img: '/bnb_chain.png', name: 'BNB Chain', chain_id: 56 },
+      chain: {
+        // selected chain
+        img: '/bnb_chain.png',
+        name: 'BNB Chain',
+        chain: 'bsc',
+        chain_id: 56,
+      },
       chains: [
         {
           img: '/bnb_chain.png',
@@ -652,36 +659,48 @@ class CompWhaleTracker extends React.Component {
           chain_id: 56,
         },
         { img: '/eth.png', name: 'Ethereum', chain: 'eth', chain_id: 1 },
-        { img: '/polygon.png', name: 'Polygon', chain_id: null },
-        { img: '/avalanche.png', name: 'Avalanche', chain_id: null },
-      ],
-      api_data: [
         {
-          time: '2023-02-25 15:43:55',
-          type: 'sell',
-          priceUSD: 6.026891359079664,
-          price: 0.020060712348923974,
-          tokenQuantity: 2654.8012227850513,
-          total: 53.25720367386254,
-          address: '0x70f16782010fa7ddf032a6aacdeed05ac6b0bc85',
-          txnHash:
-            '0x25741a0e27d1777ea39c522f3269c8705a2c3936a1a429f2c7aec17ea3c1a43c',
-          totalUSD: 16000.19854967735,
-          token: 'LVL',
-          pair: 'LVL/WBNB',
-          epochTime: 1677339835,
-          exchange: 'pancakeswap',
-          token_name: 'Level Token',
-          icon: 'https://assets.coingecko.com/coins/images/28628/small/Token.png?1672717607',
-          maker: '0x1f2b8b6c5156500ede6de94263dc159888efa532',
+          img: '/polygon.png',
+          name: 'Polygon',
+          chain: 'polygon',
+          chain_id: null,
+        },
+        {
+          img: '/avalanche.png',
+          name: 'Avalanche',
+          chain: 'avalanche',
+          chain_id: null,
+        },
+        {
+          img: '/fantom.png',
+          name: 'Fantom',
+          chain: 'fantom',
+          chain_id: null,
         },
       ],
+      api_data: [],
     };
   }
 
-  componentDidUpdate() {}
+  componentDidUpdate() {
+    console.log('hello');
+  }
 
-  componentDidMount() {}
+  componentDidMount() {
+    axios
+      .get(
+        'https://dexcheck.io/eth-api/whale_watcher?amount_min=10000&chain=' +
+          this.state.chain.chain +
+          '&exclude_stable=true&size=20&exclude_bots=0&page=1'
+      )
+      .then((res) => {
+        this.setState({
+          ...this.state,
+          chains: [...this.state.chains],
+          api_data: res.data.trs,
+        });
+      });
+  }
 
   render() {
     return (
@@ -693,13 +712,13 @@ class CompWhaleTracker extends React.Component {
               onMouseOver={() => {
                 this.setState({
                   ...this.state,
-                  main_info_hover: true,
+                  info_main_hover: true,
                 });
               }}
               onMouseLeave={() => {
                 this.setState({
                   ...this.state,
-                  main_info_hover: false,
+                  info_main_hover: false,
                 });
               }}
               className={cn(style['compwhaletracker-config-title-i'])}
@@ -708,7 +727,7 @@ class CompWhaleTracker extends React.Component {
               <div
                 className={cn(
                   style['compwhaletracker-config-title-i-modal'],
-                  this.state.main_info_hover
+                  this.state.info_main_hover
                     ? style['compwhaletracker-config-title-i-modalactive']
                     : null
                 )}
@@ -753,11 +772,19 @@ class CompWhaleTracker extends React.Component {
                     className={cn(
                       style['compwhaletracker-config-chaindd-options-item']
                     )}
-                    onClick={() => {
+                    onClick={async () => {
+                      const res = await axios.get(
+                        'https://dexcheck.io/eth-api/whale_watcher?amount_min=10000&chain=' +
+                          curr.chain +
+                          '&exclude_stable=true&size=20&exclude_bots=0&page=1'
+                      );
+
                       this.setState({
                         ...this.state,
-                        chain_dd_open: false,
+                        chains: [...this.state.chains],
                         chain: curr,
+                        chain_dd_open: false,
+                        api_data: [...res.data.trs],
                       });
                     }}
                   >
@@ -781,6 +808,9 @@ class CompWhaleTracker extends React.Component {
                       )}
                       type="checkbox"
                       checked={this.state.chain.name === curr.name}
+                      onChange={(e) => {
+                        e.preventDefault();
+                      }}
                     />
                   </div>
                 );
@@ -806,7 +836,12 @@ class CompWhaleTracker extends React.Component {
             return (
               <div
                 key={index}
-                className={cn(style['compwhaletracker-rows-row'])}
+                className={cn(
+                  style['compwhaletracker-rows-row'],
+                  curr.type === 'sell'
+                    ? style['compwhaletracker-rows-rowredbg']
+                    : style['compwhaletracker-rows-rowgreenbg']
+                )}
               >
                 <div
                   className={cn(
@@ -843,12 +878,32 @@ class CompWhaleTracker extends React.Component {
                   </div>
                 </div>
 
-                <div className={cn(style['compwhaletracker-rows-row-amount'])}>
-                  {curr.total}
+                <div
+                  className={cn(
+                    style['compwhaletracker-rows-row-amount'],
+                    curr.type === 'sell'
+                      ? style['compwhaletracker-rows-row-amountred']
+                      : style['compwhaletracker-rows-row-amountgreen']
+                  )}
+                >
+                  $17,475.32
                 </div>
 
-                <div className={cn(style['compwhaletracker-rows-row-maker'])}>
-                  {curr.maker[0] + curr.maker[1]}
+                <div
+                  onClick={async () => {
+                    await UTILS.str_copy(curr.maker);
+                  }}
+                  className={cn(style['compwhaletracker-rows-row-maker'])}
+                >
+                  {curr.maker[0] +
+                    curr.maker[1] +
+                    curr.maker[2] +
+                    curr.maker[3] +
+                    '..' +
+                    curr.maker[curr.maker.length - 4] +
+                    curr.maker[curr.maker.length - 3] +
+                    curr.maker[curr.maker.length - 2] +
+                    curr.maker[curr.maker.length - 1]}
                 </div>
               </div>
             );

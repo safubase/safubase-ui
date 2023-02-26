@@ -5,6 +5,21 @@ import Web3 from 'web3';
 // CONFIG
 import config from '../config';
 
+/**
+ *
+ * STRING FUNCTIONS
+ *
+ */
+export async function str_copy(str) {
+  try {
+    if ('clipboard' in navigator) {
+      await navigator.clipboard.writeText(str);
+    } else {
+      document.execCommand('copy', true, str);
+    }
+  } catch (error) {}
+}
+
 export function str_remove_extra_space(str, mode = 0) {
   if (!str || typeof str !== 'string') {
     return '';
@@ -43,6 +58,9 @@ export function str_remove_extra_space(str, mode = 0) {
 }
 
 /**
+ *
+ * WALLET FUNCTIONS
+ *
  *
  * WALLET UPDATE, get wallet info e.g. address from web3 lib, put them in global context
  *
@@ -162,6 +180,7 @@ export function wallet_clear(context) {
 }
 
 export default {
+  str_copy,
   str_remove_extra_space,
   wallet_update,
   wallet_connect,
