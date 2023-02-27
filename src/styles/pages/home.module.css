@@ -326,8 +326,8 @@
   width: 120px;
   border-radius: var(--border-radius-small);
   font-size: 14px;
-  font-weight: 600;
-  background-color: black;
+  font-weight: 800;
+  background-color: #63a078;
   color: white;
   cursor: pointer;
 }
@@ -476,7 +476,7 @@
 .complastadts-audits-item-btn {
   padding: 0.4rem 1rem;
   border-radius: var(--border-radius-small);
-  background-color: black;
+  background-color: #63a078;
   color: white;
   cursor: pointer;
 }
