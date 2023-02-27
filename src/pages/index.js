@@ -12,6 +12,7 @@ import IconSearch from '../components/icons/search';
 import IconNotification from '../components/icons/notification';
 import IconArrow from '../components/icons/arrow';
 import IconLoading from '../components/icons/loading';
+import IconInfo from '../components/icons/info';
 
 // CONTEXT
 import { Context } from '../context';
@@ -77,15 +78,6 @@ export async function getServerSideProps({ req }) {
       address: '0x123',
       score: 3.4,
       created_at: new Date(1676903315821 + 123232322).toString(),
-      network: 'ETH',
-    },
-    {
-      name: 'newest newest',
-      symbol: 'ETH',
-      img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Binance_Logo.svg/2048px-Binance_Logo.svg.png',
-      address: '0x123',
-      score: 3.4,
-      created_at: new Date(1676903315821 + 12323232212122).toString(),
       network: 'ETH',
     },
     {
@@ -799,7 +791,8 @@ class CompWhaleTracker extends React.Component {
               }}
               className={cn(style['compwhaletracker-config-title-i'])}
             >
-              ⓘ
+              <IconInfo />
+
               <div
                 className={cn(
                   style['compwhaletracker-config-title-i-modal'],
@@ -1088,7 +1081,8 @@ class CompUpcomingUnlocks extends React.Component {
               }}
               className={cn(style['compupcomingunlocks-config-title-i'])}
             >
-              ⓘ
+              <IconInfo />
+
               <div
                 className={cn(
                   style['compupcomingunlocks-config-title-i-modal'],
@@ -1173,7 +1167,7 @@ class CompUpcomingUnlocks extends React.Component {
                         : style['compupcomingunlocks-rows-row-amountgreen']
                     )}
                   >
-                    $490M
+                    <div></div>
                   </div>
 
                   <div

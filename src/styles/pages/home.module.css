@@ -2,7 +2,8 @@
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
-  margin-top: 1.2rem;
+  padding-top: 1rem;
+
 }
 
 @media only screen and (max-width: 1150px) {
@@ -13,7 +14,7 @@
 
 @media only screen and (max-width: 650px) {
   .sectiondash {
-    margin-top: 0;
+    padding-top: 0;
     display: flex;
     flex-direction: column-reverse;
   }
@@ -90,6 +91,7 @@
 
 .sectiondash-right {
   width: 50%;
+
 }
 
 @media only screen and (max-width: 1150px) {
@@ -707,6 +709,7 @@
   border-radius: var(--border-radius-large);
   font-size: 15px;
   overflow: hidden;
+
 }
 
 @media only screen and (max-width: 650px) {
@@ -726,9 +729,14 @@
 }
 
 .compwhaletracker-config-title-i {
-  margin-left: 1rem;
+  margin-left: .3rem;
   position: relative;
   cursor: pointer;
+  display: flex; justify-content: center; align-items: center;
+}
+
+.compwhaletracker-config-title-i > svg {
+  width: 18px; height: 18px;
 }
 
 .compwhaletracker-config-title-i-modal {
@@ -911,11 +919,11 @@
 }
 
 .compwhaletracker-rows-row-imgnamesymbol-namesymbol-symbol {
-  font-weight: bold;
+  font-weight: 600;
 }
 
 .compwhaletracker-rows-row-imgnamesymbol-namesymbol-name {
-  font-weight: 500;
+  font-weight: 400;
 }
 
 .compwhaletracker-rows-row-amount {
@@ -971,9 +979,14 @@
 }
 
 .compupcomingunlocks-config-title-i {
-  margin-left: 1rem;
+  margin-left: .3rem;
   position: relative;
   cursor: pointer;
+  display: flex; justify-content: center; align-items: center;
+}
+
+.compupcomingunlocks-config-title-i > svg {
+  width: 18px; height: 18px;
 }
 
 .compupcomingunlocks-config-title-i-modal {
@@ -1057,7 +1070,7 @@
   margin-bottom: .2rem;
   display: flex; justify-content: space-between; align-items: center;
   font-size: 13.8px;
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(0, 0, 0, 0.05);
 }
 
 .compupcomingunlocks-rows-rowredbg {
@@ -1088,11 +1101,11 @@
 }
 
 .compupcomingunlocks-rows-row-imgnamesymbol-namesymbol-symbol {
-  font-weight: bold;
+  font-weight: 600;
 }
 
 .compupcomingunlocks-rows-row-imgnamesymbol-namesymbol-name {
-  font-weight: 500;
+  font-weight: 400;
 }
 
 .compupcomingunlocks-rows-row-amount {
