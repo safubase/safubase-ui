@@ -1160,14 +1160,24 @@ class CompUpcomingUnlocks extends React.Component {
                   </div>
 
                   <div
-                    className={cn(
-                      style['compupcomingunlocks-rows-row-amount'],
-                      curr.type === 'sell'
-                        ? style['compupcomingunlocks-rows-row-amountred']
-                        : style['compupcomingunlocks-rows-row-amountgreen']
-                    )}
+                    className={cn(style['compupcomingunlocks-rows-row-amount'])}
                   >
-                    <div></div>
+                    <div
+                      className={cn(
+                        style[
+                          'compupcomingunlocks-rows-row-amount-lockedamount'
+                        ]
+                      )}
+                    >
+                      {curr.locked_supply}
+                      <span></span>
+                    </div>
+
+                    <div
+                      className={cn(
+                        style['compupcomingunlocks-rows-row-amount-usd']
+                      )}
+                    ></div>
                   </div>
 
                   <div
