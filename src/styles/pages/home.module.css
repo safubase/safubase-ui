@@ -452,6 +452,19 @@
   background-color: rgb(247, 247, 247);
 }
 
+@keyframes ani-complastadts-audits-item {
+  from {
+    opacity: 0.4;
+    transform: translateX(10rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+
 .complastadts-audits-itemani {
   animation: 1s ease 0s ani-complastadts-audits-item;
 }
@@ -507,17 +520,6 @@
   cursor: pointer;
 }
 
-@keyframes ani-complastadts-audits-item {
-  from {
-    opacity: 0.4;
-    transform: translateX(10rem);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
 
 /**
 *
@@ -831,8 +833,7 @@
 }
 
 .compwhaletracker-rows {
-  height: 327px;
-  padding: 0rem;
+  height: 320px;
   overflow-y: scroll;
 }
 
@@ -844,6 +845,26 @@
 .compwhaletracker-rows {
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
+}
+
+.compwhaletracker-rows-loading {
+  width: 100%; height: 100%;
+  display: flex; justify-content: center; align-items: center;
+}
+
+@keyframes ani-compwhaletracker-rows-loading {
+  from {
+    transform: rotateZ(0deg);
+  }
+
+  to {
+    transform: rotateZ(360deg);
+  }
+}
+
+.compwhaletracker-rows-loading > svg {
+  width: 42px; height: 42px;
+  animation: ani-compwhaletracker-rows-loading 1s linear 0s infinite
 }
 
 .compwhaletracker-rows-row {
@@ -906,7 +927,7 @@
 .compwhaletracker-rows-row-maker {
   width: 70px;
   text-align: right;
-  color: rgb(45, 45, 255);
+  color: rgb(59, 128, 255);
   letter-spacing: 0;
   font-weight: 500;
   cursor: pointer;

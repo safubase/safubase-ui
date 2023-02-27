@@ -5,7 +5,7 @@ import Web3 from 'web3';
 // CONFIG
 import config from '../config';
 
-/**
+/*
  *
  * STRING FUNCTIONS
  *
@@ -55,6 +55,59 @@ export function str_remove_extra_space(str, mode = 0) {
   }
 
   return '';
+}
+
+/*
+ *
+ * NUMBER FUNCTIONS
+ *
+ */
+
+export function num_add_commas(num) {
+  if (
+    !num &&
+    typeof num !== config.types.number &&
+    typeof num !== config.types.string
+  ) {
+    return null;
+  }
+
+  num = num.toString();
+  let new_num = '';
+  let ctr = 0;
+  let start = false;
+
+  if (num.includes('.')) {
+    for (let i = num.length - 1; i > -1; i--) {
+      if (num[i + 1] === '.') {
+        start = true;
+      }
+
+      if (start) {
+        if (ctr && ctr % 3 === 0) {
+          new_num = num[i] + ',' + new_num;
+        } else {
+          new_num = num[i] + new_num;
+        }
+
+        ctr++;
+      } else {
+        new_num = num[i] + new_num;
+      }
+    }
+  } else {
+    for (let i = num.length - 1; i > -1; i--) {
+      if (ctr && ctr % 3 === 0) {
+        new_num = num[i] + ',' + new_num;
+      } else {
+        new_num = num[i] + new_num;
+      }
+
+      ctr++;
+    }
+  }
+
+  return new_num;
 }
 
 /**
@@ -182,6 +235,7 @@ export function wallet_clear(context) {
 export default {
   str_copy,
   str_remove_extra_space,
+  num_add_commas,
   wallet_update,
   wallet_connect,
   wallet_clear,

@@ -8,9 +8,10 @@ import Head from '../components/head';
 import UserLayout from '../components/layouts/user';
 
 // COMPONENTS > ICONS
-import SearchIcon from '../components/icons/search';
-import NotificationIcon from '../components/icons/notification';
+import IconSearch from '../components/icons/search';
+import IconNotification from '../components/icons/notification';
 import IconArrow from '../components/icons/arrow';
+import IconLoading from '../components/icons/loading';
 
 // CONTEXT
 import { Context } from '../context';
@@ -564,7 +565,7 @@ class CompProfileInput extends React.Component {
       <div className={cn(style['compprofileinput'])}>
         <div className={cn(style['compprofileinput-left'])}>
           <div className={cn(style['compprofileinput-left-input'])}>
-            <SearchIcon />
+            <IconSearch />
 
             <input
               value={this.state.search_value}
@@ -584,7 +585,7 @@ class CompProfileInput extends React.Component {
                 style['compprofileinput-left-profile-notification']
               )}
             >
-              <NotificationIcon />
+              <IconNotification />
             </div>
           </div>
         </div>
@@ -644,7 +645,7 @@ class CompWhaleTracker extends React.Component {
     super(props);
     this.state = {
       info_main_hover: false,
-      chain_dd_open: false,
+      chains_dd_open: false,
       chain: {
         // selected chain
         img: '/bnb_chain.png',
@@ -680,6 +681,7 @@ class CompWhaleTracker extends React.Component {
         },
       ],
       api_data: [],
+      api_loading: true,
     };
   }
 
@@ -693,6 +695,7 @@ class CompWhaleTracker extends React.Component {
           ...this.state,
           chains: [...this.state.chains],
           api_data: res.data,
+          api_loading: false,
         });
       });
   }
@@ -739,13 +742,13 @@ class CompWhaleTracker extends React.Component {
                 // toggle dropdown
                 this.setState({
                   ...this.state,
-                  chain_dd_open: !this.state.chain_dd_open,
+                  chains_dd_open: !this.state.chains_dd_open,
                 });
               }}
               className={cn(style['compwhaletracker-config-chaindd-selected'])}
             >
               <img src={this.state.chain.img} />{' '}
-              {this.state.chain_dd_open ? (
+              {this.state.chains_dd_open ? (
                 <IconArrow dir="up" />
               ) : (
                 <IconArrow dir="down" />
@@ -755,7 +758,7 @@ class CompWhaleTracker extends React.Component {
             <div
               className={cn(
                 style['compwhaletracker-config-chaindd-options'],
-                this.state.chain_dd_open
+                this.state.chains_dd_open
                   ? style['compwhaletracker-config-chaindd-optionsactive']
                   : null
               )}
@@ -768,6 +771,14 @@ class CompWhaleTracker extends React.Component {
                       style['compwhaletracker-config-chaindd-options-item']
                     )}
                     onClick={async () => {
+                      this.setState({
+                        ...this.state,
+                        chains: [...this.state.chains],
+                        chains_dd_open: false,
+                        api_data: [...this.state.api_data],
+                        api_loading: true,
+                      });
+
                       const res = await UTILS_API.blockchain_get_whales(
                         curr.chain,
                         1,
@@ -782,8 +793,9 @@ class CompWhaleTracker extends React.Component {
                         ...this.state,
                         chains: [...this.state.chains],
                         chain: curr,
-                        chain_dd_open: false,
+                        chains_dd_open: false,
                         api_data: res.data,
+                        api_loading: false,
                       });
                     }}
                   >
@@ -831,82 +843,91 @@ class CompWhaleTracker extends React.Component {
         </div>
 
         <div className={cn(style['compwhaletracker-rows'])}>
-          {this.state.api_data.map((curr, index) => {
-            return (
-              <div
-                key={index}
-                className={cn(
-                  style['compwhaletracker-rows-row'],
-                  curr.type === 'sell'
-                    ? style['compwhaletracker-rows-rowredbg']
-                    : style['compwhaletracker-rows-rowgreenbg']
-                )}
-              >
+          {this.state.api_loading ? (
+            <div className={cn(style['compwhaletracker-rows-loading'])}>
+              <IconLoading />
+            </div>
+          ) : (
+            this.state.api_data.map((curr, index) => {
+              return (
                 <div
+                  key={index}
                   className={cn(
-                    style['compwhaletracker-rows-row-imgnamesymbol']
+                    style['compwhaletracker-rows-row'],
+                    curr.type === 'sell'
+                      ? style['compwhaletracker-rows-rowredbg']
+                      : style['compwhaletracker-rows-rowgreenbg']
                   )}
                 >
-                  <img src={curr.icon} />
+                  <div
+                    className={cn(
+                      style['compwhaletracker-rows-row-imgnamesymbol']
+                    )}
+                  >
+                    <img src={curr.icon} />
+
+                    <div
+                      className={cn(
+                        style[
+                          'compwhaletracker-rows-row-imgnamesymbol-namesymbol'
+                        ]
+                      )}
+                    >
+                      <div
+                        className={cn(
+                          style[
+                            'compwhaletracker-rows-row-imgnamesymbol-namesymbol-symbol'
+                          ]
+                        )}
+                      >
+                        {curr.token}
+                      </div>
+                      <div
+                        className={cn(
+                          style[
+                            'compwhaletracker-rows-row-imgnamesymbol-namesymbol-name'
+                          ]
+                        )}
+                      >
+                        {curr.token_name}
+                      </div>
+                    </div>
+                  </div>
 
                   <div
                     className={cn(
-                      style[
-                        'compwhaletracker-rows-row-imgnamesymbol-namesymbol'
-                      ]
+                      style['compwhaletracker-rows-row-amount'],
+                      curr.type === 'sell'
+                        ? style['compwhaletracker-rows-row-amountred']
+                        : style['compwhaletracker-rows-row-amountgreen']
                     )}
                   >
-                    <div
-                      className={cn(
-                        style[
-                          'compwhaletracker-rows-row-imgnamesymbol-namesymbol-symbol'
-                        ]
-                      )}
-                    >
-                      {curr.token}
-                    </div>
-                    <div
-                      className={cn(
-                        style[
-                          'compwhaletracker-rows-row-imgnamesymbol-namesymbol-name'
-                        ]
-                      )}
-                    >
-                      {curr.token_name}
-                    </div>
+                    $
+                    {UTILS.num_add_commas(
+                      (curr.priceUSD * curr.tokenQuantity).toFixed(2)
+                    )}
+                  </div>
+
+                  <div
+                    onClick={async () => {
+                      await UTILS.str_copy(curr.maker);
+                    }}
+                    className={cn(style['compwhaletracker-rows-row-maker'])}
+                  >
+                    {curr.maker[0] +
+                      curr.maker[1] +
+                      curr.maker[2] +
+                      curr.maker[3] +
+                      '..' +
+                      curr.maker[curr.maker.length - 4] +
+                      curr.maker[curr.maker.length - 3] +
+                      curr.maker[curr.maker.length - 2] +
+                      curr.maker[curr.maker.length - 1]}
                   </div>
                 </div>
-
-                <div
-                  className={cn(
-                    style['compwhaletracker-rows-row-amount'],
-                    curr.type === 'sell'
-                      ? style['compwhaletracker-rows-row-amountred']
-                      : style['compwhaletracker-rows-row-amountgreen']
-                  )}
-                >
-                  $17,475.32
-                </div>
-
-                <div
-                  onClick={async () => {
-                    await UTILS.str_copy(curr.maker);
-                  }}
-                  className={cn(style['compwhaletracker-rows-row-maker'])}
-                >
-                  {curr.maker[0] +
-                    curr.maker[1] +
-                    curr.maker[2] +
-                    curr.maker[3] +
-                    '..' +
-                    curr.maker[curr.maker.length - 4] +
-                    curr.maker[curr.maker.length - 3] +
-                    curr.maker[curr.maker.length - 2] +
-                    curr.maker[curr.maker.length - 1]}
-                </div>
-              </div>
-            );
-          })}
+              );
+            })
+          )}
         </div>
       </div>
     );
