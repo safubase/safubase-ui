@@ -550,6 +550,7 @@
 @media only screen and (max-width: 650px) {
   .compprofileinput-left {
     width: 100%;
+    display: none;
   }
 }
 
@@ -705,7 +706,7 @@
 }
 
 .compwhaletracker-config {
-  padding: .6rem .8rem;
+  padding: .6rem .6rem;
   display: flex; justify-content: space-between; align-items: center;
 }
 
@@ -807,7 +808,7 @@
 }
 
 .compwhaletracker-titles {
-  padding: .6rem .8rem;
+  padding: .6rem .6rem;
   border-top: 1px solid rgba(0, 0, 0, 0.3);
   border-bottom: 1px solid rgba(0, 0, 0, 0.3);
   display: flex; justify-content: space-between; align-items: center;
@@ -831,7 +832,7 @@
 
 .compwhaletracker-rows {
   height: 327px;
-  padding: .2rem;
+  padding: 0rem;
   overflow-y: scroll;
 }
 
@@ -850,7 +851,7 @@
   margin-bottom: .2rem;
   display: flex; justify-content: space-between; align-items: center;
   font-size: 13.8px;
-  border-radius: var(--border-radius-small);
+
 }
 
 .compwhaletracker-rows-rowredbg {

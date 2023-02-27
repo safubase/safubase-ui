@@ -132,6 +132,11 @@ export async function login(body, version = 1, context) {
   }
 }
 
+/***
+ *
+ * BLOCKCHAIN APIS
+ *
+ */
 export async function blockchain_get_whales(
   chain = 'bsc',
   version = 1,
