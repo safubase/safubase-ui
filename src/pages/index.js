@@ -281,6 +281,57 @@ class CompInput extends React.Component {
 
 /**
  *
+ * BOXES COMPONENT
+ *
+ */
+
+class CompBoxes extends React.Component {
+  static contextType = Context;
+
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
+  componentDidMount() {}
+
+  componentDidUpdate() {}
+
+  componentWillUnmount() {}
+
+  render() {
+    return (
+      <div className={cn(style['compboxes'])}>
+        <div className={cn(style['compboxes-box'])}>
+          <div className={cn(style['compboxes-box-title'])}>11</div>
+
+          <div className={cn(style['compboxes-box-desc'])}>
+            Lorem ipsum dolor
+          </div>
+        </div>
+
+        <div className={cn(style['compboxes-box'])}>
+          <div className={cn(style['compboxes-box-title'])}>6</div>
+
+          <div className={cn(style['compboxes-box-desc'])}>
+            Lorem ipsum dolor
+          </div>
+        </div>
+
+        <div className={cn(style['compboxes-box'])}>
+          <div className={cn(style['compboxes-box-title'])}>6</div>
+
+          <div className={cn(style['compboxes-box-desc'])}>
+            Lorem ipsum dolor
+          </div>
+        </div>
+      </div>
+    );
+  }
+}
+
+/**
+ *
  * LATEST AUDITS COMPONENT
  *
  */
@@ -352,6 +403,8 @@ class CompLastAdts extends React.Component {
         },
       ];
 
+      audits.length = 5;
+
       sort_audits_by_date(audits);
 
       this.setState({
@@ -359,7 +412,7 @@ class CompLastAdts extends React.Component {
         audits: audits,
         animation: true,
       });
-    }, this.props.interval);
+    }, 6000);
   }
 
   render() {
@@ -683,22 +736,47 @@ class CompWhaleTracker extends React.Component {
       api_data: [],
       api_loading: true,
     };
+
+    this.reduce_row_name_chars = this.reduce_row_name_chars.bind(this);
+  }
+
+  reduce_row_name_chars(str, offset = 13) {
+    let new_str = '';
+    const parts = str.split(' ');
+
+    for (let i = 0; i < parts.length; i++) {
+      if (new_str.length + parts[i].length <= offset) {
+        new_str = new_str + parts[i] + ' ';
+      } else {
+        break;
+      }
+    }
+
+    return new_str;
+  }
+
+  componentDidMount() {
+    UTILS_API.blockchain_get_whales(
+      this.state.chain.chain,
+      1,
+      this.context
+    ).then((res) => {
+      if (res === null) {
+        return;
+      }
+
+      this.setState({
+        ...this.state,
+        chains: [...this.state.chains],
+        api_data: res.data,
+        api_loading: false,
+      });
+    });
   }
 
   componentDidUpdate() {}
 
-  componentDidMount() {
-    axios
-      .get('https://api.safubase.com/v1/blockchain/whales?chain=bsc')
-      .then((res) => {
-        this.setState({
-          ...this.state,
-          chains: [...this.state.chains],
-          api_data: res.data,
-          api_loading: false,
-        });
-      });
-  }
+  componentWillUnmount() {}
 
   render() {
     return (
@@ -882,6 +960,7 @@ class CompWhaleTracker extends React.Component {
                       >
                         {curr.token}
                       </div>
+
                       <div
                         className={cn(
                           style[
@@ -889,7 +968,7 @@ class CompWhaleTracker extends React.Component {
                           ]
                         )}
                       >
-                        {curr.token_name}
+                        {this.reduce_row_name_chars(curr.token_name)}
                       </div>
                     </div>
                   </div>
@@ -923,6 +1002,184 @@ class CompWhaleTracker extends React.Component {
                       curr.maker[curr.maker.length - 3] +
                       curr.maker[curr.maker.length - 2] +
                       curr.maker[curr.maker.length - 1]}
+                  </div>
+                </div>
+              );
+            })
+          )}
+        </div>
+      </div>
+    );
+  }
+}
+
+/**
+ *
+ * UPCOMING UNLOCKEDS COMPONENT
+ *
+ */
+class CompUpcomingUnlocks extends React.Component {
+  static contextType = Context;
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      info_main_hover: false,
+      api_data: [],
+      api_loading: true,
+    };
+
+    this.reduce_row_name_chars = this.reduce_row_name_chars.bind(this);
+  }
+
+  reduce_row_name_chars(str, offset = 13) {
+    let new_str = '';
+    const parts = str.split(' ');
+
+    for (let i = 0; i < parts.length; i++) {
+      if (new_str.length + parts[i].length <= offset) {
+        new_str = new_str + parts[i] + ' ';
+      } else {
+        break;
+      }
+    }
+
+    return new_str;
+  }
+
+  componentDidMount() {
+    UTILS_API.blockchain_get_upcoming_unlocks(1, this.context).then((res) => {
+      if (res === null) {
+        return;
+      }
+
+      console.log(res.data);
+
+      this.setState({
+        ...this.state,
+        api_data: res.data,
+        api_loading: false,
+      });
+    });
+  }
+
+  componentDidUpdate() {}
+
+  componentWillUnmount() {}
+
+  render() {
+    return (
+      <div className={cn(style['compupcomingunlocks'])}>
+        <div className={cn(style['compupcomingunlocks-config'])}>
+          <div className={cn(style['compupcomingunlocks-config-title'])}>
+            Upcoming Token Unlocks
+            <div
+              onMouseOver={() => {
+                this.setState({
+                  ...this.state,
+                  info_main_hover: true,
+                });
+              }}
+              onMouseLeave={() => {
+                this.setState({
+                  ...this.state,
+                  info_main_hover: false,
+                });
+              }}
+              className={cn(style['compupcomingunlocks-config-title-i'])}
+            >
+              ⓘ
+              <div
+                className={cn(
+                  style['compupcomingunlocks-config-title-i-modal'],
+                  this.state.info_main_hover
+                    ? style['compupcomingunlocks-config-title-i-modalactive']
+                    : null
+                )}
+              >
+                The nearest token unlocks events, sorted by date
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className={cn(style['compupcomingunlocks-titles'])}>
+          <div className={cn(style['compupcomingunlocks-titles-name'])}>
+            Token
+          </div>
+
+          <div className={cn(style['compupcomingunlocks-titles-amount'])}>
+            Amount
+          </div>
+
+          <div className={cn(style['compupcomingunlocks-titles-date'])}>
+            Date
+          </div>
+        </div>
+
+        <div className={cn(style['compupcomingunlocks-rows'])}>
+          {this.state.api_loading ? (
+            <div className={cn(style['compupcomingunlocks-rows-loading'])}>
+              <IconLoading />
+            </div>
+          ) : (
+            this.state.api_data.map((curr, index) => {
+              return (
+                <div
+                  key={index}
+                  className={cn(style['compupcomingunlocks-rows-row'])}
+                >
+                  <div
+                    className={cn(
+                      style['compupcomingunlocks-rows-row-imgnamesymbol']
+                    )}
+                  >
+                    <img src={curr.icon} />
+
+                    <div
+                      className={cn(
+                        style[
+                          'compupcomingunlocks-rows-row-imgnamesymbol-namesymbol'
+                        ]
+                      )}
+                    >
+                      <div
+                        className={cn(
+                          style[
+                            'compupcomingunlocks-rows-row-imgnamesymbol-namesymbol-symbol'
+                          ]
+                        )}
+                      >
+                        {curr.symbol}
+                      </div>
+
+                      <div
+                        className={cn(
+                          style[
+                            'compupcomingunlocks-rows-row-imgnamesymbol-namesymbol-name'
+                          ]
+                        )}
+                      >
+                        {this.reduce_row_name_chars(curr.name)}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div
+                    className={cn(
+                      style['compupcomingunlocks-rows-row-amount'],
+                      curr.type === 'sell'
+                        ? style['compupcomingunlocks-rows-row-amountred']
+                        : style['compupcomingunlocks-rows-row-amountgreen']
+                    )}
+                  >
+                    $490M
+                  </div>
+
+                  <div
+                    className={cn(style['compupcomingunlocks-rows-row-date'])}
+                  >
+                    a day
                   </div>
                 </div>
               );
@@ -982,72 +1239,14 @@ class Home extends React.Component {
                     <CompInput />
                   </div>
 
-                  <CompLastAdts
-                    data={this.props.latest_audits}
-                    interval={100000}
-                  />
+                  <CompLastAdts data={this.props.latest_audits} />
                 </div>
 
                 <div className={cn(style['sectiondash-right'])}>
                   <CompProfileInput />
-
-                  <div className={cn(style['sectiondash-right-boxes'])}>
-                    <div className={cn(style['sectiondash-right-boxes-box'])}>
-                      <div
-                        className={cn(
-                          style['sectiondash-right-boxes-box-title']
-                        )}
-                      >
-                        11
-                      </div>
-
-                      <div
-                        className={cn(
-                          style['sectiondash-right-boxes-box-desc']
-                        )}
-                      >
-                        Lorem ipsum dolor
-                      </div>
-                    </div>
-
-                    <div className={cn(style['sectiondash-right-boxes-box'])}>
-                      <div
-                        className={cn(
-                          style['sectiondash-right-boxes-box-title']
-                        )}
-                      >
-                        6
-                      </div>
-
-                      <div
-                        className={cn(
-                          style['sectiondash-right-boxes-box-desc']
-                        )}
-                      >
-                        Lorem ipsum dolor
-                      </div>
-                    </div>
-
-                    <div className={cn(style['sectiondash-right-boxes-box'])}>
-                      <div
-                        className={cn(
-                          style['sectiondash-right-boxes-box-title']
-                        )}
-                      >
-                        6
-                      </div>
-
-                      <div
-                        className={cn(
-                          style['sectiondash-right-boxes-box-desc']
-                        )}
-                      >
-                        Lorem ipsum dolor
-                      </div>
-                    </div>
-                  </div>
-
+                  <CompBoxes />
                   <CompWhaleTracker />
+                  <CompUpcomingUnlocks />
                 </div>
               </section>
             </>

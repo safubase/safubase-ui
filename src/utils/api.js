@@ -162,9 +162,30 @@ export async function blockchain_get_whales(
   }
 }
 
+export async function blockchain_get_upcoming_unlocks(version = 1, context) {
+  if (!Number(version)) {
+    throw new Error('Invalid api version specified in signup');
+  }
+
+  if (!context) {
+    throw new Error('Body or Context not provided in signup');
+  }
+
+  const url = config.api_url + '/v' + version + '/blockchain/upcoming-unlocks';
+
+  try {
+    const res = await instance.get(url);
+
+    return res;
+  } catch (err) {
+    return null;
+  }
+}
+
 export default {
   get_profile,
   signup,
   login,
   blockchain_get_whales,
+  blockchain_get_upcoming_unlocks,
 };

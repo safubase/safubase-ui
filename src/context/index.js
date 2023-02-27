@@ -11,7 +11,6 @@ const initial_state = {
   },
   auth: null, // false = logged out, true = logged in, null = waiting for the server response
   sidebar_open: false,
-  modals: {},
   wallet: {
     // Metamask or Trust Wallet data
     address: null,
