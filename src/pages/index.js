@@ -13,6 +13,7 @@ import IconNotification from '../components/icons/notification';
 import IconArrow from '../components/icons/arrow';
 import IconLoading from '../components/icons/loading';
 import IconInfo from '../components/icons/info';
+import IconLock from '../components/icons/lock';
 
 // CONTEXT
 import { Context } from '../context';
@@ -1023,6 +1024,7 @@ class CompUpcomingUnlocks extends React.Component {
     };
 
     this.reduce_row_name_chars = this.reduce_row_name_chars.bind(this);
+    this.display_date = this.display_date.bind(this);
   }
 
   reduce_row_name_chars(str, offset = 13) {
@@ -1040,13 +1042,29 @@ class CompUpcomingUnlocks extends React.Component {
     return new_str;
   }
 
+  display_date(remaining_s) {
+    const remaining_m = parseInt(remaining_s / 60);
+
+    if (remaining_m < 60) {
+      return remaining_m + ' minute';
+    }
+
+    const remaining_h = parseInt(remaining_m / 60);
+
+    if (remaining_h < 24) {
+      return remaining_h + ' hours';
+    }
+
+    const remaining_d = parseInt(remaining_h / 24);
+
+    return remaining_d + ' days';
+  }
+
   componentDidMount() {
     UTILS_API.blockchain_get_upcoming_unlocks(1, this.context).then((res) => {
       if (res === null) {
         return;
       }
-
-      console.log(res.data);
 
       this.setState({
         ...this.state,
@@ -1119,9 +1137,11 @@ class CompUpcomingUnlocks extends React.Component {
           ) : (
             this.state.api_data.map((curr, index) => {
               return (
-                <div
+                <a
                   key={index}
                   className={cn(style['compupcomingunlocks-rows-row'])}
+                  href={'https://bscscan.com/address/' + curr.token_id}
+                  target="_blank"
                 >
                   <div
                     className={cn(
@@ -1169,23 +1189,46 @@ class CompUpcomingUnlocks extends React.Component {
                         ]
                       )}
                     >
-                      {curr.locked_supply}
-                      <span></span>
+                      <IconLock />
+
+                      <span>{UTILS.num_shorten(curr.locked_supply)}</span>
+
+                      <span
+                        className={cn(
+                          style[
+                            'compupcomingunlocks-rows-row-amount-lockedamount-percentage'
+                          ]
+                        )}
+                      >
+                        (
+                        {(
+                          curr.locked_supply /
+                          (curr.total_supply / 100)
+                        ).toFixed(2)}
+                        %)
+                      </span>
                     </div>
 
                     <div
                       className={cn(
                         style['compupcomingunlocks-rows-row-amount-usd']
                       )}
-                    ></div>
+                    >
+                      $
+                      {UTILS.num_add_commas(
+                        (curr.usd_price * curr.locked_supply).toFixed(2)
+                      )}
+                    </div>
                   </div>
 
                   <div
                     className={cn(style['compupcomingunlocks-rows-row-date'])}
                   >
-                    a day
+                    {this.display_date(
+                      curr.unlock_date - parseInt(Date.now() / 1000)
+                    )}
                   </div>
-                </div>
+                </a>
               );
             })
           )}

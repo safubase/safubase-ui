@@ -110,57 +110,80 @@ export function num_add_commas(num) {
   return new_num;
 }
 
-export function num_shorten_num(num, fix = 1) {
-  if (!num) {
+export function num_shorten(num) {
+  if (num === 0) {
     return 0;
   }
 
-  console.log(num);
+  if (
+    num === null ||
+    !Number(num) ||
+    (typeof num !== 'string' && typeof num !== 'number')
+  ) {
+    return null;
+  }
 
-  num = num.toString().split('.')[0];
+  num = parseInt(num).toString();
+
   let ctr = 0;
-  let result = '';
+  let new_num = '';
+  let symbol = '';
 
-  if (num.length > 3 && num.length < 7) {
-    num = num_add_commas(Number(num));
-    return num.split('.')[0] + 'K';
-  }
+  if (num.length > 12) {
+    symbol = 'T';
 
-  if (num.length > 6 && num.length < 10) {
-    num = num_add_commas(Number(num));
-    const parts = num.split('.');
-
-    for (let i = 0; i < parts[1].length; i++) {
-      result = result + parts[1][i];
-
+    for (let i = num.length - 1; i > -1; i--) {
       ctr++;
 
-      if (ctr === fix) {
-        break;
+      if (ctr > 12) {
+        new_num = num[i] + new_num;
       }
     }
 
-    return parts[0] + '.' + result + 'M';
+    return new_num + symbol;
   }
 
-  if (num.length > 9 && num.length < 13) {
-    num = num_add_commas(Number(num));
-    const parts = num.split('.');
+  if (num.length > 9) {
+    symbol = 'B';
 
-    for (let i = 0; i < parts[1].length; i++) {
-      result = result + parts[1][i];
-
+    for (let i = num.length - 1; i > -1; i--) {
       ctr++;
 
-      if (ctr === fix) {
-        break;
+      if (ctr > 9) {
+        new_num = num[i] + new_num;
       }
     }
 
-    return parts[0] + '.' + result + 'B';
+    return new_num + symbol;
   }
 
-  return num;
+  if (num.length > 6) {
+    symbol = 'M';
+
+    for (let i = num.length - 1; i > -1; i--) {
+      ctr++;
+
+      if (ctr > 6) {
+        new_num = num[i] + new_num;
+      }
+    }
+
+    return new_num + symbol;
+  }
+
+  if (num.length > 3) {
+    symbol = 'K';
+
+    for (let i = num.length - 1; i > -1; i--) {
+      ctr++;
+
+      if (ctr > 3) {
+        new_num = num[i] + new_num;
+      }
+    }
+
+    return new_num + symbol;
+  }
 }
 
 /**
@@ -289,7 +312,7 @@ export default {
   str_copy,
   str_remove_extra_space,
   num_add_commas,
-  num_shorten_num,
+  num_shorten,
   wallet_update,
   wallet_connect,
   wallet_clear,

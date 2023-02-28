@@ -1021,8 +1021,8 @@
 }
 
 .compupcomingunlocks-titles-amount {
-  width: 70px;
-  text-align: center;
+  width: 110px;
+  text-align: right;
 }
 
 .compupcomingunlocks-titles-date {
@@ -1070,7 +1070,12 @@
   margin-bottom: .2rem;
   display: flex; justify-content: space-between; align-items: center;
   font-size: 13.8px;
-  background-color: rgba(0, 0, 0, 0.05);
+  background-color: rgba(68, 109, 223, 0.08);
+  color: black;
+}
+
+.compupcomingunlocks-rows-row:hover {
+  background-color: rgba(68, 109, 223, 0.14);
 }
 
 .compupcomingunlocks-rows-rowredbg {
@@ -1109,9 +1114,10 @@
 }
 
 .compupcomingunlocks-rows-row-amount {
-  width: 70px;
-  text-align: center;
-  font-weight: bolder;
+  width: 110px;
+  text-align: right;
+  font-weight: 500;
+  
 }
 
 .compupcomingunlocks-rows-row-amountgreen {
@@ -1122,6 +1128,28 @@
   color: rgb(255, 62, 62);
 }
 
+.compupcomingunlocks-rows-row-amount-lockedamount {
+  display: flex; justify-content: flex-end; align-items: center;
+  font-size: 13px;
+}
+
+.compupcomingunlocks-rows-row-amount-lockedamount > svg {
+  width: 10px; height: 10px;
+}
+
+.compupcomingunlocks-rows-row-amount-lockedamount > span {
+  margin-left: .3rem;
+
+}
+
+.compupcomingunlocks-rows-row-amount-lockedamount-percentage {
+  font-size: 11px; font-weight: 500;
+}
+
+.compupcomingunlocks-rows-row-amount-usd {
+  font-size: 13px
+}
+
 .compupcomingunlocks-rows-row-date {
   width: 70px;
   text-align: right;
@@ -1129,3 +1157,4 @@
   font-weight: 500;
   cursor: pointer;
 }
+
