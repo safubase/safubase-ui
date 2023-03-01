@@ -13,10 +13,6 @@ html {
   scroll-behavior: smooth;
 }
 
-body {  
-  max-width: 1500px;
-}
-
 input::placeholder {
   opacity: 0.5;
   font-family: 'Murecho', sans-serif;

@@ -197,6 +197,7 @@
   padding: 1rem;
   position: relative;
   width: 100%;
+  border: 1px solid red;
 }
 
 @media only screen and (max-width: 650px) {
@@ -495,7 +496,7 @@
 
 @media only screen and (max-width: 650px) {
   .compprofileinput {
-    display: block;
+    display: none;
     height: auto;
   }
 }
@@ -645,6 +646,77 @@
   .compprofileinput-right-conwallet {
     width: 100%;
   }
+}
+
+
+/*
+*
+* COMPONENT PROFILE INPUT MOBILE
+*
+*/
+
+
+.compprofileinputmobile {
+  height: 50px;
+  display: none;
+}
+
+@media only screen and (max-width: 650px) {
+  .compprofileinputmobile {
+
+    margin-left: 0;
+    height: 50px;
+    display: flex; justify-content: center; align-items: center;
+  }
+}
+
+.compprofileinputmobile-buynow {
+  color: whitesmoke;
+  background-color: black;
+  white-space: nowrap;
+  height: 100%;     width: 100%;
+  padding: 0 0.8rem;
+  font-size: 12px;
+  border: 1px solid rgba(223, 219, 219, 0.4);
+  border-radius: var(--border-radius-small);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.compprofileinputmobile-buynow-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.compprofileinputmobile-buynow-top-token {
+  font-weight: bold;
+}
+
+.compprofileinputmobile-buynow-top-price {
+  margin-left: 1rem;
+}
+
+.compprofileinputmobile-buynow-bottom-title {
+  width: 100%;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.compprofileinputmobile-conwallet {
+  margin-left: 1rem;
+  white-space: nowrap;
+  height: 100%;     width: 100%;
+  padding: 0 1.4rem;
+  font-size: 16px;
+  font-weight: 500;
+  border-radius: var(--border-radius-small);
+  color: black;
+  background-color: rgb(235, 235, 235);
+  border: 2px solid rgb(202, 202, 202);
+  cursor: pointer;
 }
 
 

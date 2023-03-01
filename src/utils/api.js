@@ -9,7 +9,7 @@ import config from '../config';
  * AXIOS axios_instance configuration
  *
  */
-const axios_instance = axios.create({
+export const axios_instance = axios.create({
   withCredentials: true,
   headers: {
     'Content-Type': 'application/json',
@@ -213,6 +213,7 @@ export async function blockchain_get_upcoming_unlocks(version = 1, context) {
 }
 
 export default {
+  axios_instance,
   get_profile,
   signup,
   login,

@@ -1,19 +1,18 @@
 // MODULES
 import React from 'react';
 import cn from 'classnames';
-import axios from 'axios';
 
 // COMPONENTS
 import Head from '../components/head';
-import UserLayout from '../components/layouts/user';
+import Layout_user from '../components/layouts/user';
 
 // COMPONENTS > ICONS
-import IconSearch from '../components/icons/search';
-import IconNotification from '../components/icons/notification';
-import IconArrow from '../components/icons/arrow';
-import IconLoading from '../components/icons/loading';
-import IconInfo from '../components/icons/info';
-import IconLock from '../components/icons/lock';
+import Icon_search from '../components/icons/search';
+import Icon_notification from '../components/icons/notification';
+import Icon_arrow from '../components/icons/arrow';
+import Icon_loading from '../components/icons/loading';
+import Icon_info from '../components/icons/info';
+import Icon_lock from '../components/icons/lock';
 
 // CONTEXT
 import { Context } from '../context';
@@ -25,6 +24,11 @@ import UTILS_API from '../utils/api';
 // STYLES
 import style from '../styles/pages/home.module.css';
 
+/**
+ *
+ * GLOBAL PAGE FUNCTIONS
+ *
+ */
 function global_sort_audits_by_date(data) {
   // order from newly created
   for (let i = 0; i < data.length; i++) {
@@ -200,79 +204,82 @@ class Comp_input extends React.Component {
 
   render() {
     return (
-      <div className={cn(style['compinput'])}>
-        <div className={cn(style['compinput-bg'])}>
-          <div className={cn(style['compinput-bg-inputarea'])}>
-            <div
-              onClick={() => {
-                this.setState({
-                  ...this.state,
-                  dd_open: !this.state.dd_open,
-                });
-              }}
-              className={cn(style['compinput-bg-inputarea-dd'])}
-            >
-              <img src={this.state.network.img} />
-            </div>
+      <div className={cn(style['ctr'])}>
+        <div className={cn(style['ctr-left'])}></div>
+        <div className={cn(style['compinput'])}>
+          <div className={cn(style['compinput-bg'])}>
+            <div className={cn(style['compinput-bg-inputarea'])}>
+              <div
+                onClick={() => {
+                  this.setState({
+                    ...this.state,
+                    dd_open: !this.state.dd_open,
+                  });
+                }}
+                className={cn(style['compinput-bg-inputarea-dd'])}
+              >
+                <img src={this.state.network.img} />
+              </div>
 
-            <div
-              className={cn(
-                style['compinput-bg-inputarea-ddoptions'],
-                this.state.dd_open
-                  ? style['compinput-bg-inputarea-ddoptionsopen']
-                  : null
-              )}
-            >
-              {this.state.networks.map((curr, index) => {
-                return (
-                  <div
-                    key={index}
-                    onClick={() => {
-                      this.setState({
-                        ...this.state,
-                        network: curr,
-                        dd_open: false,
-                      });
-                    }}
-                    className={cn(
-                      style['compinput-bg-inputarea-ddoptions-item']
-                    )}
-                  >
-                    <img
-                      className={cn(
-                        style['compinput-bg-inputarea-ddoptions-item-img']
-                      )}
-                      src={curr.img}
-                    />
-
+              <div
+                className={cn(
+                  style['compinput-bg-inputarea-ddoptions'],
+                  this.state.dd_open
+                    ? style['compinput-bg-inputarea-ddoptionsopen']
+                    : null
+                )}
+              >
+                {this.state.networks.map((curr, index) => {
+                  return (
                     <div
+                      key={index}
+                      onClick={() => {
+                        this.setState({
+                          ...this.state,
+                          network: curr,
+                          dd_open: false,
+                        });
+                      }}
                       className={cn(
-                        style['compinput-bg-inputarea-ddoptions-item-name']
+                        style['compinput-bg-inputarea-ddoptions-item']
                       )}
                     >
-                      {curr.name}
+                      <img
+                        className={cn(
+                          style['compinput-bg-inputarea-ddoptions-item-img']
+                        )}
+                        src={curr.img}
+                      />
+
+                      <div
+                        className={cn(
+                          style['compinput-bg-inputarea-ddoptions-item-name']
+                        )}
+                      >
+                        {curr.name}
+                      </div>
                     </div>
-                  </div>
-                );
-              })}
+                  );
+                })}
+              </div>
+
+              <input
+                className={cn(style['compinput-bg-inputarea-input'])}
+                placeholder="0x90741BD5C2c928Ad19a58157987e11b2dE07c15B"
+                value={this.state.address}
+                onChange={(e) => {
+                  this.setState({ ...this.state, address: e.target.value });
+                }}
+              ></input>
             </div>
 
-            <input
-              className={cn(style['compinput-bg-inputarea-input'])}
-              placeholder="0x90741BD5C2c928Ad19a58157987e11b2dE07c15B"
-              value={this.state.address}
-              onChange={(e) => {
-                this.setState({ ...this.state, address: e.target.value });
-              }}
-            ></input>
+            <button
+              onClick={this.on_search}
+              className={cn(style['compinput-bg-btn'])}
+            >
+              AUDIT
+            </button>
           </div>
-
-          <button
-            onClick={this.on_search}
-            className={cn(style['compinput-bg-btn'])}
-          >
-            AUDIT
-          </button>
         </div>
       </div>
     );
@@ -630,7 +637,7 @@ class Comp_profile_input extends React.Component {
       <div className={cn(style['compprofileinput'])}>
         <div className={cn(style['compprofileinput-left'])}>
           <div className={cn(style['compprofileinput-left-input'])}>
-            <IconSearch />
+            <Icon_search />
 
             <input
               value={this.state.search_value}
@@ -650,7 +657,7 @@ class Comp_profile_input extends React.Component {
                 style['compprofileinput-left-profile-notification']
               )}
             >
-              <IconNotification />
+              <Icon_notification />
             </div>
           </div>
         </div>
@@ -693,6 +700,103 @@ class Comp_profile_input extends React.Component {
             {this.state.address || 'Connect Wallet'}
           </button>
         </div>
+      </div>
+    );
+  }
+}
+
+/**
+ *
+ * PROFILE & INPUT ON RIGHT COMPONENT
+ *
+ *
+ * */
+class Comp_profile_input_mobile extends React.Component {
+  static contextType = Context;
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      search_value: '',
+      address: '',
+    };
+
+    this.address_set = this.address_set.bind(this);
+  }
+
+  address_set() {
+    if (!this.context.state.wallet_address && this.state.address) {
+      this.setState({
+        ...this.state,
+        address: '',
+      });
+
+      return;
+    }
+
+    if (this.context.state.wallet_address && !this.state.address) {
+      let address = this.context.state.wallet_address;
+
+      address =
+        address[0] +
+        address[1] +
+        address[2] +
+        address[3] +
+        '...' +
+        address[address.length - 3] +
+        address[address.length - 2] +
+        address[address.length - 1];
+
+      this.setState({
+        ...this.state,
+        address: address,
+      });
+    }
+  }
+
+  componentDidUpdate() {
+    this.address_set();
+  }
+
+  componentDidMount() {}
+
+  render() {
+    return (
+      <div className={cn(style['compprofileinputmobile'])}>
+        <a
+          href="https://pinksale.finance"
+          target="_blank"
+          className={cn(style['compprofileinputmobile-buynow'])}
+        >
+          <div className={cn(style['compprofileinputmobile-buynow-top'])}>
+            <span
+              className={cn(style['compprofileinputmobile-buynow-top-token'])}
+            >
+              SAFUBASE
+            </span>
+
+            <span
+              className={cn(style['compprofileinputmobile-buynow-top-price'])}
+            >
+              Presale
+            </span>
+          </div>
+
+          <div
+            className={cn(style['compprofileinputmobile-buynow-bottom-title'])}
+          >
+            BUY NOW
+          </div>
+        </a>
+
+        <button
+          className={cn(style['compprofileinputmobile-conwallet'])}
+          onClick={() => {
+            UTILS.wallet_connect({ chain_id: 56 }, this.context);
+          }}
+        >
+          {this.state.address || 'Connect Wallet'}
+        </button>
       </div>
     );
   }
@@ -820,7 +924,7 @@ class Comp_whale_tracker extends React.Component {
               }}
               className={cn(style['compwhaletracker-config-title-i'])}
             >
-              <IconInfo />
+              <Icon_info />
 
               <div
                 className={cn(
@@ -849,9 +953,9 @@ class Comp_whale_tracker extends React.Component {
             >
               <img src={this.state.chain.img} />{' '}
               {this.state.chains_dd_open ? (
-                <IconArrow dir="up" />
+                <Icon_arrow dir="up" />
               ) : (
-                <IconArrow dir="down" />
+                <Icon_arrow dir="down" />
               )}
             </div>
 
@@ -945,7 +1049,7 @@ class Comp_whale_tracker extends React.Component {
         <div className={cn(style['compwhaletracker-rows'])}>
           {this.state.api_loading ? (
             <div className={cn(style['compwhaletracker-rows-loading'])}>
-              <IconLoading />
+              <Icon_loading />
             </div>
           ) : (
             this.state.api_data.map((curr, index) => {
@@ -1037,7 +1141,7 @@ class Comp_whale_tracker extends React.Component {
 
 /**
  *
- * UPCOMING UNLOCKEDS COMPONENT
+ * UPCOMING UNLOCKS COMPONENT
  *
  */
 class Comp_upcoming_unlocks extends React.Component {
@@ -1139,7 +1243,7 @@ class Comp_upcoming_unlocks extends React.Component {
               }}
               className={cn(style['compupcomingunlocks-config-title-i'])}
             >
-              <IconInfo />
+              <Icon_info />
 
               <div
                 className={cn(
@@ -1172,7 +1276,7 @@ class Comp_upcoming_unlocks extends React.Component {
         <div className={cn(style['compupcomingunlocks-rows'])}>
           {this.state.api_loading ? (
             <div className={cn(style['compupcomingunlocks-rows-loading'])}>
-              <IconLoading />
+              <Icon_loading />
             </div>
           ) : (
             this.state.api_data.map((curr, index) => {
@@ -1229,7 +1333,7 @@ class Comp_upcoming_unlocks extends React.Component {
                         ]
                       )}
                     >
-                      <IconLock />
+                      <Icon_lock />
 
                       <span>{UTILS.num_shorten(curr.locked_supply)}</span>
 
@@ -1299,12 +1403,12 @@ class Home extends React.Component {
     return (
       <>
         <Head title="safubase" desc="safubase" />
-
-        <UserLayout
+        <Layout_user
           element={
             <>
               <section className={cn('section', style['sectiondash'])}>
                 <div className={cn(style['sectiondash-left'])}>
+                  <Comp_profile_input_mobile />
                   <Comp_hello />
 
                   <div className={cn(style['sectiondash-left-inputarea'])}>
