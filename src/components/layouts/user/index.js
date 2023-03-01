@@ -43,7 +43,7 @@ class UserLayout extends React.Component {
         <main
           className={cn(
             style['main'],
-            this.context.state.ui_sidebar_open ? style['sidebaropen'] : null
+            this.context.state.ui_sidebar_open ? style['mainsidebaropen'] : null
           )}
         >
           {this.props.element || this.props.children}

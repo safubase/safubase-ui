@@ -873,6 +873,7 @@ class Comp_whale_tracker extends React.Component {
                     onClick={async () => {
                       this.setState({
                         ...this.state,
+                        chain: curr,
                         chains: [...this.state.chains],
                         chains_dd_open: false,
                         api_data: [...this.state.api_data],
@@ -892,7 +893,6 @@ class Comp_whale_tracker extends React.Component {
                       this.setState({
                         ...this.state,
                         chains: [...this.state.chains],
-                        chain: curr,
                         chains_dd_open: false,
                         api_data: res.data,
                         api_loading: false,
@@ -1291,9 +1291,9 @@ class Home extends React.Component {
     this.state = {};
   }
 
-  componentDidUpdate() {}
-
   componentDidMount() {}
+
+  componentDidUpdate() {}
 
   render() {
     return (

@@ -11,13 +11,10 @@
 
 html {
   scroll-behavior: smooth;
-  display: flex; justify-content: center; align-items: center;
-  height: 100%;
 }
 
-body {
-  max-width: 1920px; height: 100%;
-  position: relative; /* Sidebar relative to body*/
+body {  
+  max-width: 1500px;
 }
 
 input::placeholder {

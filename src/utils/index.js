@@ -301,12 +301,12 @@ export function wallet_add_listeners(context) {
 
   ethereum.on('accountsChanged', (accounts) => {
     if (!accounts || !accounts.length) {
-      wallet_clear(this.context);
+      wallet_clear(context);
 
       return;
     }
 
-    wallet_update(this.context);
+    wallet_update(context);
   });
 }
 
