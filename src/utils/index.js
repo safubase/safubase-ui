@@ -22,7 +22,7 @@ export async function str_copy(str) {
 
 export function str_remove_extra_space(str, mode = 0) {
   if (!str || typeof str !== 'string') {
-    return '';
+    return null;
   }
 
   if (typeof mode === 'number') {
@@ -211,10 +211,7 @@ export async function wallet_update(context) {
 
   context.set_state({
     ...context.state,
-    wallet: {
-      ...context.state.wallet,
-      address: address,
-    },
+    wallet_address: address,
   });
 }
 
@@ -254,10 +251,7 @@ export async function wallet_connect({ chain_id = 56 }, context) {
 
     context.set_state({
       ...context.state,
-      wallet: {
-        ...context.state.wallet,
-        address: accounts[0],
-      },
+      wallet_address: accounts[0],
     });
 
     await ethereum.request({
@@ -271,10 +265,7 @@ export async function wallet_connect({ chain_id = 56 }, context) {
 
     context.set_state({
       ...context.state,
-      wallet: {
-        ...context.state.wallet,
-        address: accounts[0],
-      },
+      wallet_address: accounts[0],
     });
   } catch (err) {
     await ethereum.request({
@@ -288,10 +279,7 @@ export async function wallet_connect({ chain_id = 56 }, context) {
 
     context.set_state({
       ...context.state,
-      wallet: {
-        ...context.state.wallet,
-        address: accounts[0],
-      },
+      wallet_address: accounts[0],
     });
   }
 
@@ -301,10 +289,24 @@ export async function wallet_connect({ chain_id = 56 }, context) {
 export function wallet_clear(context) {
   context.set_state({
     ...context.state,
-    wallet: {
-      ...context.state.wallet,
-      address: null,
-    },
+    wallet_address: null,
+  });
+}
+
+export function wallet_add_listeners(context) {
+  // WALLET EVENTS
+  if (!window.ethereum) {
+    return null;
+  }
+
+  ethereum.on('accountsChanged', (accounts) => {
+    if (!accounts || !accounts.length) {
+      wallet_clear(this.context);
+
+      return;
+    }
+
+    wallet_update(this.context);
   });
 }
 
@@ -316,4 +318,5 @@ export default {
   wallet_update,
   wallet_connect,
   wallet_clear,
+  wallet_add_listeners,
 };

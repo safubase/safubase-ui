@@ -3,7 +3,6 @@
   justify-content: flex-start;
   align-items: flex-start;
   padding-top: 1rem;
-
 }
 
 @media only screen and (max-width: 1150px) {
@@ -15,8 +14,7 @@
 @media only screen and (max-width: 650px) {
   .sectiondash {
     padding-top: 0;
-    display: flex;
-    flex-direction: column-reverse;
+    display: block;
   }
 }
 
@@ -1139,7 +1137,6 @@
 
 .compupcomingunlocks-rows-row-amount-lockedamount > span {
   margin-left: .3rem;
-
 }
 
 .compupcomingunlocks-rows-row-amount-lockedamount-percentage {
@@ -1157,4 +1154,3 @@
   font-weight: 500;
   cursor: pointer;
 }
-

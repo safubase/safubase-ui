@@ -11,13 +11,19 @@
 
 html {
   scroll-behavior: smooth;
+  display: flex; justify-content: center; align-items: center;
+  height: 100%;
+}
+
+body {
+  max-width: 1920px; height: 100%;
+  position: relative; /* Sidebar relative to body*/
 }
 
 input::placeholder {
   opacity: 0.5;
   font-family: 'Murecho', sans-serif;
 }
-
 
 /* SCROLL BAR */
 ::-webkit-scrollbar {

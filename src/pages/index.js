@@ -25,7 +25,7 @@ import UTILS_API from '../utils/api';
 // STYLES
 import style from '../styles/pages/home.module.css';
 
-function sort_audits_by_date(data) {
+function global_sort_audits_by_date(data) {
   // order from newly created
   for (let i = 0; i < data.length; i++) {
     for (let j = 0; j < data.length; j++) {
@@ -92,7 +92,7 @@ export async function getServerSideProps({ req }) {
     },
   ];
 
-  sort_audits_by_date(latest_audits);
+  global_sort_audits_by_date(latest_audits);
 
   // humanize created at value
   for (let i = 0; i < latest_audits.length; i++) {
@@ -110,10 +110,17 @@ export async function getServerSideProps({ req }) {
 
 /**
  *
+ *
+ * HOME PAGE COMPONENTS ***************
+ *
+ */
+
+/**
+ *
  * HELLO COMPONENT
  *
  */
-class CompHello extends React.Component {
+class Comp_hello extends React.Component {
   static contextType = Context;
 
   constructor(props) {
@@ -155,7 +162,7 @@ class CompHello extends React.Component {
  * INPUT COMPONENT
  *
  */
-class CompInput extends React.Component {
+class Comp_input extends React.Component {
   static contextType = Context;
 
   constructor(props) {
@@ -278,7 +285,7 @@ class CompInput extends React.Component {
  *
  */
 
-class CompBoxes extends React.Component {
+class Comp_boxes extends React.Component {
   static contextType = Context;
 
   constructor(props) {
@@ -328,7 +335,7 @@ class CompBoxes extends React.Component {
  * LATEST AUDITS COMPONENT
  *
  */
-class CompLastAdts extends React.Component {
+class Comp_last_adts extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -340,6 +347,8 @@ class CompLastAdts extends React.Component {
     this.audits_ref = React.createRef();
 
     this.animate = this.animate.bind(this);
+    this.api_blockchain_get_latest_audits =
+      this.api_blockchain_get_latest_audits.bind(this);
   }
 
   animate() {
@@ -376,11 +385,7 @@ class CompLastAdts extends React.Component {
     }, 1000);
   }
 
-  componentDidUpdate() {
-    this.animate();
-  }
-
-  componentDidMount() {
+  async api_blockchain_get_latest_audits() {
     // Fetch latest audits once in a while
     setInterval(() => {
       const audits = [
@@ -398,7 +403,7 @@ class CompLastAdts extends React.Component {
 
       audits.length = 5;
 
-      sort_audits_by_date(audits);
+      global_sort_audits_by_date(audits);
 
       this.setState({
         ...this.state,
@@ -406,6 +411,14 @@ class CompLastAdts extends React.Component {
         animation: true,
       });
     }, 6000);
+  }
+
+  componentDidUpdate() {
+    this.animate();
+  }
+
+  componentDidMount() {
+    this.api_blockchain_get_latest_audits();
   }
 
   render() {
@@ -563,7 +576,7 @@ class CompLastAdts extends React.Component {
  *
  *
  * */
-class CompProfileInput extends React.Component {
+class Comp_profile_input extends React.Component {
   static contextType = Context;
 
   constructor(props) {
@@ -572,10 +585,12 @@ class CompProfileInput extends React.Component {
       search_value: '',
       address: '',
     };
+
+    this.address_set = this.address_set.bind(this);
   }
 
-  componentDidUpdate() {
-    if (!this.context.state.wallet.address && this.state.address) {
+  address_set() {
+    if (!this.context.state.wallet_address && this.state.address) {
       this.setState({
         ...this.state,
         address: '',
@@ -584,8 +599,8 @@ class CompProfileInput extends React.Component {
       return;
     }
 
-    if (this.context.state.wallet.address && !this.state.address) {
-      let address = this.context.state.wallet.address;
+    if (this.context.state.wallet_address && !this.state.address) {
+      let address = this.context.state.wallet_address;
 
       address =
         address[0] +
@@ -602,6 +617,10 @@ class CompProfileInput extends React.Component {
         address: address,
       });
     }
+  }
+
+  componentDidUpdate() {
+    this.address_set();
   }
 
   componentDidMount() {}
@@ -684,7 +703,7 @@ class CompProfileInput extends React.Component {
  * WHALEE TRACKER COMPONENT
  *
  */
-class CompWhaleTracker extends React.Component {
+class Comp_whale_tracker extends React.Component {
   static contextType = Context;
 
   constructor(props) {
@@ -731,6 +750,7 @@ class CompWhaleTracker extends React.Component {
     };
 
     this.reduce_row_name_chars = this.reduce_row_name_chars.bind(this);
+    this.api_update = this.api_update.bind(this);
   }
 
   reduce_row_name_chars(str, offset = 13) {
@@ -749,21 +769,29 @@ class CompWhaleTracker extends React.Component {
   }
 
   componentDidMount() {
-    UTILS_API.blockchain_get_whales(
+    this.api_update();
+
+    setInterval(() => {
+      this.api_update();
+    }, 20000);
+  }
+
+  async api_update() {
+    const res = await UTILS_API.blockchain_get_whales(
       this.state.chain.chain,
       1,
       this.context
-    ).then((res) => {
-      if (res === null) {
-        return;
-      }
+    );
 
-      this.setState({
-        ...this.state,
-        chains: [...this.state.chains],
-        api_data: res.data,
-        api_loading: false,
-      });
+    if (res === null) {
+      return;
+    }
+
+    this.setState({
+      ...this.state,
+      chains: [...this.state.chains],
+      api_data: res.data,
+      api_loading: false,
     });
   }
 
@@ -1012,7 +1040,7 @@ class CompWhaleTracker extends React.Component {
  * UPCOMING UNLOCKEDS COMPONENT
  *
  */
-class CompUpcomingUnlocks extends React.Component {
+class Comp_upcoming_unlocks extends React.Component {
   static contextType = Context;
 
   constructor(props) {
@@ -1024,7 +1052,8 @@ class CompUpcomingUnlocks extends React.Component {
     };
 
     this.reduce_row_name_chars = this.reduce_row_name_chars.bind(this);
-    this.display_date = this.display_date.bind(this);
+    this.date_display = this.date_display.bind(this);
+    this.api_update = this.api_update.bind(this);
   }
 
   reduce_row_name_chars(str, offset = 13) {
@@ -1042,7 +1071,7 @@ class CompUpcomingUnlocks extends React.Component {
     return new_str;
   }
 
-  display_date(remaining_s) {
+  date_display(remaining_s) {
     const remaining_m = parseInt(remaining_s / 60);
 
     if (remaining_m < 60) {
@@ -1060,18 +1089,29 @@ class CompUpcomingUnlocks extends React.Component {
     return remaining_d + ' days';
   }
 
-  componentDidMount() {
-    UTILS_API.blockchain_get_upcoming_unlocks(1, this.context).then((res) => {
-      if (res === null) {
-        return;
-      }
+  async api_update() {
+    const res = await UTILS_API.blockchain_get_upcoming_unlocks(
+      1,
+      this.context
+    );
 
-      this.setState({
-        ...this.state,
-        api_data: res.data,
-        api_loading: false,
-      });
+    if (res === null) {
+      return;
+    }
+
+    this.setState({
+      ...this.state,
+      api_data: res.data,
+      api_loading: false,
     });
+  }
+
+  componentDidMount() {
+    this.api_update();
+
+    setInterval(() => {
+      this.api_update();
+    }, 20000);
   }
 
   componentDidUpdate() {}
@@ -1224,7 +1264,7 @@ class CompUpcomingUnlocks extends React.Component {
                   <div
                     className={cn(style['compupcomingunlocks-rows-row-date'])}
                   >
-                    {this.display_date(
+                    {this.date_display(
                       curr.unlock_date - parseInt(Date.now() / 1000)
                     )}
                   </div>
@@ -1265,7 +1305,7 @@ class Home extends React.Component {
             <>
               <section className={cn('section', style['sectiondash'])}>
                 <div className={cn(style['sectiondash-left'])}>
-                  <CompHello />
+                  <Comp_hello />
 
                   <div className={cn(style['sectiondash-left-inputarea'])}>
                     <div
@@ -1283,17 +1323,17 @@ class Home extends React.Component {
                       quick Audit option.
                     </div>
 
-                    <CompInput />
+                    <Comp_input />
                   </div>
 
-                  <CompLastAdts data={this.props.latest_audits} />
+                  <Comp_last_adts data={this.props.latest_audits} />
                 </div>
 
                 <div className={cn(style['sectiondash-right'])}>
-                  <CompProfileInput />
-                  <CompBoxes />
-                  <CompWhaleTracker />
-                  <CompUpcomingUnlocks />
+                  <Comp_profile_input />
+                  <Comp_boxes />
+                  <Comp_whale_tracker />
+                  <Comp_upcoming_unlocks />
                 </div>
               </section>
             </>

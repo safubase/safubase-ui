@@ -6,10 +6,10 @@ import config from '../config';
 
 /**
  *
- * AXIOS INSTANCE configuration
+ * AXIOS axios_instance configuration
  *
  */
-const instance = axios.create({
+const axios_instance = axios.create({
   withCredentials: true,
   headers: {
     'Content-Type': 'application/json',
@@ -33,29 +33,42 @@ export async function get_profile(version = 1, context) {
   const url = config.api_url + '/v' + version + '/profile';
 
   try {
-    const res = await instance.get(url);
+    const res = await axios_instance.get(url);
 
-    if (res.data === null) {
+    if (!res === null || !res.data === null) {
       // Logged out because data is null from the server 200
       context.set_state({
         ...context.state,
-        auth: false,
-        user: { id: '', username: '', email: '' },
+        user_auth: false,
+        user_id: res.data._id,
+        user_username: res.data.username,
+        user_email: res.data.email,
+        user_email_verifed: res.data.email_verified,
       });
 
       return;
     }
 
     // Logged in successfully
-    context.set_state({ ...context.state, auth: true, user: res.data });
+    context.set_state({
+      ...context.state,
+      user_auth: true,
+      user_id: res.data._id,
+      user_username: res.data.username,
+      user_email: res.data.email,
+      user_email_verifed: res.data.email_verified,
+    });
 
     return res;
   } catch (err) {
     // Something went wrong with the request, automatically logout
     context.set_state({
       ...context.state,
-      auth: false,
-      user: { id: '', username: '', email: '' },
+      user_auth: false,
+      user_id: null,
+      user_username: null,
+      user_email: null,
+      user_email_verifed: null,
     });
 
     return null;
@@ -78,19 +91,29 @@ export async function signup(body, version = 1, context) {
   const url = config.api_url + '/v' + version + '/signup';
 
   try {
-    const res = await instance.post(url, body);
+    const res = await axios_instance.post(url, body);
 
-    context.set_state({ ...context.state, auth: true, user: res.data });
+    context.set_state({
+      ...context.state,
+      user_auth: false,
+      user_id: res.data._id,
+      user_username: res.data.username,
+      user_email: res.data.email,
+      user_email_verifed: res.data.email_verified,
+    });
 
     return res;
   } catch (err) {
     // Something went wrong with the request, automatically logout
+    // Something went wrong with the request, automatically logout
     context.set_state({
       ...context.state,
-      auth: false,
-      user: { id: '', username: '', email: '' },
+      user_auth: false,
+      user_id: null,
+      user_username: null,
+      user_email: null,
+      user_email_verifed: null,
     });
-
     return null;
   }
 }
@@ -111,21 +134,28 @@ export async function login(body, version = 1, context) {
   const url = config.api_url + '/v' + version + '/login';
 
   try {
-    const res = await instance.post(url, body);
+    const res = await axios_instance.post(url, body);
 
     context.set_state({
       ...context.state,
-      auth: true,
-      user: res.data,
+      user_auth: false,
+      user_id: res.data._id,
+      user_username: res.data.username,
+      user_email: res.data.email,
+      user_email_verifed: res.data.email_verified,
     });
 
     return res;
   } catch (err) {
     // Something went wrong with the request, automatically logout
+    // Something went wrong with the request, automatically logout
     context.set_state({
       ...context.state,
-      auth: false,
-      user: { id: '', username: '', email: '' },
+      user_auth: false,
+      user_id: null,
+      user_username: null,
+      user_email: null,
+      user_email_verifed: null,
     });
 
     return null;
@@ -154,7 +184,7 @@ export async function blockchain_get_whales(
     config.api_url + '/v' + version + '/blockchain/whales?chain=' + chain;
 
   try {
-    const res = await instance.get(url);
+    const res = await axios_instance.get(url);
 
     return res;
   } catch (err) {
@@ -174,7 +204,7 @@ export async function blockchain_get_upcoming_unlocks(version = 1, context) {
   const url = config.api_url + '/v' + version + '/blockchain/upcoming-unlocks';
 
   try {
-    const res = await instance.get(url);
+    const res = await axios_instance.get(url);
 
     return res;
   } catch (err) {

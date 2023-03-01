@@ -37,14 +37,14 @@ class Sidebar extends React.Component {
       <aside
         className={cn(
           style['ctr'],
-          this.context.state.sidebar_open ? style['ctropen'] : null
+          this.context.state.ui_sidebar_open ? style['ctropen'] : null
         )}
         onMouseOver={() => {
           if (window.innerWidth < 650) return;
 
           this.context.set_state({
             ...this.context.state,
-            sidebar_open: true,
+            ui_sidebar_open: true,
           });
         }}
         onMouseLeave={() => {
@@ -52,7 +52,7 @@ class Sidebar extends React.Component {
 
           this.context.set_state({
             ...this.context.state,
-            sidebar_open: false,
+            ui_sidebar_open: false,
           });
         }}
       >
@@ -62,7 +62,7 @@ class Sidebar extends React.Component {
               <HomeIcon active={this.state.pathname === '/' ? true : false} />
               <span
                 className={cn(
-                  this.context.state.sidebar_open
+                  this.context.state.ui_sidebar_open
                     ? style['ctr-sidebar-top-iconctr-spanactive']
                     : null
                 )}
@@ -77,7 +77,7 @@ class Sidebar extends React.Component {
               />
               <span
                 className={cn(
-                  this.context.state.sidebar_open
+                  this.context.state.ui_sidebar_open
                     ? style['ctr-sidebar-top-iconctr-spanactive']
                     : null
                 )}
@@ -95,7 +95,7 @@ class Sidebar extends React.Component {
               />
               <span
                 className={cn(
-                  this.context.state.sidebar_open
+                  this.context.state.ui_sidebar_open
                     ? style['ctr-sidebar-top-iconctr-spanactive']
                     : null
                 )}
@@ -108,7 +108,7 @@ class Sidebar extends React.Component {
               <HomeIcon />
               <span
                 className={cn(
-                  this.context.state.sidebar_open
+                  this.context.state.ui_sidebar_open
                     ? style['ctr-sidebar-top-iconctr-spanactive']
                     : null
                 )}
@@ -125,7 +125,7 @@ class Sidebar extends React.Component {
                   <LogoutIcon />
                   <span
                     className={cn(
-                      this.context.state.sidebar_open
+                      this.context.state.ui_sidebar_open
                         ? style['ctr-sidebar-bottom-iconctr-spanactive']
                         : null
                     )}
@@ -138,7 +138,7 @@ class Sidebar extends React.Component {
                   <LoginIcon />
                   <span
                     className={cn(
-                      this.context.state.sidebar_open
+                      this.context.state.ui_sidebar_open
                         ? style['ctr-sidebar-bottom-iconctr-spanactive']
                         : null
                     )}

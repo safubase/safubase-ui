@@ -2,19 +2,16 @@
 import React from 'react';
 
 const initial_state = {
-  user: {
-    // current user info
-    _id: '',
-    username: '',
-    email: '',
-    email_verified: false,
-  },
-  auth: null, // false = logged out, true = logged in, null = waiting for the server response
-  sidebar_open: false,
-  wallet: {
-    // Metamask or Trust Wallet data
-    address: null,
-  },
+  // UI props
+  ui_sidebar_open: false,
+  // user props
+  user_auth: null, // false = logged out, true = logged in, null = waiting for the server response
+  user_id: null,
+  user_username: null,
+  user_email: null,
+  user_email_verified: null,
+  // wallet props
+  wallet_address: null,
 };
 
 function reducer(value = initial_state, action) {
