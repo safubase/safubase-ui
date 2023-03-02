@@ -1,7 +1,6 @@
 .ctr {
   position: fixed;
-  top: 0;
-  left: 0;
+  top: 0; left: 0;
   height: 100%;
   width: var(--comp-sidebar-width);
   padding: 1rem;

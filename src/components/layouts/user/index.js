@@ -17,6 +17,8 @@ import UTILS_API from '../../../utils/api.js';
 // STYLES
 import style from './style.module.css';
 
+//
+
 class UserLayout extends React.Component {
   static contextType = Context;
 

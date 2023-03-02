@@ -24,11 +24,7 @@ export const Context = React.createContext();
 
 export function Provider({ children }) {
   const [state, set_state] = React.useReducer(reducer, initial_state);
-  const value = {
-    state,
-    set_state,
-  };
-
+  const value = { state, set_state };
   return <Context.Provider value={value}>{children}</Context.Provider>;
 }
 

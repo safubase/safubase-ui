@@ -204,11 +204,17 @@ class Comp_input extends React.Component {
 
   render() {
     return (
-      <div className={cn(style['ctr'])}>
-        <div className={cn(style['ctr-left'])}></div>
-        <div className={cn(style['compinput'])}>
-          <div className={cn(style['compinput-bg'])}>
-            <div className={cn(style['compinput-bg-inputarea'])}>
+      <div className={cn(style['compinput'])}>
+        <div className={cn(style['compinput-left'])}>
+          <div className={cn(style['compinput-left-logo'])}>LIVE</div>
+          You can quickly check the
+          <strong> token smart contract</strong> here. This is a quick Audit
+          option.
+        </div>
+
+        <div className={cn(style['compinput-right'])}>
+          <div className={cn(style['compinput-right-bg'])}>
+            <div className={cn(style['compinput-right-bg-inputarea'])}>
               <div
                 onClick={() => {
                   this.setState({
@@ -216,16 +222,16 @@ class Comp_input extends React.Component {
                     dd_open: !this.state.dd_open,
                   });
                 }}
-                className={cn(style['compinput-bg-inputarea-dd'])}
+                className={cn(style['compinput-right-bg-inputarea-dd'])}
               >
                 <img src={this.state.network.img} />
               </div>
 
               <div
                 className={cn(
-                  style['compinput-bg-inputarea-ddoptions'],
+                  style['compinput-right-bg-inputarea-ddoptions'],
                   this.state.dd_open
-                    ? style['compinput-bg-inputarea-ddoptionsopen']
+                    ? style['compinput-right-bg-inputarea-ddoptionsopen']
                     : null
                 )}
               >
@@ -241,19 +247,23 @@ class Comp_input extends React.Component {
                         });
                       }}
                       className={cn(
-                        style['compinput-bg-inputarea-ddoptions-item']
+                        style['compinput-right-bg-inputarea-ddoptions-item']
                       )}
                     >
                       <img
                         className={cn(
-                          style['compinput-bg-inputarea-ddoptions-item-img']
+                          style[
+                            'compinput-right-bg-inputarea-ddoptions-item-img'
+                          ]
                         )}
                         src={curr.img}
                       />
 
                       <div
                         className={cn(
-                          style['compinput-bg-inputarea-ddoptions-item-name']
+                          style[
+                            'compinput-right-bg-inputarea-ddoptions-item-name'
+                          ]
                         )}
                       >
                         {curr.name}
@@ -264,7 +274,7 @@ class Comp_input extends React.Component {
               </div>
 
               <input
-                className={cn(style['compinput-bg-inputarea-input'])}
+                className={cn(style['compinput-right-bg-inputarea-input'])}
                 placeholder="0x90741BD5C2c928Ad19a58157987e11b2dE07c15B"
                 value={this.state.address}
                 onChange={(e) => {
@@ -275,7 +285,7 @@ class Comp_input extends React.Component {
 
             <button
               onClick={this.on_search}
-              className={cn(style['compinput-bg-btn'])}
+              className={cn(style['compinput-right-bg-btn'])}
             >
               AUDIT
             </button>
@@ -850,7 +860,8 @@ class Comp_whale_tracker extends React.Component {
         },
       ],
       api_data: [],
-      api_loading: true,
+      api_loading: false,
+      api_update_anim: false,
     };
 
     this.reduce_row_name_chars = this.reduce_row_name_chars.bind(this);
@@ -872,15 +883,21 @@ class Comp_whale_tracker extends React.Component {
     return new_str;
   }
 
-  componentDidMount() {
-    this.api_update();
+  async api_update(animate = false) {
+    if (animate) {
+      this.setState({
+        ...this.state,
+        api_loading: false,
+        api_update_anim: true,
+      });
+    } else {
+      this.setState({
+        ...this.state,
+        api_loading: true,
+        api_update_anim: false,
+      });
+    }
 
-    setInterval(() => {
-      this.api_update();
-    }, 20000);
-  }
-
-  async api_update() {
     const res = await UTILS_API.blockchain_get_whales(
       this.state.chain.chain,
       1,
@@ -896,7 +913,16 @@ class Comp_whale_tracker extends React.Component {
       chains: [...this.state.chains],
       api_data: res.data,
       api_loading: false,
+      api_update_anim: false,
     });
+  }
+
+  componentDidMount() {
+    this.api_update();
+
+    setInterval(() => {
+      this.api_update(true);
+    }, 25000);
   }
 
   componentDidUpdate() {}
@@ -1046,7 +1072,14 @@ class Comp_whale_tracker extends React.Component {
           </div>
         </div>
 
-        <div className={cn(style['compwhaletracker-rows'])}>
+        <div
+          className={cn(
+            style['compwhaletracker-rows'],
+            this.state.api_update_anim
+              ? style['compwhaletracker-rowsupdating']
+              : null
+          )}
+        >
           {this.state.api_loading ? (
             <div className={cn(style['compwhaletracker-rows-loading'])}>
               <Icon_loading />
@@ -1153,6 +1186,7 @@ class Comp_upcoming_unlocks extends React.Component {
       info_main_hover: false,
       api_data: [],
       api_loading: true,
+      api_update_anim: false,
     };
 
     this.reduce_row_name_chars = this.reduce_row_name_chars.bind(this);
@@ -1193,7 +1227,21 @@ class Comp_upcoming_unlocks extends React.Component {
     return remaining_d + ' days';
   }
 
-  async api_update() {
+  async api_update(animate = false) {
+    if (animate) {
+      this.setState({
+        ...this.state,
+        api_loading: false,
+        api_update_anim: true,
+      });
+    } else {
+      this.setState({
+        ...this.state,
+        api_loading: true,
+        api_update_anim: false,
+      });
+    }
+
     const res = await UTILS_API.blockchain_get_upcoming_unlocks(
       1,
       this.context
@@ -1207,6 +1255,7 @@ class Comp_upcoming_unlocks extends React.Component {
       ...this.state,
       api_data: res.data,
       api_loading: false,
+      api_update_anim: false,
     });
   }
 
@@ -1214,8 +1263,8 @@ class Comp_upcoming_unlocks extends React.Component {
     this.api_update();
 
     setInterval(() => {
-      this.api_update();
-    }, 20000);
+      this.api_update(true);
+    }, 25000);
   }
 
   componentDidUpdate() {}
@@ -1273,7 +1322,14 @@ class Comp_upcoming_unlocks extends React.Component {
           </div>
         </div>
 
-        <div className={cn(style['compupcomingunlocks-rows'])}>
+        <div
+          className={cn(
+            style['compupcomingunlocks-rows'],
+            this.state.api_update_anim
+              ? style['compupcomingunlocks-rowsupdating']
+              : null
+          )}
+        >
           {this.state.api_loading ? (
             <div className={cn(style['compupcomingunlocks-rows-loading'])}>
               <Icon_loading />
@@ -1403,6 +1459,7 @@ class Home extends React.Component {
     return (
       <>
         <Head title="safubase" desc="safubase" />
+
         <Layout_user
           element={
             <>
@@ -1410,26 +1467,7 @@ class Home extends React.Component {
                 <div className={cn(style['sectiondash-left'])}>
                   <Comp_profile_input_mobile />
                   <Comp_hello />
-
-                  <div className={cn(style['sectiondash-left-inputarea'])}>
-                    <div
-                      className={cn(style['sectiondash-left-inputarea-live'])}
-                    >
-                      <div
-                        className={cn(
-                          style['sectiondash-left-inputarea-live-logo']
-                        )}
-                      >
-                        LIVE
-                      </div>
-                      You can quickly check the
-                      <strong> token smart contract</strong> here. This is a
-                      quick Audit option.
-                    </div>
-
-                    <Comp_input />
-                  </div>
-
+                  <Comp_input />
                   <Comp_last_adts data={this.props.latest_audits} />
                 </div>
 
