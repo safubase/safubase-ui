@@ -175,32 +175,32 @@ class Comp_input extends React.Component {
       dd_open: false, // dropdown open
       address: '',
       network: {
-        img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Binance_Logo.svg/2048px-Binance_Logo.svg.png',
+        img: '/bnb_chain.png',
         name: 'Binance Smart Chain',
         chain_id: 56,
       }, // default selected network
       networks: [
         {
-          img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Binance_Logo.svg/2048px-Binance_Logo.svg.png',
-          name: 'Binance Smart Chain',
+          img: '/bnb_chain.png',
+          name: 'BNB Chain',
           chain_id: 56,
         },
         {
-          img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Ethereum_logo_2014.svg/1257px-Ethereum_logo_2014.svg.png',
-          name: 'Ethereum Mainnet',
+          img: '/eth.png',
+          name: 'Ethereum',
           chain_id: 1,
         },
         {
-          img: 'https://cryptologos.cc/logos/polygon-matic-logo.png',
-          name: 'Polygon falan filan',
+          img: '/polygon.png',
+          name: 'Polygon',
         },
       ],
     };
 
-    this.on_search = this.on_search.bind(this);
+    this.api_audit = this.api_audit.bind(this);
   }
 
-  async on_search() {}
+  async api_audit() {}
 
   render() {
     return (
@@ -268,6 +268,19 @@ class Comp_input extends React.Component {
                       >
                         {curr.name}
                       </div>
+
+                      <input
+                        className={cn(
+                          style[
+                            'compinput-right-bg-inputarea-ddoptions-item-check'
+                          ]
+                        )}
+                        type="checkbox"
+                        checked={this.state.network.name === curr.name}
+                        onChange={(e) => {
+                          e.preventDefault();
+                        }}
+                      />
                     </div>
                   );
                 })}
@@ -284,7 +297,7 @@ class Comp_input extends React.Component {
             </div>
 
             <button
-              onClick={this.on_search}
+              onClick={this.api_audit}
               className={cn(style['compinput-right-bg-btn'])}
             >
               AUDIT
@@ -864,11 +877,11 @@ class Comp_whale_tracker extends React.Component {
       api_update_anim: false,
     };
 
-    this.reduce_row_name_chars = this.reduce_row_name_chars.bind(this);
+    this.str_reduce_row_name_chars = this.str_reduce_row_name_chars.bind(this);
     this.api_update = this.api_update.bind(this);
   }
 
-  reduce_row_name_chars(str, offset = 13) {
+  str_reduce_row_name_chars(str, offset = 13) {
     let new_str = '';
     const parts = str.split(' ');
 
@@ -1127,7 +1140,7 @@ class Comp_whale_tracker extends React.Component {
                           ]
                         )}
                       >
-                        {this.reduce_row_name_chars(curr.token_name)}
+                        {this.str_reduce_row_name_chars(curr.token_name)}
                       </div>
                     </div>
                   </div>
@@ -1189,12 +1202,12 @@ class Comp_upcoming_unlocks extends React.Component {
       api_update_anim: false,
     };
 
-    this.reduce_row_name_chars = this.reduce_row_name_chars.bind(this);
+    this.str_reduce_row_name_chars = this.str_reduce_row_name_chars.bind(this);
     this.date_display = this.date_display.bind(this);
     this.api_update = this.api_update.bind(this);
   }
 
-  reduce_row_name_chars(str, offset = 13) {
+  str_reduce_row_name_chars(str, offset = 13) {
     let new_str = '';
     const parts = str.split(' ');
 
@@ -1374,7 +1387,7 @@ class Comp_upcoming_unlocks extends React.Component {
                           ]
                         )}
                       >
-                        {this.reduce_row_name_chars(curr.name)}
+                        {this.str_reduce_row_name_chars(curr.name)}
                       </div>
                     </div>
                   </div>
@@ -1459,7 +1472,6 @@ class Home extends React.Component {
     return (
       <>
         <Head title="safubase" desc="safubase" />
-
         <Layout_user
           element={
             <>
@@ -1473,7 +1485,6 @@ class Home extends React.Component {
 
                 <div className={cn(style['sectiondash-right'])}>
                   <Comp_profile_input />
-                  <Comp_boxes />
                   <Comp_whale_tracker />
                   <Comp_upcoming_unlocks />
                 </div>

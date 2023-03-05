@@ -3,6 +3,7 @@
   justify-content: flex-start;
   align-items: flex-start;
   padding-top: 1rem;
+
 }
 
 @media only screen and (max-width: 1150px) {
@@ -250,51 +251,50 @@
   height: 100%;
 }
 
-/* TODO */
 .compinput-right-bg-inputarea-ddoptions {
-  transition: all 0.2s ease;
-  width: 200px;
-  height: 0;
-  overflow: hidden;
-  overflow-y: scroll;
   position: absolute;
-  top: 100%;
-  left: 0;
-  opacity: 0;
+  left: 0;  top: 120%;
   border-radius: var(--border-radius-small);
+  overflow: hidden;
+  transition: all .2s ease;
   background-color: white;
-  box-shadow: 0px 10px 20px 1px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  display: none;
 }
 
 .compinput-right-bg-inputarea-ddoptionsopen {
-  height: 200px;
-  opacity: 1;
+  display: block;
 }
 
 .compinput-right-bg-inputarea-ddoptions-item {
-  transition: all 0.2 ease-in;
-  padding: 0.6rem 0.8rem;
-  height: 36px;
-  border-bottom: 1px solid rgb(218, 218, 218);
+  display: flex; justify-content: flex-start; align-items: center;
+  padding: .6rem .6rem;
   cursor: pointer;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
 }
 
 .compinput-right-bg-inputarea-ddoptions-item:hover {
-  background-color: rgb(218, 218, 218);
+  background-color: rgb(231, 231, 231);
 }
 
 .compinput-right-bg-inputarea-ddoptions-item-img {
-  display: block;
-  height: 100%;
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
 .compinput-right-bg-inputarea-ddoptions-item-name {
-  margin-left: 1rem;
-  font-size: 12px;
-  font-weight: 500;
+  white-space: nowrap;
+  margin-left: .6rem;
+  min-width: 80px;
+  font-size: 13px; font-weight: 500;
+  color: black;
+}
+
+.compinput-right-bg-inputarea-ddoptions-item-check {
+  margin-left: .6rem;
+  outline: non;
+  border: none;
+  background-color: aliceblue;
 }
 
 .compinput-right-bg-inputarea-input {
@@ -487,6 +487,7 @@
   justify-content: space-between;
   align-items: center;
   height: 50px;
+  margin-bottom: 1rem;
 }
 
 @media only screen and (max-width: 650px) {
@@ -643,14 +644,11 @@
   }
 }
 
-
 /*
 *
 * COMPONENT PROFILE INPUT MOBILE
 *
 */
-
-
 .compprofileinputmobile {
   height: 50px;
   display: none;
@@ -714,7 +712,6 @@
   cursor: pointer;
 }
 
-
 /*
 *
 * COMPONENT BOXES
@@ -774,7 +771,6 @@
   border-radius: var(--border-radius-large);
   font-size: 15px;
   overflow: hidden;
-
 }
 
 @media only screen and (max-width: 650px) {
@@ -846,8 +842,7 @@
 
 .compwhaletracker-config-chaindd-options {
   position: absolute;
-  right: 0;
-  top: 110%;
+  right: 0; top: 110%;
   border-radius: var(--border-radius-small);
   overflow: hidden;
   display: none;
@@ -1162,9 +1157,6 @@
   background-color: rgba(42, 255, 138, 0.2);
 }
 
-
-
-
 .compupcomingunlocks-rows-row-imgnamesymbol {
   display: flex; justify-content: flex-start; align-items: center;
   width: 150px;
@@ -1196,7 +1188,6 @@
   width: 110px;
   text-align: right;
   font-weight: 500;
-  
 }
 
 .compupcomingunlocks-rows-row-amountgreen {
@@ -1235,3 +1226,5 @@
   font-weight: 500;
   cursor: pointer;
 }
+
+

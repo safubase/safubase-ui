@@ -6,6 +6,7 @@ const initial_state = {
   ui_sidebar_open: false,
   // user props
   user_auth: null, // false = logged out, true = logged in, null = waiting for the server response
+  // httponly cookie in the browser backend for authentication
   user_id: null,
   user_username: null,
   user_email: null,
@@ -25,6 +26,7 @@ export const Context = React.createContext();
 export function Provider({ children }) {
   const [state, set_state] = React.useReducer(reducer, initial_state);
   const value = { state, set_state };
+
   return <Context.Provider value={value}>{children}</Context.Provider>;
 }
 

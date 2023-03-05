@@ -7,7 +7,7 @@ import { Context } from '../../context';
 // STYLES
 import style from './style.module.css';
 
-class ProgressiveImg extends React.Component {
+class Progressive_img extends React.Component {
   static contextType = Context;
 
   constructor(props) {
@@ -59,4 +59,4 @@ class ProgressiveImg extends React.Component {
   }
 }
 
-export default ProgressiveImg;
+export default Progressive_img;

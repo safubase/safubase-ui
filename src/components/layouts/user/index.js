@@ -17,8 +17,6 @@ import UTILS_API from '../../../utils/api.js';
 // STYLES
 import style from './style.module.css';
 
-//
-
 class UserLayout extends React.Component {
   static contextType = Context;
 
@@ -42,6 +40,7 @@ class UserLayout extends React.Component {
       <>
         <Header />
         <Sidebar />
+
         <main
           className={cn(
             style['main'],
@@ -50,6 +49,7 @@ class UserLayout extends React.Component {
         >
           {this.props.element || this.props.children}
         </main>
+
         <Footer />
       </>
     );
