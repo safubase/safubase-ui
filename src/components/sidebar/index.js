@@ -15,8 +15,6 @@ import Icon_logout from '../icons/logout';
 // STYLES
 import style from './style.module.css';
 
-// test
-
 class Sidebar extends React.Component {
   static contextType = Context;
 
