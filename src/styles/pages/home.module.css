@@ -3,7 +3,6 @@
   justify-content: flex-start;
   align-items: flex-start;
   padding-top: 1rem;
-
 }
 
 @media only screen and (max-width: 1150px) {
@@ -81,7 +80,7 @@
 }
 
 .comphello-textarea-title {
-  font-size: 30px;
+  font-size: 45px;
   font-weight: bold;
 }
 
@@ -93,7 +92,7 @@
 
 @media only screen and (max-width: 650px) {
   .comphello-textarea-title {
-    font-size: 16px;
+    font-size: 27px;
   }
 }
 
@@ -110,7 +109,7 @@
 
 @media only screen and (max-width: 650px) {
   .comphello-textarea-desc {
-    font-size: 13px;
+    font-size: 15px;
   }
 }
 
@@ -134,8 +133,8 @@
 *
 */
 .compinput {
-  display: flex; justify-content: flex-start;
-
+  display: flex;
+  justify-content: flex-start;
 }
 
 @media only screen and (max-width: 650px) {
@@ -145,7 +144,8 @@
 }
 
 .compinput-left {
-  width: 240px; height: calc(4rem + 36px);
+  width: 240px;
+  height: calc(4rem + 36px);
   background-color: rgb(235, 235, 235);
   border-radius: var(--border-radius-large);
   padding: 1rem;
@@ -253,10 +253,11 @@
 
 .compinput-right-bg-inputarea-ddoptions {
   position: absolute;
-  left: 0;  top: 120%;
+  left: 0;
+  top: 120%;
   border-radius: var(--border-radius-small);
   overflow: hidden;
-  transition: all .2s ease;
+  transition: all 0.2s ease;
   background-color: white;
   border: 1px solid rgba(0, 0, 0, 0.2);
   display: none;
@@ -267,8 +268,10 @@
 }
 
 .compinput-right-bg-inputarea-ddoptions-item {
-  display: flex; justify-content: flex-start; align-items: center;
-  padding: .6rem .6rem;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0.6rem 0.6rem;
   cursor: pointer;
 }
 
@@ -277,21 +280,23 @@
 }
 
 .compinput-right-bg-inputarea-ddoptions-item-img {
-  width: 18px; height: 18px;
+  width: 18px;
+  height: 18px;
   border-radius: 50%;
   object-fit: cover;
 }
 
 .compinput-right-bg-inputarea-ddoptions-item-name {
   white-space: nowrap;
-  margin-left: .6rem;
+  margin-left: 0.6rem;
   min-width: 80px;
-  font-size: 13px; font-weight: 500;
+  font-size: 13px;
+  font-weight: 500;
   color: black;
 }
 
 .compinput-right-bg-inputarea-ddoptions-item-check {
-  margin-left: .6rem;
+  margin-left: 0.6rem;
   outline: non;
   border: none;
   background-color: aliceblue;
@@ -419,7 +424,6 @@
   }
 }
 
-
 .complastadts-audits-itemani {
   animation: 1s ease 0s ani-complastadts-audits-item;
 }
@@ -474,7 +478,6 @@
   color: white;
   cursor: pointer;
 }
-
 
 /**
 *
@@ -656,10 +659,11 @@
 
 @media only screen and (max-width: 650px) {
   .compprofileinputmobile {
-
     margin-left: 0;
     height: 50px;
-    display: flex; justify-content: center; align-items: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 }
 
@@ -667,7 +671,8 @@
   color: whitesmoke;
   background-color: black;
   white-space: nowrap;
-  height: 100%;     width: 100%;
+  height: 100%;
+  width: 100%;
   padding: 0 0.8rem;
   font-size: 12px;
   border: 1px solid rgba(223, 219, 219, 0.4);
@@ -701,7 +706,8 @@
 .compprofileinputmobile-conwallet {
   margin-left: 1rem;
   white-space: nowrap;
-  height: 100%;     width: 100%;
+  height: 100%;
+  width: 100%;
   padding: 0 1.4rem;
   font-size: 16px;
   font-weight: 500;
@@ -758,8 +764,6 @@
   margin-left: 1rem;
 }
 
-
-
 /*
 *
 * COMPONENT WHALE TRACKER
@@ -780,24 +784,31 @@
 }
 
 .compwhaletracker-config {
-  padding: .6rem .6rem;
-  display: flex; justify-content: space-between; align-items: center;
+  padding: 0.6rem 0.6rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .compwhaletracker-config-title {
-  display: flex; justify-content: center; align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-weight: 500;
 }
 
 .compwhaletracker-config-title-i {
-  margin-left: .3rem;
+  margin-left: 0.3rem;
   position: relative;
   cursor: pointer;
-  display: flex; justify-content: center; align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .compwhaletracker-config-title-i > svg {
-  width: 18px; height: 18px;
+  width: 18px;
+  height: 18px;
 }
 
 .compwhaletracker-config-title-i-modal {
@@ -809,9 +820,9 @@
   color: white;
   width: 260px;
   font-size: 12px;
-  padding: .4rem .8rem;
+  padding: 0.4rem 0.8rem;
   border-radius: var(--border-radius-small);
-  transition: all .2s ease-in;
+  transition: all 0.2s ease-in;
 }
 
 .compwhaletracker-config-title-i-modalactive {
@@ -823,10 +834,12 @@
 }
 
 .compwhaletracker-config-chaindd-selected {
-  display: flex; justify-content: center; align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   cursor: pointer;
   border: 1px solid rgba(0, 0, 0, 0.2);
-  padding: .2rem .4rem;
+  padding: 0.2rem 0.4rem;
   border-radius: var(--border-radius-small);
 }
 
@@ -836,17 +849,19 @@
 }
 
 .compwhaletracker-config-chaindd-selected > svg {
-  width: 20px; height: 20px;
-  margin-left: .4rem;
+  width: 20px;
+  height: 20px;
+  margin-left: 0.4rem;
 }
 
 .compwhaletracker-config-chaindd-options {
   position: absolute;
-  right: 0; top: 110%;
+  right: 0;
+  top: 110%;
   border-radius: var(--border-radius-small);
   overflow: hidden;
   display: none;
-  transition: all .2s ease;
+  transition: all 0.2s ease;
   background-color: white;
   border: 1px solid rgba(0, 0, 0, 0.2);
 }
@@ -856,8 +871,10 @@
 }
 
 .compwhaletracker-config-chaindd-options-item {
-  display: flex; justify-content: flex-start; align-items: center;
-  padding: .6rem .6rem;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0.6rem 0.6rem;
   cursor: pointer;
 }
 
@@ -866,32 +883,37 @@
 }
 
 .compwhaletracker-config-chaindd-options-item > img {
-  width: 18px; height: 18px;
+  width: 18px;
+  height: 18px;
   border-radius: 50%;
   object-fit: cover;
 }
 
 .compwhaletracker-config-chaindd-options-item-name {
   white-space: nowrap;
-  margin-left: .6rem;
+  margin-left: 0.6rem;
   min-width: 80px;
-  font-size: 13px; font-weight: 500;
+  font-size: 13px;
+  font-weight: 500;
   color: black;
 }
 
 .compwhaletracker-config-chaindd-options-item-check {
-  margin-left: .6rem;
+  margin-left: 0.6rem;
   outline: non;
   border: none;
   background-color: aliceblue;
 }
 
 .compwhaletracker-titles {
-  padding: .6rem .6rem;
+  padding: 0.6rem 0.6rem;
   border-top: 1px solid rgba(0, 0, 0, 0.2);
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-  display: flex; justify-content: space-between; align-items: center;
-  font-size: 14px; font-weight: 500; 
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 500;
   color: rgba(0, 0, 0, 0.6);
 }
 
@@ -913,11 +935,11 @@
   height: 250px;
   overflow: hidden;
   overflow-y: scroll;
-  transition: all .5s ease;
+  transition: all 0.5s ease;
 }
 
 .compwhaletracker-rowsupdating {
-  opacity: .2;
+  opacity: 0.2;
 }
 
 .compwhaletracker-rows::-webkit-scrollbar {
@@ -926,13 +948,16 @@
 
 /* Hide scrollbar for IE, Edge and Firefox */
 .compwhaletracker-rows {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
 
 .compwhaletracker-rows-loading {
-  width: 100%; height: 100%;
-  display: flex; justify-content: center; align-items: center;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 @keyframes ani-compwhaletracker-rows-loading {
@@ -946,21 +971,24 @@
 }
 
 .compwhaletracker-rows-loading > svg {
-  width: 42px; height: 42px;
-  animation: ani-compwhaletracker-rows-loading 1s linear 0s infinite
+  width: 42px;
+  height: 42px;
+  animation: ani-compwhaletracker-rows-loading 1s linear 0s infinite;
 }
 
 .compwhaletracker-rows-row {
-  padding: .4rem .6rem;
-  margin-bottom: .2rem;
-  display: flex; justify-content: space-between; align-items: center;
+  padding: 0.4rem 0.6rem;
+  margin-bottom: 0.2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   font-size: 13.8px;
-  transition: all .3s ease;
+  transition: all 0.3s ease;
   background-color: transparent;
 }
 
 .compwhaletracker-rows-rowredbg {
-  background-color: rgba(255, 94, 30, 0.2)
+  background-color: rgba(255, 94, 30, 0.2);
 }
 
 .compwhaletracker-rows-rowgreenbg {
@@ -968,20 +996,23 @@
 }
 
 .compwhaletracker-rows-row-imgnamesymbol {
-  display: flex; justify-content: flex-start; align-items: center;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
   width: 150px;
 }
 
 .compwhaletracker-rows-row-imgnamesymbol > img {
   display: block;
-  width: 30px; height: 30px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
   object-fit: cover;
   border: 2px solid white;
 }
 
 .compwhaletracker-rows-row-imgnamesymbol-namesymbol {
-  margin-left: .6rem;
+  margin-left: 0.6rem;
   white-space: nowrap;
   overflow: hidden;
 }
@@ -1026,8 +1057,8 @@
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: var(--border-radius-large);
   font-size: 15px;
-
   margin-top: 1rem;
+  overflow: hidden;
 }
 
 @media only screen and (max-width: 650px) {
@@ -1037,24 +1068,31 @@
 }
 
 .compupcomingunlocks-config {
-  padding: .6rem .6rem;
-  display: flex; justify-content: space-between; align-items: center;
+  padding: 0.6rem 0.6rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .compupcomingunlocks-config-title {
-  display: flex; justify-content: center; align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-weight: 500;
 }
 
 .compupcomingunlocks-config-title-i {
-  margin-left: .3rem;
+  margin-left: 0.3rem;
   position: relative;
   cursor: pointer;
-  display: flex; justify-content: center; align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .compupcomingunlocks-config-title-i > svg {
-  width: 18px; height: 18px;
+  width: 18px;
+  height: 18px;
 }
 
 .compupcomingunlocks-config-title-i-modal {
@@ -1066,9 +1104,9 @@
   color: white;
   width: 260px;
   font-size: 12px;
-  padding: .4rem .8rem;
+  padding: 0.4rem 0.8rem;
   border-radius: var(--border-radius-small);
-  transition: all .2s ease-in;
+  transition: all 0.2s ease-in;
 }
 
 .compupcomingunlocks-config-title-i-modalactive {
@@ -1076,11 +1114,14 @@
 }
 
 .compupcomingunlocks-titles {
-  padding: .6rem .6rem;
+  padding: 0.6rem 0.6rem;
   border-top: 1px solid rgba(0, 0, 0, 0.2);
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-  display: flex; justify-content: space-between; align-items: center;
-  font-size: 14px; font-weight: 500; 
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 500;
   color: rgba(0, 0, 0, 0.6);
 }
 
@@ -1102,10 +1143,10 @@
   height: 250px;
   overflow: hidden;
   overflow-y: scroll;
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
   position: relative;
-  transition: all .5s ease;
+  transition: all 0.5s ease;
 }
 
 .compupcomingunlocks-rows::-webkit-scrollbar {
@@ -1113,12 +1154,15 @@
 }
 
 .compupcomingunlocks-rowsupdating {
-  opacity: .2;
+  opacity: 0.2;
 }
 
 .compupcomingunlocks-rows-loading {
-  width: 100%; height: 100%;
-  display: flex; justify-content: center; align-items: center;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 @keyframes ani-compupcomingunlocks-rows-loading {
@@ -1132,14 +1176,17 @@
 }
 
 .compupcomingunlocks-rows-loading > svg {
-  width: 42px; height: 42px;
-  animation: ani-compupcomingunlocks-rows-loading 1s linear 0s infinite
+  width: 42px;
+  height: 42px;
+  animation: ani-compupcomingunlocks-rows-loading 1s linear 0s infinite;
 }
 
 .compupcomingunlocks-rows-row {
-  padding: .4rem .6rem;
-  margin-bottom: .2rem;
-  display: flex; justify-content: space-between; align-items: center;
+  padding: 0.4rem 0.6rem;
+  margin-bottom: 0.2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   font-size: 13.8px;
   background-color: rgba(68, 109, 223, 0.08);
   color: black;
@@ -1158,20 +1205,23 @@
 }
 
 .compupcomingunlocks-rows-row-imgnamesymbol {
-  display: flex; justify-content: flex-start; align-items: center;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
   width: 150px;
 }
 
 .compupcomingunlocks-rows-row-imgnamesymbol > img {
   display: block;
-  width: 30px; height: 30px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
   object-fit: cover;
   border: 2px solid white;
 }
 
 .compupcomingunlocks-rows-row-imgnamesymbol-namesymbol {
-  margin-left: .6rem;
+  margin-left: 0.6rem;
   white-space: nowrap;
   overflow: hidden;
 }
@@ -1199,24 +1249,28 @@
 }
 
 .compupcomingunlocks-rows-row-amount-lockedamount {
-  display: flex; justify-content: flex-end; align-items: center;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
   font-size: 13px;
 }
 
 .compupcomingunlocks-rows-row-amount-lockedamount > svg {
-  width: 10px; height: 10px;
+  width: 10px;
+  height: 10px;
 }
 
 .compupcomingunlocks-rows-row-amount-lockedamount > span {
-  margin-left: .3rem;
+  margin-left: 0.3rem;
 }
 
 .compupcomingunlocks-rows-row-amount-lockedamount-percentage {
-  font-size: 11px; font-weight: 500;
+  font-size: 11px;
+  font-weight: 500;
 }
 
 .compupcomingunlocks-rows-row-amount-usd {
-  font-size: 13px
+  font-size: 13px;
 }
 
 .compupcomingunlocks-rows-row-date {
@@ -1226,5 +1280,3 @@
   font-weight: 500;
   cursor: pointer;
 }
-
-
