@@ -1,28 +1,28 @@
 // MODULES
-import React from "react";
-import cn from "classnames";
+import React from 'react';
+import cn from 'classnames';
 
 // COMPONENTS
-import Head from "../components/head";
-import Layout_user from "../components/layouts/user";
+import Head from '../components/head';
+import Layout_user from '../components/layouts/user';
 
 // COMPONENTS > ICONS
-import Icon_search from "../components/icons/search";
-import Icon_notification from "../components/icons/notification";
-import Icon_arrow from "../components/icons/arrow";
-import Icon_loading from "../components/icons/loading";
-import Icon_info from "../components/icons/info";
-import Icon_lock from "../components/icons/lock";
+import Icon_search from '../components/icons/search';
+import Icon_notification from '../components/icons/notification';
+import Icon_arrow from '../components/icons/arrow';
+import Icon_loading from '../components/icons/loading';
+import Icon_info from '../components/icons/info';
+import Icon_lock from '../components/icons/lock';
 
 // CONTEXT
-import { Context } from "../context";
+import { Context } from '../context';
 
 // UTILS
-import UTILS from "../utils";
-import UTILS_API from "../utils/api";
+import UTILS from '../utils';
+import UTILS_API from '../utils/api';
 
 // STYLES
-import style from "../styles/pages/home.module.css";
+import style from '../styles/pages/home.module.css';
 
 /**
  *
@@ -59,40 +59,40 @@ function global_sort_audits_by_date(data) {
 export async function getServerSideProps({ req }) {
   const latest_audits = [
     {
-      name: "oldest",
-      symbol: "ETH",
-      img: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Binance_Logo.svg/2048px-Binance_Logo.svg.png",
-      address: "0x123",
+      name: 'oldest',
+      symbol: 'ETH',
+      img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Binance_Logo.svg/2048px-Binance_Logo.svg.png',
+      address: '0x123',
       score: 3.4,
       created_at: new Date().toString(),
-      network: "ETH",
+      network: 'ETH',
     },
     {
-      name: "mid",
-      symbol: "ETH",
-      img: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Binance_Logo.svg/2048px-Binance_Logo.svg.png",
-      address: "0x123",
+      name: 'mid',
+      symbol: 'ETH',
+      img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Binance_Logo.svg/2048px-Binance_Logo.svg.png',
+      address: '0x123',
       score: 3.4,
       created_at: new Date(1676903315821 + 1232333).toString(),
-      network: "ETH",
+      network: 'ETH',
     },
     {
-      name: "newest",
-      symbol: "ETH",
-      img: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Binance_Logo.svg/2048px-Binance_Logo.svg.png",
-      address: "0x123",
+      name: 'newest',
+      symbol: 'ETH',
+      img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Binance_Logo.svg/2048px-Binance_Logo.svg.png',
+      address: '0x123',
       score: 3.4,
       created_at: new Date(1676903315821 + 123232322).toString(),
-      network: "ETH",
+      network: 'ETH',
     },
     {
-      name: "newest newest",
-      symbol: "ETH",
-      img: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Binance_Logo.svg/2048px-Binance_Logo.svg.png",
-      address: "0x123",
+      name: 'newest newest',
+      symbol: 'ETH',
+      img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Binance_Logo.svg/2048px-Binance_Logo.svg.png',
+      address: '0x123',
       score: 3.4,
       created_at: new Date(1676903315821 + 12323232212122).toString(),
-      network: "ETH",
+      network: 'ETH',
     },
   ];
 
@@ -102,7 +102,7 @@ export async function getServerSideProps({ req }) {
   for (let i = 0; i < latest_audits.length; i++) {
     latest_audits[i].created_at = new Date(latest_audits[i].created_at)
       .toISOString()
-      .split("T")[0];
+      .split('T')[0];
   }
 
   return {
@@ -134,15 +134,15 @@ class Comp_hello extends React.Component {
 
   render() {
     return (
-      <div className={cn(style["comphello"])}>
-        <div className={cn(style["comphello-textarea"])}>
-          <div className={cn(style["comphello-textarea-title"])}>
-            Hello{" "}
+      <div className={cn(style['comphello'])}>
+        <div className={cn(style['comphello-textarea'])}>
+          <div className={cn(style['comphello-textarea-title'])}>
+            Hello{' '}
             {this.context.state.auth
-              ? this.context.state.user.username + "!"
+              ? this.context.state.user.username + '!'
               : null}
           </div>
-          <span className={cn(style["comphello-textarea-desc"])}>
+          <span className={cn(style['comphello-textarea-desc'])}>
             {this.context.state.auth
               ? "It's good to see you again."
               : "It's good to see you."}
@@ -150,7 +150,7 @@ class Comp_hello extends React.Component {
         </div>
 
         <img
-          className={cn(style["comphello-manimg"])}
+          className={cn(style['comphello-manimg'])}
           src="/man.png"
           alt="man"
           title="Man"
@@ -173,26 +173,26 @@ class Comp_input extends React.Component {
     super(props);
     this.state = {
       dd_open: false, // dropdown open
-      address: "",
+      address: '',
       network: {
-        img: "/bnb_chain.png",
-        name: "Binance Smart Chain",
+        img: '/bnb_chain.png',
+        name: 'Binance Smart Chain',
         chain_id: 56,
       }, // default selected network
       networks: [
         {
-          img: "/bnb_chain.png",
-          name: "BNB Chain",
+          img: '/bnb_chain.png',
+          name: 'BNB Chain',
           chain_id: 56,
         },
         {
-          img: "/eth.png",
-          name: "Ethereum",
+          img: '/eth.png',
+          name: 'Ethereum',
           chain_id: 1,
         },
         {
-          img: "/polygon.png",
-          name: "Polygon",
+          img: '/polygon.png',
+          name: 'Polygon',
         },
       ],
     };
@@ -204,17 +204,17 @@ class Comp_input extends React.Component {
 
   render() {
     return (
-      <div className={cn(style["compinput"])}>
-        <div className={cn(style["compinput-left"])}>
-          <div className={cn(style["compinput-left-logo"])}>LIVE</div>
+      <div className={cn(style['compinput'])}>
+        <div className={cn(style['compinput-left'])}>
+          <div className={cn(style['compinput-left-logo'])}>LIVE</div>
           You can quickly check the
           <strong> token smart contract</strong> here. This is a quick Audit
           option.
         </div>
 
-        <div className={cn(style["compinput-right"])}>
-          <div className={cn(style["compinput-right-bg"])}>
-            <div className={cn(style["compinput-right-bg-inputarea"])}>
+        <div className={cn(style['compinput-right'])}>
+          <div className={cn(style['compinput-right-bg'])}>
+            <div className={cn(style['compinput-right-bg-inputarea'])}>
               <div
                 onClick={() => {
                   this.setState({
@@ -222,16 +222,16 @@ class Comp_input extends React.Component {
                     dd_open: !this.state.dd_open,
                   });
                 }}
-                className={cn(style["compinput-right-bg-inputarea-dd"])}
+                className={cn(style['compinput-right-bg-inputarea-dd'])}
               >
                 <img src={this.state.network.img} />
               </div>
 
               <div
                 className={cn(
-                  style["compinput-right-bg-inputarea-ddoptions"],
+                  style['compinput-right-bg-inputarea-ddoptions'],
                   this.state.dd_open
-                    ? style["compinput-right-bg-inputarea-ddoptionsopen"]
+                    ? style['compinput-right-bg-inputarea-ddoptionsopen']
                     : null
                 )}
               >
@@ -247,13 +247,13 @@ class Comp_input extends React.Component {
                         });
                       }}
                       className={cn(
-                        style["compinput-right-bg-inputarea-ddoptions-item"]
+                        style['compinput-right-bg-inputarea-ddoptions-item']
                       )}
                     >
                       <img
                         className={cn(
                           style[
-                            "compinput-right-bg-inputarea-ddoptions-item-img"
+                            'compinput-right-bg-inputarea-ddoptions-item-img'
                           ]
                         )}
                         src={curr.img}
@@ -262,7 +262,7 @@ class Comp_input extends React.Component {
                       <div
                         className={cn(
                           style[
-                            "compinput-right-bg-inputarea-ddoptions-item-name"
+                            'compinput-right-bg-inputarea-ddoptions-item-name'
                           ]
                         )}
                       >
@@ -272,7 +272,7 @@ class Comp_input extends React.Component {
                       <input
                         className={cn(
                           style[
-                            "compinput-right-bg-inputarea-ddoptions-item-check"
+                            'compinput-right-bg-inputarea-ddoptions-item-check'
                           ]
                         )}
                         type="checkbox"
@@ -287,7 +287,7 @@ class Comp_input extends React.Component {
               </div>
 
               <input
-                className={cn(style["compinput-right-bg-inputarea-input"])}
+                className={cn(style['compinput-right-bg-inputarea-input'])}
                 placeholder="0x90741BD5C2c928Ad19a58157987e11b2dE07c15B"
                 value={this.state.address}
                 onChange={(e) => {
@@ -298,7 +298,7 @@ class Comp_input extends React.Component {
 
             <button
               onClick={this.api_audit}
-              className={cn(style["compinput-right-bg-btn"])}
+              className={cn(style['compinput-right-bg-btn'])}
             >
               AUDIT
             </button>
@@ -331,27 +331,27 @@ class Comp_boxes extends React.Component {
 
   render() {
     return (
-      <div className={cn(style["compboxes"])}>
-        <div className={cn(style["compboxes-box"])}>
-          <div className={cn(style["compboxes-box-title"])}>11</div>
+      <div className={cn(style['compboxes'])}>
+        <div className={cn(style['compboxes-box'])}>
+          <div className={cn(style['compboxes-box-title'])}>11</div>
 
-          <div className={cn(style["compboxes-box-desc"])}>
+          <div className={cn(style['compboxes-box-desc'])}>
             Lorem ipsum dolor
           </div>
         </div>
 
-        <div className={cn(style["compboxes-box"])}>
-          <div className={cn(style["compboxes-box-title"])}>6</div>
+        <div className={cn(style['compboxes-box'])}>
+          <div className={cn(style['compboxes-box-title'])}>6</div>
 
-          <div className={cn(style["compboxes-box-desc"])}>
+          <div className={cn(style['compboxes-box-desc'])}>
             Lorem ipsum dolor
           </div>
         </div>
 
-        <div className={cn(style["compboxes-box"])}>
-          <div className={cn(style["compboxes-box-title"])}>6</div>
+        <div className={cn(style['compboxes-box'])}>
+          <div className={cn(style['compboxes-box-title'])}>6</div>
 
-          <div className={cn(style["compboxes-box-desc"])}>
+          <div className={cn(style['compboxes-box-desc'])}>
             Lorem ipsum dolor
           </div>
         </div>
@@ -369,7 +369,7 @@ class Comp_last_adts extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      category: "all",
+      category: 'all',
       audits: props.data,
       animation: false,
     };
@@ -387,16 +387,16 @@ class Comp_last_adts extends React.Component {
     }
 
     this.audits_ref.current.children[0].classList.add(
-      style["complastadts-audits-itemani"]
+      style['complastadts-audits-itemani']
     );
 
     setTimeout(() => {
-      let ani_class = "";
+      let ani_class = '';
 
       const class_list = this.audits_ref.current.children[0].classList;
 
       for (let i = 0; i < class_list.length; i++) {
-        if (class_list[i].includes("complastadts-audits-itemani")) {
+        if (class_list[i].includes('complastadts-audits-itemani')) {
           // include param must be included in the class name in css
           ani_class = class_list[i];
         }
@@ -421,13 +421,13 @@ class Comp_last_adts extends React.Component {
       const audits = [
         ...this.state.audits,
         {
-          name: "test",
-          symbol: "ETH",
-          img: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Binance_Logo.svg/2048px-Binance_Logo.svg.png",
-          address: "0x123",
+          name: 'test',
+          symbol: 'ETH',
+          img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Binance_Logo.svg/2048px-Binance_Logo.svg.png',
+          address: '0x123',
           score: 3.4,
-          created_at: new Date().toISOString().split("T")[0],
-          network: "ETH",
+          created_at: new Date().toISOString().split('T')[0],
+          network: 'ETH',
         },
       ];
 
@@ -453,18 +453,18 @@ class Comp_last_adts extends React.Component {
 
   render() {
     return (
-      <div className={cn(style["complastadts"])}>
-        <div className={cn(style["comlastadts-title"])}>LATEST AUDITS</div>
+      <div className={cn(style['complastadts'])}>
+        <div className={cn(style['comlastadts-title'])}>LATEST AUDITS</div>
 
-        <div className={cn(style["complastadts-cats"])}>
+        <div className={cn(style['complastadts-cats'])}>
           <div
             onClick={() => {
-              this.setState({ ...this.state, category: "all" });
+              this.setState({ ...this.state, category: 'all' });
             }}
             className={cn(
-              style["complastadts-cats-item"],
-              this.state.category === "all"
-                ? style["complastadts-cats-itemactive"]
+              style['complastadts-cats-item'],
+              this.state.category === 'all'
+                ? style['complastadts-cats-itemactive']
                 : null
             )}
           >
@@ -473,12 +473,12 @@ class Comp_last_adts extends React.Component {
 
           <div
             onClick={() => {
-              this.setState({ ...this.state, category: "bsc" });
+              this.setState({ ...this.state, category: 'bsc' });
             }}
             className={cn(
-              style["complastadts-cats-item"],
-              this.state.category === "bsc"
-                ? style["complastadts-cats-itemactive"]
+              style['complastadts-cats-item'],
+              this.state.category === 'bsc'
+                ? style['complastadts-cats-itemactive']
                 : null
             )}
           >
@@ -487,12 +487,12 @@ class Comp_last_adts extends React.Component {
 
           <div
             onClick={() => {
-              this.setState({ ...this.state, category: "ethereum" });
+              this.setState({ ...this.state, category: 'ethereum' });
             }}
             className={cn(
-              style["complastadts-cats-item"],
-              this.state.category === "ethereum"
-                ? style["complastadts-cats-itemactive"]
+              style['complastadts-cats-item'],
+              this.state.category === 'ethereum'
+                ? style['complastadts-cats-itemactive']
                 : null
             )}
           >
@@ -501,12 +501,12 @@ class Comp_last_adts extends React.Component {
 
           <div
             onClick={() => {
-              this.setState({ ...this.state, category: "polygon" });
+              this.setState({ ...this.state, category: 'polygon' });
             }}
             className={cn(
-              style["complastadts-cats-item"],
-              this.state.category === "polygon"
-                ? style["complastadts-cats-itemactive"]
+              style['complastadts-cats-item'],
+              this.state.category === 'polygon'
+                ? style['complastadts-cats-itemactive']
                 : null
             )}
           >
@@ -515,12 +515,12 @@ class Comp_last_adts extends React.Component {
 
           <div
             onClick={() => {
-              this.setState({ ...this.state, category: "solana" });
+              this.setState({ ...this.state, category: 'solana' });
             }}
             className={cn(
-              style["complastadts-cats-item"],
-              this.state.category === "solana"
-                ? style["complastadts-cats-itemactive"]
+              style['complastadts-cats-item'],
+              this.state.category === 'solana'
+                ? style['complastadts-cats-itemactive']
                 : null
             )}
           >
@@ -528,26 +528,26 @@ class Comp_last_adts extends React.Component {
           </div>
         </div>
 
-        <div ref={this.audits_ref} className={cn(style["complastadts-audits"])}>
+        <div ref={this.audits_ref} className={cn(style['complastadts-audits'])}>
           {this.state.audits.map((curr, index) => {
             return (
               <div
                 key={index}
                 className={cn(
-                  style["complastadts-audits-item"],
+                  style['complastadts-audits-item'],
                   index % 2 === 0
-                    ? style["complastadts-audits-itemwhitebg"]
+                    ? style['complastadts-audits-itemwhitebg']
                     : null
                 )}
               >
                 <div
                   className={cn(
-                    style["complastadts-audits-item-imgnamesymbol"]
+                    style['complastadts-audits-item-imgnamesymbol']
                   )}
                 >
                   <div
                     className={cn(
-                      style["complastadts-audits-item-imgnamesymbol-img"]
+                      style['complastadts-audits-item-imgnamesymbol-img']
                     )}
                   >
                     <img src={curr.img} />
@@ -555,13 +555,13 @@ class Comp_last_adts extends React.Component {
 
                   <div
                     className={cn(
-                      style["complastadts-audits-item-imgnamesymbol-namesymbol"]
+                      style['complastadts-audits-item-imgnamesymbol-namesymbol']
                     )}
                   >
                     <div
                       className={cn(
                         style[
-                          "complastadts-audits-item-imgnamesymbol-namesymbol-symbol"
+                          'complastadts-audits-item-imgnamesymbol-namesymbol-symbol'
                         ]
                       )}
                     >
@@ -571,7 +571,7 @@ class Comp_last_adts extends React.Component {
                     <div
                       className={cn(
                         style[
-                          "complastadts-audits-item-imgnamesymbol-namesymbol-name"
+                          'complastadts-audits-item-imgnamesymbol-namesymbol-name'
                         ]
                       )}
                     >
@@ -580,15 +580,15 @@ class Comp_last_adts extends React.Component {
                   </div>
                 </div>
 
-                <div className={cn(style["complastadts-audits-item-date"])}>
+                <div className={cn(style['complastadts-audits-item-date'])}>
                   {curr.created_at}
                 </div>
 
-                <div className={cn(style["complastadts-audits-item-network"])}>
+                <div className={cn(style['complastadts-audits-item-network'])}>
                   {curr.network}
                 </div>
 
-                <button className={cn(style["complastadts-audits-item-btn"])}>
+                <button className={cn(style['complastadts-audits-item-btn'])}>
                   VIEW
                 </button>
               </div>
@@ -612,8 +612,8 @@ class Comp_profile_input extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      search_value: "",
-      address: "",
+      search_value: '',
+      address: '',
     };
 
     this.address_set = this.address_set.bind(this);
@@ -623,7 +623,7 @@ class Comp_profile_input extends React.Component {
     if (!this.context.state.wallet_address && this.state.address) {
       this.setState({
         ...this.state,
-        address: "",
+        address: '',
       });
 
       return;
@@ -637,7 +637,7 @@ class Comp_profile_input extends React.Component {
         address[1] +
         address[2] +
         address[3] +
-        "..." +
+        '...' +
         address[address.length - 3] +
         address[address.length - 2] +
         address[address.length - 1];
@@ -657,9 +657,9 @@ class Comp_profile_input extends React.Component {
 
   render() {
     return (
-      <div className={cn(style["compprofileinput"])}>
-        <div className={cn(style["compprofileinput-left"])}>
-          <div className={cn(style["compprofileinput-left-input"])}>
+      <div className={cn(style['compprofileinput'])}>
+        <div className={cn(style['compprofileinput-left'])}>
+          <div className={cn(style['compprofileinput-left-input'])}>
             <Icon_search />
 
             <input
@@ -674,10 +674,10 @@ class Comp_profile_input extends React.Component {
             />
           </div>
 
-          <div className={cn(style["compprofileinput-left-profile"])}>
+          <div className={cn(style['compprofileinput-left-profile'])}>
             <div
               className={cn(
-                style["compprofileinput-left-profile-notification"]
+                style['compprofileinput-left-profile-notification']
               )}
             >
               <Icon_notification />
@@ -685,21 +685,21 @@ class Comp_profile_input extends React.Component {
           </div>
         </div>
 
-        <div className={cn(style["compprofileinput-right"])}>
+        <div className={cn(style['compprofileinput-right'])}>
           <a
             href="https://pinksale.finance"
             target="_blank"
-            className={cn(style["compprofileinput-right-buynow"])}
+            className={cn(style['compprofileinput-right-buynow'])}
           >
-            <div className={cn(style["compprofileinput-right-buynow-top"])}>
+            <div className={cn(style['compprofileinput-right-buynow-top'])}>
               <span
-                className={cn(style["compprofileinput-right-buynow-top-token"])}
+                className={cn(style['compprofileinput-right-buynow-top-token'])}
               >
                 SAFUBASE
               </span>
 
               <span
-                className={cn(style["compprofileinput-right-buynow-top-price"])}
+                className={cn(style['compprofileinput-right-buynow-top-price'])}
               >
                 Presale
               </span>
@@ -707,7 +707,7 @@ class Comp_profile_input extends React.Component {
 
             <div
               className={cn(
-                style["compprofileinput-right-buynow-bottom-title"]
+                style['compprofileinput-right-buynow-bottom-title']
               )}
             >
               BUY NOW
@@ -715,12 +715,12 @@ class Comp_profile_input extends React.Component {
           </a>
 
           <button
-            className={cn(style["compprofileinput-right-conwallet"])}
+            className={cn(style['compprofileinput-right-conwallet'])}
             onClick={() => {
               UTILS.wallet_connect({ chain_id: 56 }, this.context);
             }}
           >
-            {this.state.address || "Connect Wallet"}
+            {this.state.address || 'Connect Wallet'}
           </button>
         </div>
       </div>
@@ -740,8 +740,8 @@ class Comp_profile_input_mobile extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      search_value: "",
-      address: "",
+      search_value: '',
+      address: '',
     };
 
     this.address_set = this.address_set.bind(this);
@@ -751,7 +751,7 @@ class Comp_profile_input_mobile extends React.Component {
     if (!this.context.state.wallet_address && this.state.address) {
       this.setState({
         ...this.state,
-        address: "",
+        address: '',
       });
 
       return;
@@ -765,7 +765,7 @@ class Comp_profile_input_mobile extends React.Component {
         address[1] +
         address[2] +
         address[3] +
-        "..." +
+        '...' +
         address[address.length - 3] +
         address[address.length - 2] +
         address[address.length - 1];
@@ -785,40 +785,40 @@ class Comp_profile_input_mobile extends React.Component {
 
   render() {
     return (
-      <div className={cn(style["compprofileinputmobile"])}>
+      <div className={cn(style['compprofileinputmobile'])}>
         <a
           href="https://pinksale.finance"
           target="_blank"
-          className={cn(style["compprofileinputmobile-buynow"])}
+          className={cn(style['compprofileinputmobile-buynow'])}
         >
-          <div className={cn(style["compprofileinputmobile-buynow-top"])}>
+          <div className={cn(style['compprofileinputmobile-buynow-top'])}>
             <span
-              className={cn(style["compprofileinputmobile-buynow-top-token"])}
+              className={cn(style['compprofileinputmobile-buynow-top-token'])}
             >
               SAFUBASE
             </span>
 
             <span
-              className={cn(style["compprofileinputmobile-buynow-top-price"])}
+              className={cn(style['compprofileinputmobile-buynow-top-price'])}
             >
               Presale
             </span>
           </div>
 
           <div
-            className={cn(style["compprofileinputmobile-buynow-bottom-title"])}
+            className={cn(style['compprofileinputmobile-buynow-bottom-title'])}
           >
             BUY NOW
           </div>
         </a>
 
         <button
-          className={cn(style["compprofileinputmobile-conwallet"])}
+          className={cn(style['compprofileinputmobile-conwallet'])}
           onClick={() => {
             UTILS.wallet_connect({ chain_id: 56 }, this.context);
           }}
         >
-          {this.state.address || "Connect Wallet"}
+          {this.state.address || 'Connect Wallet'}
         </button>
       </div>
     );
@@ -840,35 +840,35 @@ class Comp_whale_tracker extends React.Component {
       chains_dd_open: false,
       chain: {
         // selected chain
-        img: "/bnb_chain.png",
-        name: "BNB Chain",
-        chain: "bsc",
+        img: '/bnb_chain.png',
+        name: 'BNB Chain',
+        chain: 'bsc',
         chain_id: 56,
       },
       chains: [
         {
-          img: "/bnb_chain.png",
-          name: "BNB Chain",
-          chain: "bsc",
+          img: '/bnb_chain.png',
+          name: 'BNB Chain',
+          chain: 'bsc',
           chain_id: 56,
         },
-        { img: "/eth.png", name: "Ethereum", chain: "eth", chain_id: 1 },
+        { img: '/eth.png', name: 'Ethereum', chain: 'eth', chain_id: 1 },
         {
-          img: "/polygon.png",
-          name: "Polygon",
-          chain: "polygon",
+          img: '/polygon.png',
+          name: 'Polygon',
+          chain: 'polygon',
           chain_id: null,
         },
         {
-          img: "/avalanche.png",
-          name: "Avalanche",
-          chain: "avalanche",
+          img: '/avalanche.png',
+          name: 'Avalanche',
+          chain: 'avalanche',
           chain_id: null,
         },
         {
-          img: "/fantom.png",
-          name: "Fantom",
-          chain: "fantom",
+          img: '/fantom.png',
+          name: 'Fantom',
+          chain: 'fantom',
           chain_id: null,
         },
       ],
@@ -882,12 +882,12 @@ class Comp_whale_tracker extends React.Component {
   }
 
   str_reduce_row_name_chars(str, offset = 13) {
-    let new_str = "";
-    const parts = str.split(" ");
+    let new_str = '';
+    const parts = str.split(' ');
 
     for (let i = 0; i < parts.length; i++) {
       if (new_str.length + parts[i].length <= offset) {
-        new_str = new_str + parts[i] + " ";
+        new_str = new_str + parts[i] + ' ';
       } else {
         break;
       }
@@ -944,9 +944,9 @@ class Comp_whale_tracker extends React.Component {
 
   render() {
     return (
-      <div className={cn(style["compwhaletracker"])}>
-        <div className={cn(style["compwhaletracker-config"])}>
-          <div className={cn(style["compwhaletracker-config-title"])}>
+      <div className={cn(style['compwhaletracker'])}>
+        <div className={cn(style['compwhaletracker-config'])}>
+          <div className={cn(style['compwhaletracker-config-title'])}>
             Whales Tracker
             <div
               onMouseOver={() => {
@@ -961,15 +961,15 @@ class Comp_whale_tracker extends React.Component {
                   info_main_hover: false,
                 });
               }}
-              className={cn(style["compwhaletracker-config-title-i"])}
+              className={cn(style['compwhaletracker-config-title-i'])}
             >
               <Icon_info />
 
               <div
                 className={cn(
-                  style["compwhaletracker-config-title-i-modal"],
+                  style['compwhaletracker-config-title-i-modal'],
                   this.state.info_main_hover
-                    ? style["compwhaletracker-config-title-i-modalactive"]
+                    ? style['compwhaletracker-config-title-i-modalactive']
                     : null
                 )}
               >
@@ -979,7 +979,7 @@ class Comp_whale_tracker extends React.Component {
             </div>
           </div>
 
-          <div className={cn(style["compwhaletracker-config-chaindd"])}>
+          <div className={cn(style['compwhaletracker-config-chaindd'])}>
             <div
               onClick={() => {
                 // toggle dropdown
@@ -988,9 +988,9 @@ class Comp_whale_tracker extends React.Component {
                   chains_dd_open: !this.state.chains_dd_open,
                 });
               }}
-              className={cn(style["compwhaletracker-config-chaindd-selected"])}
+              className={cn(style['compwhaletracker-config-chaindd-selected'])}
             >
-              <img src={this.state.chain.img} />{" "}
+              <img src={this.state.chain.img} />{' '}
               {this.state.chains_dd_open ? (
                 <Icon_arrow dir="up" />
               ) : (
@@ -1000,9 +1000,9 @@ class Comp_whale_tracker extends React.Component {
 
             <div
               className={cn(
-                style["compwhaletracker-config-chaindd-options"],
+                style['compwhaletracker-config-chaindd-options'],
                 this.state.chains_dd_open
-                  ? style["compwhaletracker-config-chaindd-optionsactive"]
+                  ? style['compwhaletracker-config-chaindd-optionsactive']
                   : null
               )}
             >
@@ -1011,7 +1011,7 @@ class Comp_whale_tracker extends React.Component {
                   <div
                     key={index}
                     className={cn(
-                      style["compwhaletracker-config-chaindd-options-item"]
+                      style['compwhaletracker-config-chaindd-options-item']
                     )}
                     onClick={async () => {
                       this.setState({
@@ -1047,7 +1047,7 @@ class Comp_whale_tracker extends React.Component {
                     <div
                       className={cn(
                         style[
-                          "compwhaletracker-config-chaindd-options-item-name"
+                          'compwhaletracker-config-chaindd-options-item-name'
                         ]
                       )}
                     >
@@ -1057,7 +1057,7 @@ class Comp_whale_tracker extends React.Component {
                     <input
                       className={cn(
                         style[
-                          "compwhaletracker-config-chaindd-options-item-check"
+                          'compwhaletracker-config-chaindd-options-item-check'
                         ]
                       )}
                       type="checkbox"
@@ -1073,28 +1073,28 @@ class Comp_whale_tracker extends React.Component {
           </div>
         </div>
 
-        <div className={cn(style["compwhaletracker-titles"])}>
-          <div className={cn(style["compwhaletracker-titles-name"])}>Token</div>
+        <div className={cn(style['compwhaletracker-titles'])}>
+          <div className={cn(style['compwhaletracker-titles-name'])}>Token</div>
 
-          <div className={cn(style["compwhaletracker-titles-amount"])}>
+          <div className={cn(style['compwhaletracker-titles-amount'])}>
             Amount
           </div>
 
-          <div className={cn(style["compwhaletracker-titles-maker"])}>
+          <div className={cn(style['compwhaletracker-titles-maker'])}>
             Maker
           </div>
         </div>
 
         <div
           className={cn(
-            style["compwhaletracker-rows"],
+            style['compwhaletracker-rows'],
             this.state.api_update_anim
-              ? style["compwhaletracker-rowsupdating"]
+              ? style['compwhaletracker-rowsupdating']
               : null
           )}
         >
           {this.state.api_loading ? (
-            <div className={cn(style["compwhaletracker-rows-loading"])}>
+            <div className={cn(style['compwhaletracker-rows-loading'])}>
               <Icon_loading />
             </div>
           ) : (
@@ -1103,15 +1103,15 @@ class Comp_whale_tracker extends React.Component {
                 <div
                   key={index}
                   className={cn(
-                    style["compwhaletracker-rows-row"],
-                    curr.type === "sell"
-                      ? style["compwhaletracker-rows-rowredbg"]
-                      : style["compwhaletracker-rows-rowgreenbg"]
+                    style['compwhaletracker-rows-row'],
+                    curr.type === 'sell'
+                      ? style['compwhaletracker-rows-rowredbg']
+                      : style['compwhaletracker-rows-rowgreenbg']
                   )}
                 >
                   <div
                     className={cn(
-                      style["compwhaletracker-rows-row-imgnamesymbol"]
+                      style['compwhaletracker-rows-row-imgnamesymbol']
                     )}
                   >
                     <img src={curr.icon} />
@@ -1119,14 +1119,14 @@ class Comp_whale_tracker extends React.Component {
                     <div
                       className={cn(
                         style[
-                          "compwhaletracker-rows-row-imgnamesymbol-namesymbol"
+                          'compwhaletracker-rows-row-imgnamesymbol-namesymbol'
                         ]
                       )}
                     >
                       <div
                         className={cn(
                           style[
-                            "compwhaletracker-rows-row-imgnamesymbol-namesymbol-symbol"
+                            'compwhaletracker-rows-row-imgnamesymbol-namesymbol-symbol'
                           ]
                         )}
                       >
@@ -1136,7 +1136,7 @@ class Comp_whale_tracker extends React.Component {
                       <div
                         className={cn(
                           style[
-                            "compwhaletracker-rows-row-imgnamesymbol-namesymbol-name"
+                            'compwhaletracker-rows-row-imgnamesymbol-namesymbol-name'
                           ]
                         )}
                       >
@@ -1147,10 +1147,10 @@ class Comp_whale_tracker extends React.Component {
 
                   <div
                     className={cn(
-                      style["compwhaletracker-rows-row-amount"],
-                      curr.type === "sell"
-                        ? style["compwhaletracker-rows-row-amountred"]
-                        : style["compwhaletracker-rows-row-amountgreen"]
+                      style['compwhaletracker-rows-row-amount'],
+                      curr.type === 'sell'
+                        ? style['compwhaletracker-rows-row-amountred']
+                        : style['compwhaletracker-rows-row-amountgreen']
                     )}
                   >
                     $
@@ -1163,13 +1163,13 @@ class Comp_whale_tracker extends React.Component {
                     onClick={async () => {
                       await UTILS.str_copy(curr.maker);
                     }}
-                    className={cn(style["compwhaletracker-rows-row-maker"])}
+                    className={cn(style['compwhaletracker-rows-row-maker'])}
                   >
                     {curr.maker[0] +
                       curr.maker[1] +
                       curr.maker[2] +
                       curr.maker[3] +
-                      ".." +
+                      '..' +
                       curr.maker[curr.maker.length - 4] +
                       curr.maker[curr.maker.length - 3] +
                       curr.maker[curr.maker.length - 2] +
@@ -1208,12 +1208,12 @@ class Comp_upcoming_unlocks extends React.Component {
   }
 
   str_reduce_row_name_chars(str, offset = 13) {
-    let new_str = "";
-    const parts = str.split(" ");
+    let new_str = '';
+    const parts = str.split(' ');
 
     for (let i = 0; i < parts.length; i++) {
       if (new_str.length + parts[i].length <= offset) {
-        new_str = new_str + parts[i] + " ";
+        new_str = new_str + parts[i] + ' ';
       } else {
         break;
       }
@@ -1226,18 +1226,18 @@ class Comp_upcoming_unlocks extends React.Component {
     const remaining_m = parseInt(remaining_s / 60);
 
     if (remaining_m < 60) {
-      return remaining_m + " minute";
+      return remaining_m + ' minute';
     }
 
     const remaining_h = parseInt(remaining_m / 60);
 
     if (remaining_h < 24) {
-      return remaining_h + " hours";
+      return remaining_h + ' hours';
     }
 
     const remaining_d = parseInt(remaining_h / 24);
 
-    return remaining_d + " days";
+    return remaining_d + ' days';
   }
 
   async api_update(animate = false) {
@@ -1277,7 +1277,7 @@ class Comp_upcoming_unlocks extends React.Component {
 
     setInterval(() => {
       this.api_update(true);
-    }, 25000);
+    }, 45000);
   }
 
   componentDidUpdate() {}
@@ -1286,9 +1286,9 @@ class Comp_upcoming_unlocks extends React.Component {
 
   render() {
     return (
-      <div className={cn(style["compupcomingunlocks"])}>
-        <div className={cn(style["compupcomingunlocks-config"])}>
-          <div className={cn(style["compupcomingunlocks-config-title"])}>
+      <div className={cn(style['compupcomingunlocks'])}>
+        <div className={cn(style['compupcomingunlocks-config'])}>
+          <div className={cn(style['compupcomingunlocks-config-title'])}>
             Upcoming Token Unlocks
             <div
               onMouseOver={() => {
@@ -1303,15 +1303,15 @@ class Comp_upcoming_unlocks extends React.Component {
                   info_main_hover: false,
                 });
               }}
-              className={cn(style["compupcomingunlocks-config-title-i"])}
+              className={cn(style['compupcomingunlocks-config-title-i'])}
             >
               <Icon_info />
 
               <div
                 className={cn(
-                  style["compupcomingunlocks-config-title-i-modal"],
+                  style['compupcomingunlocks-config-title-i-modal'],
                   this.state.info_main_hover
-                    ? style["compupcomingunlocks-config-title-i-modalactive"]
+                    ? style['compupcomingunlocks-config-title-i-modalactive']
                     : null
                 )}
               >
@@ -1321,30 +1321,30 @@ class Comp_upcoming_unlocks extends React.Component {
           </div>
         </div>
 
-        <div className={cn(style["compupcomingunlocks-titles"])}>
-          <div className={cn(style["compupcomingunlocks-titles-name"])}>
+        <div className={cn(style['compupcomingunlocks-titles'])}>
+          <div className={cn(style['compupcomingunlocks-titles-name'])}>
             Token
           </div>
 
-          <div className={cn(style["compupcomingunlocks-titles-amount"])}>
+          <div className={cn(style['compupcomingunlocks-titles-amount'])}>
             Amount
           </div>
 
-          <div className={cn(style["compupcomingunlocks-titles-date"])}>
+          <div className={cn(style['compupcomingunlocks-titles-date'])}>
             Date
           </div>
         </div>
 
         <div
           className={cn(
-            style["compupcomingunlocks-rows"],
+            style['compupcomingunlocks-rows'],
             this.state.api_update_anim
-              ? style["compupcomingunlocks-rowsupdating"]
+              ? style['compupcomingunlocks-rowsupdating']
               : null
           )}
         >
           {this.state.api_loading ? (
-            <div className={cn(style["compupcomingunlocks-rows-loading"])}>
+            <div className={cn(style['compupcomingunlocks-rows-loading'])}>
               <Icon_loading />
             </div>
           ) : (
@@ -1352,13 +1352,13 @@ class Comp_upcoming_unlocks extends React.Component {
               return (
                 <a
                   key={index}
-                  className={cn(style["compupcomingunlocks-rows-row"])}
-                  href={"https://bscscan.com/address/" + curr.token_id}
+                  className={cn(style['compupcomingunlocks-rows-row'])}
+                  href={'https://bscscan.com/address/' + curr.token_id}
                   target="_blank"
                 >
                   <div
                     className={cn(
-                      style["compupcomingunlocks-rows-row-imgnamesymbol"]
+                      style['compupcomingunlocks-rows-row-imgnamesymbol']
                     )}
                   >
                     <img src={curr.icon} />
@@ -1366,14 +1366,14 @@ class Comp_upcoming_unlocks extends React.Component {
                     <div
                       className={cn(
                         style[
-                          "compupcomingunlocks-rows-row-imgnamesymbol-namesymbol"
+                          'compupcomingunlocks-rows-row-imgnamesymbol-namesymbol'
                         ]
                       )}
                     >
                       <div
                         className={cn(
                           style[
-                            "compupcomingunlocks-rows-row-imgnamesymbol-namesymbol-symbol"
+                            'compupcomingunlocks-rows-row-imgnamesymbol-namesymbol-symbol'
                           ]
                         )}
                       >
@@ -1383,7 +1383,7 @@ class Comp_upcoming_unlocks extends React.Component {
                       <div
                         className={cn(
                           style[
-                            "compupcomingunlocks-rows-row-imgnamesymbol-namesymbol-name"
+                            'compupcomingunlocks-rows-row-imgnamesymbol-namesymbol-name'
                           ]
                         )}
                       >
@@ -1393,12 +1393,12 @@ class Comp_upcoming_unlocks extends React.Component {
                   </div>
 
                   <div
-                    className={cn(style["compupcomingunlocks-rows-row-amount"])}
+                    className={cn(style['compupcomingunlocks-rows-row-amount'])}
                   >
                     <div
                       className={cn(
                         style[
-                          "compupcomingunlocks-rows-row-amount-lockedamount"
+                          'compupcomingunlocks-rows-row-amount-lockedamount'
                         ]
                       )}
                     >
@@ -1409,7 +1409,7 @@ class Comp_upcoming_unlocks extends React.Component {
                       <span
                         className={cn(
                           style[
-                            "compupcomingunlocks-rows-row-amount-lockedamount-percentage"
+                            'compupcomingunlocks-rows-row-amount-lockedamount-percentage'
                           ]
                         )}
                       >
@@ -1424,7 +1424,7 @@ class Comp_upcoming_unlocks extends React.Component {
 
                     <div
                       className={cn(
-                        style["compupcomingunlocks-rows-row-amount-usd"]
+                        style['compupcomingunlocks-rows-row-amount-usd']
                       )}
                     >
                       $
@@ -1435,7 +1435,7 @@ class Comp_upcoming_unlocks extends React.Component {
                   </div>
 
                   <div
-                    className={cn(style["compupcomingunlocks-rows-row-date"])}
+                    className={cn(style['compupcomingunlocks-rows-row-date'])}
                   >
                     {this.date_display(
                       curr.unlock_date - parseInt(Date.now() / 1000)
@@ -1475,15 +1475,15 @@ class Home extends React.Component {
         <Layout_user
           element={
             <>
-              <section className={cn("section", style["sectiondash"])}>
-                <div className={cn(style["sectiondash-left"])}>
+              <section className={cn('section', style['sectiondash'])}>
+                <div className={cn(style['sectiondash-left'])}>
                   <Comp_profile_input_mobile />
                   <Comp_hello />
                   <Comp_input />
                   <Comp_last_adts data={this.props.latest_audits} />
                 </div>
 
-                <div className={cn(style["sectiondash-right"])}>
+                <div className={cn(style['sectiondash-right'])}>
                   <Comp_profile_input />
                   <Comp_whale_tracker />
                   <Comp_upcoming_unlocks />

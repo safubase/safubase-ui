@@ -1,12 +1,12 @@
 // MODULES
-import React from "react";
-import cn from "classnames";
+import React from 'react';
+import cn from 'classnames';
 
 // CONTEXT
-import { Context } from "../../context";
+import { Context } from '../../context';
 
 // STYLES
-import style from "./style.module.css";
+import style from './style.module.css';
 
 class Footer extends React.Component {
   static contextType = Context;
@@ -20,10 +20,12 @@ class Footer extends React.Component {
     return (
       <footer
         className={cn(
-          style["footer"],
-          this.context.state.ui_sidebar_open ? style["footersidebaropen"] : null
+          style['footer'],
+          this.context.state.ui_sidebar_open ? style['footersidebaropen'] : null
         )}
-      ></footer>
+      >
+        <p className={cn(style['footer-disclaimer'])}></p>
+      </footer>
     );
   }
 }
