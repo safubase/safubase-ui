@@ -26,7 +26,7 @@ import style from '../styles/pages/home.module.css';
 
 /**
  *
- * GLOBAL PAGE FUNCTIONS
+ * GLOBAL FUNCTIONS, for both serverside and components
  *
  */
 function global_sort_audits_by_date(data) {
@@ -151,7 +151,7 @@ class Comp_hello extends React.Component {
 
         <img
           className={cn(style['comphello-manimg'])}
-          src="/man.png"
+          src="/images/man.png"
           alt="man"
           title="Man"
         />

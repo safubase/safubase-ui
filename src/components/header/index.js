@@ -27,18 +27,18 @@ class Header extends React.Component {
   render() {
     return (
       <header className={cn(style['header'])}>
-        <div
-          onClick={() => {}}
-          className={cn(style['header-hamburgericon'], 'flxctrctr')}
-        >
+        <div onClick={() => {}} className={cn(style['header-hamburgericon'])}>
           <HamburgerIcon />
         </div>
 
-        <img className={cn(style['header-logo'])} src="/mobile_logo.png" />
+        <img
+          className={cn(style['header-logo'])}
+          src="/images/mobile_logo.png"
+        />
 
         <div
           onClick={() => {}}
-          className={cn(style['header-notificationicon'], 'flxctrctr')}
+          className={cn(style['header-notificationicon'])}
         >
           <NotificationIcon />
         </div>

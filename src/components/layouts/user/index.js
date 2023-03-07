@@ -31,8 +31,8 @@ class UserLayout extends React.Component {
    *
    */
   componentDidMount() {
-    UTILS.wallet_update(this.context);
     UTILS.wallet_add_listeners(this.context);
+    UTILS.wallet_update(this.context);
   }
 
   render() {
@@ -40,7 +40,6 @@ class UserLayout extends React.Component {
       <>
         <Header />
         <Sidebar />
-
         <main
           className={cn(
             style['main'],
@@ -49,7 +48,6 @@ class UserLayout extends React.Component {
         >
           {this.props.element || this.props.children}
         </main>
-
         <Footer />
       </>
     );

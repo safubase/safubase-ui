@@ -6,7 +6,7 @@ import cn from 'classnames';
 import { Provider } from '../context';
 
 // COMPONENTS
-import ErrorPage from '../components/error';
+import Error from '../components/error';
 
 // STYLES
 import '../styles/index.css';
@@ -15,20 +15,22 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
+
+    this.display_app = this.display_app.bind(this);
+  }
+
+  display_app() {
+    if (this.props.pageProps.statusCode) {
+      return <Error status_code={this.props.pageProps.statusCode} />;
+    }
+
+    return <this.props.Component {...this.props.pageProps} />;
   }
 
   componentDidMount() {}
 
   render() {
-    return (
-      <Provider>
-        {this.props.pageProps.statusCode ? (
-          <ErrorPage statusCode={this.props.pageProps.statusCode} />
-        ) : (
-          <this.props.Component {...this.props.pageProps} />
-        )}
-      </Provider>
-    );
+    return <Provider>{this.display_app()}</Provider>;
   }
 }
 

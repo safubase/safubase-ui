@@ -25,11 +25,11 @@ class Error extends React.Component {
           <section className={cn('section', style['sectionerror'])}>
             <div className={cn(style['sectionerror-ctr'])}>
               <div className={cn(style['sectionerror-ctr-title'])}>
-                {this.props.statusCode}
+                {this.props.status_code}
               </div>
 
               <div className={cn(style['sectionerror-ctr-desc'])}>
-                {this.props.statusCode === 404
+                {this.props.status_code === 404
                   ? "Sorry, couldn't find the page you are looking for."
                   : null}
               </div>
