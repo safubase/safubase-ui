@@ -5,6 +5,14 @@ import Web3 from 'web3';
 // CONFIG
 import config from '../config';
 
+export async function sleep(ms) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve();
+    }, ms);
+  });
+}
+
 /*
  *
  * STRING FUNCTIONS
@@ -311,6 +319,7 @@ export function wallet_add_listeners(context) {
 }
 
 export default {
+  sleep,
   str_copy,
   str_remove_extra_space,
   num_add_commas,

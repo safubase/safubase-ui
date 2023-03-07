@@ -174,6 +174,8 @@ class Comp_input extends React.Component {
     this.state = {
       dd_open: false, // dropdown open
       modal_open: false,
+      bar_pct: 0, // bar percentage
+      bar_info: 'analyzing token credentials',
       address: '',
       network: {
         img: '/bnb_chain.png',
@@ -198,16 +200,63 @@ class Comp_input extends React.Component {
       ],
     };
 
+    this.bar_ref = React.createRef();
+
     this.api_audit = this.api_audit.bind(this);
+    this.modal_init = this.modal_init.bind(this);
   }
 
   async api_audit() {
+    this.modal_init();
+  }
+
+  async modal_init() {
     this.setState({
       ...this.state,
       network: { ...this.state.network },
       networks: [...this.state.networks],
       modal_open: true,
     });
+
+    await UTILS.sleep(200);
+
+    const bar_div = this.bar_ref.current;
+
+    if (!bar_div) {
+      return null;
+    }
+
+    let total_pct = 0;
+    const random_pct_padding = Math.floor(Math.random() * 13 + 5);
+    const token_info_index = {
+      0: 'analyzing token credentials',
+      1: 'checking security measures',
+      2: 'detailizing safu information',
+      3: 'finalizing results for you...',
+    };
+
+    for (let i = 0; i < 4; i++) {
+      const random_pct = Math.floor(Math.random() * 34 + random_pct_padding);
+
+      total_pct = total_pct + random_pct;
+
+      if (total_pct >= 100 || i === 3) {
+        total_pct = 99.9;
+      }
+
+      this.setState({
+        ...this.state,
+        modal_open: true,
+        bar_pct: total_pct,
+        bar_info: token_info_index[i],
+      });
+
+      let delay_ms = Math.floor(Math.random() * 1000 + 700);
+
+      bar_div.style.width = total_pct + '%';
+
+      await UTILS.sleep(delay_ms);
+    }
   }
 
   componentDidMount() {}
@@ -313,21 +362,46 @@ class Comp_input extends React.Component {
               className={cn(style['compinput-right-bg-btn'])}
             >
               AUDIT
+            </button>
+          </div>
+        </div>
+
+        <div
+          className={cn(
+            style['compinput-modal'],
+            this.state.modal_open ? style['compinput-modalopen'] : null
+          )}
+        >
+          <div className={cn(style['compinput-modal-content'])}>
+            <div className={cn(style['compinput-modal-content-info'])}>
+              {this.state.bar_info}
+            </div>
+
+            <div
+              className={cn(style['compinput-modal-content-progressbarctr'])}
+            >
               <div
                 className={cn(
-                  style['compinput-right-bg-btn-modal'],
-                  this.state.modal_open
-                    ? style['compinput-right-bg-btn-modalopen']
-                    : null
+                  style['compinput-modal-content-progressbarctr-status']
+                )}
+              >
+                {this.state.bar_pct}% Loading...
+              </div>
+              <div
+                ref={this.bar_ref}
+                className={cn(
+                  style['compinput-modal-content-progressbarctr-bar']
                 )}
               >
                 <div
-                  className={cn(style['compinput-right-bg-btn-modal-content'])}
-                >
-                  sdffsddfsdf
-                </div>
+                  className={cn(
+                    style[
+                      'compinput-modal-content-progressbarctr-bar-reflection'
+                    ]
+                  )}
+                ></div>
               </div>
-            </button>
+            </div>
           </div>
         </div>
       </div>
@@ -900,7 +974,7 @@ class Comp_whale_tracker extends React.Component {
       ],
       api_data: [],
       api_loading: false,
-      api_update_anim: false,
+      api_updating: false,
     };
 
     this.str_reduce_row_name_chars = this.str_reduce_row_name_chars.bind(this);
@@ -927,13 +1001,13 @@ class Comp_whale_tracker extends React.Component {
       this.setState({
         ...this.state,
         api_loading: false,
-        api_update_anim: true,
+        api_updating: true,
       });
     } else {
       this.setState({
         ...this.state,
         api_loading: true,
-        api_update_anim: false,
+        api_updating: false,
       });
     }
 
@@ -952,7 +1026,7 @@ class Comp_whale_tracker extends React.Component {
       chains: [...this.state.chains],
       api_data: res.data,
       api_loading: false,
-      api_update_anim: false,
+      api_updating: false,
     });
   }
 
@@ -1114,7 +1188,7 @@ class Comp_whale_tracker extends React.Component {
         <div
           className={cn(
             style['compwhaletracker-rows'],
-            this.state.api_update_anim
+            this.state.api_updating
               ? style['compwhaletracker-rowsupdating']
               : null
           )}
@@ -1225,7 +1299,7 @@ class Comp_upcoming_unlocks extends React.Component {
       info_main_hover: false,
       api_data: [],
       api_loading: true,
-      api_update_anim: false,
+      api_updating: false,
     };
 
     this.str_reduce_row_name_chars = this.str_reduce_row_name_chars.bind(this);
@@ -1271,13 +1345,13 @@ class Comp_upcoming_unlocks extends React.Component {
       this.setState({
         ...this.state,
         api_loading: false,
-        api_update_anim: true,
+        api_updating: true,
       });
     } else {
       this.setState({
         ...this.state,
         api_loading: true,
-        api_update_anim: false,
+        api_updating: false,
       });
     }
 
@@ -1294,7 +1368,7 @@ class Comp_upcoming_unlocks extends React.Component {
       ...this.state,
       api_data: res.data,
       api_loading: false,
-      api_update_anim: false,
+      api_updating: false,
     });
   }
 
@@ -1364,7 +1438,7 @@ class Comp_upcoming_unlocks extends React.Component {
         <div
           className={cn(
             style['compupcomingunlocks-rows'],
-            this.state.api_update_anim
+            this.state.api_updating
               ? style['compupcomingunlocks-rowsupdating']
               : null
           )}

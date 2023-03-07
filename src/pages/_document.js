@@ -14,6 +14,7 @@ class Document extends React.Component {
     return (
       <Html lang="en">
         <Head />
+
         <body>
           <Main />
           <NextScript />
