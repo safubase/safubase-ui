@@ -218,6 +218,7 @@ class Comp_input extends React.Component {
       modal_open: true,
     });
 
+    // sleep for state changes otherwise previous setState will be ignored because react is trash
     await UTILS.sleep(200);
 
     const bar_div = this.bar_ref.current;
@@ -228,12 +229,12 @@ class Comp_input extends React.Component {
 
     let total_pct = 0;
     const random_pct_padding = Math.floor(Math.random() * 13 + 5);
-    const token_info_index = {
-      0: 'analyzing token credentials',
-      1: 'checking security measures',
-      2: 'detailizing safu information',
-      3: 'finalizing results for you...',
-    };
+    const token_info_index = [
+      'analyzing token credentials',
+      'checking security measures',
+      'detailizing safu information',
+      'finalizing results for you...',
+    ];
 
     for (let i = 0; i < 4; i++) {
       const random_pct = Math.floor(Math.random() * 34 + random_pct_padding);
