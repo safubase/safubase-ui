@@ -173,10 +173,11 @@ class Comp_input extends React.Component {
     super(props);
     this.state = {
       dd_open: false, // dropdown open
+      modal_open: false,
       address: '',
       network: {
         img: '/bnb_chain.png',
-        name: 'Binance Smart Chain',
+        name: 'BNB Chain',
         chain_id: 56,
       }, // default selected network
       networks: [
@@ -200,7 +201,18 @@ class Comp_input extends React.Component {
     this.api_audit = this.api_audit.bind(this);
   }
 
-  async api_audit() {}
+  async api_audit() {
+    this.setState({
+      ...this.state,
+      network: { ...this.state.network },
+      networks: [...this.state.networks],
+      modal_open: true,
+    });
+  }
+
+  componentDidMount() {}
+
+  componentDidUpdate() {}
 
   render() {
     return (
@@ -301,6 +313,20 @@ class Comp_input extends React.Component {
               className={cn(style['compinput-right-bg-btn'])}
             >
               AUDIT
+              <div
+                className={cn(
+                  style['compinput-right-bg-btn-modal'],
+                  this.state.modal_open
+                    ? style['compinput-right-bg-btn-modalopen']
+                    : null
+                )}
+              >
+                <div
+                  className={cn(style['compinput-right-bg-btn-modal-content'])}
+                >
+                  sdffsddfsdf
+                </div>
+              </div>
             </button>
           </div>
         </div>

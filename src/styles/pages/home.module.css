@@ -1,9 +1,6 @@
 .sectiondash {
-  display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
+  display: flex; justify-content: flex-start; align-items: flex-start;
   padding-top: 1rem;
-
 }
 
 @media only screen and (max-width: 1150px) {
@@ -135,7 +132,6 @@
 */
 .compinput {
   display: flex; justify-content: flex-start;
-
 }
 
 @media only screen and (max-width: 650px) {
@@ -324,6 +320,7 @@
   background-color: #63a078;
   color: white;
   cursor: pointer;
+  position: relative;
 }
 
 @media only screen and (max-width: 650px) {
@@ -333,6 +330,28 @@
   }
 }
 
+.compinput-right-bg-btn-modal {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: 1;
+  background-color:  rgba(0, 10, 39, 0.3);
+  backdrop-filter: blur(6px);
+  transition: all .4s ease;
+  opacity: 0;
+  visibility: hidden;
+  display: flex; justify-content: center; align-items: center;
+}
+
+.compinput-right-bg-btn-modalopen {
+  opacity: 1;
+  visibility: visible;
+}
+
+.compinput-right-bg-btn-modal-content {
+
+}
+
 /**
 *
 * LATEST AUDITS COMPONENT
@@ -340,6 +359,7 @@
 */
 .complastadts {
   margin-top: 1rem;
+  overflow: hidden;
 }
 
 .comlastadts-title {
@@ -849,6 +869,7 @@
   transition: all .2s ease;
   background-color: white;
   border: 1px solid rgba(0, 0, 0, 0.2);
+  z-index: 1;
 }
 
 .compwhaletracker-config-chaindd-optionsactive {
@@ -1026,8 +1047,8 @@
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: var(--border-radius-large);
   font-size: 15px;
-
   margin-top: 1rem;
+  overflow: hidden;
 }
 
 @media only screen and (max-width: 650px) {
