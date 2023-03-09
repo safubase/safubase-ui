@@ -221,6 +221,8 @@ export async function wallet_update(context) {
     ...context.state,
     wallet_address: address,
   });
+
+  return address;
 }
 
 export async function wallet_connect({ chain_id = 56 }, context) {

@@ -1,6 +1,6 @@
 // MODULES
 import React from 'react';
-import { HiOutlineInformationCircle } from 'react-icons/hi';
+import { RiInformationFill } from 'react-icons/ri';
 
 class Info extends React.Component {
   constructor(props) {
@@ -9,7 +9,7 @@ class Info extends React.Component {
   }
 
   render() {
-    return <HiOutlineInformationCircle />;
+    return <RiInformationFill />;
   }
 }
 

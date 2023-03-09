@@ -6,13 +6,14 @@ import cn from 'classnames';
 import Header from '../../header';
 import Footer from '../../footer';
 import Sidebar from '../../sidebar';
+import Toaster from '../../toaster';
 
 // CONTEXT
 import { Context } from '../../../context';
 
 // UTILS
 import UTILS from '../../../utils';
-import UTILS_API from '../../../utils/api.js';
+import UTILS_API from '../../../utils/api';
 
 // STYLES
 import style from './style.module.css';
@@ -33,6 +34,34 @@ class UserLayout extends React.Component {
   componentDidMount() {
     UTILS.wallet_add_listeners(this.context);
     UTILS.wallet_update(this.context);
+
+    setTimeout(() => {
+      this.context.set_state({
+        ...this.context.state,
+        ui_toasts: [
+          ...this.context.state.ui_toasts,
+          {
+            type: 'success',
+            message: '1 First toast',
+            created_at: new Date(),
+          },
+        ],
+      });
+    }, 3000);
+
+    setTimeout(() => {
+      this.context.set_state({
+        ...this.context.state,
+        ui_toasts: [
+          ...this.context.state.ui_toasts,
+          {
+            type: 'success',
+            message: '2 Second toast',
+            created_at: new Date(),
+          },
+        ],
+      });
+    }, 6000);
   }
 
   render() {
@@ -47,6 +76,7 @@ class UserLayout extends React.Component {
           )}
         >
           {this.props.element || this.props.children}
+          <Toaster />
         </main>
         <Footer />
       </>
