@@ -56,7 +56,7 @@ class UserLayout extends React.Component {
           ...this.context.state.ui_toasts,
           {
             type: 'success',
-            message: '2 Second toast',
+            message: '2 Second toast anan zaa lol lorem ipsum test 123 yarrrrrmaa',
             created_at: new Date(),
           },
         ],

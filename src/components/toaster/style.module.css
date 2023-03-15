@@ -1,6 +1,6 @@
 .toaster {
   position: fixed;
-  top: 100px; right: 100px;
+  top: 50px; right: 50px;
   width: 340px;
   z-index: 10;
 }
@@ -25,7 +25,7 @@
 .toaster-toast {
   position: relative;
   padding: 1rem;
-  display: flex; justify-content: flex-start; align-items: center;
+  display: flex; justify-content: space-between; align-items: flex-start;
   border-radius: 4px;
   color: white;
   margin-bottom: 1rem;
@@ -64,19 +64,29 @@
   background-color: rgb(59, 144, 255);
 }
 
-.toaster-toast-icon {
+.toaster-toast-left {
+  margin-right: 1rem;
+  display: flex; justify-content: flex-start; align-items: flex-start;
+}
+
+.toaster-toast-left-icon {
   display: flex; justify-content: center; align-items: center;
   width: 22px;
   font-size: 22px;
 }
 
-.toaster-toast-icon {
+.toaster-toast-left-icon {
   width: 22px;
   display: block;
 }
 
-.toaster-toast-message {
+.toaster-toast-left-message {
   margin-left: 1rem;
   font-size: 14px;
 }
 
+.toaster-toast-right {
+  width: 14px;
+  display: block;
+  cursor: pointer;
+}
