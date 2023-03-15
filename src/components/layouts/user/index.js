@@ -42,7 +42,8 @@ class UserLayout extends React.Component {
           ...this.context.state.ui_toasts,
           {
             type: 'success',
-            message: '1 First toast',
+            message:
+              '1 First toast fsdahjsdfahjlfsadhj h sdfhsdf ahjasdf hj;dfs ahj;asdf hj; asdfhj;asdf hj;asdf hj;sdfa hj;df ashj;asdf hj;asdf hjl;asdf hjasdf hjlsdfa hjkl;adfs hjlk;adfs ',
             created_at: new Date(),
           },
         ],
@@ -56,12 +57,40 @@ class UserLayout extends React.Component {
           ...this.context.state.ui_toasts,
           {
             type: 'success',
-            message: '2 Second toast anan zaa lol lorem ipsum test 123 yarrrrrmaa',
+            message: '2 Second toast',
             created_at: new Date(),
           },
         ],
       });
     }, 6000);
+
+    setTimeout(() => {
+      this.context.set_state({
+        ...this.context.state,
+        ui_toasts: [
+          ...this.context.state.ui_toasts,
+          {
+            type: 'success',
+            message: '3 third',
+            created_at: new Date(),
+          },
+        ],
+      });
+    }, 9000);
+
+    setTimeout(() => {
+      this.context.set_state({
+        ...this.context.state,
+        ui_toasts: [
+          ...this.context.state.ui_toasts,
+          {
+            type: 'success',
+            message: '4 fourth toast',
+            created_at: new Date(),
+          },
+        ],
+      });
+    }, 12000);
   }
 
   render() {
@@ -76,8 +105,8 @@ class UserLayout extends React.Component {
           )}
         >
           {this.props.element || this.props.children}
-          <Toaster />
         </main>
+        <Toaster />
         <Footer />
       </>
     );

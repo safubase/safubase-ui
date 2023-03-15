@@ -7,8 +7,8 @@
 
 @media only screen and (max-width: 650px) {
   .toaster {
-    top: auto; right: auto; left: 0; bottom: 0;
-    width: 100%; 
+    left: 0; top: 0;
+    width: 100%;
   }
 }
 
@@ -30,11 +30,16 @@
   color: white;
   margin-bottom: 1rem;
   box-shadow: 0px 0px 20px  rgba(0, 0, 0, 0.5);
+  transition: all .3s ease-in;
 }
 
 @media only screen and (max-width: 650px) {
   .toaster-toast {
     margin-bottom: 0;
+    border-radius: 0;
+    position: absolute;
+    left: 0; top: 0;
+    width: 100%;
   }
 }
 
@@ -46,6 +51,11 @@
   .toaster-toastani {
     margin-bottom: 0;
   }
+}
+
+/* for clearing toasts*/
+.toaster-toastfade {
+  opacity: 0;
 }
 
 .toaster-toastsuccess {

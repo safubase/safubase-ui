@@ -6,8 +6,8 @@ import cn from 'classnames';
 import { Context } from '../../context';
 
 // UTILS
-import UTILS from '../../utils';
-import UTILS_API from '../../utils/api';
+import UTILS from '../../utils/index.js';
+import UTILS_API from '../../utils/api.js';
 
 // STYLES
 import style from './style.module.css';
@@ -22,25 +22,35 @@ class Toaster extends React.Component {
       toasts_clear_timer_id: 0,
     };
 
-    this.toasts_clear = this.toasts_clear.bind(this);
+    this.clear = this.clear.bind(this);
+    this.update = this.update.bind(this);
 
     this.toaster_ref = React.createRef();
   }
 
   // Clears all the toasts after some time on update
-  async toasts_clear() {
-    console.log('Clearing all the toasts');
+  clear() {
+    const toaster_div = this.toaster_ref.current;
+
+    if (toaster_div.children.length === 0) {
+      return;
+    }
+
+    for (let i = 0; i < toaster_div.children.length; i++) {
+      toaster_div.children[i].classList.add(style['toaster-toastfade']);
+    }
+
+    setTimeout(() => {
+      this.context.set_state({
+        ...this.context.state,
+        ui_toasts: [],
+      });
+    }, 1000);
   }
 
-  componentDidMount() {}
-
-  componentDidUpdate() {
-    console.log(this.state);
-    console.log(this.context.state)
-    const toasts_global = this.context.state.ui_toasts;
-    const toasts_local = this.state.toasts;
-    const toasts_new = [];
-
+  // On new toast in context state
+  update() {
+    const toasts_global = [...this.context.state.ui_toasts];
     const toaster_div = this.toaster_ref.current;
 
     // Check created_at prop because everything depends on it,
@@ -53,30 +63,11 @@ class Toaster extends React.Component {
       }
     }
 
-    // Check if there is any new or reduced toasts compare to locals
-    for (let i = 0; i < toasts_global.length; i++) {
-      let exists = false;
-
-      for (let j = 0; j < toasts_local.length; j++) {
-        if (
-          toasts_global[i].created_at.valueOf() ===
-          toasts_local[j].created_at.valueOf()
-        ) {
-          exists = true;
-          // break;
-        }
-      }
-
-      if (exists === false) {
-        toasts_new.push(toasts_global[i]);
-      }
-    }
-
-    if (!toasts_new.length) {
+    if (toasts_global.length === this.state.toasts.length) {
       return;
     }
 
-    const toasts_final = [...toasts_local, ...toasts_new];
+    const toasts_final = [...toasts_global];
 
     // Sort final toasts by date, we want the newest toaster to be on top
     for (let i = 0; i < toasts_final.length; i++) {
@@ -109,36 +100,35 @@ class Toaster extends React.Component {
       text_div.classList.add(style['toaster-toast-left-message']);
       text_div.innerHTML = toasts_final[i].message;
 
-      const icon_text_ctr_div = document.createElement("div");
-      icon_text_ctr_div.classList.add(style["toaster-toast-left"]);
+      const icon_text_ctr_div = document.createElement('div');
+      icon_text_ctr_div.classList.add(style['toaster-toast-left']);
 
-      const close_icon_img = document.createElement("img");
-      close_icon_img.classList.add(style["toaster-toast-right"]);
-      close_icon_img.src = "https://www.nicepng.com/png/detail/52-521935_close-white-close-button-png.png";
+      const close_icon_img = document.createElement('img');
+      close_icon_img.classList.add(style['toaster-toast-right']);
+      close_icon_img.src =
+        'https://www.nicepng.com/png/detail/52-521935_close-white-close-button-png.png';
 
-      close_icon_img.addEventListener("click", () => {
+      close_icon_img.addEventListener('click', () => {
         const toasts_filtered = this.state.toasts.filter((curr, index) => {
-          if (curr.created_at !== toasts_final[i].created_at) {
+          if (
+            curr.created_at.valueOf() !== toasts_final[i].created_at.valueOf()
+          ) {
             return curr;
           }
         });
 
-        this.setState({
-          ...this.state,
-          toasts: toasts_filtered
-        });
-
         this.context.set_state({
           ...this.context.state,
-          ui_toasts: toasts_filtered
+          ui_toasts: toasts_filtered,
         });
-      })
+      });
 
       const toast_div = document.createElement('div');
       toast_div.classList.add(style['toaster-toast']);
+      toast_div.style.zIndex = toasts_final.length - i;
 
       // Give first one the slide animation
-      if (!i) {
+      if (i === 0) {
         toast_div.classList.add(style['toaster-toastani']);
       }
 
@@ -178,7 +168,7 @@ class Toaster extends React.Component {
     clearTimeout(this.state.toasts_clear_timer_id);
 
     const toasts_clear_timer_id = setTimeout(() => {
-      this.toasts_clear();
+      this.clear();
     }, 4000);
 
     this.setState({
@@ -186,6 +176,12 @@ class Toaster extends React.Component {
       toasts: toasts_final,
       toasts_clear_timer_id: toasts_clear_timer_id,
     });
+  }
+
+  componentDidMount() {}
+
+  componentDidUpdate() {
+    this.update();
   }
 
   componentWillUnmount() {}

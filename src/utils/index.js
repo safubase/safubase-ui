@@ -13,6 +13,22 @@ export async function sleep(ms) {
   });
 }
 
+/**
+ *
+ * CONTEXT FUNCTIONS
+ *
+ */
+export function context_create_toast(payload, context) {
+  if (!payload.created_at) {
+    payload.created_at = new Date();
+  }
+
+  context.set_state({
+    ...context.state,
+    ui_toasts: [...context.state.ui_toasts, payload],
+  });
+}
+
 /*
  *
  * STRING FUNCTIONS
@@ -207,22 +223,18 @@ export async function wallet_update(context) {
     return;
   }
 
-  let address = null;
+  const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
 
-  const accounts = await ethereum.request({
-    method: 'eth_requestAccounts',
-  });
-
-  if (accounts[0]) {
-    address = accounts[0];
+  if (!accounts[0]) {
+    return;
   }
 
   context.set_state({
     ...context.state,
-    wallet_address: address,
+    wallet_address: accounts[0],
   });
 
-  return address;
+  return accounts[0];
 }
 
 export async function wallet_connect({ chain_id = 56 }, context) {
@@ -296,12 +308,7 @@ export async function wallet_connect({ chain_id = 56 }, context) {
   return accounts;
 }
 
-export function wallet_clear(context) {
-  context.set_state({
-    ...context.state,
-    wallet_address: null,
-  });
-}
+export function wallet_clear(context) {}
 
 export function wallet_add_listeners(context) {
   // WALLET EVENTS
@@ -311,7 +318,10 @@ export function wallet_add_listeners(context) {
 
   ethereum.on('accountsChanged', (accounts) => {
     if (!accounts || !accounts.length) {
-      wallet_clear(context);
+      context.set_state({
+        ...context.state,
+        wallet_address: null,
+      });
 
       return;
     }

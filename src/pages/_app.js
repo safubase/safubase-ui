@@ -1,6 +1,5 @@
 // MODULES
 import React from 'react';
-import cn from 'classnames';
 
 // CONTEXT
 import { Provider } from '../context';
@@ -16,21 +15,29 @@ class App extends React.Component {
     super(props);
     this.state = {};
 
-    this.display_app = this.display_app.bind(this);
+    this.init = this.init.bind(this);
   }
 
-  display_app() {
+  init() {
     if (this.props.pageProps.statusCode) {
-      return <Error status_code={this.props.pageProps.statusCode} />;
+      return (
+        <Provider>
+          <Error status_code={this.props.pageProps.statusCode} />
+        </Provider>
+      );
     }
 
-    return <this.props.Component {...this.props.pageProps} />;
+    return (
+      <Provider>
+        <this.props.Component {...this.props.pageProps} />
+      </Provider>
+    );
   }
 
   componentDidMount() {}
 
   render() {
-    return <Provider>{this.display_app()}</Provider>;
+    return this.init();
   }
 }
 
