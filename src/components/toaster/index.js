@@ -53,7 +53,7 @@ class Toaster extends React.Component {
     const toasts_global = [...this.context.state.ui_toasts];
     const toaster_div = this.toaster_ref.current;
 
-    // Check created_at prop because everything depends on it,
+    // Check created_at prop for sorting by date
     for (let i = 0; i < toasts_global.length; i++) {
       if (
         !toasts_global[i].created_at ||
@@ -63,6 +63,7 @@ class Toaster extends React.Component {
       }
     }
 
+    // If global toasts synced with local ones, dont do anything
     if (toasts_global.length === this.state.toasts.length) {
       return;
     }
@@ -125,9 +126,10 @@ class Toaster extends React.Component {
 
       const toast_div = document.createElement('div');
       toast_div.classList.add(style['toaster-toast']);
+      // for proper displaying on mobile
       toast_div.style.zIndex = toasts_final.length - i;
 
-      // Give first one the slide animation
+      // Give first one the slide animation, first one is the newest added toast
       if (i === 0) {
         toast_div.classList.add(style['toaster-toastani']);
       }

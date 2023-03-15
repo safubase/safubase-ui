@@ -9,11 +9,11 @@ import Sidebar from '../../sidebar';
 import Toaster from '../../toaster';
 
 // CONTEXT
-import { Context } from '../../../context';
+import { Context } from '../../../context/index.js';
 
 // UTILS
-import UTILS from '../../../utils';
-import UTILS_API from '../../../utils/api';
+import UTILS from '../../../utils/index.js';
+import UTILS_API from '../../../utils/api.js';
 
 // STYLES
 import style from './style.module.css';
@@ -34,63 +34,6 @@ class UserLayout extends React.Component {
   componentDidMount() {
     UTILS.wallet_add_listeners(this.context);
     UTILS.wallet_update(this.context);
-
-    setTimeout(() => {
-      this.context.set_state({
-        ...this.context.state,
-        ui_toasts: [
-          ...this.context.state.ui_toasts,
-          {
-            type: 'success',
-            message:
-              '1 First toast fsdahjsdfahjlfsadhj h sdfhsdf ahjasdf hj;dfs ahj;asdf hj; asdfhj;asdf hj;asdf hj;sdfa hj;df ashj;asdf hj;asdf hjl;asdf hjasdf hjlsdfa hjkl;adfs hjlk;adfs ',
-            created_at: new Date(),
-          },
-        ],
-      });
-    }, 3000);
-
-    setTimeout(() => {
-      this.context.set_state({
-        ...this.context.state,
-        ui_toasts: [
-          ...this.context.state.ui_toasts,
-          {
-            type: 'success',
-            message: '2 Second toast',
-            created_at: new Date(),
-          },
-        ],
-      });
-    }, 6000);
-
-    setTimeout(() => {
-      this.context.set_state({
-        ...this.context.state,
-        ui_toasts: [
-          ...this.context.state.ui_toasts,
-          {
-            type: 'success',
-            message: '3 third',
-            created_at: new Date(),
-          },
-        ],
-      });
-    }, 9000);
-
-    setTimeout(() => {
-      this.context.set_state({
-        ...this.context.state,
-        ui_toasts: [
-          ...this.context.state.ui_toasts,
-          {
-            type: 'success',
-            message: '4 fourth toast',
-            created_at: new Date(),
-          },
-        ],
-      });
-    }, 12000);
   }
 
   render() {
