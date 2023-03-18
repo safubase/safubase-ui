@@ -57,6 +57,9 @@ class Sidebar extends React.Component {
         }}
       >
         <div className={cn(style['sidebarctr-sidebar'])}>
+          <div className={cn(style['sidebarctr-sidebar-logo'])}>
+            <img src="/safubase.png" />
+          </div>
           <div className={cn(style['sidebarctr-sidebar-top'])}>
             <a className={cn(style['sidebarctr-sidebar-top-iconctr'])} href="/">
               <Icon_home active={this.state.pathname === '/' ? true : false} />
@@ -120,7 +123,6 @@ class Sidebar extends React.Component {
               </span>
             </a>
           </div>
-
           <div className={cn(style['sidebarctr-sidebar-bottom'])}>
             <div className={cn(style['sidebarctr-sidebar-bottom-iconctr'])}>
               {this.context.state.auth ? (

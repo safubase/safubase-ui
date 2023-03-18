@@ -1,6 +1,8 @@
 .sectiondash {
   display: flex; justify-content: flex-start; align-items: flex-start;
   padding-top: 1rem;
+  border: 1px solid red;
+  height: 100%;
 }
 
 @media only screen and (max-width: 1150px) {
@@ -17,8 +19,9 @@
 }
 
 .sectiondash-left {
-  width: 50%;
+  width: 50%; 
   margin-right: 2rem;
+  border: 1px solid red;
 }
 
 @media only screen and (max-width: 1150px) {
@@ -29,7 +32,9 @@
 }
 
 .sectiondash-right {
-  width: 50%;
+  width: 50%; height: 100%;
+  border: 1px solid red;
+  display: flex; justify-content: flex-start; align-items: flex-start; flex-direction: column;
 }
 
 @media only screen and (max-width: 1150px) {
@@ -572,8 +577,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 50px;
+  width: 100%; height: 50px;
   margin-bottom: 1rem;
+  border: 1px solid red;
 }
 
 @media only screen and (max-width: 650px) {
@@ -857,6 +863,7 @@
   border-radius: var(--border-radius-large);
   font-size: 15px;
   overflow: hidden;
+  width: 100%; height: 100%;
 }
 
 @media only screen and (max-width: 650px) {
@@ -997,7 +1004,7 @@
 }
 
 .compwhaletracker-rows {
-  height: 250px;
+  min-height: 250px;
   overflow: hidden;
   overflow-y: scroll;
   transition: all .5s ease;
@@ -1115,6 +1122,7 @@
   font-size: 15px;
   margin-top: 1rem;
   overflow: hidden;
+  width: 100%; height: 100%;
 }
 
 @media only screen and (max-width: 650px) {
@@ -1186,7 +1194,7 @@
 }
 
 .compupcomingunlocks-rows {
-  height: 250px;
+  min-height: 250px;
   overflow: hidden;
   overflow-y: scroll;
   -ms-overflow-style: none;  /* IE and Edge */

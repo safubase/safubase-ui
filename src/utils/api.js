@@ -35,15 +35,29 @@ export async function get_profile(version = 1, context) {
   try {
     const res = await axios_instance.get(url);
 
-    if (!res === null || !res.data === null) {
+    if (res === null) {
       // Logged out because data is null from the server 200
       context.set_state({
         ...context.state,
         user_auth: false,
-        user_id: res.data._id,
-        user_username: res.data.username,
-        user_email: res.data.email,
-        user_email_verifed: res.data.email_verified,
+        user_id: null,
+        user_username: null,
+        user_email: null,
+        user_email_verifed: null,
+      });
+
+      return;
+    }
+
+    if (res.data === null) {
+      // Logged out because data is null from the server 200
+      context.set_state({
+        ...context.state,
+        user_auth: false,
+        user_id: null,
+        user_username: null,
+        user_email: null,
+        user_email_verifed: null,
       });
 
       return;
@@ -202,6 +216,26 @@ export async function blockchain_get_upcoming_unlocks(version = 1, context) {
   }
 
   const url = config.api_url + '/v' + version + '/blockchain/upcoming-unlocks';
+
+  try {
+    const res = await axios_instance.get(url);
+
+    return res;
+  } catch (err) {
+    return null;
+  }
+}
+
+export async function blockchain_audit(version = 1, context) {
+  if (!Number(version)) {
+    throw new Error('Invalid api version specified in signup');
+  }
+
+  if (!context) {
+    throw new Error('Body or Context not provided in signup');
+  }
+
+  const url = config.api_url + '/v' + version + '/blockchain/audit/0x123';
 
   try {
     const res = await axios_instance.get(url);

@@ -50,7 +50,6 @@ class UserLayout extends React.Component {
           {this.props.element || this.props.children}
         </main>
         <Toaster />
-        <Footer />
       </>
     );
   }

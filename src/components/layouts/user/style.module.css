@@ -2,7 +2,7 @@
   padding: 1rem;
   margin-left: var(--comp-sidebar-width);
   transition: all .3s ease-out;
-
+  height: 100vh;
 }
 
 @media only screen and (max-width: 1150px) {

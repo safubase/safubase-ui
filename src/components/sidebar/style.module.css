@@ -35,9 +35,18 @@
   position: relative;
 }
 
+.sidebarctr-sidebar-logo {
+  display: flex; justify-content: center; align-items: center;
+}
+
+.sidebarctr-sidebar-logo > img {
+  width: 70px;
+  border-radius: 5px;
+}
+
+
 .sidebarctr-sidebar-top {
-  height: 80%;
-  padding-top: 8rem;
+  margin-top: 8rem;
 }
 
 .sidebarctr-sidebar-top-iconctr {
