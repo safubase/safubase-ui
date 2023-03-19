@@ -20,7 +20,7 @@ class Error extends React.Component {
   render() {
     return (
       <>
-        <Head title="safubase" desc="safubase" />
+        <Head title="Safubase.com | Blockchain Security with AI" desc="Contract audit and investment security with artificial intelligence. Safubase is a security company." />
         <main>
           <section className={cn('section', style['sectionerror'])}>
             <div className={cn(style['sectionerror-ctr'])}>
