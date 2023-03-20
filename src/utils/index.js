@@ -13,22 +13,6 @@ export async function sleep(ms) {
   });
 }
 
-/**
- *
- * CONTEXT FUNCTIONS
- *
- */
-export function context_create_toast(payload, context) {
-  if (!payload.created_at) {
-    payload.created_at = new Date();
-  }
-
-  context.set_state({
-    ...context.state,
-    ui_toasts: [...context.state.ui_toasts, payload],
-  });
-}
-
 /*
  *
  * STRING FUNCTIONS

@@ -1,7 +1,18 @@
+
+
+/*
+- Left and right divs of the dashboard section have flex column so elements have squezed and might have unintended results.
+
+-  after 1150px: they displayed as block. whale tracker and upcoming unlocks having fixed height
+
+- Whale tracker and upcoming unlocks components will be flexed column from container to squeeze them
+*/
+
 .sectiondash {
   display: flex; justify-content: flex-start; align-items: flex-start;
   padding-top: 1rem;
   height: 100%;
+
 }
 
 @media only screen and (max-width: 1150px) {
@@ -13,19 +24,22 @@
 @media only screen and (max-width: 650px) {
   .sectiondash {
     padding-top: 0;
-    display: block;
   }
 }
 
 .sectiondash-left {
-  width: 50%; 
+  width: 50%; height: 100%;
+
   margin-right: 2rem;
+  display: flex; justify-content: space-between; align-items: flex-start; flex-direction: column;
 }
 
 @media only screen and (max-width: 1150px) {
   .sectiondash-left {
     width: 100%;
     margin-right: 0;
+    margin-bottom: 1rem;
+    display: block;
   }
 }
 
@@ -53,7 +67,7 @@
 *
 */
 .comphello {
-  height: 170px;
+  width: 100%; height: 150px;
   border-radius: var(--border-radius-large);
   background-color: rgb(235, 235, 235);
   display: flex;
@@ -115,7 +129,7 @@
 }
 
 .comphello-manimg {
-  width: 170px;
+  height: 105%;
   position: absolute;
   right: 10%;
   bottom: 0;
@@ -123,7 +137,6 @@
 
 @media only screen and (max-width: 650px) {
   .comphello-manimg {
-    width: 110px;
     right: 8%;
   }
 }
@@ -135,6 +148,7 @@
 */
 .compinput {
   display: flex; justify-content: flex-start;
+  width: 100%;
 }
 
 @media only screen and (max-width: 650px) {
@@ -429,7 +443,8 @@
 */
 .complastadts {
   margin-top: 1rem;
-  overflow: hidden;
+  margin-bottom: 1rem;
+  width: 100%; 
 }
 
 .comlastadts-title {
@@ -472,11 +487,25 @@
 
 .complastadts-audits {
   margin-top: 1rem;
+  height: 350px;
+  overflow-y: scroll;
 }
 
-@media only screen and (max-width: 650px) {
+/* Hide scrollbar for Chrome, Safari and Opera */
+.complastadts-audits::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.complastadts-audits {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+@media only screen and (max-width: 1150px) {
   .complastadts-audits {
-    overflow: hidden;
+    height: auto;
+    overflow-y: auto;
   }
 }
 
@@ -508,7 +537,6 @@
     transform: translateX(0);
   }
 }
-
 
 .complastadts-audits-itemani {
   animation: 1s ease 0s ani-complastadts-audits-item;
@@ -565,6 +593,63 @@
   cursor: pointer;
 }
 
+/*
+*
+* COMPONENT NEWSLETTER
+*
+*/
+.compnewsletter {
+  width: 100%; height: auto;
+  padding: 1rem;
+  border-radius: var(--border-radius-small);
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  display: flex; justify-content: space-between; align-items: flex-start; flex-direction: column;
+}
+
+@media only screen and (max-width: 650px) {
+  .compnewsletter {
+   height: auto;
+  }
+}
+
+.compnewsletter-title {
+  font-size: 14px;
+  width: 500px;
+  margin-bottom: 1rem;
+}
+
+.compnewsletter-input {
+  font-size: 16px;
+  padding: .3rem .6rem;
+  border-radius: 3px;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  width: 300px;
+  margin-bottom: 1rem;
+}
+
+@media only screen and (max-width: 650px) {
+  .compnewsletter-input {
+    width: 100%;
+  }
+}
+
+.compnewsletter-button {
+  min-width: 120px;
+  padding: .4rem 1rem;
+  background-color: #63a078;
+  color: white;
+  font-weight: 500; font-size: 14px;
+  text-align: center;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+@media only screen and (max-width: 650px) {
+  .compnewsletter-button {
+    min-width: none;
+    width: 100%;
+  }
+}
 
 /**
 *
@@ -575,7 +660,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100%; height: 110px;
+  width: 100%; height: 50px;
   margin-bottom: 1rem;
 }
 
@@ -866,7 +951,8 @@
   border-radius: var(--border-radius-large);
   font-size: 15px;
   overflow: hidden;
-  width: 100%; height: 100%;
+  width: 100%; height: 50%;
+  display: flex; justify-content: flex-start; align-items: flex-start; flex-direction: column;
 }
 
 @media only screen and (max-width: 650px) {
@@ -877,6 +963,7 @@
 
 .compwhaletracker-config {
   padding: .6rem .6rem;
+  width: 100%;
   display: flex; justify-content: space-between; align-items: center;
 }
 
@@ -985,6 +1072,7 @@
 
 .compwhaletracker-titles {
   padding: .6rem .6rem;
+  width: 100%;
   border-top: 1px solid rgba(0, 0, 0, 0.2);
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   display: flex; justify-content: space-between; align-items: center;
@@ -1007,7 +1095,7 @@
 }
 
 .compwhaletracker-rows {
-  height: 100%;
+  width: 100%; height: 100%;
   overflow: hidden;
   overflow-y: scroll;
   transition: all .5s ease;
@@ -1015,8 +1103,7 @@
 
 @media only screen and (max-width: 1150px) {
   .compwhaletracker-rows {
-    height: 350px;
-
+    height: 300px;
   }
 }
 
@@ -1132,7 +1219,8 @@
   font-size: 15px;
   margin-top: 1rem;
   overflow: hidden;
-  width: 100%; height: 100%;
+  width: 100%; height: 50%;
+  display: flex; justify-content: flex-start; align-items: flex-start; flex-direction: column;
 }
 
 @media only screen and (max-width: 650px) {
@@ -1143,6 +1231,7 @@
 
 .compupcomingunlocks-config {
   padding: .6rem .6rem;
+  width: 100%;
   display: flex; justify-content: space-between; align-items: center;
 }
 
@@ -1181,6 +1270,7 @@
 }
 
 .compupcomingunlocks-titles {
+  width: 100%;
   padding: .6rem .6rem;
   border-top: 1px solid rgba(0, 0, 0, 0.2);
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
@@ -1204,7 +1294,7 @@
 }
 
 .compupcomingunlocks-rows {
-  height: 100%;
+  width: 100%; height: 100%;
   overflow: hidden;
   overflow-y: scroll;
   -ms-overflow-style: none;  /* IE and Edge */
@@ -1215,7 +1305,7 @@
 
 @media only screen and (max-width: 1150px) {
   .compupcomingunlocks-rows {
-    height: 350px;
+    height: 300px;
   }
 }
 

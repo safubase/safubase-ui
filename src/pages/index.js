@@ -18,8 +18,8 @@ import Icon_lock from '../components/icons/lock';
 import { Context } from '../context';
 
 // UTILS
-import UTILS from '../utils';
-import UTILS_API from '../utils/api';
+import UTILS from '../utils/index.js';
+import UTILS_API from '../utils/api.js';
 
 // STYLES
 import style from '../styles/pages/home.module.css';
@@ -416,7 +416,6 @@ class Comp_input extends React.Component {
  * BOXES COMPONENT
  *
  */
-
 class Comp_boxes extends React.Component {
   static contextType = Context;
 
@@ -704,6 +703,45 @@ class Comp_last_adts extends React.Component {
 
 /**
  *
+ * NEWSLETTER COMPONENT
+ *
+ *
+ */
+class Comp_newsletter extends React.Component {
+  static contextType = Context;
+
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
+  componentDidMount() {}
+
+  componentDidUpdate() {}
+
+  componentWillUnmount() {}
+
+  render() {
+    return (
+      <div className={cn(style['compnewsletter'])}>
+        <div className={cn(style['compnewsletter-title'])}>
+          Sign up our mailing list to receive our new presales, features, tips
+          and reviews for next 100x projects.
+        </div>
+
+        <input
+          className={cn(style['compnewsletter-input'])}
+          placeholder="Enter your email address..."
+        />
+
+        <div className={cn(style['compnewsletter-button'])}>Subscribe</div>
+      </div>
+    );
+  }
+}
+
+/**
+ *
  * PROFILE & INPUT ON RIGHT COMPONENT
  *
  *
@@ -774,16 +812,6 @@ class Comp_profile_input extends React.Component {
               }}
               placeholder="Search..."
             />
-          </div>
-
-          <div className={cn(style['compprofileinput-left-profile'])}>
-            <div
-              className={cn(
-                style['compprofileinput-left-profile-notification']
-              )}
-            >
-              <Icon_notification />
-            </div>
           </div>
         </div>
 
@@ -1573,27 +1601,30 @@ class Home extends React.Component {
   render() {
     return (
       <>
-        <Head title="safubase" desc="safubase" />
-        <Layout_user
-          element={
-            <>
-              <section className={cn('section', style['sectiondash'])}>
-                <div className={cn(style['sectiondash-left'])}>
-                  <Comp_profile_input_mobile />
-                  <Comp_hello />
-                  <Comp_input />
-                  <Comp_last_adts data={this.props.latest_audits} />
-                </div>
-
-                <div className={cn(style['sectiondash-right'])}>
-                  <Comp_profile_input />
-                  <Comp_whale_tracker />
-                  <Comp_upcoming_unlocks />
-                </div>
-              </section>
-            </>
-          }
+        <Head
+          title="Safubase.com | Blockchain Security with AI"
+          desc="Contract audit and investment security with artificial intelligence. Safubase is a security company."
         />
+
+        <Layout_user>
+          <>
+            <section className={cn('section', style['sectiondash'])}>
+              <div className={cn(style['sectiondash-left'])}>
+                <Comp_profile_input_mobile />
+                <Comp_hello />
+                <Comp_input />
+                <Comp_last_adts data={this.props.latest_audits} />
+                <Comp_newsletter />
+              </div>
+
+              <div className={cn(style['sectiondash-right'])}>
+                <Comp_profile_input />
+                <Comp_whale_tracker />
+                <Comp_upcoming_unlocks />
+              </div>
+            </section>
+          </>
+        </Layout_user>
       </>
     );
   }

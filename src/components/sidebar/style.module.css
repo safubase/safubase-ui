@@ -41,9 +41,9 @@
 
 .sidebarctr-sidebar-logo > img {
   width: 70px;
+  display: block;
   border-radius: 5px;
 }
-
 
 .sidebarctr-sidebar-top {
   margin-top: 8rem;
