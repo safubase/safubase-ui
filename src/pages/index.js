@@ -94,6 +94,15 @@ export async function getServerSideProps({ req }) {
       created_at: new Date(1676903315821 + 12323232212122).toString(),
       network: 'ETH',
     },
+    {
+      name: 'newest newest',
+      symbol: 'ETH',
+      img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Binance_Logo.svg/2048px-Binance_Logo.svg.png',
+      address: '0x123',
+      score: 3.4,
+      created_at: new Date(1676903315821 + 12323232212122).toString(),
+      network: 'ETH',
+    },
   ];
 
   global_sort_audits_by_date(latest_audits);
@@ -478,8 +487,7 @@ class Comp_last_adts extends React.Component {
     this.audits_ref = React.createRef();
 
     this.animate = this.animate.bind(this);
-    this.api_blockchain_get_latest_audits =
-      this.api_blockchain_get_latest_audits.bind(this);
+    this.api_get_latest_audits = this.api_get_latest_audits.bind(this);
   }
 
   animate() {
@@ -491,6 +499,7 @@ class Comp_last_adts extends React.Component {
       style['complastadts-audits-itemani']
     );
 
+    // Remove animation class after 1 seconds to clean the state
     setTimeout(() => {
       let ani_class = '';
 
@@ -516,7 +525,7 @@ class Comp_last_adts extends React.Component {
     }, 1000);
   }
 
-  async api_blockchain_get_latest_audits() {
+  async api_get_latest_audits() {
     // Fetch latest audits once in a while
     setInterval(() => {
       const audits = [
@@ -541,15 +550,17 @@ class Comp_last_adts extends React.Component {
         audits: audits,
         animation: true,
       });
-    }, 6000);
+    }, 10000);
   }
 
+  // Fetches new data in intervals and updates state
+  componentDidMount() {
+    this.api_get_latest_audits();
+  }
+
+  // Adds animation style to the first latest audit bar after every update
   componentDidUpdate() {
     this.animate();
-  }
-
-  componentDidMount() {
-    this.api_blockchain_get_latest_audits();
   }
 
   render() {
