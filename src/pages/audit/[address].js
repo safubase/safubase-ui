@@ -11,6 +11,7 @@ import { Context } from '../../context';
 
 // UTILS
 import UTILS from '../../utils/index.js';
+import UTILS_API from '../../utils/api.js';
 
 // STYLES
 import style from '../../styles/pages/audit.module.css';
@@ -24,28 +25,71 @@ class Comp_circle extends React.Component {
   static contextType = Context;
 
   constructor(props) {
+    // Initialization
+
+    // ONLY EDIT THESE 3 VALUES
+    const CANVAS_WIDTH = 200;
+    const CANVAS_HEIGHT = 200;
+    const LINE_WIDTH = 30;
+
+    const R = CANVAS_WIDTH / 2 - LINE_WIDTH / 2; // formula of maximum radius without losing content
+
     super(props);
     this.state = {
-      CANVAS_WIDTH: 300,
-      CANVAS_HEIGHT: 300,
-      ARC_R: 100,
-      LINE_WIDTH: 30,
+      CANVAS_WIDTH: CANVAS_WIDTH,
+      CANVAS_HEIGHT: CANVAS_HEIGHT,
+      LINE_WIDTH: LINE_WIDTH,
+      R: R,
     };
 
+    // functions
+    this.setup = this.setup.bind(this);
     this.draw = this.draw.bind(this);
 
+    // References of html elements
     this.ctr_ref = React.createRef();
     this.info_ref = React.createRef();
   }
 
-  draw(ctx) {
-    const FPS = parseInt(1000 / 60); // Interval update milliseconds
-    const DPI_PERCENTS = (Math.PI * 2) / 100; // Double pi percents
-    const SCORE = this.props.data; // Token score which came from server
-    const V = 0.035; // velocity of the circle drawing, velocity and FPS are related since they draw the circle together
-    const V_COLOR_TRANS = 4; // velocity of the RGB Color transition of stroke style
+  setup() {
+    // Config html elements style and canvas
+    const ctr_div = this.ctr_ref.current; // ctr_div stands for container div of the component which has compcircle container class
 
-    // Stroke RGB numbers
+    ctr_div.style.width = this.state.CANVAS_WIDTH + 'px';
+    ctr_div.style.height = this.state.CANVAS_HEIGHT + 'px';
+
+    const frame_div = ctr_div.children[0];
+    const canvas = ctr_div.children[1];
+
+    frame_div.style.width = this.state.R * 2 + this.state.LINE_WIDTH + 'px';
+    frame_div.style.height = this.state.R * 2 + this.state.LINE_WIDTH + 'px';
+
+    frame_div.style.borderWidth = this.state.LINE_WIDTH + 'px';
+
+    const ctx = canvas.getContext('2d');
+
+    //ctx.lineCap = 'round';
+    ctx.lineWidth = this.state.LINE_WIDTH;
+    ctx.strokeStyle = '#e64c3c';
+
+    ctx.clearRect(0, 0, this.state.CANVAS_WIDTH, this.state.CANVAS_HEIGHT);
+
+    return ctx;
+  }
+
+  draw(ctx) {
+    /**
+     * 
+      First we declare global constant and normal variables, then we  interval the canvas path draw with the given configurations, at each security score (current angle passes the 49% percent of double pi) we initialize the color transition intervals. Even though main circle draw interval is done the color transition intervals will keep drawing the circle. So it does not matter what speed we set the color transition velocity
+     *
+     */
+
+    // These interval config values can be edited
+    const FPS = parseInt(1000 / 60); // Interval update milliseconds
+    const V = 0.035; // velocity of the circle drawing, velocity and FPS are related since they draw the circle together
+    const V_COLOR_TRANS = 3; // velocity of the RGB Color transition of stroke style
+
+    // Stroke RGB numbers, herbiji
     const STROKE_STYLE_LOW_SECURITY = [230, 76, 60];
     const STROKE_STYLE_MEDIUM_SECURITY = [240, 196, 16];
     const STROKE_STYLE_HIGH_SECURITY = [60, 204, 112];
@@ -53,14 +97,15 @@ class Comp_circle extends React.Component {
     const STROKE_STYLE_CURRENT = [...STROKE_STYLE_LOW_SECURITY];
 
     let angle_current = 0;
-    const ANGLE_END = DPI_PERCENTS * SCORE;
-
-    const ANGLE_LOW_SECURITY_OFFSET = DPI_PERCENTS * 49; // Low security score mapped to double pi
-    const ANGLE_MID_SECURITY_OFFSET = DPI_PERCENTS * 84; // Middle security score mapped to double pi
+    // Determine the end angle by multiplying props data by double pi mapped to 100%
+    const ANGLE_END = ((Math.PI * 2) / 100) * this.props.data;
+    const ANGLE_LOW_SECURITY_OFFSET = ((Math.PI * 2) / 100) * 49; // Low security score mapped to double pi
+    const ANGLE_MID_SECURITY_OFFSET = ((Math.PI * 2) / 100) * 84; // Middle security score mapped to double pi
 
     let angle_mid_security_passed = false;
     let angle_high_security_passed = false;
 
+    // Start drawing the circle progress
     const TIMER_MAIN = setInterval(() => {
       if (angle_current >= ANGLE_END) {
         clearInterval(TIMER_MAIN);
@@ -74,7 +119,9 @@ class Comp_circle extends React.Component {
         angle_current = angle_current + V;
       }
 
-      // Determine the color according to score
+      /**
+       * Initialize the color transition interval after they passed specific security score
+       */
       if (angle_current < ANGLE_LOW_SECURITY_OFFSET) {
       }
 
@@ -142,24 +189,20 @@ class Comp_circle extends React.Component {
           }
 
           ctx.strokeStyle = `rgba(${STROKE_STYLE_CURRENT[0]}, ${STROKE_STYLE_CURRENT[1]}, ${STROKE_STYLE_CURRENT[2]})`;
-
           ctx.beginPath();
-
           ctx.clearRect(
             0,
             0,
             this.state.CANVAS_WIDTH,
             this.state.CANVAS_HEIGHT
           );
-
           ctx.arc(
             this.state.CANVAS_WIDTH / 2,
             this.state.CANVAS_HEIGHT / 2,
-            this.state.ARC_R,
+            this.state.R,
             0,
             angle_current
           );
-
           ctx.stroke();
 
           if (
@@ -180,7 +223,6 @@ class Comp_circle extends React.Component {
         !angle_high_security_passed
       ) {
         // After circle passed the high security score
-
         const TIMER_COLOR_FADE = setInterval(() => {
           // Current rgb colors
           const CURRENT_RED = STROKE_STYLE_CURRENT[0];
@@ -238,24 +280,20 @@ class Comp_circle extends React.Component {
           }
 
           ctx.strokeStyle = `rgba(${STROKE_STYLE_CURRENT[0]}, ${STROKE_STYLE_CURRENT[1]}, ${STROKE_STYLE_CURRENT[2]})`;
-
           ctx.beginPath();
-
           ctx.clearRect(
             0,
             0,
             this.state.CANVAS_WIDTH,
             this.state.CANVAS_HEIGHT
           );
-
           ctx.arc(
             this.state.CANVAS_WIDTH / 2,
             this.state.CANVAS_HEIGHT / 2,
-            this.state.ARC_R,
+            this.state.R,
             0,
             angle_current
           );
-
           ctx.stroke();
 
           if (
@@ -272,17 +310,14 @@ class Comp_circle extends React.Component {
       }
 
       ctx.beginPath();
-
       ctx.clearRect(0, 0, this.state.CANVAS_WIDTH, this.state.CANVAS_HEIGHT);
-
       ctx.arc(
         this.state.CANVAS_WIDTH / 2,
         this.state.CANVAS_HEIGHT / 2,
-        this.state.ARC_R,
+        this.state.R,
         0,
         angle_current
       );
-
       ctx.stroke();
 
       // Display current percentage of the circle
@@ -292,29 +327,7 @@ class Comp_circle extends React.Component {
   }
 
   componentDidMount() {
-    // Config html elements style according to canvas scale
-    const ctr_div = this.ctr_ref.current;
-
-    ctr_div.style.width = this.state.CANVAS_WIDTH + 'px';
-    ctr_div.style.height = this.state.CANVAS_HEIGHT + 'px';
-
-    const frame_div = ctr_div.children[0];
-    const canvas = ctr_div.children[1];
-
-    frame_div.style.width = this.state.ARC_R * 2 + this.state.LINE_WIDTH + 'px';
-    frame_div.style.height =
-      this.state.ARC_R * 2 + this.state.LINE_WIDTH + 'px';
-
-    frame_div.style.borderWidth = this.state.LINE_WIDTH + 'px';
-
-    const ctx = canvas.getContext('2d');
-
-    ctx.lineWidth = this.state.LINE_WIDTH;
-    //ctx.lineCap = 'round';
-    ctx.strokeStyle = '#e64c3c';
-
-    // Start drawing of canvas circle
-    this.draw(ctx);
+    this.draw(this.setup());
   }
 
   componentDidUpdate() {}
@@ -369,7 +382,7 @@ class Home extends React.Component {
         <Layout_user>
           <>
             <section className={cn('section', style['sectionaudit'])}>
-              <Comp_circle data={85} />
+              <Comp_circle data={74} />
             </section>
           </>
         </Layout_user>
