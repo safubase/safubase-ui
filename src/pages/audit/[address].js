@@ -6,6 +6,9 @@ import cn from 'classnames';
 import Head from '../../components/head';
 import Layout_user from '../../components/layouts/user';
 
+// COMPONENTS > ICONS
+import Icon_chart from '../../components/icons/chart/index.js';
+
 // CONTEXT
 import { Context } from '../../context';
 
@@ -19,6 +22,7 @@ import style from '../../styles/pages/audit.module.css';
 /**
  *
  * CIRCLE COMPONENT
+ * Will be used in other components because it is little complex by state
  *
  */
 class Comp_circle extends React.Component {
@@ -28,10 +32,9 @@ class Comp_circle extends React.Component {
     // Initialization
 
     // ONLY EDIT THESE 3 VALUES
-    const CANVAS_WIDTH = 200;
-    const CANVAS_HEIGHT = 200;
-    const LINE_WIDTH = 30;
-
+    const CANVAS_WIDTH = 180;
+    const CANVAS_HEIGHT = 180;
+    const LINE_WIDTH = 26;
     const R = CANVAS_WIDTH / 2 - LINE_WIDTH / 2; // formula of maximum radius without losing content
 
     super(props);
@@ -80,14 +83,14 @@ class Comp_circle extends React.Component {
   draw(ctx) {
     /**
      * 
-      First we declare global constant and normal variables, then we  interval the canvas path draw with the given configurations, at each security score (current angle passes the 49% percent of double pi) we initialize the color transition intervals. Even though main circle draw interval is done the color transition intervals will keep drawing the circle. So it does not matter what speed we set the color transition velocity
+      First we declare global constant and normal variables, then we  interval the canvas path draw with the given configurations, at each security score (current angle passes the 49% percent of double pi) we initialize the color transition intervals. Even though main circle draw interval is done the color transition intervals will keep drawing the circle and color transition. So it does not matter what speed we set the color transition velocity
      *
      */
 
     // These interval config values can be edited
     const FPS = parseInt(1000 / 60); // Interval update milliseconds
-    const V = 0.035; // velocity of the circle drawing, velocity and FPS are related since they draw the circle together
-    const V_COLOR_TRANS = 3; // velocity of the RGB Color transition of stroke style
+    const V = 0.045; // velocity of the circle drawing, velocity and FPS are related since they draw the circle together
+    const V_COLOR_TRANS = 2.6; // velocity of the RGB Color transition of stroke style
 
     // Stroke RGB numbers, herbiji
     const STROKE_STYLE_LOW_SECURITY = [230, 76, 60];
@@ -356,6 +359,93 @@ class Comp_circle extends React.Component {
 
 /**
  *
+ * SCORE CARD COMPONENT
+ *
+ *
+ */
+class Comp_scores extends React.Component {
+  static contextType = Context;
+
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
+  componentDidMount() {}
+
+  componentDidUpdate() {}
+
+  componentWillUnmount() {}
+
+  render() {
+    return (
+      <div className={cn(style['compscores'])}>
+        <div className={cn(style['compscores-top'])}>
+          <div className={cn(style['compscores-top-title'])}>0x123</div>
+        </div>
+        <div className={cn(style['compscores-bottom'])}>
+          <div className={cn(style['compscores-bottom-left'])}>
+            <Comp_circle data={87} />
+
+            <div className={cn(style['compscore-bottom-left-improvebtn'])}>
+              <Icon_chart /> Improve your security measures
+            </div>
+          </div>
+
+          <div className={cn(style['compscores-bottom-right'])}>
+            <div className={cn(style['compscores-bottom-right-barctr'])}>
+              <div
+                className={cn(style['compscores-bottom-right-barctr-label'])}
+              >
+                <span>10</span> Failed
+              </div>
+              <div className={cn(style['compscores-bottom-right-barctr-bar'])}>
+                <div
+                  className={cn(
+                    style['compscores-bottom-right-barctr-bar-progressfailed']
+                  )}
+                ></div>
+              </div>
+            </div>
+
+            <div className={cn(style['compscores-bottom-right-barctr'])}>
+              <div
+                className={cn(style['compscores-bottom-right-barctr-label'])}
+              >
+                <span>10</span> Warnings
+              </div>
+              <div className={cn(style['compscores-bottom-right-barctr-bar'])}>
+                <div
+                  className={cn(
+                    style['compscores-bottom-right-barctr-bar-progressfailed']
+                  )}
+                ></div>
+              </div>
+            </div>
+
+            <div className={cn(style['compscores-bottom-right-barctr'])}>
+              <div
+                className={cn(style['compscores-bottom-right-barctr-label'])}
+              >
+                <span>10</span> Passed
+              </div>
+              <div className={cn(style['compscores-bottom-right-barctr-bar'])}>
+                <div
+                  className={cn(
+                    style['compscores-bottom-right-barctr-bar-progressfailed']
+                  )}
+                ></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+}
+
+/**
+ *
  * PAGE
  *
  */
@@ -382,7 +472,7 @@ class Home extends React.Component {
         <Layout_user>
           <>
             <section className={cn('section', style['sectionaudit'])}>
-              <Comp_circle data={74} />
+              <Comp_scores data={{ score: 87 }} />
             </section>
           </>
         </Layout_user>

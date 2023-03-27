@@ -12,7 +12,7 @@ class Button extends React.Component {
   }
 
   render() {
-    return <button>footer</button>;
+    return <button>button</button>;
   }
 }
 
