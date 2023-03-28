@@ -472,7 +472,7 @@ class Home extends React.Component {
         <Layout_user>
           <>
             <section className={cn('section', style['sectionaudit'])}>
-              <Comp_scores data={{ score: 87 }} />
+              <Comp_scores />
             </section>
           </>
         </Layout_user>

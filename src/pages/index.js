@@ -857,8 +857,13 @@ class Comp_profile_input extends React.Component {
 
           <button
             className={cn(style['compprofileinput-right-conwallet'])}
-            onClick={() => {
-              UTILS.wallet_connect({ chain_id: 56 }, this.context);
+            onClick={async () => {
+              const accounts = await UTILS.wallet_connect({ chain_id: 56 });
+
+              this.context.set_state({
+                ...this.context.state,
+                wallet_address: accounts[0],
+              });
             }}
           >
             {this.state.address || 'Connect Wallet'}
@@ -955,8 +960,15 @@ class Comp_profile_input_mobile extends React.Component {
 
         <button
           className={cn(style['compprofileinputmobile-conwallet'])}
-          onClick={() => {
-            UTILS.wallet_connect({ chain_id: 56 }, this.context);
+          onClick={async () => {
+            const wallet_accounts = await UTILS.wallet_connect({
+              chain_id: 56,
+            });
+
+            this.context.set_state({
+              ...this.context.state,
+              wallet_address: wallet_accounts[0],
+            });
           }}
         >
           {this.state.address || 'Connect Wallet'}

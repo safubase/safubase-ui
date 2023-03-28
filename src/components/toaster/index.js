@@ -5,10 +5,6 @@ import cn from 'classnames';
 // CONTEXT
 import { Context } from '../../context';
 
-// UTILS
-import UTILS from '../../utils/index.js';
-import UTILS_API from '../../utils/api.js';
-
 // STYLES
 import style from './style.module.css';
 
@@ -22,9 +18,11 @@ class Toaster extends React.Component {
       toasts_clear_timer_id: 0,
     };
 
+    // functions
     this.clear = this.clear.bind(this);
     this.update = this.update.bind(this);
 
+    // html element references
     this.toaster_ref = React.createRef();
   }
 
@@ -50,7 +48,8 @@ class Toaster extends React.Component {
 
   // On new toast in context state
   update() {
-    const toasts_global = [...this.context.state.ui_toasts];
+    // toasts_global is a pointer to global context ui toasts
+    const toasts_global = this.context.state.ui_toasts;
     const toaster_div = this.toaster_ref.current;
 
     // Check created_at prop for sorting by date
@@ -63,43 +62,41 @@ class Toaster extends React.Component {
       }
     }
 
-    // If global toasts synced with local ones, dont do anything
+    // return if global toasts synced with local toasts
     if (toasts_global.length === this.state.toasts.length) {
       return;
     }
 
-    const toasts_final = [...toasts_global];
-
     // Sort final toasts by date, we want the newest toaster to be on top
-    for (let i = 0; i < toasts_final.length; i++) {
-      for (let j = 0; j < toasts_final.length; j++) {
-        if (toasts_final[j + 1]) {
-          const current = toasts_final[j];
-          const next = toasts_final[j + 1];
+    for (let i = 0; i < toasts_global.length; i++) {
+      for (let j = 0; j < toasts_global.length; j++) {
+        if (toasts_global[j + 1]) {
+          const current = toasts_global[j];
+          const next = toasts_global[j + 1];
 
           if (current.created_at.valueOf() < next.created_at.valueOf()) {
-            toasts_final[j] = next;
-            toasts_final[j + 1] = current;
+            toasts_global[j] = next;
+            toasts_global[j + 1] = current;
           }
         }
       }
     }
 
-    // Remove all childs of toaster
+    // Remove all children of toaster
     const child_len = toaster_div.children.length;
     for (let i = 0; i < child_len; i++) {
       toaster_div.removeChild(toaster_div.children[0]);
     }
 
     // After removing all children, start creating new elements and place them into toaster container.
-    for (let i = 0; i < toasts_final.length; i++) {
+    for (let i = 0; i < toasts_global.length; i++) {
       // Left icon
       const icon_img = document.createElement('img');
       icon_img.classList.add(style['toaster-toast-left-icon']);
 
       const text_div = document.createElement('div');
       text_div.classList.add(style['toaster-toast-left-message']);
-      text_div.innerHTML = toasts_final[i].message;
+      text_div.innerHTML = toasts_global[i].message;
 
       const icon_text_ctr_div = document.createElement('div');
       icon_text_ctr_div.classList.add(style['toaster-toast-left']);
@@ -110,13 +107,14 @@ class Toaster extends React.Component {
         'https://www.nicepng.com/png/detail/52-521935_close-white-close-button-png.png';
 
       close_icon_img.addEventListener('click', () => {
-        const toasts_filtered = this.state.toasts.filter((curr, index) => {
-          if (
-            curr.created_at.valueOf() !== toasts_final[i].created_at.valueOf()
-          ) {
-            return curr;
+        const toasts_filtered = [];
+
+        for (let j = 0; j < toasts_global.length; j++) {
+          // because toasts_global is real reference to the global context ui toasts we can compare objects itself
+          if (toasts_global[i] !== toasts_global[j]) {
+            toasts_filtered.push(toasts_global[j]);
           }
-        });
+        }
 
         this.context.set_state({
           ...this.context.state,
@@ -127,14 +125,14 @@ class Toaster extends React.Component {
       const toast_div = document.createElement('div');
       toast_div.classList.add(style['toaster-toast']);
       // for proper displaying on mobile
-      toast_div.style.zIndex = toasts_final.length - i;
+      toast_div.style.zIndex = toasts_global.length - i;
 
-      // Give first one the slide animation, first one is the newest added toast
-      if (i === 0) {
+      // Give first one the slide animation, first one is the newest added toast. if global toasts are lower then local ones do not give animation because it means that user deleted one.
+      if (i === 0 && toasts_global.length >= this.state.toasts.length) {
         toast_div.classList.add(style['toaster-toastani']);
       }
 
-      switch (toasts_final[i].type) {
+      switch (toasts_global[i].type) {
         case 'success':
           icon_img.src =
             'https://toppng.com/uploads/preview/white-check-mark-symbol-11549993297psg7f12raf.png';
@@ -171,11 +169,11 @@ class Toaster extends React.Component {
 
     const toasts_clear_timer_id = setTimeout(() => {
       this.clear();
-    }, 4000);
+    }, 10000);
 
     this.setState({
       ...this.state,
-      toasts: toasts_final,
+      toasts: toasts_global,
       toasts_clear_timer_id: toasts_clear_timer_id,
     });
   }

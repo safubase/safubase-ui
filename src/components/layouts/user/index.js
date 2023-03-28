@@ -18,12 +18,26 @@ import UTILS_API from '../../../utils/api.js';
 // STYLES
 import style from './style.module.css';
 
-class UserLayout extends React.Component {
+class Layout_user extends React.Component {
   static contextType = Context;
 
   constructor(props) {
     super(props);
     this.state = {};
+
+    this.init = this.init.bind(this);
+  }
+
+  // layout initialization
+  async init() {
+    UTILS.wallet_add_listeners(this.context);
+    const wallet_accounts = await UTILS.wallet_req_accounts();
+
+    // Context update
+    this.context.set_state({
+      ...this.context.state,
+      wallet_address: wallet_accounts[0],
+    });
   }
 
   /**
@@ -32,8 +46,7 @@ class UserLayout extends React.Component {
    *
    */
   componentDidMount() {
-    UTILS.wallet_add_listeners(this.context);
-    UTILS.wallet_update(this.context);
+    this.init();
   }
 
   render() {
@@ -41,6 +54,7 @@ class UserLayout extends React.Component {
       <>
         <Header />
         <Sidebar />
+        <Toaster />
         <main
           className={cn(
             style['main'],
@@ -49,10 +63,9 @@ class UserLayout extends React.Component {
         >
           {this.props.element || this.props.children}
         </main>
-        <Toaster />
       </>
     );
   }
 }
 
-export default UserLayout;
+export default Layout_user;

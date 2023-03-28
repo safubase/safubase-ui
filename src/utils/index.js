@@ -5,6 +5,12 @@ import Web3 from 'web3';
 // CONFIG
 import config from '../config';
 
+/*
+ * UTILS
+ * Allmost none of the utility functions changes the global context. no functions should change the context.
+ *
+ */
+
 export async function sleep(ms) {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
@@ -199,31 +205,28 @@ export function num_shorten(num) {
  * WALLET FUNCTIONS
  *
  *
- * WALLET UPDATE, get wallet info e.g. address from web3 lib, put them in global context
- *
  */
-export async function wallet_update(context) {
+export async function wallet_req_accounts() {
   if (!window.ethereum) {
-    return;
+    return null;
   }
 
   const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
 
-  if (!accounts[0]) {
-    return;
+  if (!accounts) {
+    return null;
   }
 
-  context.set_state({
-    ...context.state,
-    wallet_address: accounts[0],
-  });
+  if (!accounts[0]) {
+    return null;
+  }
 
-  return accounts[0];
+  return accounts;
 }
 
-export async function wallet_connect({ chain_id = 56 }, context) {
+export async function wallet_connect({ chain_id = 56 }) {
   if (!window.ethereum) {
-    return;
+    return null;
   }
 
   const chains = {
@@ -255,11 +258,6 @@ export async function wallet_connect({ chain_id = 56 }, context) {
       method: 'eth_requestAccounts',
     });
 
-    context.set_state({
-      ...context.state,
-      wallet_address: accounts[0],
-    });
-
     await ethereum.request({
       method: 'wallet_switchEthereumChain',
       params: [{ chainId: Web3.utils.toHex(chain_id) }],
@@ -267,11 +265,6 @@ export async function wallet_connect({ chain_id = 56 }, context) {
 
     accounts = await ethereum.request({
       method: 'eth_requestAccounts',
-    });
-
-    context.set_state({
-      ...context.state,
-      wallet_address: accounts[0],
     });
   } catch (err) {
     await ethereum.request({
@@ -282,19 +275,12 @@ export async function wallet_connect({ chain_id = 56 }, context) {
     accounts = await ethereum.request({
       method: 'eth_requestAccounts',
     });
-
-    context.set_state({
-      ...context.state,
-      wallet_address: accounts[0],
-    });
   }
 
   return accounts;
 }
 
-export function wallet_clear(context) {}
-
-export function wallet_add_listeners(context) {
+export async function wallet_add_listeners(context) {
   // WALLET EVENTS
   if (!window.ethereum) {
     return null;
@@ -310,7 +296,10 @@ export function wallet_add_listeners(context) {
       return;
     }
 
-    wallet_update(context);
+    context.set_state({
+      ...context.state,
+      wallet_address: accounts[0],
+    });
   });
 }
 
@@ -320,8 +309,7 @@ export default {
   str_remove_extra_space,
   num_add_commas,
   num_shorten,
-  wallet_update,
+  wallet_req_accounts,
   wallet_connect,
-  wallet_clear,
   wallet_add_listeners,
 };
