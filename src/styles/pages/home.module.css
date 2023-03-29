@@ -595,7 +595,7 @@
 *
 */
 .compnewsletter {
-  width: 100%; height: auto; max-height: 200px;
+  width: 100%; max-height: 200px;
   padding: 1rem;
   border-radius: var(--border-radius-large);
   border: 1px solid rgba(0, 0, 0, 0.2);
@@ -610,7 +610,6 @@
 
 .compnewsletter-title {
   font-size: 14px;
-  width: 500px;
   margin-bottom: 1rem;
 }
 

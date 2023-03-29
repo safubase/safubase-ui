@@ -57,7 +57,7 @@ function global_sort_audits_by_date(data) {
  *
  */
 export async function getServerSideProps({ req }) {
-  const latest_audits = [
+  const audits_latest = [
     {
       name: 'oldest',
       symbol: 'ETH',
@@ -105,18 +105,18 @@ export async function getServerSideProps({ req }) {
     },
   ];
 
-  global_sort_audits_by_date(latest_audits);
+  global_sort_audits_by_date(audits_latest);
 
   // humanize created at value
-  for (let i = 0; i < latest_audits.length; i++) {
-    latest_audits[i].created_at = new Date(latest_audits[i].created_at)
+  for (let i = 0; i < audits_latest.length; i++) {
+    audits_latest[i].created_at = new Date(audits_latest[i].created_at)
       .toISOString()
       .split('T')[0];
   }
 
   return {
     props: {
-      latest_audits: latest_audits,
+      audits_latest: audits_latest,
     },
   };
 }
@@ -1636,7 +1636,7 @@ class Home extends React.Component {
                 <Comp_profile_input_mobile />
                 <Comp_hello />
                 <Comp_input />
-                <Comp_last_adts data={this.props.latest_audits} />
+                <Comp_last_adts data={this.props.audits_latest} />
                 <Comp_newsletter />
               </div>
 
