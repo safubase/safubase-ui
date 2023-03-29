@@ -36,6 +36,7 @@ class Layout_user extends React.Component {
     // Context update
     this.context.set_state({
       ...this.context.state,
+      ui_toasts: [],
       wallet_address: wallet_accounts[0],
     });
   }
@@ -48,6 +49,10 @@ class Layout_user extends React.Component {
   componentDidMount() {
     this.init();
   }
+
+  componentDidUpdate() {}
+
+  componentWillUnmount() {}
 
   render() {
     return (

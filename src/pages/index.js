@@ -1621,6 +1621,8 @@ class Home extends React.Component {
 
   componentDidUpdate() {}
 
+  componentWillUnmount() {}
+
   render() {
     return (
       <>
