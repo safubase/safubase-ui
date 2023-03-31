@@ -1674,9 +1674,7 @@ class Home extends React.Component {
     this.init();
   }
 
-  componentDidUpdate() {
-    console.log(this.context.state);
-  }
+  componentDidUpdate() {}
 
   componentWillUnmount() {}
 
