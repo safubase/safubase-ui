@@ -13,6 +13,7 @@ const initial_state = {
   user_username: null,
   user_email: null,
   user_email_verified: null,
+  user_role: null,
   // wallet props
   wallet_address: null,
 };

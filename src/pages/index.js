@@ -1616,19 +1616,53 @@ class Home extends React.Component {
   }
 
   async init() {
-    // API
-    const api_profile_data = await UTILS_API.get_profile(1);
+    const context_state = {
+      ...this.context.state,
+      ui_toasts: [],
+    };
 
-    // WALLET CONFIG
+    /**
+     *
+     * ASYNC PROMISE CALLS
+     *
+     */ // [get_profile(), another_async_func()]
+    const api_responses = await Promise.all([UTILS_API.get_profile(1)]);
+    const api_res_profile = api_responses[0];
+
+    if (api_res_profile && api_res_profile.data) {
+      context_state.user_auth = true;
+      context_state.user_id = api_res_profile.data._id;
+      context_state.user_username = api_res_profile.data.username;
+      context_state.user_email = api_res_profile.data.email;
+      context_state.user_email_verified = api_res_profile.data.email_verified;
+      context_state.user_role = api_res_profile.data.role;
+    } else {
+      context_state.user_auth = false;
+      context_state.user_id = null;
+      context_state.user_username = null;
+      context_state.user_email = null;
+      context_state.user_email_verified = null;
+      context_state.user_role = null;
+    }
+
+    /**
+     *
+     * WALLET CONFIG
+     *
+     */
     UTILS.wallet_add_listeners(this.context);
     const wallet_accounts = await UTILS.wallet_req_accounts();
 
-    // Context update
-    this.context.set_state({
-      ...this.context.state,
-      ui_toasts: [],
-      wallet_address: wallet_accounts[0],
-    });
+    if (wallet_accounts[0]) {
+      context_state.wallet_address = wallet_accounts[0];
+    }
+
+    /**
+     *
+     * CONTEXT UPDATE
+     *
+     */
+    this.context.set_state(context_state);
   }
 
   /**
@@ -1640,7 +1674,9 @@ class Home extends React.Component {
     this.init();
   }
 
-  componentDidUpdate() {}
+  componentDidUpdate() {
+    console.log(this.context.state);
+  }
 
   componentWillUnmount() {}
 

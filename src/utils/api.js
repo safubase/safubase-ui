@@ -31,8 +31,6 @@ export async function get_profile(version = 1) {
   try {
     const res = await axios_instance.get(url);
 
-    console.log(res);
-
     if (res === null) {
       return null;
     }
