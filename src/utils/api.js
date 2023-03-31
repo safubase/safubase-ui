@@ -21,13 +21,9 @@ export const axios_instance = axios.create({
  * GET PROFILE data from the server, also checks if current user is logged in with sid cookie?
  *
  */
-export async function get_profile(version = 1, context) {
+export async function get_profile(version = 1) {
   if (!Number(version)) {
     throw new Error('Invalid api version specified in get_profile');
-  }
-
-  if (!context) {
-    throw new Error('Context not provided in get_profile');
   }
 
   const url = config.api_url + '/v' + version + '/profile';
@@ -35,56 +31,18 @@ export async function get_profile(version = 1, context) {
   try {
     const res = await axios_instance.get(url);
 
-    if (res === null) {
-      // Logged out because data is null from the server 200
-      context.set_state({
-        ...context.state,
-        user_auth: false,
-        user_id: null,
-        user_username: null,
-        user_email: null,
-        user_email_verifed: null,
-      });
+    console.log(res);
 
-      return;
+    if (res === null) {
+      return null;
     }
 
     if (res.data === null) {
-      // Logged out because data is null from the server 200
-      context.set_state({
-        ...context.state,
-        user_auth: false,
-        user_id: null,
-        user_username: null,
-        user_email: null,
-        user_email_verifed: null,
-      });
-
-      return;
+      return null;
     }
-
-    // Logged in successfully
-    context.set_state({
-      ...context.state,
-      user_auth: true,
-      user_id: res.data._id,
-      user_username: res.data.username,
-      user_email: res.data.email,
-      user_email_verifed: res.data.email_verified,
-    });
 
     return res;
   } catch (err) {
-    // Something went wrong with the request, automatically logout
-    context.set_state({
-      ...context.state,
-      user_auth: false,
-      user_id: null,
-      user_username: null,
-      user_email: null,
-      user_email_verifed: null,
-    });
-
     return null;
   }
 }
@@ -93,12 +51,12 @@ export async function get_profile(version = 1, context) {
  *
  * SIGNUP Use this to sign a user to the database
  */
-export async function signup(body, version = 1, context) {
+export async function signup(version = 1, body) {
   if (!Number(version)) {
     throw new Error('Invalid api version specified in signup');
   }
 
-  if (!body || !context) {
+  if (!body) {
     throw new Error('Body or Context not provided in signup');
   }
 
@@ -106,28 +64,8 @@ export async function signup(body, version = 1, context) {
 
   try {
     const res = await axios_instance.post(url, body);
-
-    context.set_state({
-      ...context.state,
-      user_auth: false,
-      user_id: res.data._id,
-      user_username: res.data.username,
-      user_email: res.data.email,
-      user_email_verifed: res.data.email_verified,
-    });
-
     return res;
   } catch (err) {
-    // Something went wrong with the request, automatically logout
-    // Something went wrong with the request, automatically logout
-    context.set_state({
-      ...context.state,
-      user_auth: false,
-      user_id: null,
-      user_username: null,
-      user_email: null,
-      user_email_verifed: null,
-    });
     return null;
   }
 }
@@ -136,12 +74,12 @@ export async function signup(body, version = 1, context) {
  *
  * LOGIN Use this to log the user into server
  */
-export async function login(body, version = 1, context) {
+export async function login(version = 1, body) {
   if (!Number(version)) {
     throw new Error('Invalid api version specified in signup');
   }
 
-  if (!body || !context) {
+  if (!body) {
     throw new Error('Body or Context not provided in signup');
   }
 
@@ -149,29 +87,8 @@ export async function login(body, version = 1, context) {
 
   try {
     const res = await axios_instance.post(url, body);
-
-    context.set_state({
-      ...context.state,
-      user_auth: false,
-      user_id: res.data._id,
-      user_username: res.data.username,
-      user_email: res.data.email,
-      user_email_verifed: res.data.email_verified,
-    });
-
     return res;
   } catch (err) {
-    // Something went wrong with the request, automatically logout
-    // Something went wrong with the request, automatically logout
-    context.set_state({
-      ...context.state,
-      user_auth: false,
-      user_id: null,
-      user_username: null,
-      user_email: null,
-      user_email_verifed: null,
-    });
-
     return null;
   }
 }
@@ -181,17 +98,9 @@ export async function login(body, version = 1, context) {
  * BLOCKCHAIN APIS
  *
  */
-export async function blockchain_get_whales(
-  chain = 'bsc',
-  version = 1,
-  context
-) {
+export async function blockchain_get_whales(version = 1, chain = 'bsc') {
   if (!Number(version)) {
     throw new Error('Invalid api version specified in signup');
-  }
-
-  if (!context) {
-    throw new Error('Body or Context not provided in signup');
   }
 
   const url =
@@ -206,13 +115,9 @@ export async function blockchain_get_whales(
   }
 }
 
-export async function blockchain_get_upcoming_unlocks(version = 1, context) {
+export async function blockchain_get_upcoming_unlocks(version = 1) {
   if (!Number(version)) {
     throw new Error('Invalid api version specified in signup');
-  }
-
-  if (!context) {
-    throw new Error('Body or Context not provided in signup');
   }
 
   const url = config.api_url + '/v' + version + '/blockchain/upcoming-unlocks';
@@ -226,13 +131,9 @@ export async function blockchain_get_upcoming_unlocks(version = 1, context) {
   }
 }
 
-export async function blockchain_audit(version = 1, context) {
+export async function blockchain_audit(version = 1) {
   if (!Number(version)) {
     throw new Error('Invalid api version specified in signup');
-  }
-
-  if (!context) {
-    throw new Error('Body or Context not provided in signup');
   }
 
   const url = config.api_url + '/v' + version + '/blockchain/audit/0x123';

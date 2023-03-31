@@ -10,7 +10,7 @@ import style from './style.module.css';
 
 class Toaster extends React.Component {
   static contextType = Context;
-
+  
   constructor(props) {
     super(props);
     this.state = {

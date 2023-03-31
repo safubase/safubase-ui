@@ -1,5 +1,4 @@
 // MODULES
-import axios from 'axios';
 import Web3 from 'web3';
 
 // CONFIG

@@ -6,7 +6,7 @@ import cn from 'classnames';
 import Head from '../components/head';
 import Layout_user from '../components/layouts/user';
 
-// COMPONENTS > ICONS
+// COMPONENTS > ICONS (SVGS)
 import Icon_search from '../components/icons/search';
 import Icon_notification from '../components/icons/notification';
 import Icon_arrow from '../components/icons/arrow';
@@ -1065,9 +1065,8 @@ class Comp_whale_tracker extends React.Component {
     }
 
     const res = await UTILS_API.blockchain_get_whales(
-      this.state.chain.chain,
       1,
-      this.context
+      this.state.chain.chain
     );
 
     if (res === null) {
@@ -1177,9 +1176,8 @@ class Comp_whale_tracker extends React.Component {
                       });
 
                       const res = await UTILS_API.blockchain_get_whales(
-                        curr.chain,
                         1,
-                        this.context
+                        curr.chain
                       );
 
                       if (res === null) {
@@ -1617,7 +1615,30 @@ class Home extends React.Component {
     this.state = {};
   }
 
-  componentDidMount() {}
+  async init() {
+    // API
+    const api_profile_data = await UTILS_API.get_profile(1);
+
+    // WALLET CONFIG
+    UTILS.wallet_add_listeners(this.context);
+    const wallet_accounts = await UTILS.wallet_req_accounts();
+
+    // Context update
+    this.context.set_state({
+      ...this.context.state,
+      ui_toasts: [],
+      wallet_address: wallet_accounts[0],
+    });
+  }
+
+  /**
+   *
+   * PAGE INIT, event listener registrations, update wallet, many more
+   *
+   */
+  componentDidMount() {
+    this.init();
+  }
 
   componentDidUpdate() {}
 

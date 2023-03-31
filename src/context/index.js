@@ -1,6 +1,7 @@
 // MODULES
 import React from 'react';
 
+// Keep the context update as minimum as possible during the lifecycle of the application.
 const initial_state = {
   // UI props
   ui_sidebar_open: false,

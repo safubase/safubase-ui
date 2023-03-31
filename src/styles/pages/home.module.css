@@ -1,11 +1,16 @@
 /*
-- Left and right divs of the dashboard section have flex column so elements have squezed and might have unintended results.
+- Left and right divs of the dashboard section have flex column so elements have squezed ande spaced between them so it will be full height screen.
 
-- Whale tracker and upcoming unlocks components will be flexed column from container to squeeze them
+- Whale tracker and upcoming unlocks components are flexed column from container to avoid container offset bug. (last rows cannot be seen because 100% height of the container)
 
 -  after 1150px: they displayed as block. whale tracker and upcoming unlocks having fixed height
 */
 
+/*
+*
+* DASHBOARD SECTION
+*
+*/
 .sectiondash {
   display: flex; justify-content: flex-start; align-items: flex-start;
   padding-top: 1rem;

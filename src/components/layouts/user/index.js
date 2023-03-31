@@ -24,30 +24,6 @@ class Layout_user extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
-
-    this.init = this.init.bind(this);
-  }
-
-  // layout initialization
-  async init() {
-    UTILS.wallet_add_listeners(this.context);
-    const wallet_accounts = await UTILS.wallet_req_accounts();
-
-    // Context update
-    this.context.set_state({
-      ...this.context.state,
-      ui_toasts: [],
-      wallet_address: wallet_accounts[0],
-    });
-  }
-
-  /**
-   *
-   * LAYOUT INIT, event listener registrations, update wallet, many more
-   *
-   */
-  componentDidMount() {
-    this.init();
   }
 
   componentDidUpdate() {}
