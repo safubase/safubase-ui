@@ -43,7 +43,7 @@ class Comp_modal_signup extends React.Component {
       input_password_verification: '',
     };
 
-    this.ref_form = React.createRef();
+    this.form_ref = React.createRef();
   }
 
   componentDidMount() {}
@@ -125,7 +125,7 @@ class Comp_modal_signup extends React.Component {
 
           <form
             className={cn(style['compmodalsignup-top-captchactr'])}
-            ref={this.ref_form}
+            ref={this.form_ref}
           >
             <div
               className="h-captcha"
@@ -141,21 +141,12 @@ class Comp_modal_signup extends React.Component {
 
               this.setState({ ...this.state, api_loading: true });
 
-              console.log(this.ref_form.current.value);
-              console.log(this.ref_form.current.elements);
-
-              for (let i = 0; i < this.ref_form.current.elements.length; i++) {
-                console.log(this.ref_form.current.elements[i].value);
-              }
-
-              return;
-
               const api_res_signup = await UTILS_API.signup(1, {
                 username: this.state.input_username,
                 email: this.state.input_email,
                 password: this.state.input_password,
                 password_verification: this.state.input_password_verification,
-                captcha_token: '',
+                captcha_token: this.form_ref.current.elements[0].value,
               });
 
               this.setState({ ...this.state, api_loading: false });
