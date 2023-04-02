@@ -126,6 +126,74 @@ export async function login(version = 1, body) {
 
 /**
  *
+ * VERIFY EMAIL
+ *
+ */
+
+export async function verify_email(version = 1, token) {
+  if (!Number(version)) {
+    throw new Error('Invalid api version specified in signup');
+  }
+
+  if (!token) {
+    throw new Error('Token or Context not provided in verify_email');
+  }
+
+  const url = config.api_url + '/v' + version + '/verify-email/' + token;
+
+  try {
+    const res = await axios_instance.get(url);
+
+    res.code = undefined;
+
+    return res;
+  } catch (err) {
+    if (err.code === 'ERR_NETWORK') {
+      return { code: err.code, message: 'No internet connection' };
+    }
+
+    if (!err.response) {
+      return { code: err.code, message: err.name };
+    }
+
+    return { ...err.response.data, code: err.code };
+  }
+}
+
+/**
+ *
+ * SIGNOUT
+ *
+ */
+
+export async function signout(version = 1) {
+  if (!Number(version)) {
+    throw new Error('Invalid api version specified in signup');
+  }
+
+  const url = config.api_url + '/v' + version + '/signout';
+
+  try {
+    const res = await axios_instance.get(url);
+
+    res.code = undefined;
+
+    return res;
+  } catch (err) {
+    if (err.code === 'ERR_NETWORK') {
+      return { code: err.code, message: 'No internet connection' };
+    }
+
+    if (!err.response) {
+      return { code: err.code, message: err.name };
+    }
+
+    return { ...err.response.data, code: err.code };
+  }
+}
+
+/**
+ *
  * EMAIL APIS
  *
  */
@@ -249,6 +317,8 @@ export default {
   get_profile,
   signup,
   login,
+  signout,
+  verify_email,
   email_send_password_reset_link,
   blockchain_get_whales,
   blockchain_get_upcoming_unlocks,

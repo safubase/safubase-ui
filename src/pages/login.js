@@ -190,6 +190,10 @@ class Comp_modal_login extends React.Component {
                   },
                 ],
               });
+
+              setTimeout(() => {
+                window.location.replace('https://safubase.com');
+              }, 1500);
             }}
             className={cn(
               style['compmodallogin-top-loginbtn'],

@@ -14,13 +14,13 @@ class Progressive_img extends React.Component {
     super(props);
     this.state = {};
 
-    this.imgref = React.createRef();
+    this.img_ref = React.createRef();
 
     this.onscroll = this.onscroll.bind(this);
   }
 
   onscroll() {
-    const img = this.imgref.current; // element
+    const img = this.img_ref.current; // element
     const rect = img.getBoundingClientRect();
 
     if (
@@ -50,7 +50,7 @@ class Progressive_img extends React.Component {
     return (
       <img
         className={cn(style['img'], this.props.className)}
-        ref={this.imgref}
+        ref={this.img_ref}
         src=""
         alt=""
         title=""

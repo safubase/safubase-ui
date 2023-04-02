@@ -43,7 +43,6 @@
 *
 */
 .compscores {
- 
   border: 1px solid rgba(0, 0, 0, 0.15);
   border-radius: var(--border-radius-small);
 }

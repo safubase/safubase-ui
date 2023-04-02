@@ -173,7 +173,7 @@ class Comp_modal_signup extends React.Component {
                   ...this.context.state.ui_toasts,
                   {
                     type: 'success',
-                    message: 'Sucessfully signup in',
+                    message: 'Sucessfully signed up',
                     created_at: new Date(),
                   },
                 ],
