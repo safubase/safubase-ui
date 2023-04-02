@@ -141,7 +141,8 @@ class Comp_modal_signup extends React.Component {
 
               this.setState({ ...this.state, api_loading: true });
 
-              console.log(this.ref_form.elements);
+              console.log(this.ref_form.current.value);
+              console.log(this.ref_form.current.elements);
 
               return;
 
