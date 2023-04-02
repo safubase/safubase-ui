@@ -8,7 +8,6 @@ import Layout_user from '../components/layouts/user';
 
 // COMPONENTS > ICONS (SVGS)
 import Icon_search from '../components/icons/search';
-import Icon_notification from '../components/icons/notification';
 import Icon_arrow from '../components/icons/arrow';
 import Icon_loading from '../components/icons/loading';
 import Icon_info from '../components/icons/info';
@@ -1070,6 +1069,14 @@ class Comp_whale_tracker extends React.Component {
     );
 
     if (res === null) {
+      this.setState({
+        ...this.state,
+        chains: [...this.state.chains],
+        api_data: [],
+        api_loading: false,
+        api_updating: false,
+      });
+
       return;
     }
 
@@ -1412,6 +1419,13 @@ class Comp_upcoming_unlocks extends React.Component {
     );
 
     if (res === null) {
+      this.setState({
+        ...this.state,
+        api_data: [],
+        api_loading: false,
+        api_updating: false,
+      });
+
       return;
     }
 

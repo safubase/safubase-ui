@@ -81,7 +81,7 @@ export async function login(version = 1, body) {
     throw new Error('Body or Context not provided in signup');
   }
 
-  const url = config.api_url + '/v' + version + '/login';
+  const url = config.api_url + '/v' + version + '/signin';
 
   try {
     const res = await axios_instance.post(url, body);
@@ -138,7 +138,6 @@ export async function blockchain_audit(version = 1) {
 
   try {
     const res = await axios_instance.get(url);
-
     return res;
   } catch (err) {
     return null;

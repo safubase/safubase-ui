@@ -176,12 +176,8 @@ class Login extends React.Component {
     const api_res_profile = api_responses[0];
 
     if (api_res_profile && api_res_profile.data) {
-      context_state.user_auth = true;
-      context_state.user_id = api_res_profile.data._id;
-      context_state.user_username = api_res_profile.data.username;
-      context_state.user_email = api_res_profile.data.email;
-      context_state.user_email_verified = api_res_profile.data.email_verified;
-      context_state.user_role = api_res_profile.data.role;
+      window.location.replace('https://safubase.com');
+      return;
     } else {
       context_state.user_auth = false;
       context_state.user_id = null;
