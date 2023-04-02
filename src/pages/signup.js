@@ -144,6 +144,10 @@ class Comp_modal_signup extends React.Component {
               console.log(this.ref_form.current.value);
               console.log(this.ref_form.current.elements);
 
+              for (let i = 0; i < this.ref_form.current.elements.length; i++) {
+                console.log(this.ref_form.current.elements[i].value);
+              }
+
               return;
 
               const api_res_signup = await UTILS_API.signup(1, {
