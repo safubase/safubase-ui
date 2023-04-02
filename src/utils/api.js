@@ -45,7 +45,7 @@ export async function get_profile(version = 1) {
     return res;
   } catch (err) {
     if (err.code === 'ERR_NETWORK') {
-      return { code: err.code, message: 'No internet connection' };
+      return { code: err.code, message: 'Network connection error' };
     }
 
     if (!err.response) {
