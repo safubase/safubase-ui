@@ -8,7 +8,6 @@ import config from '../config/index.js';
 // COMPONENTS
 import Head from '../components/head';
 import Layout_login from '../components/layouts/login';
-import Captcha from '../components/captcha';
 
 // COMPONENTS > ICONS
 import Icon_profile from '../components/icons/profile';
@@ -142,7 +141,7 @@ class Comp_modal_signup extends React.Component {
 
               this.setState({ ...this.state, api_loading: true });
 
-              console.log(this.ref_form.value);
+              console.log(this.ref_form.elements);
 
               return;
 
