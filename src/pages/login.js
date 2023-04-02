@@ -10,6 +10,7 @@ import Layout_login from '../components/layouts/login';
 import Icon_profile from '../components/icons/profile';
 import Icon_lock from '../components/icons/lock';
 import Icon_loading from '../components/icons/loading';
+import Icon_arrow from '../components/icons/arrow';
 
 // CONTEXT
 import { Context } from '../context';
@@ -35,6 +36,7 @@ class Comp_modal_login extends React.Component {
       api_loading: false,
       input_uid: '',
       input_password: '',
+      open_forgot_pwd: false,
     };
   }
 
@@ -48,7 +50,20 @@ class Comp_modal_login extends React.Component {
     return (
       <div className={cn(style['compmodallogin'])}>
         <div className={cn(style['compmodallogin-top'])}>
-          <div className={cn(style['compmodallogin-top-logoctr'])}>Log In</div>
+          <div className={cn(style['compmodallogin-top-logoctr'])}>
+            {this.state.open_forgot_pwd ? (
+              <Icon_arrow
+                onClick={() => {
+                  this.setState({
+                    ...this.state,
+                    open_forgot_pwd: false,
+                  });
+                }}
+                dir="left"
+              />
+            ) : null}
+            {this.state.open_forgot_pwd ? 'Forgot Password' : 'Log In'}
+          </div>
 
           <div className={cn(style['compmodallogin-top-inputctr'])}>
             <Icon_profile />
@@ -56,30 +71,43 @@ class Comp_modal_login extends React.Component {
             <input
               value={this.state.input_uid}
               onChange={(e) => {
+                if (this.state.open_forgot_pwd) {
+                  this.setState({
+                    ...this.state,
+                    input_uid: e.target.value,
+                  });
+
+                  return;
+                }
+
                 this.setState({
                   ...this.state,
                   input_uid: e.target.value,
                 });
               }}
-              placeholder="Email or Username..."
+              placeholder={
+                this.state.open_forgot_pwd ? 'Email...' : 'Email or Username...'
+              }
             />
           </div>
 
-          <div className={cn(style['compmodallogin-top-inputctr'])}>
-            <Icon_lock />
+          {this.state.open_forgot_pwd ? null : (
+            <div className={cn(style['compmodallogin-top-inputctr'])}>
+              <Icon_lock />
 
-            <input
-              value={this.state.input_password}
-              onChange={(e) => {
-                this.setState({
-                  ...this.state,
-                  input_password: e.target.value,
-                });
-              }}
-              type="password"
-              placeholder="Password..."
-            />
-          </div>
+              <input
+                value={this.state.input_password}
+                onChange={(e) => {
+                  this.setState({
+                    ...this.state,
+                    input_password: e.target.value,
+                  });
+                }}
+                type="password"
+                placeholder="Password..."
+              />
+            </div>
+          )}
 
           <button
             onClick={async () => {
@@ -88,6 +116,45 @@ class Comp_modal_login extends React.Component {
               }
 
               this.setState({ ...this.state, api_loading: true });
+
+              if (this.state.open_forgot_pwd) {
+                const api_res_email_send_password_reset_link =
+                  await UTILS_API.email_send_password_reset_link(1, {
+                    email: this.state.input_uid,
+                  });
+
+                this.setState({ ...this.state, api_loading: false });
+
+                if (api_res_email_send_password_reset_link.code) {
+                  this.context.set_state({
+                    ...this.context.state,
+                    ui_toasts: [
+                      ...this.context.state.ui_toasts,
+                      {
+                        type: 'error',
+                        message: api_res_email_send_password_reset_link.message,
+                        created_at: new Date(),
+                      },
+                    ],
+                  });
+
+                  return;
+                }
+
+                this.context.set_state({
+                  ...this.context.state,
+                  ui_toasts: [
+                    ...this.context.state.ui_toasts,
+                    {
+                      type: 'success',
+                      message: 'Sucessfully send password reset link',
+                      created_at: new Date(),
+                    },
+                  ],
+                });
+
+                return;
+              }
 
               const api_res_login = await UTILS_API.login(1, {
                 uid: this.state.input_uid,
@@ -131,15 +198,30 @@ class Comp_modal_login extends React.Component {
                 : null
             )}
           >
-            {this.state.api_loading ? <Icon_loading /> : 'Log In'}
+            {this.state.api_loading ? <Icon_loading /> : null}
+
+            {!this.state.api_loading && this.state.open_forgot_pwd
+              ? 'Send Reset Link'
+              : null}
+
+            {!this.state.api_loading && !this.state.open_forgot_pwd
+              ? 'Log In'
+              : null}
           </button>
 
-          <a
-            href="/signup"
-            className={cn(style['compmodallogin-top-forgotlink'])}
-          >
-            Forgot Password?
-          </a>
+          {this.state.open_forgot_pwd ? null : (
+            <div
+              onClick={() => {
+                this.setState({
+                  ...this.state,
+                  open_forgot_pwd: true,
+                });
+              }}
+              className={cn(style['compmodallogin-top-forgotlink'])}
+            >
+              Forgot Password?
+            </div>
+          )}
         </div>
 
         <div className={cn(style['compmodallogin-bottom'])}>

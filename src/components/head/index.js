@@ -1,6 +1,7 @@
 // MODULES
 import React from 'react';
 import Head from 'next/head';
+import Script from 'next/script';
 
 class HeadTag extends React.Component {
   constructor(props) {
@@ -12,6 +13,7 @@ class HeadTag extends React.Component {
     return (
       <Head lang="en">
         <title>{this.props.title}</title>
+
         <meta charSet="utf-8" />
         <meta httpEquiv="content-language" content="en" />
         <meta name="title" content={this.props.title} />
@@ -25,15 +27,13 @@ class HeadTag extends React.Component {
         <meta property="og:image:height" content="200" />
         <meta property="og:type" content="website" />
         <meta property="og:locale" content="en_US" />
-        <meta property="og:site_name" content="Konsolya" />
+        <meta property="og:site_name" content="safubase" />
         <meta property="og:title" content={this.props.title} />
-
         <meta property="og:description" content={this.props.ogdesc} />
 
-        <meta name="twitter:site" content="@Konsolya" />
+        <meta name="twitter:site" content="@safubase" />
         <meta name="twitter:card" content="summary_large_image" />
-
-        <meta name="twitter:creator" content="@konsolya" />
+        <meta name="twitter:creator" content="@safubase" />
 
         <link rel="icon" href="/favicon.ico" type="image/x-icon" />
         <link rel="manifest" href="/manifest.json" />

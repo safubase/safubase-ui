@@ -18,15 +18,15 @@ class Arrow extends React.Component {
   choose_dir(dir) {
     switch (dir) {
       case 'down':
-        return <MdKeyboardArrowDown />;
+        return <MdKeyboardArrowDown onClick={this.props.onClick} />;
       case 'left':
-        return <MdKeyboardArrowLeft />;
+        return <MdKeyboardArrowLeft onClick={this.props.onClick} />;
       case 'right':
-        return <MdKeyboardArrowRight />;
+        return <MdKeyboardArrowRight onClick={this.props.onClick} />;
       case 'up':
-        return <MdKeyboardArrowUp />;
+        return <MdKeyboardArrowUp onClick={this.props.onClick} />;
       default:
-        return <MdKeyboardArrowUp />;
+        return <MdKeyboardArrowUp onClick={this.props.onClick} />;
     }
   }
 

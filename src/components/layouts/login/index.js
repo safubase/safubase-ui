@@ -1,6 +1,7 @@
 // MODULES
 import React from 'react';
 import cn from 'classnames';
+import Script from 'next/script';
 
 // COMPONENTS
 import Toaster from '../../toaster';
@@ -35,6 +36,7 @@ class Layout_login extends React.Component {
         >
           {this.props.element || this.props.children}
         </main>
+        <Script src="https://js.hcaptcha.com/1/api.js" async defer></Script>
       </>
     );
   }

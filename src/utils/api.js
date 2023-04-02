@@ -19,9 +19,9 @@ export const axios_instance = axios.create({
 /**
  * API function return types
  *
- * ERROR { code: 'ERR_BAD_REQUEST', message: 'Credentials are not provided', type: 'auth:signin' }
+ * ERROR { code: 'ERR_BAD_REQUEST', message: 'Credentials are not provided', type: 'auth:signin', data: undefined }
  *
- * SUCCESS { data: { _id: '123' }, headers: { 'Content-Type: 'application/json' } }
+ * SUCCESS { data: { _id: '123' }, headers: { 'Content-Type: 'application/json' }, code: undefined }
  *
  */
 
@@ -104,6 +104,42 @@ export async function login(version = 1, body) {
   }
 
   const url = config.api_url + '/v' + version + '/signin';
+
+  try {
+    const res = await axios_instance.post(url, body);
+
+    res.code = undefined;
+
+    return res;
+  } catch (err) {
+    if (err.code === 'ERR_NETWORK') {
+      return { code: err.code, message: 'No internet connection' };
+    }
+
+    if (!err.response) {
+      return { code: err.code, message: err.name };
+    }
+
+    return { ...err.response.data, code: err.code };
+  }
+}
+
+/**
+ *
+ * EMAIL APIS
+ *
+ */
+export async function email_send_password_reset_link(version = 1, body) {
+  if (!Number(version)) {
+    throw new Error('Invalid api version specified in signup');
+  }
+
+  if (!body) {
+    throw new Error('Body or Context not provided in signup');
+  }
+
+  const url =
+    config.api_url + '/v' + version + '/email/send-password-reset-link';
 
   try {
     const res = await axios_instance.post(url, body);
@@ -213,6 +249,7 @@ export default {
   get_profile,
   signup,
   login,
+  email_send_password_reset_link,
   blockchain_get_whales,
   blockchain_get_upcoming_unlocks,
 };

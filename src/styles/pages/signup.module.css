@@ -6,7 +6,7 @@
 * COMPONENT MODAL LOGIN
 */
 
-.compmodallogin {
+.compmodalsignup {
   width: 440px;
   border-radius: var(--border-radius-large);
   position: fixed;
@@ -16,37 +16,37 @@
 }
 
 @media only screen and (max-width: 650px) {
-  .compmodallogin {
+  .compmodalsignup {
     width: 100%; height: 100%;
     border-radius: none;
     box-shadow: none;
   }
 }
 
-.compmodallogin-top {
+.compmodalsignup-top {
   padding: 2rem 3rem 0 3rem;
 }
 
 @media only screen and (max-width: 650px) {
-  .compmodallogin-top {
+  .compmodalsignup-top {
     padding: 2rem 2rem 0rem 2rem;
   }
 }
 
-.compmodallogin-top-logoctr {
+.compmodalsignup-top-logoctr {
   display: flex; justify-content: center; align-items: center;
   font-size: 28px; font-weight: 600;
   margin-bottom: 2rem;
   position: relative;
 }
 
-.compmodallogin-top-logoctr > img {
+.compmodalsignup-top-logoctr > img {
   display: block;
   width: 200px;
   filter: invert(1);
 }
 
-.compmodallogin-top-logoctr > svg {
+.compmodalsignup-top-logoctr > svg {
   position: absolute;
   left: 0;
   font-size: 30px;
@@ -54,18 +54,18 @@
   cursor: pointer;
 }
 
-.compmodallogin-top-inputctr {
+.compmodalsignup-top-inputctr {
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   padding: .4rem .4rem;
   margin-bottom: 2rem;
   display: flex; justify-content: flex-start; align-items: center;
 }
 
-.compmodallogin-top-inputctr > svg {
+.compmodalsignup-top-inputctr > svg {
   font-size: 22px;
 }
 
-.compmodallogin-top-inputctr > input {
+.compmodalsignup-top-inputctr > input {
   width: 100%;
   background-color: transparent;
   outline: none;
@@ -74,7 +74,12 @@
   margin-left: 1rem;
 }
 
-.compmodallogin-top-loginbtn {
+.compmodalsignup-top-captchactr {
+  margin-bottom: 2rem;
+  display: flex; justify-content: center; align-items: center;
+}
+
+.compmodalsignup-top-loginbtn {
   margin-bottom: 2rem;
   background-color: var(--green);
   width: 100%;
@@ -86,11 +91,11 @@
   display: flex; justify-content: center; align-items: center;
 }
 
-.compmodallogin-top-loginbtnloading {
+.compmodalsignup-top-loginbtnloading {
   cursor: default;
 }
 
-@keyframes ani-compmodallogin-top-loginbtn-svg {
+@keyframes ani-compmodalsignup-top-loginbtn-svg {
   from {
     transform: rotateZ(0deg);
   }
@@ -100,13 +105,13 @@
   }
 }
 
-.compmodallogin-top-loginbtn > svg {
-  animation: ani-compmodallogin-top-loginbtn-svg 1s linear infinite;
+.compmodalsignup-top-loginbtn > svg {
+  animation: ani-compmodalsignup-top-loginbtn-svg 1s linear infinite;
   font-size: 26px;
   width: 26px; height: 26px;
 }
 
-.compmodallogin-top-forgotlink {
+.compmodalsignup-top-forgotlink {
   color: var(--green);
   font-size: 14px;
   text-align: center;
@@ -114,13 +119,13 @@
   cursor: pointer;
 }
 
-.compmodallogin-bottom {
+.compmodalsignup-bottom {
   padding: 1rem;
   text-align: center;
   font-size: 14px;
   border-top: 1px solid rgba(0, 0, 0, 0.15);
 }
 
-.compmodallogin-bottom > a {
+.compmodalsignup-bottom > a {
   color: var(--green);
 }
