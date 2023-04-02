@@ -10,7 +10,7 @@ import style from './style.module.css';
 
 class Toaster extends React.Component {
   static contextType = Context;
-  
+
   constructor(props) {
     super(props);
     this.state = {
@@ -169,7 +169,7 @@ class Toaster extends React.Component {
 
     const toasts_clear_timer_id = setTimeout(() => {
       this.clear();
-    }, 10000);
+    }, 6000);
 
     this.setState({
       ...this.state,

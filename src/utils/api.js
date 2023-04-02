@@ -17,6 +17,15 @@ export const axios_instance = axios.create({
 });
 
 /**
+ * API function return types
+ *
+ * ERROR { code: 'ERR_BAD_REQUEST', message: 'Credentials are not provided', type: 'auth:signin' }
+ *
+ * SUCCESS { data: { _id: '123' }, headers: { 'Content-Type: 'application/json' } }
+ *
+ */
+
+/**
  *
  * GET PROFILE data from the server, also checks if current user is logged in with sid cookie?
  *
@@ -31,17 +40,19 @@ export async function get_profile(version = 1) {
   try {
     const res = await axios_instance.get(url);
 
-    if (res === null) {
-      return null;
-    }
-
-    if (res.data === null) {
-      return null;
-    }
+    res.code = undefined;
 
     return res;
   } catch (err) {
-    return null;
+    if (err.code === 'ERR_NETWORK') {
+      return { code: err.code, message: 'No internet connection' };
+    }
+
+    if (!err.response) {
+      return { code: err.code, message: err.message };
+    }
+
+    return { ...err.response.data, code: err.code, data: null };
   }
 }
 
@@ -62,9 +73,20 @@ export async function signup(version = 1, body) {
 
   try {
     const res = await axios_instance.post(url, body);
+
+    res.code = undefined;
+
     return res;
   } catch (err) {
-    return null;
+    if (err.code === 'ERR_NETWORK') {
+      return { code: err.code, message: 'No internet connection' };
+    }
+
+    if (!err.response) {
+      return { code: err.code, message: err.name };
+    }
+
+    return { ...err.response.data, code: err.code };
   }
 }
 
@@ -85,9 +107,20 @@ export async function login(version = 1, body) {
 
   try {
     const res = await axios_instance.post(url, body);
+
+    res.code = undefined;
+
     return res;
   } catch (err) {
-    return null;
+    if (err.code === 'ERR_NETWORK') {
+      return { code: err.code, message: 'No internet connection' };
+    }
+
+    if (!err.response) {
+      return { code: err.code, message: err.name };
+    }
+
+    return { ...err.response.data, code: err.code };
   }
 }
 
@@ -107,9 +140,19 @@ export async function blockchain_get_whales(version = 1, chain = 'bsc') {
   try {
     const res = await axios_instance.get(url);
 
+    res.code = undefined;
+
     return res;
   } catch (err) {
-    return null;
+    if (err.code === 'ERR_NETWORK') {
+      return { code: err.code, message: 'No internet connection' };
+    }
+
+    if (!err.response) {
+      return { code: err.code, message: err.name };
+    }
+
+    return { ...err.response.data, code: err.code };
   }
 }
 
@@ -123,9 +166,19 @@ export async function blockchain_get_upcoming_unlocks(version = 1) {
   try {
     const res = await axios_instance.get(url);
 
+    res.code = undefined;
+
     return res;
   } catch (err) {
-    return null;
+    if (err.code === 'ERR_NETWORK') {
+      return { code: err.code, message: 'No internet connection' };
+    }
+
+    if (!err.response) {
+      return { code: err.code, message: err.name };
+    }
+
+    return { ...err.response.data, code: err.code };
   }
 }
 
@@ -138,9 +191,20 @@ export async function blockchain_audit(version = 1) {
 
   try {
     const res = await axios_instance.get(url);
+
+    res.code = undefined;
+
     return res;
   } catch (err) {
-    return null;
+    if (err.code === 'ERR_NETWORK') {
+      return { code: err.code, message: 'No internet connection' };
+    }
+
+    if (!err.response) {
+      return { code: err.code, message: err.name };
+    }
+
+    return { ...err.response.data, code: err.code };
   }
 }
 

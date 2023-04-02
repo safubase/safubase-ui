@@ -30,7 +30,7 @@ export async function str_copy(str) {
     } else {
       document.execCommand('copy', true, str);
     }
-  } catch (error) {}
+  } catch (err) {}
 }
 
 export function str_remove_extra_space(str, mode = 0) {

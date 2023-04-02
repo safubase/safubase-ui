@@ -33,7 +33,6 @@ class Comp_modal_login extends React.Component {
     super(props);
     this.state = {
       api_loading: false,
-      input_username: '',
       input_uid: '',
       input_password: '',
     };
@@ -77,6 +76,7 @@ class Comp_modal_login extends React.Component {
                   input_password: e.target.value,
                 });
               }}
+              type="password"
               placeholder="Password..."
             />
           </div>
@@ -96,15 +96,17 @@ class Comp_modal_login extends React.Component {
 
               this.setState({ ...this.state, api_loading: false });
 
-              if (api_res_login === null) {
+              if (api_res_login.code) {
                 this.context.set_state({
                   ...this.context.state,
-                  user_auth: false,
-                  user_id: null,
-                  user_username: null,
-                  user_email: null,
-                  user_email_verified: null,
-                  user_role: null,
+                  ui_toasts: [
+                    ...this.context.state.ui_toasts,
+                    {
+                      type: 'error',
+                      message: api_res_login.message,
+                      created_at: new Date(),
+                    },
+                  ],
                 });
 
                 return;
@@ -112,12 +114,14 @@ class Comp_modal_login extends React.Component {
 
               this.context.set_state({
                 ...this.context.state,
-                user_auth: true,
-                user_id: api_res_login.data._id,
-                user_username: api_res_login.data.username,
-                user_email: api_res_login.data.email,
-                user_email_verified: api_res_login.data.email_verified,
-                user_role: api_res_login.data.role,
+                ui_toasts: [
+                  ...this.context.state.ui_toasts,
+                  {
+                    type: 'success',
+                    message: 'Sucessfully logged in',
+                    created_at: new Date(),
+                  },
+                ],
               });
             }}
             className={cn(
@@ -173,18 +177,28 @@ class Login extends React.Component {
      *
      */ // [get_profile(), another_async_func()]
     const api_responses = await Promise.all([UTILS_API.get_profile(1)]);
-    const api_res_profile = api_responses[0];
+    const api_res_get_profile = api_responses[0];
 
-    if (api_res_profile && api_res_profile.data) {
-      window.location.replace('https://safubase.com');
-      return;
-    } else {
+    if (api_res_get_profile.code) {
+      context_state.ui_toasts = [
+        ...context_state.ui_toasts,
+        {
+          type: 'error',
+          message: api_res_get_profile.message,
+          created_at: new Date(),
+        },
+      ];
+    } else if (api_res_get_profile.data === null) {
       context_state.user_auth = false;
       context_state.user_id = null;
       context_state.user_username = null;
       context_state.user_email = null;
       context_state.user_email_verified = null;
       context_state.user_role = null;
+      context_state.user_img = null;
+    } else if (api_res_get_profile.data) {
+      window.location.replace('https://safubase.com');
+      return;
     }
 
     /*

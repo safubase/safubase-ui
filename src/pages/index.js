@@ -1048,8 +1048,8 @@ class Comp_whale_tracker extends React.Component {
     return new_str;
   }
 
-  async api_update(animate = false) {
-    if (animate) {
+  async api_update(update = false) {
+    if (update) {
       this.setState({
         ...this.state,
         api_loading: false,
@@ -1068,7 +1068,7 @@ class Comp_whale_tracker extends React.Component {
       this.state.chain.chain
     );
 
-    if (res === null) {
+    if (res.code) {
       this.setState({
         ...this.state,
         chains: [...this.state.chains],
@@ -1187,7 +1187,15 @@ class Comp_whale_tracker extends React.Component {
                         curr.chain
                       );
 
-                      if (res === null) {
+                      if (res.code) {
+                        this.setState({
+                          ...this.state,
+                          chains: [...this.state.chains],
+                          chains_dd_open: false,
+                          api_data: [],
+                          api_loading: false,
+                        });
+
                         return;
                       }
 
@@ -1418,7 +1426,7 @@ class Comp_upcoming_unlocks extends React.Component {
       this.context
     );
 
-    if (res === null) {
+    if (res.code) {
       this.setState({
         ...this.state,
         api_data: [],
@@ -1641,22 +1649,34 @@ class Home extends React.Component {
      *
      */ // [get_profile(), another_async_func()]
     const api_responses = await Promise.all([UTILS_API.get_profile(1)]);
-    const api_res_profile = api_responses[0];
+    const api_res_get_profile = api_responses[0];
 
-    if (api_res_profile && api_res_profile.data) {
-      context_state.user_auth = true;
-      context_state.user_id = api_res_profile.data._id;
-      context_state.user_username = api_res_profile.data.username;
-      context_state.user_email = api_res_profile.data.email;
-      context_state.user_email_verified = api_res_profile.data.email_verified;
-      context_state.user_role = api_res_profile.data.role;
-    } else {
+    if (api_res_get_profile.code) {
+      context_state.ui_toasts = [
+        ...context_state.ui_toasts,
+        {
+          type: 'error',
+          message: api_res_get_profile.message,
+          created_at: new Date(),
+        },
+      ];
+    } else if (api_res_get_profile.data === null) {
       context_state.user_auth = false;
       context_state.user_id = null;
       context_state.user_username = null;
       context_state.user_email = null;
       context_state.user_email_verified = null;
       context_state.user_role = null;
+      context_state.user_img = null;
+    } else if (api_res_get_profile.data) {
+      context_state.user_auth = true;
+      context_state.user_id = api_res_get_profile.data._id;
+      context_state.user_username = api_res_get_profile.data.username;
+      context_state.user_email = api_res_get_profile.data.email;
+      context_state.user_email_verified =
+        api_res_get_profile.data.email_verified;
+      context_state.user_role = api_res_get_profile.data.role;
+      context_state.user_img = api_res_get_profile.data.img;
     }
 
     /**
