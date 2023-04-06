@@ -9,7 +9,6 @@ import config from '../config';
  * Allmost none of the utility functions changes the global context. no functions should change the context.
  *
  */
-
 export async function sleep(ms) {
   return new Promise((resolve, reject) => {
     setTimeout(() => {

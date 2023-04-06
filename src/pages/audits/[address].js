@@ -17,7 +17,7 @@ import UTILS from '../../utils/index.js';
 import UTILS_API from '../../utils/api.js';
 
 // STYLES
-import style from '../../styles/pages/audit.module.css';
+import style from '../../styles/pages/audits.module.css';
 
 /**
  *
@@ -449,7 +449,7 @@ class Comp_scores extends React.Component {
  * PAGE
  *
  */
-class Home extends React.Component {
+class Audits extends React.Component {
   static contextType = Context;
 
   constructor(props) {
@@ -471,7 +471,7 @@ class Home extends React.Component {
 
         <Layout_user>
           <>
-            <section className={cn('section', style['sectionaudit'])}>
+            <section className={cn('section', style['sectionaudits'])}>
               <Comp_scores />
             </section>
           </>
@@ -481,4 +481,4 @@ class Home extends React.Component {
   }
 }
 
-export default Home;
+export default Audits;

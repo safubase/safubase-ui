@@ -286,12 +286,19 @@ export async function blockchain_get_upcoming_unlocks(version = 1) {
   }
 }
 
-export async function blockchain_audit(version = 1) {
+export async function blockchain_audit(version = 1, { address, chain_id }) {
   if (!Number(version)) {
     throw new Error('Invalid api version specified in signup');
   }
 
-  const url = config.api_url + '/v' + version + '/blockchain/audit/0x123';
+  const url =
+    config.api_url +
+    '/v' +
+    version +
+    '/blockchain/audit/' +
+    address +
+    '?chain_id=' +
+    chain_id;
 
   try {
     const res = await axios_instance.get(url);
@@ -322,4 +329,5 @@ export default {
   email_send_password_reset_link,
   blockchain_get_whales,
   blockchain_get_upcoming_unlocks,
+  blockchain_audit,
 };

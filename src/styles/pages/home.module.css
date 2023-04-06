@@ -348,6 +348,25 @@
   }
 }
 
+.compinput-right-bg-btnloading {
+  display: flex; justify-content: center; align-items: center;
+  cursor: default;
+}
+
+@keyframes ani-compinput-right-bg-btnloading-svg {
+  from {
+    transform: rotateZ(0deg);
+  }
+
+  to {
+    transform: rotateZ(360deg);
+  }
+}
+
+.compinput-right-bg-btnloading > svg {
+  animation: ani-compinput-right-bg-btnloading-svg 1s linear infinite;
+}
+
 .compinput-modal {
   position: fixed;
   top: 0; left: 0;

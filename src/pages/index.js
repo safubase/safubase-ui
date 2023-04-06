@@ -204,27 +204,64 @@ class Comp_input extends React.Component {
         {
           img: '/polygon.png',
           name: 'Polygon',
+          chain_id: 137,
         },
       ],
+      loading: false,
     };
 
     this.bar_ref = React.createRef();
 
-    this.api_audit = this.api_audit.bind(this);
     this.modal_init = this.modal_init.bind(this);
   }
 
-  async api_audit() {
-    this.modal_init();
-  }
-
   async modal_init() {
+    if (this.state.loading || !this.state.address) {
+      this.context.set_state({
+        ...this.context.state,
+        ui_toasts: [
+          ...this.context.state.ui_toasts,
+          {
+            type: 'error',
+            message: 'Address is empty',
+            created_at: new Date(),
+          },
+        ],
+      });
+
+      return;
+    }
+
     this.setState({
       ...this.state,
       network: { ...this.state.network },
       networks: [...this.state.networks],
       modal_open: true,
+      loading: true,
     });
+
+    const api_res_blockchain_audit = await UTILS_API.blockchain_audit(1, {
+      address: this.state.address.toLowerCase(),
+      chain_id: this.state.network.chain_id,
+    });
+
+    if (api_res_blockchain_audit === null) {
+      return;
+    }
+
+    if (api_res_blockchain_audit.code) {
+      return;
+    }
+
+    if (!api_res_blockchain_audit.data.result) {
+      return;
+    }
+
+    if (
+      !api_res_blockchain_audit.data.result[this.state.address.toLowerCase()]
+    ) {
+      return;
+    }
 
     // sleep for state changes otherwise previous setState will be ignored because react is trash
     await UTILS.sleep(250);
@@ -267,11 +304,18 @@ class Comp_input extends React.Component {
 
       await UTILS.sleep(delay_ms);
     }
+
+    // Modal progress bar done...
+    window.location.replace(
+      'https://safubase.com/audits/' + this.state.address
+    );
   }
 
   componentDidMount() {}
 
   componentDidUpdate() {}
+
+  componentWillUnmount() {}
 
   render() {
     return (
@@ -368,10 +412,15 @@ class Comp_input extends React.Component {
             </div>
 
             <button
-              onClick={this.api_audit}
-              className={cn(style['compinput-right-bg-btn'])}
+              onClick={this.modal_init}
+              className={cn(
+                style['compinput-right-bg-btn'],
+                this.state.loading
+                  ? style['compinput-right-bg-btnloading']
+                  : null
+              )}
             >
-              AUDIT
+              {this.state.loading ? <Icon_loading /> : 'AUDIT'}
             </button>
           </div>
         </div>
