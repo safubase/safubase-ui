@@ -36,6 +36,7 @@ class Layout_login extends React.Component {
         >
           {this.props.element || this.props.children}
         </main>
+
         <Script src="https://js.hcaptcha.com/1/api.js" async defer></Script>
       </>
     );

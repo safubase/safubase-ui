@@ -1,7 +1,6 @@
 // MODULES
 import React from 'react';
 import Head from 'next/head';
-import Script from 'next/script';
 
 class HeadTag extends React.Component {
   constructor(props) {

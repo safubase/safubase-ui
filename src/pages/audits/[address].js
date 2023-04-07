@@ -21,6 +21,37 @@ import style from '../../styles/pages/audits.module.css';
 
 /**
  *
+ * SERVER SIDE data processing layer, But it is better to do the math calculations in client side.
+ *
+ */
+export async function getServerSideProps({ req, query }) {
+  if (!query.address || !query.chain_id) {
+    return {
+      props: {
+        code: 'ERR_BAD_REQUEST',
+        message: 'Address or chain id is invalid',
+      },
+    };
+  }
+
+  const api_res_blockchain_audit = await UTILS_API.blockchain_audit(1, {
+    address: query.address.toLowerCase(),
+    chain_id: query.chain_id,
+  });
+
+  if (api_res_blockchain_audit.code) {
+    return {
+      props: api_res_blockchain_audit,
+    };
+  }
+
+  return {
+    props: api_res_blockchain_audit.data,
+  };
+}
+
+/**
+ *
  * CIRCLE COMPONENT
  * Will be used in other components because it is little complex by state
  *
@@ -88,9 +119,10 @@ class Comp_circle extends React.Component {
      */
 
     // These interval config values can be edited
-    const FPS = parseInt(1000 / 60); // Interval update milliseconds
-    const V = 0.045; // velocity of the circle drawing, velocity and FPS are related since they draw the circle together
-    const V_COLOR_TRANS = 2.6; // velocity of the RGB Color transition of stroke style
+    const FPS = parseInt(1000 / 40); // Interval update milliseconds
+    const FPS_COLOR_TRANS = parseInt(1000 / 60);
+    const V = 0.08; // velocity of the circle drawing, velocity and FPS are related since they draw the circle together
+    const V_COLOR_TRANS = 2.5; // velocity of the RGB Color transition of stroke style
 
     // Stroke RGB numbers, herbiji
     const STROKE_STYLE_LOW_SECURITY = [230, 76, 60];
@@ -112,6 +144,7 @@ class Comp_circle extends React.Component {
     const TIMER_MAIN = setInterval(() => {
       if (angle_current >= ANGLE_END) {
         clearInterval(TIMER_MAIN);
+
         return;
       }
 
@@ -125,15 +158,13 @@ class Comp_circle extends React.Component {
       /**
        * Initialize the color transition interval after they passed specific security score
        */
-      if (angle_current < ANGLE_LOW_SECURITY_OFFSET) {
-      }
 
       if (
         angle_current > ANGLE_LOW_SECURITY_OFFSET &&
         angle_current < ANGLE_MID_SECURITY_OFFSET &&
         !angle_mid_security_passed
       ) {
-        // After circle passed the mid security score
+        // After circle passed the low security score
 
         const TIMER_COLOR_FADE = setInterval(() => {
           // Current rgb colors
@@ -193,12 +224,14 @@ class Comp_circle extends React.Component {
 
           ctx.strokeStyle = `rgba(${STROKE_STYLE_CURRENT[0]}, ${STROKE_STYLE_CURRENT[1]}, ${STROKE_STYLE_CURRENT[2]})`;
           ctx.beginPath();
+
           ctx.clearRect(
             0,
             0,
             this.state.CANVAS_WIDTH,
             this.state.CANVAS_HEIGHT
           );
+
           ctx.arc(
             this.state.CANVAS_WIDTH / 2,
             this.state.CANVAS_HEIGHT / 2,
@@ -206,17 +239,20 @@ class Comp_circle extends React.Component {
             0,
             angle_current
           );
+
           ctx.stroke();
 
           if (
-            STROKE_STYLE_CURRENT[0] === STROKE_STYLE_MEDIUM_SECURITY[0] &&
-            STROKE_STYLE_CURRENT[1] === STROKE_STYLE_MEDIUM_SECURITY[1] &&
-            STROKE_STYLE_CURRENT[2] === STROKE_STYLE_MEDIUM_SECURITY[2]
+            (STROKE_STYLE_CURRENT[0] === STROKE_STYLE_MEDIUM_SECURITY[0] &&
+              STROKE_STYLE_CURRENT[1] === STROKE_STYLE_MEDIUM_SECURITY[1] &&
+              STROKE_STYLE_CURRENT[2] === STROKE_STYLE_MEDIUM_SECURITY[2]) ||
+            angle_high_security_passed
           ) {
             clearInterval(TIMER_COLOR_FADE);
+
             return;
           }
-        }, FPS);
+        }, FPS_COLOR_TRANS);
 
         angle_mid_security_passed = true;
       }
@@ -307,13 +343,15 @@ class Comp_circle extends React.Component {
             clearInterval(TIMER_COLOR_FADE);
             return;
           }
-        }, FPS / 2);
+        }, FPS_COLOR_TRANS);
 
         angle_high_security_passed = true;
       }
 
       ctx.beginPath();
+
       ctx.clearRect(0, 0, this.state.CANVAS_WIDTH, this.state.CANVAS_HEIGHT);
+
       ctx.arc(
         this.state.CANVAS_WIDTH / 2,
         this.state.CANVAS_HEIGHT / 2,
@@ -321,6 +359,7 @@ class Comp_circle extends React.Component {
         0,
         angle_current
       );
+
       ctx.stroke();
 
       // Display current percentage of the circle
@@ -455,11 +494,31 @@ class Audits extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
+
+    console.log(this.props);
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+    if (this.props.code) {
+      this.context.set_state({
+        ...this.context.state,
+        ui_toasts: [
+          ...this.context.state.ui_toasts,
+          {
+            type: 'error',
+            message: this.props.message,
+            created_at: new Date(),
+          },
+        ],
+      });
+
+      return;
+    }
+  }
 
   componentDidUpdate() {}
+
+  componentWillUnmount() {}
 
   render() {
     return (

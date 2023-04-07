@@ -216,7 +216,11 @@ class Comp_input extends React.Component {
   }
 
   async modal_init() {
-    if (this.state.loading || !this.state.address) {
+    if (this.state.loading) {
+      return;
+    }
+
+    if (!this.state.address) {
       this.context.set_state({
         ...this.context.state,
         ui_toasts: [
@@ -245,21 +249,19 @@ class Comp_input extends React.Component {
       chain_id: this.state.network.chain_id,
     });
 
-    if (api_res_blockchain_audit === null) {
-      return;
-    }
-
     if (api_res_blockchain_audit.code) {
-      return;
-    }
+      this.context.set_state({
+        ...this.context.state,
+        ui_toasts: [
+          ...this.context.state.ui_toasts,
+          {
+            type: 'error',
+            message: api_res_blockchain_audit.message,
+            created_at: new Date(),
+          },
+        ],
+      });
 
-    if (!api_res_blockchain_audit.data.result) {
-      return;
-    }
-
-    if (
-      !api_res_blockchain_audit.data.result[this.state.address.toLowerCase()]
-    ) {
       return;
     }
 
@@ -307,7 +309,10 @@ class Comp_input extends React.Component {
 
     // Modal progress bar done...
     window.location.replace(
-      'https://safubase.com/audits/' + this.state.address
+      'http://localhost:3000/audits/' +
+        this.state.address +
+        '?chain_id=' +
+        this.state.network.chain_id
     );
   }
 
