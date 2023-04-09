@@ -600,7 +600,7 @@ class Comp_last_adts extends React.Component {
         },
       ];
 
-      audits.length = 5;
+      console.log(window.innerWidth);
 
       global_sort_audits_by_date(audits);
 
@@ -923,9 +923,13 @@ class Comp_profile_input extends React.Component {
                 this.context.set_state({
                   ...this.context.state,
                   ui_toasts: [
-                    ...this.context.state.ui_toasts, 
-                    { type: "error", message: "No web3 wallet detected in the browser", created_at: new Date() }
-                  ]
+                    ...this.context.state.ui_toasts,
+                    {
+                      type: 'error',
+                      message: 'No web3 wallet detected in the browser',
+                      created_at: new Date(),
+                    },
+                  ],
                 });
 
                 return;
@@ -1036,20 +1040,21 @@ class Comp_profile_input_mobile extends React.Component {
               chain_id: 56,
             });
 
-
-
             if (wallet_accounts === null) {
               this.context.set_state({
                 ...this.context.state,
                 ui_toasts: [
-                  ...this.context.state.ui_toasts, 
-                  { type: "error", message: "No web3 wallet detected in the browser", created_at: new Date() }
-                ]
+                  ...this.context.state.ui_toasts,
+                  {
+                    type: 'error',
+                    message: 'No web3 wallet detected in the browser',
+                    created_at: new Date(),
+                  },
+                ],
               });
 
               return;
             }
-
 
             this.context.set_state({
               ...this.context.state,
@@ -1815,8 +1820,6 @@ class Home extends React.Component {
                 <Comp_hello />
                 <Comp_input />
                 <Comp_last_adts data={this.props.audits_latest} />
-                
-          
               </div>
 
               <div className={cn(style['sectiondash-right'])}>
