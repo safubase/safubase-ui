@@ -240,13 +240,19 @@ class Comp_input extends React.Component {
       ...this.state,
       network: { ...this.state.network },
       networks: [...this.state.networks],
-      modal_open: true,
       loading: true,
     });
 
     const api_res_blockchain_audit = await UTILS_API.blockchain_audit(1, {
       address: this.state.address.toLowerCase(),
       chain_id: this.state.network.chain_id,
+    });
+
+    this.setState({
+      ...this.state,
+      network: { ...this.state.network },
+      networks: [...this.state.networks],
+      loading: false,
     });
 
     if (api_res_blockchain_audit.code) {
@@ -913,6 +919,18 @@ class Comp_profile_input extends React.Component {
             onClick={async () => {
               const accounts = await UTILS.wallet_connect({ chain_id: 56 });
 
+              if (accounts === null) {
+                this.context.set_state({
+                  ...this.context.state,
+                  ui_toasts: [
+                    ...this.context.state.ui_toasts, 
+                    { type: "error", message: "No web3 wallet detected in the browser", created_at: new Date() }
+                  ]
+                });
+
+                return;
+              }
+
               this.context.set_state({
                 ...this.context.state,
                 wallet_address: accounts[0],
@@ -1017,6 +1035,21 @@ class Comp_profile_input_mobile extends React.Component {
             const wallet_accounts = await UTILS.wallet_connect({
               chain_id: 56,
             });
+
+
+
+            if (wallet_accounts === null) {
+              this.context.set_state({
+                ...this.context.state,
+                ui_toasts: [
+                  ...this.context.state.ui_toasts, 
+                  { type: "error", message: "No web3 wallet detected in the browser", created_at: new Date() }
+                ]
+              });
+
+              return;
+            }
+
 
             this.context.set_state({
               ...this.context.state,
@@ -1741,7 +1774,7 @@ class Home extends React.Component {
     UTILS.wallet_add_listeners(this.context);
     const wallet_accounts = await UTILS.wallet_req_accounts();
 
-    if (wallet_accounts[0]) {
+    if (wallet_accounts !== null && wallet_accounts[0]) {
       context_state.wallet_address = wallet_accounts[0];
     }
 
@@ -1782,7 +1815,8 @@ class Home extends React.Component {
                 <Comp_hello />
                 <Comp_input />
                 <Comp_last_adts data={this.props.audits_latest} />
-                <Comp_newsletter />
+                
+          
               </div>
 
               <div className={cn(style['sectiondash-right'])}>

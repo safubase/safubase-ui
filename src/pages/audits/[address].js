@@ -39,6 +39,7 @@ export async function getServerSideProps({ req, query }) {
     chain_id: query.chain_id,
   });
 
+
   if (api_res_blockchain_audit.code) {
     return {
       props: api_res_blockchain_audit,
@@ -83,6 +84,8 @@ class Comp_circle extends React.Component {
     // References of html elements
     this.ctr_ref = React.createRef();
     this.info_ref = React.createRef();
+
+    console.log(props.data);
   }
 
   setup() {
@@ -133,7 +136,7 @@ class Comp_circle extends React.Component {
 
     let angle_current = 0;
     // Determine the end angle by multiplying props data by double pi mapped to 100%
-    const ANGLE_END = ((Math.PI * 2) / 100) * this.props.data;
+    const ANGLE_END = ((Math.PI * 2) / 100) * Number(this.props.data);
     const ANGLE_LOW_SECURITY_OFFSET = ((Math.PI * 2) / 100) * 49; // Low security score mapped to double pi
     const ANGLE_MID_SECURITY_OFFSET = ((Math.PI * 2) / 100) * 84; // Middle security score mapped to double pi
 
@@ -144,7 +147,6 @@ class Comp_circle extends React.Component {
     const TIMER_MAIN = setInterval(() => {
       if (angle_current >= ANGLE_END) {
         clearInterval(TIMER_MAIN);
-
         return;
       }
 
@@ -424,7 +426,7 @@ class Comp_scores extends React.Component {
         </div>
         <div className={cn(style['compscores-bottom'])}>
           <div className={cn(style['compscores-bottom-left'])}>
-            <Comp_circle data={87} />
+            <Comp_circle data={this.props.data.score} />
 
             <div className={cn(style['compscore-bottom-left-improvebtn'])}>
               <Icon_chart /> Improve your security measures
@@ -494,8 +496,6 @@ class Audits extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
-
-    console.log(this.props);
   }
 
   componentDidMount() {
@@ -529,11 +529,9 @@ class Audits extends React.Component {
         />
 
         <Layout_user>
-          <>
-            <section className={cn('section', style['sectionaudits'])}>
-              <Comp_scores />
-            </section>
-          </>
+          <section className={cn('section', style['sectionaudits'])}>
+            <Comp_scores data={this.props} />
+          </section>
         </Layout_user>
       </>
     );
