@@ -295,10 +295,36 @@ export async function blockchain_audit(version = 1, { address, chain_id }) {
     config.api_url +
     '/v' +
     version +
-    '/blockchain/audit/' +
+    '/blockchain/audits/' +
     address +
     '?chain_id=' +
     chain_id;
+
+  try {
+    const res = await axios_instance.get(url);
+
+    res.code = undefined;
+
+    return res;
+  } catch (err) {
+    if (err.code === 'ERR_NETWORK') {
+      return { code: err.code, message: 'No internet connection' };
+    }
+
+    if (!err.response) {
+      return { code: err.code, message: err.name };
+    }
+
+    return { ...err.response.data, code: err.code };
+  }
+}
+
+export async function blockchain_get_audits(version = 1) {
+  if (!Number(version)) {
+    throw new Error('Invalid api version specified in signup');
+  }
+
+  const url = config.api_url + '/v' + version + '/blockchain/audits';
 
   try {
     const res = await axios_instance.get(url);
@@ -330,4 +356,5 @@ export default {
   blockchain_get_whales,
   blockchain_get_upcoming_unlocks,
   blockchain_audit,
+  blockchain_get_audits,
 };

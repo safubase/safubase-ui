@@ -39,7 +39,6 @@ export async function getServerSideProps({ req, query }) {
     chain_id: query.chain_id,
   });
 
-
   if (api_res_blockchain_audit.code) {
     return {
       props: api_res_blockchain_audit,
@@ -84,8 +83,6 @@ class Comp_circle extends React.Component {
     // References of html elements
     this.ctr_ref = React.createRef();
     this.info_ref = React.createRef();
-
-    console.log(props.data);
   }
 
   setup() {
@@ -107,7 +104,7 @@ class Comp_circle extends React.Component {
 
     //ctx.lineCap = 'round';
     ctx.lineWidth = this.state.LINE_WIDTH;
-    ctx.strokeStyle = '#e64c3c';
+    ctx.strokeStyle = 'rgb(243, 100, 84)';
 
     ctx.clearRect(0, 0, this.state.CANVAS_WIDTH, this.state.CANVAS_HEIGHT);
 
@@ -128,7 +125,7 @@ class Comp_circle extends React.Component {
     const V_COLOR_TRANS = 2.5; // velocity of the RGB Color transition of stroke style
 
     // Stroke RGB numbers, herbiji
-    const STROKE_STYLE_LOW_SECURITY = [230, 76, 60];
+    const STROKE_STYLE_LOW_SECURITY = [243, 100, 84];
     const STROKE_STYLE_MEDIUM_SECURITY = [240, 196, 16];
     const STROKE_STYLE_HIGH_SECURITY = [60, 204, 112];
 
@@ -136,7 +133,8 @@ class Comp_circle extends React.Component {
 
     let angle_current = 0;
     // Determine the end angle by multiplying props data by double pi mapped to 100%
-    const ANGLE_END = ((Math.PI * 2) / 100) * Number(this.props.data);
+    const ANGLE_END = ((Math.PI * 2) / 100) * Number(this.props.data || 0);
+
     const ANGLE_LOW_SECURITY_OFFSET = ((Math.PI * 2) / 100) * 49; // Low security score mapped to double pi
     const ANGLE_MID_SECURITY_OFFSET = ((Math.PI * 2) / 100) * 84; // Middle security score mapped to double pi
 
@@ -422,7 +420,12 @@ class Comp_scores extends React.Component {
     return (
       <div className={cn(style['compscores'])}>
         <div className={cn(style['compscores-top'])}>
-          <div className={cn(style['compscores-top-title'])}>0x123</div>
+          <div className={cn(style['compscores-top-title'])}>
+            {this.props.data.name} ({this.props.data.symbol})
+          </div>
+          <div className={cn(style['compscores-top-address'])}>
+            {this.props.data.address}
+          </div>
         </div>
         <div className={cn(style['compscores-bottom'])}>
           <div className={cn(style['compscores-bottom-left'])}>
@@ -434,6 +437,15 @@ class Comp_scores extends React.Component {
           </div>
 
           <div className={cn(style['compscores-bottom-right'])}>
+            <div className={cn(style['compscores-bottom-right-desc'])}>
+              The score of this contract address is{' '}
+              <strong>{this.props.data.score}% out of 100.</strong> Upon
+              detailed examination, <strong>3 important issues</strong> were
+              discovered. <strong>Found 1 bug</strong> that is easy to fix. You
+              can get information about these issues and get a service offer by
+              contacting Safubase!
+            </div>
+
             <div className={cn(style['compscores-bottom-right-barctr'])}>
               <div
                 className={cn(style['compscores-bottom-right-barctr-label'])}
@@ -530,7 +542,14 @@ class Audits extends React.Component {
 
         <Layout_user>
           <section className={cn('section', style['sectionaudits'])}>
-            <Comp_scores data={this.props} />
+            <div className={cn(style['sectionaudits-left'])}>
+              <Comp_scores data={this.props} />
+            </div>
+            <div className={cn(style['sectionaudits-right'])}>
+              <div className={cn(style['sectionaudits-right-banner'])}>
+                <img src="https://placehold.co/800x800" />
+              </div>
+            </div>
           </section>
         </Layout_user>
       </>

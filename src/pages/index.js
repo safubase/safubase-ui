@@ -56,66 +56,22 @@ function global_sort_audits_by_date(data) {
  *
  */
 export async function getServerSideProps({ req }) {
-  const audits_latest = [
-    {
-      name: 'oldest',
-      symbol: 'ETH',
-      img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Binance_Logo.svg/2048px-Binance_Logo.svg.png',
-      address: '0x123',
-      score: 3.4,
-      created_at: new Date().toString(),
-      network: 'ETH',
-    },
-    {
-      name: 'mid',
-      symbol: 'ETH',
-      img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Binance_Logo.svg/2048px-Binance_Logo.svg.png',
-      address: '0x123',
-      score: 3.4,
-      created_at: new Date(1676903315821 + 1232333).toString(),
-      network: 'ETH',
-    },
-    {
-      name: 'newest',
-      symbol: 'ETH',
-      img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Binance_Logo.svg/2048px-Binance_Logo.svg.png',
-      address: '0x123',
-      score: 3.4,
-      created_at: new Date(1676903315821 + 123232322).toString(),
-      network: 'ETH',
-    },
-    {
-      name: 'newest newest',
-      symbol: 'ETH',
-      img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Binance_Logo.svg/2048px-Binance_Logo.svg.png',
-      address: '0x123',
-      score: 3.4,
-      created_at: new Date(1676903315821 + 12323232212122).toString(),
-      network: 'ETH',
-    },
-    {
-      name: 'newest newest',
-      symbol: 'ETH',
-      img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Binance_Logo.svg/2048px-Binance_Logo.svg.png',
-      address: '0x123',
-      score: 3.4,
-      created_at: new Date(1676903315821 + 12323232212122).toString(),
-      network: 'ETH',
-    },
-  ];
+  const api_res_audits = await UTILS_API.blockchain_get_audits(1);
 
-  global_sort_audits_by_date(audits_latest);
+  global_sort_audits_by_date(api_res_audits.data);
 
   // humanize created at value
-  for (let i = 0; i < audits_latest.length; i++) {
-    audits_latest[i].created_at = new Date(audits_latest[i].created_at)
+  for (let i = 0; i < api_res_audits.data.length; i++) {
+    api_res_audits.data[i].created_at = new Date(
+      api_res_audits.data[i].created_at
+    )
       .toISOString()
       .split('T')[0];
   }
 
   return {
     props: {
-      audits_latest: audits_latest,
+      audits: api_res_audits.data,
     },
   };
 }
@@ -248,14 +204,14 @@ class Comp_input extends React.Component {
       chain_id: this.state.network.chain_id,
     });
 
-    this.setState({
-      ...this.state,
-      network: { ...this.state.network },
-      networks: [...this.state.networks],
-      loading: false,
-    });
-
     if (api_res_blockchain_audit.code) {
+      this.setState({
+        ...this.state,
+        network: { ...this.state.network },
+        networks: [...this.state.networks],
+        loading: false,
+      });
+
       this.context.set_state({
         ...this.context.state,
         ui_toasts: [
@@ -270,9 +226,6 @@ class Comp_input extends React.Component {
 
       return;
     }
-
-    // sleep for state changes otherwise previous setState will be ignored because react is trash
-    await UTILS.sleep(250);
 
     const bar_div = this.bar_ref.current;
 
@@ -302,6 +255,9 @@ class Comp_input extends React.Component {
       this.setState({
         ...this.state,
         modal_open: true,
+        network: { ...this.state.network },
+        networks: [...this.state.networks],
+        loading: false,
         bar_pct: total_pct,
         bar_info: token_info_index[i],
       });
@@ -541,12 +497,16 @@ class Comp_last_adts extends React.Component {
       category: 'all',
       audits: props.data,
       animation: false,
+      chains: {
+        56: 'BSC',
+        1: 'ETH',
+      },
     };
 
     this.audits_ref = React.createRef();
 
     this.animate = this.animate.bind(this);
-    this.api_get_latest_audits = this.api_get_latest_audits.bind(this);
+    this.api_get_audits = this.api_get_audits.bind(this);
   }
 
   animate() {
@@ -584,29 +544,25 @@ class Comp_last_adts extends React.Component {
     }, 1000);
   }
 
-  async api_get_latest_audits() {
-    // Fetch latest audits once in a while
-    setInterval(() => {
-      const audits = [
-        ...this.state.audits,
-        {
-          name: 'test',
-          symbol: 'ETH',
-          img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Binance_Logo.svg/2048px-Binance_Logo.svg.png',
-          address: '0x123',
-          score: 3.4,
-          created_at: new Date().toISOString().split('T')[0],
-          network: 'ETH',
-        },
-      ];
+  // Fetch latest audits once in a while
+  async api_get_audits() {
+    setInterval(async () => {
+      const api_res_audits = await UTILS_API.blockchain_get_audits(1);
 
-      console.log(window.innerWidth);
+      global_sort_audits_by_date(api_res_audits.data);
 
-      global_sort_audits_by_date(audits);
+      // humanize created at value
+      for (let i = 0; i < api_res_audits.data.length; i++) {
+        api_res_audits.data[i].created_at = new Date(
+          api_res_audits.data[i].created_at
+        )
+          .toISOString()
+          .split('T')[0];
+      }
 
       this.setState({
         ...this.state,
-        audits: audits,
+        audits: api_res_audits.data,
         animation: true,
       });
     }, 10000);
@@ -614,7 +570,7 @@ class Comp_last_adts extends React.Component {
 
   // Fetches new data in intervals and updates state
   componentDidMount() {
-    this.api_get_latest_audits();
+    this.api_get_audits();
   }
 
   // Adds animation style to the first latest audit bar after every update
@@ -721,7 +677,12 @@ class Comp_last_adts extends React.Component {
                       style['complastadts-audits-item-imgnamesymbol-img']
                     )}
                   >
-                    <img src={curr.img} />
+                    <img
+                      src={
+                        curr.logo ||
+                        'https://media.istockphoto.com/id/1268510010/vector/golden-one-token-coin-icon.jpg?s=612x612&w=0&k=20&c=rQ7yWnMEBFy8jUcjCjqa48-1ARmflM6aIn9svQ1En8E='
+                      }
+                    />
                   </div>
 
                   <div
@@ -756,12 +717,20 @@ class Comp_last_adts extends React.Component {
                 </div>
 
                 <div className={cn(style['complastadts-audits-item-network'])}>
-                  {curr.network}
+                  {this.state.chains[Number(curr.chain_id)]}
                 </div>
 
-                <button className={cn(style['complastadts-audits-item-btn'])}>
+                <a
+                  href={
+                    'https://safubase.com/audits/' +
+                    curr.address +
+                    '?chain_id=' +
+                    curr.chain_id
+                  }
+                  className={cn(style['complastadts-audits-item-btn'])}
+                >
                   VIEW
-                </button>
+                </a>
               </div>
             );
           })}
@@ -1727,6 +1696,8 @@ class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
+
+    this.init = this.init.bind(this);
   }
 
   async init() {
@@ -1813,22 +1784,20 @@ class Home extends React.Component {
         />
 
         <Layout_user>
-          <>
-            <section className={cn('section', style['sectiondash'])}>
-              <div className={cn(style['sectiondash-left'])}>
-                <Comp_profile_input_mobile />
-                <Comp_hello />
-                <Comp_input />
-                <Comp_last_adts data={this.props.audits_latest} />
-              </div>
+          <section className={cn('section', style['sectiondash'])}>
+            <div className={cn(style['sectiondash-left'])}>
+              <Comp_profile_input_mobile />
+              <Comp_hello />
+              <Comp_input />
+              <Comp_last_adts data={this.props.audits} />
+            </div>
 
-              <div className={cn(style['sectiondash-right'])}>
-                <Comp_profile_input />
-                <Comp_whale_tracker />
-                <Comp_upcoming_unlocks />
-              </div>
-            </section>
-          </>
+            <div className={cn(style['sectiondash-right'])}>
+              <Comp_profile_input />
+              <Comp_whale_tracker />
+              <Comp_upcoming_unlocks />
+            </div>
+          </section>
         </Layout_user>
       </>
     );

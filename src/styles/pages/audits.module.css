@@ -1,7 +1,54 @@
 .sectionaudits {
-
+  display: flex; justify-content: flex-start; align-items: flex-start;
 }
 
+@media only screen and (max-width: 1150px) {
+  .sectionaudits {
+    display: block;
+  }
+}
+
+.sectionaudits-left {
+  width: 70%;
+  margin-right: 2rem;
+}
+
+@media only screen and (max-width: 1150px) {
+  .sectionaudits-left {
+    width: auto;
+    margin-right: 0;
+  }
+}
+
+.sectionaudits-right {
+  width: 30%;
+}
+
+@media only screen and (max-width: 1150px) {
+  .sectionaudits-right {
+    width: auto;
+  }
+}
+
+.sectionaudits-right-banner {
+  height: 420px;
+}
+
+@media only screen and (max-width: 1450px) {
+  .sectionaudits-right-banner {
+   display: none;
+  }
+}
+
+.sectionaudits-right-banner > img {
+  height: 100%;
+  display: block;
+}
+
+
+/* 
+COMPONENT CIRCLE
+*/
 .compcircle {
   position: relative;
 }
@@ -43,13 +90,15 @@
 *
 */
 .compscores {
-  border: 1px solid rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(0, 0, 0, 0.25);
   border-radius: var(--border-radius-small);
+
 }
 
 .compscores-top {
   padding: 1.4rem;
   border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+  height: 100px;
 }
 
 @media only screen and (max-width: 650px) {
@@ -62,9 +111,15 @@
   font-size: 17px; font-weight: 600;
 }
 
+.compscores-top-address {
+  font-size: 15px; font-weight: 400;
+  color: rgba(0, 0, 0, 0.6);
+  word-break: break-all;
+}
+
 .compscores-bottom {
-  height: 300px;
   padding: 1.4rem;
+  height: 360px;
   display: flex; justify-content: flex-start; align-items: flex-start; 
 }
 
@@ -93,8 +148,8 @@
 }
 
 .compscore-bottom-left-improvebtn {
-  border: 1px solid tomato;
-  color: tomato;
+  border: 1px solid black;
+  color: black;
   border-radius: var(--border-radius-small);
   padding: 1rem;
   text-align: center;
@@ -118,9 +173,10 @@
 }
 
 .compscore-bottom-left-improvebtn > svg {
-  margin-right: .6rem;
+  margin-right: .4rem;
   width: 20px;
   font-size: 20px;
+  margin-top: 4px;
 }
 
 .compscores-bottom-right {
@@ -134,6 +190,10 @@
     margin-left: 0rem;
     margin-top: 1rem;
   }
+}
+
+.compscores-bottom-right-desc {
+  margin-bottom: 1rem;
 }
 
 .compscores-bottom-right-barctr {
@@ -161,7 +221,7 @@
 }
 
 .compscores-bottom-right-barctr-bar {
-  width: 100%; height: 26px;
+  width: 100%; height: 20px;
   margin-top: .2rem;
   border-radius: var(--border-radius-small);
   overflow: hidden;
@@ -172,6 +232,6 @@
 .compscores-bottom-right-barctr-bar-progressfailed {
   width: 35%; height: 100%;
   position: absolute;
-  background-color: rgba(230, 76, 60, 1);
+  background-color: var(--red);
   transition: all 1s ease-in;
 }

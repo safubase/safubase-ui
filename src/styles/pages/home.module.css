@@ -150,6 +150,7 @@
 .compinput {
   display: flex; justify-content: flex-start;
   width: 100%;
+  margin-bottom: 1rem;
 }
 
 @media only screen and (max-width: 650px) {
@@ -462,8 +463,7 @@
 *
 */
 .complastadts {
-  margin-top: 1rem;
-  margin-bottom: 1rem;
+
   overflow: hidden;
   width: 100%; height: 70%;
   display: flex; justify-content: flex-start; align-items: flex-start; flex-direction: column;
@@ -592,7 +592,7 @@
 }
 
 .complastadts-audits-item-imgnamesymbol-namesymbol {
-  width: 100px;
+  width: 130px;
   margin-left: 1rem;
 }
 
