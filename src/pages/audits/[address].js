@@ -1,13 +1,17 @@
 // MODULES
 import React from 'react';
 import cn from 'classnames';
+import { FaCheck, FaTimes } from 'react-icons/fa';
 
 // COMPONENTS
 import Head from '../../components/head';
 import Layout_user from '../../components/layouts/user';
+import Linegraph from '../../components/graphs/line';
 
 // COMPONENTS > ICONS
 import Icon_chart from '../../components/icons/chart/index.js';
+import Icon_check from '../../components/icons/check';
+import Icon_cross from '../../components/icons/error';
 
 // CONTEXT
 import { Context } from '../../context';
@@ -24,7 +28,7 @@ import style from '../../styles/pages/audits.module.css';
  * SERVER SIDE data processing layer, But it is better to do the math calculations in client side.
  *
  */
-export async function getServerSideProps({ req, query }) {
+export async function getServerSideProps({ query }) {
   if (!query.address || !query.chain_id) {
     return {
       props: {
@@ -167,6 +171,11 @@ class Comp_circle extends React.Component {
         // After circle passed the low security score
 
         const TIMER_COLOR_FADE = setInterval(() => {
+          if (angle_high_security_passed) {
+            clearInterval(TIMER_COLOR_FADE);
+            return;
+          }
+
           // Current rgb colors
           const CURRENT_RED = STROKE_STYLE_CURRENT[0];
           const CURRENT_GREEN = STROKE_STYLE_CURRENT[1];
@@ -499,6 +508,46 @@ class Comp_scores extends React.Component {
 
 /**
  *
+ * CHECK BOX COMPONENT
+ *
+ */
+class Comp_check_box extends React.Component {
+  static contextType = Context;
+
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
+  componentDidMount() {}
+
+  componentDidUpdate() {}
+
+  componentWillUnmount() {}
+
+  render() {
+    return (
+      <div className={cn(style['compcheckbox'])}>
+        <div className={cn(style['compcheckbox-left'])}>
+          {this.props.title.split(' ').map((curr, index) => {
+            return <div key={index}>{curr}</div>;
+          })}
+        </div>
+        <div
+          className={cn(
+            style['compcheckbox-right'],
+            this.props.secure ? style['compcheckbox-rightsecure'] : null
+          )}
+        >
+          {this.props.secure ? <FaCheck /> : <FaTimes />}
+        </div>
+      </div>
+    );
+  }
+}
+
+/**
+ *
  * PAGE
  *
  */
@@ -507,7 +556,9 @@ class Audits extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      line_graph_data: [],
+    };
   }
 
   componentDidMount() {
@@ -526,6 +577,8 @@ class Audits extends React.Component {
 
       return;
     }
+
+    console.log(this.props);
   }
 
   componentDidUpdate() {}
@@ -544,12 +597,17 @@ class Audits extends React.Component {
           <section className={cn('section', style['sectionaudits'])}>
             <div className={cn(style['sectionaudits-left'])}>
               <Comp_scores data={this.props} />
-            </div>
-            <div className={cn(style['sectionaudits-right'])}>
-              <div className={cn(style['sectionaudits-right-banner'])}>
-                <img src="https://placehold.co/800x800" />
+
+              <div className={cn(style['sectionaudits-left-checkboxes'])}>
+                <Comp_check_box title="Anti Whale Test" secure={false} />
+                <Comp_check_box title="Anti Whale" secure={false} />
+                <Comp_check_box title="Anti Whale" secure={true} />
+                <Comp_check_box title="Anti Whale" secure={false} />
+                <Comp_check_box title="Anti Whale" secure={true} />
+                <Comp_check_box title="Anti Whale" secure={false} />
               </div>
             </div>
+            <div className={cn(style['sectionaudits-right'])}></div>
           </section>
         </Layout_user>
       </>

@@ -20,6 +20,11 @@
   }
 }
 
+.sectionaudits-left-checkboxes {
+  display: flex; justify-content: flex-start; align-items: flex-start; flex-wrap: wrap;
+  margin-top: 1rem;
+}
+
 .sectionaudits-right {
   width: 30%;
 }
@@ -92,7 +97,6 @@ COMPONENT CIRCLE
 .compscores {
   border: 1px solid rgba(0, 0, 0, 0.25);
   border-radius: var(--border-radius-small);
-
 }
 
 .compscores-top {
@@ -235,3 +239,70 @@ COMPONENT CIRCLE
   background-color: var(--red);
   transition: all 1s ease-in;
 }
+
+
+/*
+COMPONENT CHECK BOX
+*/
+.compcheckbox {
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  padding: 1rem;
+  border-radius: var(--border-radius-small);
+  display: flex; justify-content: flex-start; align-items: center;
+  margin-bottom: 1rem;
+  margin-right: 1rem;
+}
+
+
+@media only screen and (max-width: 650px) {
+  .compcheckbox {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
+
+.compcheckbox-left  {
+
+}
+
+@media only screen and (max-width: 650px) {
+  .compcheckbox-left  {
+    display: flex;
+  }
+}
+
+.compcheckbox-left > div {
+  text-align: center;
+  font-size: 19px; font-weight: 500;
+}
+
+@media only screen and (max-width: 650px) {
+  .compcheckbox-left > div {
+    margin-right: .6rem;
+    font-size: 18px;
+  }
+}
+
+.compcheckbox-right  {
+  border: 8px solid var(--red);
+  margin-left: 2rem;
+  width: 80px; height: 80px;
+  border-radius: 50%;
+  position: relative;
+  display: flex; justify-content: center; align-items: center;
+}
+
+.compcheckbox-right > svg  {
+  width: 65%; height: 65%;
+  color: var(--red);
+} 
+
+
+.compcheckbox-rightsecure {
+  border-color: var(--green);
+}
+
+.compcheckbox-rightsecure > svg {
+  color: var(--green);
+}
+

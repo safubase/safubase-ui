@@ -6,10 +6,10 @@ import config from '../config';
 
 /*
  * UTILS
- * Allmost none of the utility functions changes the global context. no functions should change the context.
+ * Allmost none of the utility functions changes the global context. Keep the context update as minimum as possible for unintended results.
  *
  */
-export async function sleep(ms) {
+export async function sleep(ms = 1000) {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       resolve();

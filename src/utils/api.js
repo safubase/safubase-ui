@@ -129,7 +129,6 @@ export async function login(version = 1, body) {
  * VERIFY EMAIL
  *
  */
-
 export async function verify_email(version = 1, token) {
   if (!Number(version)) {
     throw new Error('Invalid api version specified in signup');
@@ -165,7 +164,6 @@ export async function verify_email(version = 1, token) {
  * SIGNOUT
  *
  */
-
 export async function signout(version = 1) {
   if (!Number(version)) {
     throw new Error('Invalid api version specified in signup');
