@@ -10,8 +10,6 @@ import Linegraph from '../../components/graphs/line';
 
 // COMPONENTS > ICONS
 import Icon_chart from '../../components/icons/chart/index.js';
-import Icon_check from '../../components/icons/check';
-import Icon_cross from '../../components/icons/error';
 
 // CONTEXT
 import { Context } from '../../context';
@@ -407,6 +405,108 @@ class Comp_circle extends React.Component {
 
 /**
  *
+ * SCROLL NUMBER COMPONENT
+ *
+ */
+class Comp_scroll_number extends React.Component {
+  static contextType = Context;
+
+  constructor(props) {
+    super(props);
+    this.state = {};
+
+    this.ctr_ref = React.createRef();
+  }
+
+  componentDidMount() {
+    const ctr_div = this.ctr_ref.current;
+    const str = this.props.data.toString();
+    const dec = 22; // decrement
+    const from = Number(this.props.data) - dec;
+
+    if (from < 10) {
+      ctr_div.textContent = this.props.data;
+
+      return;
+    }
+
+    for (let i = 0; i < str.length; i++) {
+      const slot = document.createElement('div');
+
+      slot.classList.add(style['compscrollnumber-slot']);
+
+      ctr_div.appendChild(slot);
+    }
+
+    let ctr = 0;
+    for (let i = str.length - 1; i > -1; i--) {
+      if (ctr === 0) {
+        for (let j = 0; j < dec; j++) {
+          const digit = document.createElement('div');
+          const num_str = (from + j + 1).toString();
+
+          digit.textContent = num_str[num_str.length - 1];
+
+          ctr_div.children[i].appendChild(digit);
+        }
+      }
+
+      if (ctr === 1) {
+        let existing_nums = '';
+
+        for (let j = 0; j < dec; j++) {
+          const digit = document.createElement('div');
+          const num_str = (from + j + 1).toString();
+
+          if (!existing_nums.includes(num_str[num_str.length - 2])) {
+            digit.textContent = num_str[num_str.length - 2];
+
+            ctr_div.children[i].appendChild(digit);
+
+            existing_nums = existing_nums + num_str[num_str.length - 2];
+          }
+        }
+      }
+
+      if (ctr !== 0 && ctr !== 1) {
+        const digit = document.createElement('div');
+        digit.textContent = str[i];
+        ctr_div.children[i].appendChild(digit);
+      }
+
+      ctr++;
+    }
+
+    for (let i = str.length - 1; i > str.length - 3; i--) {
+      const percentage = ctr_div.children[i].children.length - 1;
+      /**
+       *       const style = document.createElement('style');
+
+      document.head.appendChild(style);
+
+      const style_str =
+        '.compscrollnumber-slotslide' + i + ' { top: -' + percentage + '00%; }';
+
+      style.sheet.insertRule(style_str, style.sheet.cssRules.length);
+       * 
+            ctr_div.children[i].classList.add('.compscrollnumber-slotslide' + i);
+       */
+
+      setTimeout(() => {
+        ctr_div.children[i].style.top = '-' + percentage + '00%';
+      }, 1000);
+    }
+  }
+
+  render() {
+    return (
+      <div ref={this.ctr_ref} className={cn(style['compscrollnumber'])}></div>
+    );
+  }
+}
+
+/**
+ *
  * SCORE CARD COMPONENT
  *
  *
@@ -429,11 +529,16 @@ class Comp_scores extends React.Component {
     return (
       <div className={cn(style['compscores'])}>
         <div className={cn(style['compscores-top'])}>
-          <div className={cn(style['compscores-top-title'])}>
-            {this.props.data.name} ({this.props.data.symbol})
+          <div className={cn(style['compscores-top-left'])}>
+            <div className={cn(style['compscores-top-left-title'])}>
+              {this.props.data.name} ({this.props.data.symbol})
+            </div>
+            <div className={cn(style['compscores-top-left-address'])}>
+              {this.props.data.address}
+            </div>
           </div>
-          <div className={cn(style['compscores-top-address'])}>
-            {this.props.data.address}
+          <div className={cn(style['compscores-top-right'])}>
+            <Comp_scroll_number data={Number(this.props.data.holder_count)} />
           </div>
         </div>
         <div className={cn(style['compscores-bottom'])}>
@@ -577,8 +682,6 @@ class Audits extends React.Component {
 
       return;
     }
-
-    console.log(this.props);
   }
 
   componentDidUpdate() {}
@@ -597,15 +700,6 @@ class Audits extends React.Component {
           <section className={cn('section', style['sectionaudits'])}>
             <div className={cn(style['sectionaudits-left'])}>
               <Comp_scores data={this.props} />
-
-              <div className={cn(style['sectionaudits-left-checkboxes'])}>
-                <Comp_check_box title="Anti Whale Test" secure={false} />
-                <Comp_check_box title="Anti Whale" secure={false} />
-                <Comp_check_box title="Anti Whale" secure={true} />
-                <Comp_check_box title="Anti Whale" secure={false} />
-                <Comp_check_box title="Anti Whale" secure={true} />
-                <Comp_check_box title="Anti Whale" secure={false} />
-              </div>
             </div>
             <div className={cn(style['sectionaudits-right'])}></div>
           </section>

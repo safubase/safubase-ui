@@ -103,19 +103,28 @@ COMPONENT CIRCLE
   padding: 1.4rem;
   border-bottom: 1px solid rgba(0, 0, 0, 0.15);
   height: 100px;
+  display: flex; justify-content: space-between; align-items: center;
 }
 
 @media only screen and (max-width: 650px) {
   .compscores-top {
     padding: 1rem;
+    height: auto;
+    display: block;
   }
 }
 
-.compscores-top-title {
+@media only screen and (max-width: 650px) {
+  .compscores-top-right {
+    margin-top: 1rem;
+  }
+}
+
+.compscores-top-left-title {
   font-size: 17px; font-weight: 600;
 }
 
-.compscores-top-address {
+.compscores-top-left-address {
   font-size: 15px; font-weight: 400;
   color: rgba(0, 0, 0, 0.6);
   word-break: break-all;
@@ -127,16 +136,16 @@ COMPONENT CIRCLE
   display: flex; justify-content: flex-start; align-items: flex-start; 
 }
 
-@media only screen and (max-width: 650px) {
-  .compscores-bottom {
-    padding: 1rem;
-  }
-}
-
 @media only screen and (max-width: 950px) {
   .compscores-bottom {
     display: block;
     height: auto;
+  }
+}
+
+@media only screen and (max-width: 650px) {
+  .compscores-bottom {
+    padding: 1rem;
   }
 }
 
@@ -239,6 +248,24 @@ COMPONENT CIRCLE
   background-color: var(--red);
   transition: all 1s ease-in;
 }
+
+
+/* COMPONENT SCROLL NUMBER */
+.compscrollnumber {
+  border: 1px solid red;
+  font-size: 22px;
+  height: 34px;
+  display: flex;
+  overflow: hidden;
+  position: relative;
+}
+
+.compscrollnumber-slot {
+  border: 1px solid red;
+  position: relative;
+  transition: all .6s ease-in;
+}
+
 
 
 /*
