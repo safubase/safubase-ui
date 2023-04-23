@@ -435,6 +435,8 @@ class Comp_scroll_number extends React.Component {
 
       slot.classList.add(style['compscrollnumber-slot']);
 
+      slot.style.top = '0%';
+
       ctr_div.appendChild(slot);
     }
 
@@ -479,22 +481,25 @@ class Comp_scroll_number extends React.Component {
 
     for (let i = str.length - 1; i > str.length - 3; i--) {
       const percentage = ctr_div.children[i].children.length - 1;
+
       /**
        *       const style = document.createElement('style');
-
       document.head.appendChild(style);
 
       const style_str =
         '.compscrollnumber-slotslide' + i + ' { top: -' + percentage + '00%; }';
 
+      style.innerHTML = style_str;
+
       style.sheet.insertRule(style_str, style.sheet.cssRules.length);
-       * 
+
             ctr_div.children[i].classList.add('.compscrollnumber-slotslide' + i);
+       * 
        */
 
       setTimeout(() => {
         ctr_div.children[i].style.top = '-' + percentage + '00%';
-      }, 1000);
+      }, 200);
     }
   }
 

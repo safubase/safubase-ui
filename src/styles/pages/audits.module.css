@@ -252,8 +252,8 @@ COMPONENT CIRCLE
 
 /* COMPONENT SCROLL NUMBER */
 .compscrollnumber {
-  border: 1px solid red;
-  font-size: 22px;
+
+  font-size: 23px;
   height: 34px;
   display: flex;
   overflow: hidden;
@@ -261,12 +261,10 @@ COMPONENT CIRCLE
 }
 
 .compscrollnumber-slot {
-  border: 1px solid red;
+
   position: relative;
-  transition: all .6s ease-in;
+  transition: all 1s ease;
 }
-
-
 
 /*
 COMPONENT CHECK BOX
