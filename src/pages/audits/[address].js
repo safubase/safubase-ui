@@ -493,10 +493,10 @@ class Comp_scroll_number extends React.Component {
       const height_slot = ctr_div.children[i].getBoundingClientRect().height;
       const height = height_slot * ctr_div.children[i].children.length;
 
-      ctr_div.children[i].style.height = height + 'px';
+      ctr_div.children[i].style.height = '650px';
 
       setTimeout(() => {
-        ctr_div.children[i].style.top = '-' + (height - height_slot) + 'px';
+        ctr_div.children[i].style.top = '-' + (650 - height_slot) + 'px';
       }, 200);
     }
   }

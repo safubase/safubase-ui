@@ -138,7 +138,7 @@ COMPONENT CIRCLE
 
 .compscores-top-left-address {
   font-size: 15px; font-weight: 400;
-  color: rgba(0, 0, 0, 0.6);
+  color: rgba(0, 0, 0, 0.8);
   word-break: break-all;
 }
 
@@ -271,17 +271,18 @@ COMPONENT CIRCLE
 .compscrollnumber {
   height: 27px;
   display: flex;
+  overflow: hidden;
   position: relative;
   margin-left: .6rem;
   color: rgba(0, 0, 0, 0.6);
- 
+  
 }
 
 .compscrollnumber-slot {
   position: relative;
   transition: all 2s ease;
-  font-weight: 400;
-  border: 1px solid red;
+  font-weight: 400; font-size: 19px;
+  display: flex; justify-content: space-between; align-items: center; flex-direction: column;
 }
 
 /*
