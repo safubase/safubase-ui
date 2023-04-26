@@ -497,7 +497,7 @@ class Comp_scroll_number extends React.Component {
 
       setTimeout(() => {
         ctr_div.children[i].style.top = '-' + (height - height_slot) + 'px';
-      }, 50);
+      }, 200);
     }
   }
 
