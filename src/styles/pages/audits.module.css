@@ -271,7 +271,6 @@ COMPONENT CIRCLE
 .compscrollnumber {
   height: 27px;
   display: flex;
-
   position: relative;
   margin-left: .6rem;
   color: rgba(0, 0, 0, 0.6);
@@ -282,6 +281,7 @@ COMPONENT CIRCLE
   position: relative;
   transition: all 2s ease;
   font-weight: 400;
+  border: 1px solid red;
 }
 
 /*
