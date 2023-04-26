@@ -56,14 +56,14 @@ function global_sort_audits_by_date(data) {
  *
  */
 export async function getServerSideProps({ req }) {
-  const api_res_audits = await UTILS_API.blockchain_get_audits(1);
+  const api_res_get_audits = await UTILS_API.blockchain_get_audits(1);
 
-  global_sort_audits_by_date(api_res_audits.data);
+  global_sort_audits_by_date(api_res_get_audits.data);
 
   // humanize created at value
-  for (let i = 0; i < api_res_audits.data.length; i++) {
-    api_res_audits.data[i].created_at = new Date(
-      api_res_audits.data[i].created_at
+  for (let i = 0; i < api_res_get_audits.data.length; i++) {
+    api_res_get_audits.data[i].created_at = new Date(
+      api_res_get_audits.data[i].created_at
     )
       .toISOString()
       .split('T')[0];
@@ -71,7 +71,7 @@ export async function getServerSideProps({ req }) {
 
   return {
     props: {
-      audits: api_res_audits.data,
+      audits: api_res_get_audits.data,
     },
   };
 }
@@ -1783,55 +1783,6 @@ class Home extends React.Component {
    */
   componentDidMount() {
     this.init();
-
-    const store = {
-      // store props
-      _id: 123,
-      name: 'Arslan Cafe',
-      email: 'behcetcafe@gmail.com',
-      phone: '+90 212 232 3223',
-
-      // location props
-      loc_province_id: 34,
-      loc_district_id: 428,
-      loc_neighborhood_id: 32133,
-      loc_longitude: 12323.423,
-      loc_attitude: 12322.43,
-      loc_map_url: 'goog.le/maps/123dcu9sdf',
-
-      // Owner props
-      owner_id: '123',
-      owner_identity: '54562168906',
-      owner_name: 'Parcala',
-      owner_surname: 'Behcet',
-      owner_phone: '9032423432',
-      owner_name_backup: 'Ataberk',
-      owner_surname_backup: 'Karinca',
-      owner_phone_backup: '90234234234',
-
-      created_at: new Date(),
-      updated_at: new Date(),
-    };
-
-    const machine = {
-      serial_number: 1,
-      gamepad_count: 1,
-      games: '',
-      model: 'ps4',
-
-      rent_by: 123123,
-
-      rent_start_at: new Date(),
-      rent_end_at: new Date(),
-
-      rent_price_one_day: 120,
-      rent_price_two_day: 120,
-      rent_price_three_day: 120,
-      rent_price_four_day: null,
-      rent_price_five_day: 120,
-
-      state: -1,
-    };
   }
 
   componentDidUpdate() {}
