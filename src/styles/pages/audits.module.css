@@ -263,7 +263,6 @@ COMPONENT CIRCLE
 
 /* COMPONENT SCROLL NUMBER */
 .compscrollnumber {
-  font-size: 18.5px; font-weight: 400;
   height: 27px;
   display: flex;
   overflow: hidden;
@@ -276,7 +275,7 @@ COMPONENT CIRCLE
 .compscrollnumber-slot {
   position: relative;
   transition: all 2s ease;
-
+  font-weight: 400;
 }
 
 /*
