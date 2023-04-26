@@ -419,85 +419,74 @@ class Comp_scroll_number extends React.Component {
   }
 
   componentDidMount() {
+    const size = 19;
     const ctr_div = this.ctr_ref.current;
-    const str = this.props.data.toString();
-    const dec = 22; // decrement
-    const from = Number(this.props.data) - dec;
 
-    if (from < 10) {
-      ctr_div.textContent = this.props.data;
+    ctr_div.style.fontSize = size + 'px';
+    ctr_div.style.height = size + 'px';
+    ctr_div.style.lineHeight = size + 'px';
 
+    const dec = 23;
+    const holder_count = this.props.data.toString();
+    const holder_count_from = Number(holder_count) - dec;
+
+    if (holder_count_from < 10) {
+      ctr_div.textContent = holder_count;
       return;
     }
 
-    for (let i = 0; i < str.length; i++) {
-      const slot = document.createElement('div');
+    // Create slot divs for each digit
+    for (let i = 0; i < holder_count.length; i++) {
+      const slot_div = document.createElement('div');
 
-      slot.classList.add(style['compscrollnumber-slot']);
+      slot_div.classList.add(style['compscrollnumber-slot']);
 
-      slot.style.top = '0%';
-
-      ctr_div.appendChild(slot);
+      ctr_div.appendChild(slot_div);
     }
 
     let ctr = 0;
-
-    for (let i = str.length - 1; i > -1; i--) {
+    for (let i = holder_count.length - 1; i > -1; i--) {
       if (ctr === 0) {
         for (let j = 0; j < dec; j++) {
+          const from_index_str = (holder_count_from + j + 1).toString();
           const digit = document.createElement('div');
-          const num_str = (from + j + 1).toString();
-
-          digit.textContent = num_str[num_str.length - 1];
-
+          digit.textContent = from_index_str[from_index_str.length - 1];
           ctr_div.children[i].appendChild(digit);
         }
       }
 
       if (ctr === 1) {
-        let existing_nums = '';
-
+        let digits = '';
         for (let j = 0; j < dec; j++) {
+          const from_index_str = (holder_count_from + j + 1).toString();
           const digit = document.createElement('div');
-          const num_str = (from + j + 1).toString();
 
-          if (!existing_nums.includes(num_str[num_str.length - 2])) {
-            digit.textContent = num_str[num_str.length - 2];
-
+          if (!digits.includes(from_index_str[from_index_str.length - 2])) {
+            digit.textContent = from_index_str[from_index_str.length - 2];
             ctr_div.children[i].appendChild(digit);
 
-            existing_nums = existing_nums + num_str[num_str.length - 2];
+            digits = digits + from_index_str[from_index_str.length - 2];
           }
         }
       }
 
       if (ctr !== 0 && ctr !== 1) {
         const digit = document.createElement('div');
-        digit.textContent = str[i];
+        digit.textContent = holder_count[i];
         ctr_div.children[i].appendChild(digit);
       }
 
       ctr++;
     }
 
-    for (let i = str.length - 1; i > str.length - 3; i--) {
-      /**
-       *       const percentage = ctr_div.children[i].children.length - 1;
+    for (let i = holder_count.length - 1; i > holder_count.length - 3; i--) {
+      const height_total = ctr_div.children[i].children.length * size;
+      ctr_div.children[i].style.height = height_total + 'px';
+      ctr_div.children[i].style.top = '0';
 
       setTimeout(() => {
-        ctr_div.children[i].style.top = '-' + percentage + '00%';
-      }, 50);
-       * 
-       */
-
-      const height_slot = ctr_div.children[i].getBoundingClientRect().height;
-      const height = height_slot * ctr_div.children[i].children.length;
-
-      ctr_div.children[i].style.height = '650px';
-
-      setTimeout(() => {
-        ctr_div.children[i].style.top = '-' + (650 - height_slot) + 'px';
-      }, 200);
+        ctr_div.children[i].style.top = '-' + (height_total - size) + 'px';
+      }, 1000);
     }
   }
 

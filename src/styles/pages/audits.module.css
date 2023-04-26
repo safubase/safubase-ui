@@ -123,7 +123,7 @@ COMPONENT CIRCLE
 
 .compscores-top-right {
   font-size: 19px; font-weight: 500;
-  display: flex;
+  display: flex; justify-content: flex-start; align-items: center;
 }
 
 @media only screen and (max-width: 650px) {
@@ -269,21 +269,20 @@ COMPONENT CIRCLE
 
 /* COMPONENT SCROLL NUMBER */
 .compscrollnumber {
-  height: 27px;
+  font-weight: 400;
   display: flex;
   overflow: hidden;
   position: relative;
   margin-left: .6rem;
   color: rgba(0, 0, 0, 0.6);
-  
+
 }
 
 .compscrollnumber-slot {
-  position: relative;
   transition: all 2s ease;
-  font-weight: 400; font-size: 19px;
-  display: flex; justify-content: space-between; align-items: center; flex-direction: column;
+  position: relative;
 }
+
 
 /*
 COMPONENT CHECK BOX
