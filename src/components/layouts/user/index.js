@@ -40,7 +40,10 @@ class Layout_user extends React.Component {
         <main
           className={cn(
             style['main'],
-            this.context.state.ui_sidebar_open ? style['mainsidebaropen'] : null
+            this.context.state.ui_sidebar_open
+              ? style['mainsidebaropen']
+              : null,
+            this.props.height === 'auto' ? style['mainautoheight'] : null
           )}
         >
           {this.props.element || this.props.children}

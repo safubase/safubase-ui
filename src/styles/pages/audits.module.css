@@ -32,7 +32,14 @@
 @media only screen and (max-width: 1150px) {
   .sectionaudits-right {
     width: auto;
+    margin-top: 1rem;
   }
+}
+
+.sectionaudits-right > iframe {
+  width: 100%; height: 460px;
+  border-radius: var(--border-radius-small);
+  margin-bottom: 1rem;
 }
 
 .sectionaudits-right-banner {
@@ -49,7 +56,6 @@
   height: 100%;
   display: block;
 }
-
 
 /* 
 COMPONENT CIRCLE
@@ -87,7 +93,6 @@ COMPONENT CIRCLE
   font-size: 17px; font-weight: 500;
 }
 
-
 /*
 *
 * SCORES CARD COMPONENT
@@ -97,6 +102,7 @@ COMPONENT CIRCLE
 .compscores {
   border: 1px solid rgba(0, 0, 0, 0.25);
   border-radius: var(--border-radius-small);
+  margin-bottom: 1rem;
 }
 
 .compscores-top {
@@ -112,6 +118,11 @@ COMPONENT CIRCLE
     height: auto;
     display: block;
   }
+}
+
+.compscores-top-right {
+  font-size: 18px; font-weight: 500;
+  display: flex;
 }
 
 @media only screen and (max-width: 650px) {
@@ -249,85 +260,125 @@ COMPONENT CIRCLE
   transition: all 1s ease-in;
 }
 
-
 /* COMPONENT SCROLL NUMBER */
 .compscrollnumber {
-
-  font-size: 23px;
-  height: 34px;
+  font-size: 18px; font-weight: 400;
+  height: 26px;
   display: flex;
   overflow: hidden;
   position: relative;
+  margin-left: .6rem;
+  color: rgba(0, 0, 0, 0.6);
 }
 
 .compscrollnumber-slot {
-
   position: relative;
-  transition: all 1s ease;
+  transition: all 2s ease;
+
 }
 
 /*
 COMPONENT CHECK BOX
 */
-.compcheckbox {
-  border: 1px solid rgba(0, 0, 0, 0.25);
-  padding: 1rem;
-  border-radius: var(--border-radius-small);
-  display: flex; justify-content: flex-start; align-items: center;
+.compcheckboxes {
+
+}
+
+.compcheckboxes-row {
+  display: flex; justify-content: space-between; align-items: center;
   margin-bottom: 1rem;
-  margin-right: 1rem;
 }
 
-
-@media only screen and (max-width: 650px) {
-  .compcheckbox {
-    width: 100%;
-    justify-content: space-between;
-  }
+.compcheckboxes-row-checkbox {
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  border-radius: var(--border-radius-small);
+  display: flex; justify-content: flex-start; align-items: flex-start;
+  width: 50%; height: 80px;
+  overflow: hidden;
 }
 
-.compcheckbox-left  {
-
+.compcheckboxes-row-checkbox:nth-child(2) {
+  margin-left: 1rem;
 }
 
-@media only screen and (max-width: 650px) {
-  .compcheckbox-left  {
-    display: flex;
-  }
-}
-
-.compcheckbox-left > div {
-  text-align: center;
-  font-size: 19px; font-weight: 500;
-}
-
-@media only screen and (max-width: 650px) {
-  .compcheckbox-left > div {
-    margin-right: .6rem;
-    font-size: 18px;
-  }
-}
-
-.compcheckbox-right  {
-  border: 8px solid var(--red);
-  margin-left: 2rem;
-  width: 80px; height: 80px;
-  border-radius: 50%;
-  position: relative;
+.compcheckboxes-row-checkbox-left  {
+  background-color: var(--red);
+  width: 40%; height: 100%;
+  border-radius: 1px solid rgba(0, 0, 0, 0.25);
   display: flex; justify-content: center; align-items: center;
 }
 
-.compcheckbox-right > svg  {
-  width: 65%; height: 65%;
-  color: var(--red);
-} 
-
-
-.compcheckbox-rightsecure {
-  border-color: var(--green);
+.compcheckboxes-row-checkbox-leftsecure  {
+  background-color: var(--green);
 }
 
-.compcheckbox-rightsecure > svg {
-  color: var(--green);
+.compcheckboxes-row-checkbox-left > svg  {
+  color: white;
+  width: 60%; height: 60%;
+}
+
+.compcheckboxes-row-checkbox-right  {
+  display: flex; justify-content: center; align-items: center;
+  width: 60%; height: 100%;
+  padding: 1rem;
+  text-align: center;
+  font-weight: 500;
+}
+
+/* COMPONENT INFO BOX */
+.compinfoboxes {
+
+}
+
+.compinfoboxes-row {
+  display: flex; justify-content: flex-start; align-items: center;
+}
+
+@media only screen and (max-width: 1250px) {
+  .compinfoboxes-row {
+    flex-wrap: wrap;
+  }
+}
+
+.compinfoboxes-row-box {
+  font-size: 15px;
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  border-radius: var(--border-radius-small);
+  display: flex;
+  margin-right: 1rem;
+  margin-bottom: 1rem;
+  width: 25%; height: 80px;
+}
+
+@media only screen and (max-width: 1450px) {
+  .compinfoboxes-row-box {
+    width: auto;
+  }
+}
+
+@media only screen and (max-width: 650px) {
+  .compinfoboxes-row-box {
+    width: 100%; height: auto;
+  }
+}
+
+.compinfoboxes-row-box:nth-last-child(1) {
+  margin-right: 0;
+}
+
+
+
+.compinfoboxes-row-box-key {
+  padding: 1rem;
+  border-right: 1px solid rgba(0, 0, 0, 0.25);
+  display: flex; justify-content: center; align-items: center;
+  text-align: center;
+  font-weight: 500;
+}
+
+.compinfoboxes-row-box-value {
+  display: flex; justify-content: center; align-items: center;
+  text-align: center;
+  padding: 1rem;
 }
 

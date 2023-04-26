@@ -482,24 +482,9 @@ class Comp_scroll_number extends React.Component {
     for (let i = str.length - 1; i > str.length - 3; i--) {
       const percentage = ctr_div.children[i].children.length - 1;
 
-      /**
-       *       const style = document.createElement('style');
-      document.head.appendChild(style);
-
-      const style_str =
-        '.compscrollnumber-slotslide' + i + ' { top: -' + percentage + '00%; }';
-
-      style.innerHTML = style_str;
-
-      style.sheet.insertRule(style_str, style.sheet.cssRules.length);
-
-            ctr_div.children[i].classList.add('.compscrollnumber-slotslide' + i);
-       * 
-       */
-
       setTimeout(() => {
         ctr_div.children[i].style.top = '-' + percentage + '00%';
-      }, 200);
+      }, 50);
     }
   }
 
@@ -543,7 +528,7 @@ class Comp_scores extends React.Component {
             </div>
           </div>
           <div className={cn(style['compscores-top-right'])}>
-            <Comp_scroll_number data={Number(this.props.data.holder_count)} />
+            Holders: <Comp_scroll_number data={this.props.data.holder_count} />
           </div>
         </div>
         <div className={cn(style['compscores-bottom'])}>
@@ -637,19 +622,256 @@ class Comp_check_box extends React.Component {
 
   render() {
     return (
-      <div className={cn(style['compcheckbox'])}>
-        <div className={cn(style['compcheckbox-left'])}>
-          {this.props.title.split(' ').map((curr, index) => {
-            return <div key={index}>{curr}</div>;
-          })}
+      <div className={cn(style['compcheckboxes'])}>
+        <div className={cn(style['compcheckboxes-row'])}>
+          <div className={cn(style['compcheckboxes-row-checkbox'])}>
+            <div
+              className={cn(
+                style['compcheckboxes-row-checkbox-left'],
+                this.props.data.anti_whale === '1'
+                  ? style['compcheckboxes-row-checkbox-leftsecure']
+                  : null
+              )}
+            >
+              {this.props.data.anti_whale === '1' ? <FaCheck /> : <FaTimes />}
+            </div>
+            <div className={cn(style['compcheckboxes-row-checkbox-right'])}>
+              Anti Whale
+            </div>
+          </div>
+
+          <div className={cn(style['compcheckboxes-row-checkbox'])}>
+            <div
+              className={cn(
+                style['compcheckboxes-row-checkbox-left'],
+                this.props.data.is_blacklisted === '1'
+                  ? style['compcheckboxes-row-checkbox-leftsecure']
+                  : null
+              )}
+            >
+              {this.props.data.is_blacklisted === '1' ? (
+                <FaCheck />
+              ) : (
+                <FaTimes />
+              )}
+            </div>
+            <div className={cn(style['compcheckboxes-row-checkbox-right'])}>
+              Blacklist
+            </div>
+          </div>
         </div>
-        <div
-          className={cn(
-            style['compcheckbox-right'],
-            this.props.secure ? style['compcheckbox-rightsecure'] : null
-          )}
-        >
-          {this.props.secure ? <FaCheck /> : <FaTimes />}
+
+        <div className={cn(style['compcheckboxes-row'])}>
+          <div className={cn(style['compcheckboxes-row-checkbox'])}>
+            <div
+              className={cn(
+                style['compcheckboxes-row-checkbox-left'],
+                this.props.data.is_honeypot === '1'
+                  ? style['compcheckboxes-row-checkbox-leftsecure']
+                  : null
+              )}
+            >
+              {this.props.data.is_honeypot === '1' ? <FaCheck /> : <FaTimes />}
+            </div>
+            <div className={cn(style['compcheckboxes-row-checkbox-right'])}>
+              Honeypot
+            </div>
+          </div>
+
+          <div className={cn(style['compcheckboxes-row-checkbox'])}>
+            <div
+              className={cn(
+                style['compcheckboxes-row-checkbox-left'],
+                this.props.data.is_mintable === '0'
+                  ? style['compcheckboxes-row-checkbox-leftsecure']
+                  : null
+              )}
+            >
+              {this.props.data.is_mintable === '0' ? <FaCheck /> : <FaTimes />}
+            </div>
+            <div className={cn(style['compcheckboxes-row-checkbox-right'])}>
+              Mintable
+            </div>
+          </div>
+        </div>
+
+        <div className={cn(style['compcheckboxes-row'])}>
+          <div className={cn(style['compcheckboxes-row-checkbox'])}>
+            <div
+              className={cn(
+                style['compcheckboxes-row-checkbox-left'],
+                this.props.data.is_open_source === '1'
+                  ? style['compcheckboxes-row-checkbox-leftsecure']
+                  : null
+              )}
+            >
+              {this.props.data.is_open_source === '1' ? (
+                <FaCheck />
+              ) : (
+                <FaTimes />
+              )}
+            </div>
+            <div className={cn(style['compcheckboxes-row-checkbox-right'])}>
+              Open Source
+            </div>
+          </div>
+
+          <div className={cn(style['compcheckboxes-row-checkbox'])}>
+            <div
+              className={cn(
+                style['compcheckboxes-row-checkbox-left'],
+                this.props.data.is_proxy === '0'
+                  ? style['compcheckboxes-row-checkbox-leftsecure']
+                  : null
+              )}
+            >
+              {this.props.data.is_proxy === '0' ? <FaCheck /> : <FaTimes />}
+            </div>
+            <div className={cn(style['compcheckboxes-row-checkbox-right'])}>
+              Proxy
+            </div>
+          </div>
+        </div>
+
+        <div className={cn(style['compcheckboxes-row'])}>
+          <div className={cn(style['compcheckboxes-row-checkbox'])}>
+            <div
+              className={cn(
+                style['compcheckboxes-row-checkbox-left'],
+                this.props.data.is_whitelisted === '0'
+                  ? style['compcheckboxes-row-checkbox-leftsecure']
+                  : null
+              )}
+            >
+              {this.props.data.is_whitelisted === '0' ? (
+                <FaCheck />
+              ) : (
+                <FaTimes />
+              )}
+            </div>
+            <div className={cn(style['compcheckboxes-row-checkbox-right'])}>
+              Whitelisted
+            </div>
+          </div>
+
+          <div className={cn(style['compcheckboxes-row-checkbox'])}>
+            <div
+              className={cn(
+                style['compcheckboxes-row-checkbox-left'],
+                this.props.data.selfdestruct === '0'
+                  ? style['compcheckboxes-row-checkbox-leftsecure']
+                  : null
+              )}
+            >
+              {this.props.data.selfdestruct === '0' ? <FaCheck /> : <FaTimes />}
+            </div>
+            <div className={cn(style['compcheckboxes-row-checkbox-right'])}>
+              Self Destruct
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+}
+
+/**
+ *
+ * INFO BOX COMPONENT
+ *
+ */
+class Comp_info_box extends React.Component {
+  static contextType = Context;
+
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
+  componentDidMount() {}
+
+  componentDidUpdate() {}
+
+  componentWillUnmount() {}
+
+  render() {
+    return (
+      <div className={cn(style['compinfoboxes'])}>
+        <div className={cn(style['compinfoboxes-row'])}>
+          <div className={cn(style['compinfoboxes-row-box'])}>
+            <div className={cn(style['compinfoboxes-row-box-key'])}>
+              Owner Address
+            </div>
+            <div className={cn(style['compinfoboxes-row-box-value'])}>
+              {UTILS.str_reduce(this.props.data.owner_address, 10) + '...'}
+            </div>
+          </div>
+
+          <div className={cn(style['compinfoboxes-row-box'])}>
+            <div className={cn(style['compinfoboxes-row-box-key'])}>
+              Owner Balance
+            </div>
+            <div className={cn(style['compinfoboxes-row-box-value'])}>
+              {this.props.data.owner_balance}
+            </div>
+          </div>
+
+          <div className={cn(style['compinfoboxes-row-box'])}>
+            <div className={cn(style['compinfoboxes-row-box-key'])}>
+              Creator Address
+            </div>
+            <div className={cn(style['compinfoboxes-row-box-value'])}>
+              {UTILS.str_reduce(this.props.data.creator_address, 10) + '...'}
+            </div>
+          </div>
+
+          <div className={cn(style['compinfoboxes-row-box'])}>
+            <div className={cn(style['compinfoboxes-row-box-key'])}>
+              Creator Balance
+            </div>
+            <div className={cn(style['compinfoboxes-row-box-value'])}>
+              {this.props.data.creator_balance}
+            </div>
+          </div>
+        </div>
+        <div className={cn(style['compinfoboxes-row'])}>
+          <div className={cn(style['compinfoboxes-row-box'])}>
+            <div className={cn(style['compinfoboxes-row-box-key'])}>
+              Buy Tax
+            </div>
+            <div className={cn(style['compinfoboxes-row-box-value'])}>
+              {this.props.data.buy_tax}
+            </div>
+          </div>
+
+          <div className={cn(style['compinfoboxes-row-box'])}>
+            <div className={cn(style['compinfoboxes-row-box-key'])}>
+              Sell Tax
+            </div>
+            <div className={cn(style['compinfoboxes-row-box-value'])}>
+              {this.props.data.sell_tax}
+            </div>
+          </div>
+
+          <div className={cn(style['compinfoboxes-row-box'])}>
+            <div className={cn(style['compinfoboxes-row-box-key'])}>
+              Slippage Modifiable
+            </div>
+            <div className={cn(style['compinfoboxes-row-box-value'])}>
+              {this.props.data.slippage_modifiable === '1' ? 'Yes' : 'No'}
+            </div>
+          </div>
+
+          <div className={cn(style['compinfoboxes-row-box'])}>
+            <div className={cn(style['compinfoboxes-row-box-key'])}>
+              Personal Slippage Modifiable
+            </div>
+            <div className={cn(style['compinfoboxes-row-box-value'])}>
+              {this.props.data.personal_slippage_modifiable === '1'
+                ? 'Yes'
+                : 'No'}
+            </div>
+          </div>
         </div>
       </div>
     );
@@ -687,6 +909,8 @@ class Audits extends React.Component {
 
       return;
     }
+
+    console.log(this.props);
   }
 
   componentDidUpdate() {}
@@ -701,12 +925,24 @@ class Audits extends React.Component {
           desc="Contract audit and investment security with artificial intelligence. Safubase is a security company."
         />
 
-        <Layout_user>
+        <Layout_user height="auto">
           <section className={cn('section', style['sectionaudits'])}>
             <div className={cn(style['sectionaudits-left'])}>
               <Comp_scores data={this.props} />
+              <Comp_info_box data={this.props} />
             </div>
-            <div className={cn(style['sectionaudits-right'])}></div>
+
+            <div className={cn(style['sectionaudits-right'])}>
+              <iframe
+                src={
+                  'https://dexscreener.com/bsc/' +
+                  this.props.address +
+                  '?embed=1&theme=dark&info=0'
+                }
+              ></iframe>
+
+              <Comp_check_box data={this.props} />
+            </div>
           </section>
         </Layout_user>
       </>

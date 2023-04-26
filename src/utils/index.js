@@ -69,6 +69,20 @@ export function str_remove_extra_space(str, mode = 0) {
   return '';
 }
 
+export function str_reduce(str, offset = 14) {
+  let result = '';
+
+  if (str.length > offset) {
+    for (let i = 0; i < offset; i++) {
+      result = result + str[i];
+    }
+
+    return result;
+  }
+
+  return str;
+}
+
 /*
  *
  * NUMBER FUNCTIONS
@@ -305,6 +319,7 @@ export default {
   sleep,
   str_copy,
   str_remove_extra_space,
+  str_reduce,
   num_add_commas,
   num_shorten,
   wallet_req_accounts,
