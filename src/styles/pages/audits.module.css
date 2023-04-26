@@ -142,6 +142,12 @@ COMPONENT CIRCLE
   word-break: break-all;
 }
 
+@media only screen and (max-width: 650px) {
+  .compscores-top-left-address {
+    font-size: 14px;
+  }
+}
+
 .compscores-bottom {
   padding: 1.4rem;
   height: 360px;

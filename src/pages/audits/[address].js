@@ -441,6 +441,7 @@ class Comp_scroll_number extends React.Component {
     }
 
     let ctr = 0;
+
     for (let i = str.length - 1; i > -1; i--) {
       if (ctr === 0) {
         for (let j = 0; j < dec; j++) {
@@ -480,10 +481,22 @@ class Comp_scroll_number extends React.Component {
     }
 
     for (let i = str.length - 1; i > str.length - 3; i--) {
-      const percentage = ctr_div.children[i].children.length - 1;
+      /**
+       *       const percentage = ctr_div.children[i].children.length - 1;
 
       setTimeout(() => {
         ctr_div.children[i].style.top = '-' + percentage + '00%';
+      }, 50);
+       * 
+       */
+
+      const height_slot = ctr_div.children[i].getBoundingClientRect().height;
+      const height = height_slot * ctr_div.children[i].children.length;
+
+      ctr_div.children[i].style.height = height + 'px';
+
+      setTimeout(() => {
+        ctr_div.children[i].style.top = '-' + (height - height_slot) + 'px';
       }, 50);
     }
   }
