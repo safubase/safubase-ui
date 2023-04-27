@@ -814,7 +814,7 @@ class Comp_info_box extends React.Component {
               Owner Balance
             </div>
             <div className={cn(style['compinfoboxes-row-box-value'])}>
-              {this.props.data.owner_balance}
+              {Number(this.props.data.owner_balance).toFixed(2)}
             </div>
           </div>
 
@@ -832,7 +832,7 @@ class Comp_info_box extends React.Component {
               Creator Balance
             </div>
             <div className={cn(style['compinfoboxes-row-box-value'])}>
-              {this.props.data.creator_balance}
+              {Number(this.props.data.creator_balance).toFixed(2)}
             </div>
           </div>
         </div>
