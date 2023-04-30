@@ -236,26 +236,11 @@ export async function blockchain_get_whales(version = 1, chain = 'bsc') {
     throw new Error('Invalid api version specified in signup');
   }
 
-  //const url = config.api_url + '/v' + version + '/blockchain/whales?chain=' + chain;
-
-  const api_match = {
-    avalanche: 'avax',
-    fantom: 'ftm',
-    arbitrum: 'arb',
-    polygon: 'poly',
-    bsc: 'bsc',
-    eth: 'eth',
-  };
   const url =
-    'https://dexcheck.io/' +
-    api_match[chain.toLowerCase()] +
-    '-api/whale_watcher?amount_min=10000&chain=' +
-    chain.toLowerCase() +
-    '&exclude_stable=true&size=20&exclude_bots=0&page=1';
+    config.api_url + '/v' + version + '/blockchain/whales?chain=' + chain;
 
   try {
-    //const res = await axios_instance.get(url);
-    const res = await axios.get(url);
+    const res = await axios_instance.get(url);
 
     res.code = undefined;
 
@@ -278,16 +263,15 @@ export async function blockchain_get_upcoming_unlocks(version = 1) {
     throw new Error('Invalid api version specified in signup');
   }
 
-  const url = 'https://dexcheck.io/unlocks/token_locks_combined?page=1';
+  const url = config.api_url + '/v' + version + '/blockchain/upcoming-unlocks';
 
   try {
-    const res = await axios.get(url);
+    const res = await axios_instance.get(url);
 
     res.code = undefined;
 
     return res;
   } catch (err) {
-    console.log(err);
     if (err.code === 'ERR_NETWORK') {
       return { code: err.code, message: 'No internet connection' };
     }
