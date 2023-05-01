@@ -389,6 +389,7 @@
 .compinput-modal-content {
   width: 800px;
   padding: 1rem;
+  border: 1px solid red;
 }
 
 @media only screen and (max-width: 1150px) {
@@ -921,53 +922,6 @@
   border: 2px solid rgb(202, 202, 202);
   cursor: pointer;
 }
-
-/*
-*
-* COMPONENT BOXES
-*
-*/
-.compboxes {
-  margin-top: 1rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-}
-
-@media only screen and (max-width: 650px) {
-  .compboxes {
-    display: none;
-  }
-}
-
-.compboxes-box {
-  width: 30%;
-  padding: 1rem;
-  border-radius: var(--border-radius-large);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: rgb(233, 233, 233);
-  margin-bottom: 1rem;
-}
-
-@media only screen and (max-width: 1150px) {
-  .compboxes-box {
-    width: 100%;
-    margin-right: 0;
-  }
-}
-
-.compboxes-box-title {
-  font-weight: bold;
-  font-size: 26px;
-}
-
-.compboxes-box-desc {
-  margin-left: 1rem;
-}
-
 
 
 /*

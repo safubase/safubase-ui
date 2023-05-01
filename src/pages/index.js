@@ -271,7 +271,7 @@ class Comp_input extends React.Component {
 
     // Modal progress bar done...
     window.location.replace(
-      'http://localhost:3000/audits/' +
+      'https://safubase.com/audits/' +
         this.state.address +
         '?chain_id=' +
         this.state.network.chain_id
@@ -428,56 +428,6 @@ class Comp_input extends React.Component {
                 ></div>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
-}
-
-/**
- *
- * BOXES COMPONENT
- *
- */
-class Comp_boxes extends React.Component {
-  static contextType = Context;
-
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
-  componentDidMount() {}
-
-  componentDidUpdate() {}
-
-  componentWillUnmount() {}
-
-  render() {
-    return (
-      <div className={cn(style['compboxes'])}>
-        <div className={cn(style['compboxes-box'])}>
-          <div className={cn(style['compboxes-box-title'])}>11</div>
-
-          <div className={cn(style['compboxes-box-desc'])}>
-            Lorem ipsum dolor
-          </div>
-        </div>
-
-        <div className={cn(style['compboxes-box'])}>
-          <div className={cn(style['compboxes-box-title'])}>6</div>
-
-          <div className={cn(style['compboxes-box-desc'])}>
-            Lorem ipsum dolor
-          </div>
-        </div>
-
-        <div className={cn(style['compboxes-box'])}>
-          <div className={cn(style['compboxes-box-title'])}>6</div>
-
-          <div className={cn(style['compboxes-box-desc'])}>
-            Lorem ipsum dolor
           </div>
         </div>
       </div>

@@ -10,6 +10,7 @@ import Linegraph from '../../components/graphs/line';
 
 // COMPONENTS > ICONS
 import Icon_chart from '../../components/icons/chart/index.js';
+import Icon_copy from '../../components/icons/copy';
 
 // CONTEXT
 import { Context } from '../../context';
@@ -882,6 +883,195 @@ class Comp_info_box extends React.Component {
 
 /**
  *
+ * COMPONENT INFO BOX 2
+ *
+ */
+class Comp_info_boxes2 extends React.Component {
+  static contextType = Context;
+
+  constructor(props) {
+    super(props);
+    this.state = {};
+
+    this.ctr_ref = React.createRef();
+  }
+
+  componentDidMount() {
+    const ctr_div = this.ctr_ref.current;
+    const child_len = ctr_div.children.length;
+    let i = 0;
+
+    const timer = setInterval(() => {
+      if (i >= child_len) {
+        clearInterval(timer);
+        return;
+      }
+
+      ctr_div.children[i].classList.add(style['compinfoboxes2-boxactive']);
+
+      i++;
+    }, 250);
+  }
+
+  componentDidUpdate() {}
+
+  componentWillUnmount() {}
+
+  render() {
+    return (
+      <div ref={this.ctr_ref} className={cn(style['compinfoboxes2'])}>
+        <div className={cn(style['compinfoboxes2-titles'])}>
+          <div className={cn(style['compinfoboxes2-titles-title'])}>TITLE</div>
+          <div className={cn(style['compinfoboxes2-titles-desc'])}>
+            DESCRIPTION
+          </div>
+          <div className={cn(style['compinfoboxes2-titles-value'])}>VALUE</div>
+        </div>
+
+        <div
+          className={cn(
+            style['compinfoboxes2-box'],
+            this.props.is_anti_whale === '0'
+              ? style['compinfoboxes2-boxredbg']
+              : style['compinfoboxes2-boxgreenbg']
+          )}
+        >
+          <div className={cn(style['compinfoboxes2-box-title'])}>
+            Anti Whale
+          </div>
+          <div className={cn(style['compinfoboxes2-box-desc'])}>
+            Indicates wether a token has anti whale protection or not.
+          </div>
+          <div className={cn(style['compinfoboxes2-box-value'])}>
+            {this.props.is_anti_whale === '1' ? 'Yes' : 'No'}
+          </div>
+        </div>
+
+        <div
+          className={cn(
+            style['compinfoboxes2-box'],
+            this.props.is_blacklisted === '1'
+              ? style['compinfoboxes2-boxredbg']
+              : style['compinfoboxes2-boxgreenbg']
+          )}
+        >
+          <div className={cn(style['compinfoboxes2-box-title'])}>
+            Blacklisted
+          </div>
+          <div className={cn(style['compinfoboxes2-box-desc'])}>
+            Indicates wether a token is blacklisted or not
+          </div>
+          <div className={cn(style['compinfoboxes2-box-value'])}>
+            {this.props.is_blacklisted === '1' ? 'Yes' : 'No'}
+          </div>
+        </div>
+
+        <div className={cn(style['compinfoboxes2-box'])}>
+          <div className={cn(style['compinfoboxes2-box-title'])}>Address</div>
+          <div className={cn(style['compinfoboxes2-box-desc'])}>
+            Indicates the token's address
+          </div>
+          <div className={cn(style['compinfoboxes2-box-value'], 'flxctrctr')}>
+            {UTILS.str_reduce(this.props.data.address, 8) + '...'}
+
+            <Icon_copy
+              onClick={async () => {
+                await UTILS.str_copy(this.props.data.address);
+
+                this.context.set_state({
+                  ...this.context.state,
+                  ui_toasts: [
+                    ...this.context.state.ui_toasts,
+                    {
+                      type: 'success',
+                      message: 'Address copied to clipboard',
+                      created_at: new Date(),
+                    },
+                  ],
+                });
+              }}
+            />
+          </div>
+        </div>
+
+        <div
+          className={cn(
+            style['compinfoboxes2-box'],
+            this.props.data.is_proxy === '0'
+              ? style['compinfoboxes2-boxredbg']
+              : style['compinfoboxes2-boxgreenbg']
+          )}
+        >
+          <div className={cn(style['compinfoboxes2-box-title'])}>Proxy</div>
+          <div className={cn(style['compinfoboxes2-box-desc'])}>
+            Indicates if a token is proxy
+          </div>
+          <div className={cn(style['compinfoboxes2-box-value'], 'flxctrctr')}>
+            {this.props.data.is_proxy === '1' ? 'Yes' : 'No'}
+          </div>
+        </div>
+
+        <div className={cn(style['compinfoboxes2-box'])}>
+          <div className={cn(style['compinfoboxes2-box-title'])}>Buy Tax</div>
+          <div className={cn(style['compinfoboxes2-box-desc'])}>
+            Buy tax of the token
+          </div>
+          <div className={cn(style['compinfoboxes2-box-value'], 'flxctrctr')}>
+            {Number(this.props.data.buy_tax || 0).toFixed(2)}
+          </div>
+        </div>
+
+        <div className={cn(style['compinfoboxes2-box'])}>
+          <div className={cn(style['compinfoboxes2-box-title'])}>Sell Tax</div>
+          <div className={cn(style['compinfoboxes2-box-desc'])}>
+            Sell tax of the token
+          </div>
+          <div className={cn(style['compinfoboxes2-box-value'], 'flxctrctr')}>
+            {Number(this.props.data.sell_tax || 0).toFixed(2)}
+          </div>
+        </div>
+
+        <div
+          className={cn(
+            style['compinfoboxes2-box'],
+            this.props.data.is_open_source === '0'
+              ? style['compinfoboxes2-boxredbg']
+              : style['compinfoboxes2-boxgreenbg']
+          )}
+        >
+          <div className={cn(style['compinfoboxes2-box-title'])}>
+            Open Source
+          </div>
+          <div className={cn(style['compinfoboxes2-box-desc'])}>
+            Shows if a token's source code is open source
+          </div>
+          <div className={cn(style['compinfoboxes2-box-value'], 'flxctrctr')}>
+            {this.props.data.is_open_source === '1' ? 'Yes' : 'No'}
+          </div>
+        </div>
+
+        <div
+          className={cn(
+            style['compinfoboxes2-box'],
+            this.props.data.is_mintable === '1'
+              ? style['compinfoboxes2-boxredbg']
+              : style['compinfoboxes2-boxgreenbg']
+          )}
+        >
+          <div className={cn(style['compinfoboxes2-box-title'])}>Mintable</div>
+          <div className={cn(style['compinfoboxes2-box-desc'])}>
+            Shows if the token is mintable
+          </div>
+          <div className={cn(style['compinfoboxes2-box-value'], 'flxctrctr')}>
+            {this.props.data.is_mintable === '1' ? 'Yes' : 'No'}
+          </div>
+        </div>
+      </div>
+    );
+  }
+}
+/**
+ *
  * PAGE
  *
  */
@@ -929,7 +1119,7 @@ class Audits extends React.Component {
           <section className={cn('section', style['sectionaudits'])}>
             <div className={cn(style['sectionaudits-left'])}>
               <Comp_scores data={this.props} />
-              <Comp_info_box data={this.props} />
+              <Comp_info_boxes2 data={this.props} />
             </div>
 
             <div className={cn(style['sectionaudits-right'])}>
@@ -937,11 +1127,9 @@ class Audits extends React.Component {
                 src={
                   'https://dexscreener.com/bsc/' +
                   this.props.address +
-                  '?embed=1&theme=dark&info=0'
+                  '?embed=1&theme=light&info=0&trades=0'
                 }
               ></iframe>
-
-              <Comp_check_box data={this.props} />
             </div>
           </section>
         </Layout_user>
