@@ -447,10 +447,7 @@ class Comp_last_adts extends React.Component {
       category: 'all',
       audits: props.data,
       animation: false,
-      chains: {
-        56: 'BSC',
-        1: 'ETH',
-      },
+      chain_id: '',
     };
 
     this.audits_ref = React.createRef();
@@ -549,11 +546,11 @@ class Comp_last_adts extends React.Component {
         <div className={cn(style['complastadts-cats'])}>
           <div
             onClick={() => {
-              this.setState({ ...this.state, category: 'all' });
+              this.setState({ ...this.state, chain_id: '' });
             }}
             className={cn(
               style['complastadts-cats-item'],
-              this.state.category === 'all'
+              this.state.chain_id === ''
                 ? style['complastadts-cats-itemactive']
                 : null
             )}
@@ -563,11 +560,11 @@ class Comp_last_adts extends React.Component {
 
           <div
             onClick={() => {
-              this.setState({ ...this.state, category: 'bsc' });
+              this.setState({ ...this.state, chain_id: '56' });
             }}
             className={cn(
               style['complastadts-cats-item'],
-              this.state.category === 'bsc'
+              this.state.chain_id === '56'
                 ? style['complastadts-cats-itemactive']
                 : null
             )}
@@ -577,11 +574,11 @@ class Comp_last_adts extends React.Component {
 
           <div
             onClick={() => {
-              this.setState({ ...this.state, category: 'ethereum' });
+              this.setState({ ...this.state, chain_id: '`ethereum`' });
             }}
             className={cn(
               style['complastadts-cats-item'],
-              this.state.category === 'ethereum'
+              this.state.chain_id === '`ethereum`'
                 ? style['complastadts-cats-itemactive']
                 : null
             )}
@@ -591,11 +588,11 @@ class Comp_last_adts extends React.Component {
 
           <div
             onClick={() => {
-              this.setState({ ...this.state, category: 'polygon' });
+              this.setState({ ...this.state, chain_id: '137' });
             }}
             className={cn(
               style['complastadts-cats-item'],
-              this.state.category === 'polygon'
+              this.state.chain_id === '137'
                 ? style['complastadts-cats-itemactive']
                 : null
             )}
@@ -605,11 +602,11 @@ class Comp_last_adts extends React.Component {
 
           <div
             onClick={() => {
-              this.setState({ ...this.state, category: 'solana' });
+              this.setState({ ...this.state, chain_id: '1399811149' });
             }}
             className={cn(
               style['complastadts-cats-item'],
-              this.state.category === 'solana'
+              this.state.chain_id === '1399811149'
                 ? style['complastadts-cats-itemactive']
                 : null
             )}
@@ -620,82 +617,93 @@ class Comp_last_adts extends React.Component {
 
         <div ref={this.audits_ref} className={cn(style['complastadts-audits'])}>
           {this.state.audits.map((curr, index) => {
-            return (
-              <div
-                key={index}
-                className={cn(
-                  style['complastadts-audits-item'],
-                  index % 2 === 0
-                    ? style['complastadts-audits-itemwhitebg']
-                    : null
-                )}
-              >
+            if (
+              this.state.chain_id === '' ||
+              curr.chain_id === this.state.chain_id
+            ) {
+              return (
                 <div
+                  key={index}
                   className={cn(
-                    style['complastadts-audits-item-imgnamesymbol']
+                    style['complastadts-audits-item'],
+                    index % 2 === 0
+                      ? style['complastadts-audits-itemwhitebg']
+                      : null
                   )}
                 >
                   <div
                     className={cn(
-                      style['complastadts-audits-item-imgnamesymbol-img']
+                      style['complastadts-audits-item-imgnamesymbol']
                     )}
                   >
-                    <img
-                      src={
-                        curr.logo ||
-                        'https://media.istockphoto.com/id/1268510010/vector/golden-one-token-coin-icon.jpg?s=612x612&w=0&k=20&c=rQ7yWnMEBFy8jUcjCjqa48-1ARmflM6aIn9svQ1En8E='
-                      }
-                    />
+                    <div
+                      className={cn(
+                        style['complastadts-audits-item-imgnamesymbol-img']
+                      )}
+                    >
+                      <img
+                        src={
+                          curr.logo ||
+                          'https://media.istockphoto.com/id/1268510010/vector/golden-one-token-coin-icon.jpg?s=612x612&w=0&k=20&c=rQ7yWnMEBFy8jUcjCjqa48-1ARmflM6aIn9svQ1En8E='
+                        }
+                      />
+                    </div>
+
+                    <div
+                      className={cn(
+                        style[
+                          'complastadts-audits-item-imgnamesymbol-namesymbol'
+                        ]
+                      )}
+                    >
+                      <div
+                        className={cn(
+                          style[
+                            'complastadts-audits-item-imgnamesymbol-namesymbol-symbol'
+                          ]
+                        )}
+                      >
+                        {curr.symbol}
+                      </div>
+
+                      <div
+                        className={cn(
+                          style[
+                            'complastadts-audits-item-imgnamesymbol-namesymbol-name'
+                          ]
+                        )}
+                      >
+                        {curr.name}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className={cn(style['complastadts-audits-item-date'])}>
+                    {curr.created_at}
                   </div>
 
                   <div
-                    className={cn(
-                      style['complastadts-audits-item-imgnamesymbol-namesymbol']
-                    )}
+                    className={cn(style['complastadts-audits-item-network'])}
                   >
-                    <div
-                      className={cn(
-                        style[
-                          'complastadts-audits-item-imgnamesymbol-namesymbol-symbol'
-                        ]
-                      )}
-                    >
-                      {curr.symbol}
-                    </div>
-
-                    <div
-                      className={cn(
-                        style[
-                          'complastadts-audits-item-imgnamesymbol-namesymbol-name'
-                        ]
-                      )}
-                    >
-                      {curr.name}
-                    </div>
+                    {curr.chain_id.toString() === '56' ? 'BSC' : null}
+                    {curr.chain_id.toString() === '1' ? 'ETH' : null}
+                    {curr.chain_id.toString() === '137' ? 'POLYGON' : null}
                   </div>
-                </div>
 
-                <div className={cn(style['complastadts-audits-item-date'])}>
-                  {curr.created_at}
+                  <a
+                    href={
+                      'https://safubase.com/audits/' +
+                      curr.address +
+                      '?chain_id=' +
+                      curr.chain_id
+                    }
+                    className={cn(style['complastadts-audits-item-btn'])}
+                  >
+                    VIEW
+                  </a>
                 </div>
-
-                <div className={cn(style['complastadts-audits-item-network'])}>
-                  {this.state.chains[Number(curr.chain_id)]}
-                </div>
-
-                <a
-                  href={
-                    'https://safubase.com/audits/' +
-                    curr.address +
-                    '?chain_id=' +
-                    curr.chain_id
-                  }
-                  className={cn(style['complastadts-audits-item-btn'])}
-                >
-                  VIEW
-                </a>
-              </div>
-            );
+              );
+            }
           })}
         </div>
       </div>
@@ -819,7 +827,7 @@ class Comp_profile_input extends React.Component {
 
         <div className={cn(style['compprofileinput-right'])}>
           <a
-            href="https://pinksale.finance"
+            href="https://www.pinksale.finance/launchpad/0x6fC397ddF50A70817b41dF1BAb806C1A68fA7Ae1?chain=BSC"
             target="_blank"
             className={cn(style['compprofileinput-right-buynow'])}
           >
@@ -940,7 +948,7 @@ class Comp_profile_input_mobile extends React.Component {
     return (
       <div className={cn(style['compprofileinputmobile'])}>
         <a
-          href="https://pinksale.finance"
+          href="https://www.pinksale.finance/launchpad/0x6fC397ddF50A70817b41dF1BAb806C1A68fA7Ae1?chain=BSC"
           target="_blank"
           className={cn(style['compprofileinputmobile-buynow'])}
         >

@@ -261,11 +261,26 @@ COMPONENT CIRCLE
 }
 
 .compscores-bottom-right-barctr-bar-progressfailed {
-  width: 35%; height: 100%;
+  width: 0%; height: 100%;
   position: absolute;
   background-color: var(--red);
-  transition: all 1s ease-in;
+  transition: all 2s ease-in;
 }
+
+.compscores-bottom-right-barctr-bar-progresspassed {
+  width: 0%; height: 100%;
+  position: absolute;
+  background-color: var(--green);
+  transition: all 2s ease;
+}
+
+.compscores-bottom-right-barctr-bar-progresswarnings {
+  width: 0%; height: 100%;
+  position: absolute;
+  background-color: var(--yellow);
+  transition: all 2s ease;
+}
+
 
 /* COMPONENT SCROLL NUMBER */
 .compscrollnumber {
@@ -403,11 +418,11 @@ COMPONENT CHECK BOX
 
 .compinfoboxes2-box {
   display: flex; justify-content: space-between; align-items: center;
-  padding: 1rem;
+  padding: .8rem;
   border-radius: var(--border-radius-small);
   background-color: #ebefef;
-  margin-bottom: 1.6rem;
-  height: 80px;
+  margin-bottom: 1.2rem;
+  height: 70px;
   opacity: 0;
   transition: all .3s ease-out;
 }
@@ -476,3 +491,8 @@ COMPONENT CHECK BOX
 }
 
 
+.anan {
+  display: block;
+  width: 100%;
+  border-radius: var(--border-radius-small);
+}

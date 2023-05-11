@@ -20,16 +20,20 @@ class Error extends React.Component {
   render() {
     return (
       <>
-        <Head title="Safubase.com | Blockchain Security with AI" desc="Contract audit and investment security with artificial intelligence. Safubase is a security company." />
+        <Head
+          title="Safubase.com | Blockchain Security with AI"
+          desc="Contract audit and investment security with artificial intelligence. Safubase is a security company."
+        />
+
         <main>
           <section className={cn('section', style['sectionerror'])}>
             <div className={cn(style['sectionerror-ctr'])}>
               <div className={cn(style['sectionerror-ctr-title'])}>
-                {this.props.status_code}
+                {this.props.data}
               </div>
 
               <div className={cn(style['sectionerror-ctr-desc'])}>
-                {this.props.status_code === 404
+                {this.props.data === 404
                   ? "Sorry, couldn't find the page you are looking for."
                   : null}
               </div>

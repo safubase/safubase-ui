@@ -27,6 +27,8 @@ class Layout_user extends React.Component {
     this.state = {};
   }
 
+  componentDidMount() {}
+
   componentDidUpdate() {}
 
   componentWillUnmount() {}
@@ -37,6 +39,7 @@ class Layout_user extends React.Component {
         <Header />
         <Sidebar />
         <Toaster />
+
         <main
           className={cn(
             style['main'],
@@ -48,6 +51,7 @@ class Layout_user extends React.Component {
         >
           {this.props.element || this.props.children}
         </main>
+
         <Script src="https://js.hcaptcha.com/1/api.js" async defer></Script>
       </>
     );

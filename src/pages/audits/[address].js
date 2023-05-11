@@ -510,9 +510,27 @@ class Comp_scores extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
+
+    this.progress_warnings_ref = React.createRef();
+    this.progress_passed_ref = React.createRef();
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+    const warnings_div = this.progress_warnings_ref.current;
+    const passed_div = this.progress_passed_ref.current;
+
+    const passed_count = this.props.data.passed
+      ? this.props.data.passed.split('_').length
+      : 0;
+
+    const warnings_count = this.props.data.warnings
+      ? this.props.data.warnings.split('_').length
+      : 0;
+
+    const warnings_percent = 100 / (8 / warnings_count);
+
+    warnings_div.style.width = warnings_percent + '%';
+  }
 
   componentDidUpdate() {}
 
@@ -559,6 +577,7 @@ class Comp_scores extends React.Component {
               >
                 <span>10</span> Failed
               </div>
+
               <div className={cn(style['compscores-bottom-right-barctr-bar'])}>
                 <div
                   className={cn(
@@ -572,12 +591,18 @@ class Comp_scores extends React.Component {
               <div
                 className={cn(style['compscores-bottom-right-barctr-label'])}
               >
-                <span>10</span> Warnings
+                <span>
+                  {this.props.data.warnings
+                    ? this.props.data.warnings.split('_').length
+                    : 0}
+                </span>{' '}
+                Warnings
               </div>
               <div className={cn(style['compscores-bottom-right-barctr-bar'])}>
                 <div
+                  ref={this.progress_warnings_ref}
                   className={cn(
-                    style['compscores-bottom-right-barctr-bar-progressfailed']
+                    style['compscores-bottom-right-barctr-bar-progresswarnings']
                   )}
                 ></div>
               </div>
@@ -589,10 +614,12 @@ class Comp_scores extends React.Component {
               >
                 <span>10</span> Passed
               </div>
+
               <div className={cn(style['compscores-bottom-right-barctr-bar'])}>
                 <div
+                  ref={this.progress_passed_ref}
                   className={cn(
-                    style['compscores-bottom-right-barctr-bar-progressfailed']
+                    style['compscores-bottom-right-barctr-bar-progresspassed']
                   )}
                 ></div>
               </div>
@@ -1101,6 +1128,8 @@ class Audits extends React.Component {
 
       return;
     }
+
+    console.log(this.props);
   }
 
   componentDidUpdate() {}
@@ -1130,6 +1159,11 @@ class Audits extends React.Component {
                   '?embed=1&theme=light&info=0&trades=0'
                 }
               ></iframe>
+
+              <img
+                className={cn(style['anan'])}
+                src="https://cdn.discordapp.com/attachments/531837640740175882/1106198956297433178/safubase-ads.png"
+              />
             </div>
           </section>
         </Layout_user>

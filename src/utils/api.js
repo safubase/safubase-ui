@@ -305,6 +305,8 @@ export async function blockchain_audit(version = 1, { address, chain_id }) {
 
     return res;
   } catch (err) {
+    console.log(err);
+
     if (err.code === 'ERR_NETWORK') {
       return { code: err.code, message: 'No internet connection' };
     }

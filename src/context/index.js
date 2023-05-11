@@ -8,12 +8,13 @@ const initial_state = {
   ui_toasts: [],
   // user props
   user_auth: null, // false = logged out, true = logged in, null = waiting for the server response
-  // httponly cookie in the browser backend for authentication
+  // httponly cookie in the browser's backend for authentication
   user_id: null,
   user_username: null,
   user_email: null,
   user_email_verified: null,
   user_role: null,
+  user_img: null,
   // wallet props
   wallet_address: null,
 };

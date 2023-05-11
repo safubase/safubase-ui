@@ -22,7 +22,7 @@ class App extends React.Component {
     if (this.props.pageProps.statusCode) {
       return (
         <Provider>
-          <Error status_code={this.props.pageProps.statusCode} />
+          <Error data={this.props.pageProps.statusCode} />
         </Provider>
       );
     }
