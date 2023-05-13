@@ -1,6 +1,6 @@
 // MODULES
 import React from 'react';
-import { HiDocument, HiOutlineDocument } from 'react-icons/io';
+import { HiDocument, HiOutlineDocument } from 'react-icons/hi';
 
 class Docs extends React.Component {
   constructor(props) {

@@ -416,6 +416,40 @@ COMPONENT CHECK BOX
   border-radius: var(--border-radius-small);
 }
 
+.compinfoboxes2-titles-title {
+  width: 150px;
+  text-align: center;
+}
+
+
+@media only screen and (max-width: 650px) {
+  .compinfoboxes2-titles-title {
+    width: auto;
+  }
+}
+
+.compinfoboxes2-titles-desc {
+  width: 300px;
+  text-align: center;
+}
+
+@media only screen and (max-width: 650px) {
+  .compinfoboxes2-titles-desc {
+    width: auto;
+  }
+}
+
+.compinfoboxes2-titles-value {
+  width: 150px;
+  text-align: center;
+}
+
+@media only screen and (max-width: 650px) {
+  .compinfoboxes2-titles-value {
+
+  }
+}
+
 .compinfoboxes2-box {
   display: flex; justify-content: space-between; align-items: center;
   padding: .8rem;

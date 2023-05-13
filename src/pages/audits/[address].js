@@ -528,8 +528,10 @@ class Comp_scores extends React.Component {
       : 0;
 
     const warnings_percent = 100 / (8 / warnings_count);
+    const passed_percent = 100 / (8 / passed_count);
 
     warnings_div.style.width = warnings_percent + '%';
+    passed_div.style.width = passed_percent + '%';
   }
 
   componentDidUpdate() {}
@@ -575,7 +577,7 @@ class Comp_scores extends React.Component {
               <div
                 className={cn(style['compscores-bottom-right-barctr-label'])}
               >
-                <span>10</span> Failed
+                <span>0</span> Info
               </div>
 
               <div className={cn(style['compscores-bottom-right-barctr-bar'])}>
@@ -612,7 +614,12 @@ class Comp_scores extends React.Component {
               <div
                 className={cn(style['compscores-bottom-right-barctr-label'])}
               >
-                <span>10</span> Passed
+                <span>
+                  {this.props.data.passed
+                    ? this.props.data.passed.split('_').length
+                    : 0}
+                </span>{' '}
+                Passed
               </div>
 
               <div className={cn(style['compscores-bottom-right-barctr-bar'])}>
