@@ -39,14 +39,19 @@
   display: flex; justify-content: center; align-items: center;
 }
 
-.sidebarctr-sidebar-logo > img {
+.sidebarctr-sidebar-logo > a {
   width: 70px;
+  display: block;
+}
+
+.sidebarctr-sidebar-logo > a > img {
+  width: 100%;
   display: block;
   border-radius: 5px;
 }
 
 .sidebarctr-sidebar-top {
-  margin-top: 8rem;
+  margin-top: 2rem;
 }
 
 .sidebarctr-sidebar-top-iconctr {
