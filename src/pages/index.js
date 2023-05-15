@@ -1454,10 +1454,7 @@ class Comp_upcoming_unlocks extends React.Component {
       });
     }
 
-    const res = await UTILS_API.blockchain_get_upcoming_unlocks(
-      1,
-      this.context
-    );
+    const res = await UTILS_API.blockchain_get_upcoming_unlocks(1);
 
     if (res.code) {
       this.setState({

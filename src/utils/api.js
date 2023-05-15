@@ -286,7 +286,7 @@ export async function blockchain_get_upcoming_unlocks(version = 1) {
    * 
    */
 
-  const res = await axios_instance.get('https://token.unlocks.app/');
+  const res = await axios.get('https://token.unlocks.app');
   console.log(res);
 }
 
