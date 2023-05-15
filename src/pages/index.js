@@ -1469,6 +1469,8 @@ class Comp_upcoming_unlocks extends React.Component {
 
     console.log(res.data);
 
+    return;
+
     this.setState({
       ...this.state,
       api_data: res.data,
