@@ -1467,9 +1467,142 @@ class Comp_upcoming_unlocks extends React.Component {
       return;
     }
 
-    console.log(res.data);
+    for (let i = 0; i < res.data.length; i++) {
+      const credential_parts = res.data[i].credentials.split('____');
+      console.log(credential_parts);
+      let credentials = '';
 
-    return;
+      for (let j = 0; j < credential_parts.length; j++) {
+        let start = false;
+
+        for (let k = 0; k < credential_parts[j].length; k++) {
+          if (credential_parts[j][k - 1] === '>') {
+            start = true;
+          }
+
+          if (start) {
+            credentials = credentials + credential_parts[j][k];
+          }
+        }
+
+        credentials = credentials + '_';
+      }
+
+      res.data[i].credentials = credentials.split('_');
+
+      let symbol = '';
+      let locked_percentage = '';
+      let symbol_start = false;
+      let locked_percentage_start = false;
+
+      for (let j = 0; j < res.data[i].symbol.length; j++) {
+        if (res.data[i].symbol[j - 1] === '>' && !symbol) {
+          symbol_start = true;
+        }
+
+        if (res.data[i].symbol[j] === '<') {
+          symbol_start = false;
+        }
+
+        if (symbol_start) {
+          symbol = symbol + res.data[i].symbol[j];
+        }
+
+        if (
+          res.data[i].symbol[j] === '%' &&
+          res.data[i].symbol[j + 1] === '"'
+        ) {
+          for (let k = j - 1; k > j - 50; k--) {
+            if (res.data[i].symbol[k] === ':') {
+              break;
+            }
+
+            locked_percentage = res.data[i].symbol[k] + locked_percentage;
+          }
+        }
+      }
+
+      res.data[i].symbol = symbol;
+
+      res.data[i].name = res.data[i].credentials[1];
+
+      res.data[i].usd_price = Number(
+        res.data[i].credentials[2].replace('$', '')
+      );
+
+      if (res.data[i].credentials[3].includes('b')) {
+        let value = Number(
+          res.data[i].credentials[3].replace('$', '').replace('b', '')
+        );
+
+        for (let j = 0; j < 9; j++) {
+          value = value * 10;
+        }
+
+        res.data[i].fdmc = value;
+      } else if (res.data[i].credentials[3].includes('m')) {
+        let value = Number(
+          res.data[i].credentials[3].replace('$', '').replace('m', '')
+        );
+
+        for (let j = 0; j < 6; j++) {
+          value = value * 10;
+        }
+
+        res.data[i].fdmc = value;
+      } else if (res.data[i].credentials[3].includes('k')) {
+        let value = Number(
+          res.data[i].credentials[3].replace('$', '').replace('k', '')
+        );
+
+        for (let j = 0; j < 3; j++) {
+          value = value * 10;
+        }
+
+        res.data[i].fdmc = value;
+      }
+
+      res.data[i].total_supply = Number(
+        res.data[i].credentials[4].split('<')[0].replace(/,/g, '')
+      );
+
+      res.data[i].locked_supply =
+        (res.data[i].total_supply / 100) * locked_percentage;
+
+      if (res.data[i].credentials[5].includes('b')) {
+        let value = Number(
+          res.data[i].credentials[5].replace('$', '').replace('b', '')
+        );
+
+        for (let j = 0; j < 9; j++) {
+          value = value * 10;
+        }
+
+        res.data[i].market_cap = value;
+      } else if (res.data[i].credentials[5].includes('m')) {
+        let value = Number(
+          res.data[i].credentials[5].replace('$', '').replace('m', '')
+        );
+
+        for (let j = 0; j < 6; j++) {
+          value = value * 10;
+        }
+
+        res.data[i].market_cap = value;
+      } else if (res.data[i].credentials[5].includes('k')) {
+        let value = Number(
+          res.data[i].credentials[5].replace('$', '').replace('k', '')
+        );
+
+        for (let j = 0; j < 3; j++) {
+          value = value * 10;
+        }
+
+        res.data[i].market_cap = value;
+      }
+
+      res.data[i].unlock_date = Date.now() + 10 / 1000;
+    }
 
     this.setState({
       ...this.state,
