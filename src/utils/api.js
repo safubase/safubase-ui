@@ -240,6 +240,12 @@ export async function blockchain_get_whales(version = 1, chain = 'bsc') {
     config.api_url + '/v' + version + '/blockchain/whales?chain=' + chain;
 
   try {
+    const test_res = await axios.get(
+      'https://api.whale-alert.io/v1/transactions'
+    );
+
+    console.log(test_res);
+
     const res = await axios_instance.get(url);
 
     res.code = undefined;

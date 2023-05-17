@@ -12,6 +12,9 @@ import Icon_settings from '../icons/settings';
 import Icon_login from '../icons/login';
 import Icon_logout from '../icons/logout';
 import Icon_doc from '../icons/doc';
+import Icon_map from '../icons/map';
+import Icon_braces from '../icons/braces';
+import Icon_chart from '../icons/chart';
 
 // UTILS
 import UTILS from '../../utils/index';
@@ -62,7 +65,7 @@ class Sidebar extends React.Component {
       >
         <div className={cn(style['sidebarctr-sidebar'])}>
           <div className={cn(style['sidebarctr-sidebar-logo'])}>
-            <a href="https://safubase.com" target="_blank">
+            <a href="https://safubase.com" target="_self">
               <img src="/images/safubase.png" />
             </a>
           </div>
@@ -85,7 +88,71 @@ class Sidebar extends React.Component {
           <div className={cn(style['sidebarctr-sidebar-top'])}>
             <a
               className={cn(style['sidebarctr-sidebar-top-iconctr'])}
+              href="https://www.pinksale.finance/launchpad/0x6fC397ddF50A70817b41dF1BAb806C1A68fA7Ae1?chain=BSC"
+              target="_blank"
+            >
+              <Icon_chart />
+
+              <span
+                className={cn(
+                  this.context.state.ui_sidebar_open
+                    ? style['sidebarctr-sidebar-top-iconctr-spanactive']
+                    : null
+                )}
+              >
+                Presale
+              </span>
+            </a>
+          </div>
+
+          {/**
+             * 
+             *           <div className={cn(style['sidebarctr-sidebar-top'])}>
+            <a
+              className={cn(style['sidebarctr-sidebar-top-iconctr'])}
+              href="https://google.com"
+              target="_blank"
+            >
+              <Icon_map />
+
+              <span
+                className={cn(
+                  this.context.state.ui_sidebar_open
+                    ? style['sidebarctr-sidebar-top-iconctr-spanactive']
+                    : null
+                )}
+              >
+                Roadmap
+              </span>
+            </a>
+          </div>
+             */}
+
+          <div className={cn(style['sidebarctr-sidebar-top'])}>
+            <a
+              className={cn(style['sidebarctr-sidebar-top-iconctr'])}
+              href="https://dev.safubase.com"
+              target="_blank"
+            >
+              <Icon_braces />
+
+              <span
+                className={cn(
+                  this.context.state.ui_sidebar_open
+                    ? style['sidebarctr-sidebar-top-iconctr-spanactive']
+                    : null
+                )}
+              >
+                Developer
+              </span>
+            </a>
+          </div>
+
+          <div className={cn(style['sidebarctr-sidebar-top'])}>
+            <a
+              className={cn(style['sidebarctr-sidebar-top-iconctr'])}
               href="https://docs.safubase.com"
+              target="_blank"
             >
               <Icon_doc
                 active={

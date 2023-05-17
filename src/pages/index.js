@@ -162,6 +162,11 @@ class Comp_input extends React.Component {
           name: 'Polygon',
           chain_id: 137,
         },
+        {
+          img: 'https://cdn.discordapp.com/attachments/992423326301565029/1108455307715280896/avax-network.png',
+          name: 'Avax',
+          chain_id: 43114,
+        },
       ],
       loading: false,
     };
@@ -643,8 +648,18 @@ class Comp_last_adts extends React.Component {
                     >
                       <img
                         src={
-                          curr.logo ||
-                          'https://media.istockphoto.com/id/1268510010/vector/golden-one-token-coin-icon.jpg?s=612x612&w=0&k=20&c=rQ7yWnMEBFy8jUcjCjqa48-1ARmflM6aIn9svQ1En8E='
+                          (curr.chain_id.toString() === '1'
+                            ? 'https://cdn.discordapp.com/attachments/992423326301565029/1108453541619699833/eth-network.png'
+                            : '') +
+                          (curr.chain_id.toString() === '56'
+                            ? 'https://cdn.discordapp.com/attachments/992423326301565029/1108454109939499088/bsc-network.png'
+                            : '') +
+                          (curr.chain_id.toString() === '137'
+                            ? 'https://cdn.discordapp.com/attachments/992423326301565029/1108455132699570196/polygon-network.png'
+                            : '') +
+                          (curr.chain_id.toString() === '43114'
+                            ? 'https://cdn.discordapp.com/attachments/992423326301565029/1108455307715280896/avax-network.png'
+                            : '')
                         }
                       />
                     </div>
@@ -1469,7 +1484,7 @@ class Comp_upcoming_unlocks extends React.Component {
 
     for (let i = 0; i < res.data.length; i++) {
       const credential_parts = res.data[i].credentials.split('____');
-      console.log(credential_parts);
+
       let credentials = '';
 
       for (let j = 0; j < credential_parts.length; j++) {
@@ -1493,7 +1508,6 @@ class Comp_upcoming_unlocks extends React.Component {
       let symbol = '';
       let locked_percentage = '';
       let symbol_start = false;
-      let locked_percentage_start = false;
 
       for (let j = 0; j < res.data[i].symbol.length; j++) {
         if (res.data[i].symbol[j - 1] === '>' && !symbol) {
@@ -1601,7 +1615,7 @@ class Comp_upcoming_unlocks extends React.Component {
         res.data[i].market_cap = value;
       }
 
-      res.data[i].unlock_date = Date.now() + 10 / 1000;
+      res.data[i].unlock_date = Date.now() / 1000 + 123;
     }
 
     this.setState({

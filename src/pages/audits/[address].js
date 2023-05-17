@@ -1135,8 +1135,6 @@ class Audits extends React.Component {
 
       return;
     }
-
-    console.log(this.props);
   }
 
   componentDidUpdate() {}
