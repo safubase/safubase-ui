@@ -1067,12 +1067,12 @@
 }
 
 .compwhaletracker-titles-amount {
-  width: 70px;
+  width: 200px;
   text-align: center;
 }
 
 .compwhaletracker-titles-maker {
-  width: 70px;
+  width: 100px;
   text-align: right;
 }
 
@@ -1168,9 +1168,15 @@
 }
 
 .compwhaletracker-rows-row-amount {
-  width: 70px;
+  width: 200px;
   text-align: center;
   font-weight: bolder;
+  font-weight: 500;
+}
+
+.compwhaletracker-rows-row-amount > span {
+  cursor: pointer;
+  margin: 0 .2rem;
 }
 
 .compwhaletracker-rows-row-amountgreen {
@@ -1182,9 +1188,8 @@
 }
 
 .compwhaletracker-rows-row-maker {
-  width: 70px;
+  width: 100px;
   text-align: right;
-  color: rgb(59, 128, 255);
   letter-spacing: 0;
   font-weight: 500;
   cursor: pointer;

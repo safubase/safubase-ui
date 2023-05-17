@@ -1127,6 +1127,8 @@ class Comp_whale_tracker extends React.Component {
       return;
     }
 
+    console.log(res);
+
     this.setState({
       ...this.state,
       chains: [...this.state.chains],
@@ -1291,12 +1293,10 @@ class Comp_whale_tracker extends React.Component {
           <div className={cn(style['compwhaletracker-titles-name'])}>Token</div>
 
           <div className={cn(style['compwhaletracker-titles-amount'])}>
-            Amount
+            From -{'>'} To
           </div>
 
-          <div className={cn(style['compwhaletracker-titles-maker'])}>
-            Maker
-          </div>
+          <div className={cn(style['compwhaletracker-titles-maker'])}>Date</div>
         </div>
 
         <div
@@ -1328,7 +1328,31 @@ class Comp_whale_tracker extends React.Component {
                       style['compwhaletracker-rows-row-imgnamesymbol']
                     )}
                   >
-                    <img src={curr.icon} />
+                    <img
+                      src={
+                        (curr.blockchain === 'dogecoin'
+                          ? 'https://upload.wikimedia.org/wikipedia/tr/d/db/Dogecoin-logo.png'
+                          : '') +
+                        (curr.blockchain === 'ethereum'
+                          ? 'https://cdn.discordapp.com/attachments/992423326301565029/1108453541619699833/eth-network.png'
+                          : '') +
+                        (curr.blockchain === 'tron'
+                          ? 'https://s3.coinmarketcap.com/static/img/portraits/62837c68ab0e763d5f77e9a6.png'
+                          : '') +
+                        (curr.blockchain === 'bitcoin'
+                          ? 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Bitcoin.svg/1200px-Bitcoin.svg.png'
+                          : '') +
+                        (curr.blockchain === 'ripple'
+                          ? 'https://s2.coinmarketcap.com/static/img/coins/200x200/52.png'
+                          : '') +
+                        (curr.blockchain === 'bitcoin-cash'
+                          ? 'https://upload.wikimedia.org/wikipedia/commons/5/58/Bitcoin_Cash.png'
+                          : '') +
+                        (curr.blockchain === 'litecoin'
+                          ? 'https://s3.coinmarketcap.com/static/img/portraits/630c5fcaf8184351dc5c6ee5.png'
+                          : '')
+                      }
+                    />
 
                     <div
                       className={cn(
@@ -1344,7 +1368,7 @@ class Comp_whale_tracker extends React.Component {
                           ]
                         )}
                       >
-                        {curr.token}
+                        ${UTILS.num_add_commas(curr.amount_usd)}
                       </div>
 
                       <div
@@ -1354,32 +1378,83 @@ class Comp_whale_tracker extends React.Component {
                           ]
                         )}
                       >
-                        {this.str_reduce_row_name_chars(curr.token_name)}
+                        {UTILS.num_add_commas(curr.amount)}
+                        {/**          <strong>{curr.symbol.toUpperCase()}</strong> */}
                       </div>
                     </div>
                   </div>
 
                   <div
-                    className={cn(
-                      style['compwhaletracker-rows-row-amount'],
-                      curr.type === 'sell'
-                        ? style['compwhaletracker-rows-row-amountred']
-                        : style['compwhaletracker-rows-row-amountgreen']
-                    )}
+                    className={cn(style['compwhaletracker-rows-row-amount'])}
                   >
-                    $
-                    {UTILS.num_add_commas(
-                      (curr.priceUSD * curr.tokenQuantity).toFixed(2)
-                    )}
+                    <span
+                      onClick={async () => {
+                        await UTILS.str_copy(curr.from_address);
+
+                        this.context.set_state({
+                          ...this.context.state,
+                          ui_toasts: [
+                            ...this.context.state.ui_toasts,
+                            {
+                              type: 'success',
+                              message: 'Address successfully copied',
+                              created_at: new Date(),
+                            },
+                          ],
+                        });
+                      }}
+                    >
+                      {curr.from_address[0] +
+                        curr.from_address[1] +
+                        curr.from_address[2] +
+                        curr.from_address[3] +
+                        '..' +
+                        curr.from_address[curr.from_address.length - 4] +
+                        curr.from_address[curr.from_address.length - 3] +
+                        curr.from_address[curr.from_address.length - 2] +
+                        curr.from_address[curr.from_address.length - 1]}
+                    </span>{' '}
+                    -{'>'}{' '}
+                    <span
+                      onClick={async () => {
+                        await UTILS.str_copy(curr.to_address);
+
+                        this.context.set_state({
+                          ...this.context.state,
+                          ui_toasts: [
+                            ...this.context.state.ui_toasts,
+                            {
+                              type: 'success',
+                              message: 'Address successfully copied',
+                              created_at: new Date(),
+                            },
+                          ],
+                        });
+                      }}
+                    >
+                      <span>
+                        {curr.to_address[0] +
+                          curr.to_address[1] +
+                          curr.to_address[2] +
+                          curr.to_address[3] +
+                          '..' +
+                          curr.to_address[curr.to_address.length - 4] +
+                          curr.to_address[curr.to_address.length - 3] +
+                          curr.to_address[curr.to_address.length - 2] +
+                          curr.to_address[curr.to_address.length - 1]}
+                      </span>
+                    </span>
                   </div>
 
                   <div
                     onClick={async () => {
-                      await UTILS.str_copy(curr.maker);
+                      //await UTILS.str_copy(curr.maker);
                     }}
                     className={cn(style['compwhaletracker-rows-row-maker'])}
                   >
-                    {curr.maker[0] +
+                    {/**
+                     * 
+                     *   curr.maker[0] +
                       curr.maker[1] +
                       curr.maker[2] +
                       curr.maker[3] +
@@ -1387,7 +1462,9 @@ class Comp_whale_tracker extends React.Component {
                       curr.maker[curr.maker.length - 4] +
                       curr.maker[curr.maker.length - 3] +
                       curr.maker[curr.maker.length - 2] +
-                      curr.maker[curr.maker.length - 1]}
+                      curr.maker[curr.maker.length - 1]
+                     */}
+                    {curr.date.split('T')[0]}
                   </div>
                 </div>
               );
