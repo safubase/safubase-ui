@@ -1041,7 +1041,7 @@ class Comp_whale_tracker extends React.Component {
         // selected chain
         img: '/bnb_chain.png',
         name: 'BNB Chain',
-        chain: 'bsc',
+        chain: 'binancechain',
         chain_id: 56,
       },
       chains: [
