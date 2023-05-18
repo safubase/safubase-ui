@@ -1039,43 +1039,31 @@ class Comp_whale_tracker extends React.Component {
       chains_dd_open: false,
       chain: {
         // selected chain
-        img: '/bnb_chain.png',
+        img: '/images/tokens/bnb.png',
         name: 'BNB Chain',
         chain: 'binancechain',
         chain_id: 56,
       },
       chains: [
         {
-          img: '/bnb_chain.png',
+          img: '/images/tokens/btc.png',
           name: 'All chain',
           chain: 'all',
           chain_id: 0,
         },
         {
-          img: '/bnb_chain.png',
+          img: '/images/tokens/btc.png',
+          name: 'Bitcoin chain',
+          chain: 'bitcoin',
+          chain_id: 1,
+        },
+        {
+          img: '/images/tokens/bnb.png',
           name: 'BNB Chain',
           chain: 'binancechain',
           chain_id: 56,
         },
         { img: '/eth.png', name: 'Ethereum', chain: 'eth', chain_id: 1 },
-        {
-          img: '/polygon.png',
-          name: 'Polygon',
-          chain: 'polygon',
-          chain_id: 137,
-        },
-        {
-          img: '/avalanche.png',
-          name: 'Avalanche',
-          chain: 'avalanche',
-          chain_id: null,
-        },
-        {
-          img: '/fantom.png',
-          name: 'Fantom',
-          chain: 'fantom',
-          chain_id: null,
-        },
       ],
       api_data: [],
       api_loading: false,
