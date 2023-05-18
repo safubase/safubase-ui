@@ -544,7 +544,8 @@ class Comp_scores extends React.Component {
         <div className={cn(style['compscores-top'])}>
           <div className={cn(style['compscores-top-left'])}>
             <div className={cn(style['compscores-top-left-title'])}>
-              {this.props.data.name} ({this.props.data.symbol})
+              {this.props.data.name || this.props.data.token_name} (
+              {this.props.data.symbol || this.props.data.token_symbol})
             </div>
             <div className={cn(style['compscores-top-left-address'])}>
               {this.props.data.address}
@@ -962,7 +963,6 @@ class Comp_info_boxes2 extends React.Component {
           <div className={cn(style['compinfoboxes2-titles-value'])}>VALUE</div>
         </div>
 
-
         <div className={cn(style['compinfoboxes2-box'])}>
           <div className={cn(style['compinfoboxes2-box-title'])}>Address</div>
           <div className={cn(style['compinfoboxes2-box-desc'])}>
@@ -1066,7 +1066,6 @@ class Comp_info_boxes2 extends React.Component {
           </div>
         </div>
 
-
         <div
           className={cn(
             style['compinfoboxes2-box'],
@@ -1083,8 +1082,6 @@ class Comp_info_boxes2 extends React.Component {
             {this.props.data.is_proxy === '1' ? 'Yes' : 'No'}
           </div>
         </div>
-
-        
 
         <div
           className={cn(
@@ -1104,8 +1101,6 @@ class Comp_info_boxes2 extends React.Component {
             {this.props.data.is_open_source === '1' ? 'Yes' : 'No'}
           </div>
         </div>
-
-        
       </div>
     );
   }
@@ -1126,6 +1121,8 @@ class Audits extends React.Component {
   }
 
   componentDidMount() {
+    console.log(this.props);
+
     if (this.props.code) {
       this.context.set_state({
         ...this.context.state,
