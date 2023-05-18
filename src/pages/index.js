@@ -1444,7 +1444,7 @@ class Comp_whale_tracker extends React.Component {
                       curr.maker[curr.maker.length - 2] +
                       curr.maker[curr.maker.length - 1]
                      */}
-                    {curr.date}
+                    {curr.date.split("T")[0]}
                   </div>
                 </div>
               );
