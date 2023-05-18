@@ -1330,27 +1330,7 @@ class Comp_whale_tracker extends React.Component {
                   >
                     <img
                       src={
-                        (curr.blockchain === 'dogecoin'
-                          ? 'https://upload.wikimedia.org/wikipedia/tr/d/db/Dogecoin-logo.png'
-                          : '') +
-                        (curr.blockchain === 'ethereum'
-                          ? 'https://cdn.discordapp.com/attachments/992423326301565029/1108453541619699833/eth-network.png'
-                          : '') +
-                        (curr.blockchain === 'tron'
-                          ? 'https://s3.coinmarketcap.com/static/img/portraits/62837c68ab0e763d5f77e9a6.png'
-                          : '') +
-                        (curr.blockchain === 'bitcoin'
-                          ? 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Bitcoin.svg/1200px-Bitcoin.svg.png'
-                          : '') +
-                        (curr.blockchain === 'ripple'
-                          ? 'https://s2.coinmarketcap.com/static/img/coins/200x200/52.png'
-                          : '') +
-                        (curr.blockchain === 'bitcoin-cash'
-                          ? 'https://upload.wikimedia.org/wikipedia/commons/5/58/Bitcoin_Cash.png'
-                          : '') +
-                        (curr.blockchain === 'litecoin'
-                          ? 'https://s3.coinmarketcap.com/static/img/portraits/630c5fcaf8184351dc5c6ee5.png'
-                          : '')
+                        "/images/tokens/" + curr.symbol + ".png"
                       }
                     />
 

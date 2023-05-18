@@ -133,7 +133,7 @@ class Toaster extends React.Component {
       switch (toasts_global[i].type) {
         case 'success':
           icon_img.src =
-            '/images/thick_white.png';
+            '/images/tick_white.png';
           toast_div.classList.add(style['toaster-toastsuccess']);
           break;
         case 'error':
