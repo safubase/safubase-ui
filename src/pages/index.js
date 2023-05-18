@@ -579,7 +579,7 @@ class Comp_last_adts extends React.Component {
 
           <div
             onClick={() => {
-              this.setState({ ...this.state, chain_id: '`ethereum`' });
+              this.setState({ ...this.state, chain_id: '1' });
             }}
             className={cn(
               style['complastadts-cats-item'],
@@ -624,7 +624,7 @@ class Comp_last_adts extends React.Component {
           {this.state.audits.map((curr, index) => {
             if (
               this.state.chain_id === '' ||
-              curr.chain_id === this.state.chain_id
+              curr.chain_id.toString() === this.state.chain_id.toString()
             ) {
               return (
                 <div
@@ -1784,7 +1784,7 @@ class Comp_upcoming_unlocks extends React.Component {
                 <a
                   key={index}
                   className={cn(style['compupcomingunlocks-rows-row'])}
-                  href={'https://bscscan.com/address/' + curr.token_id}
+                  href="#"
                   target="_blank"
                 >
                   <div
@@ -1868,9 +1868,13 @@ class Comp_upcoming_unlocks extends React.Component {
                   <div
                     className={cn(style['compupcomingunlocks-rows-row-date'])}
                   >
-                    {this.date_display(
+                    {
+                    
+                    /*
+                    this.date_display(
                       curr.unlock_date - parseInt(Date.now() / 1000)
-                    )}
+                    )
+                    */}-
                   </div>
                 </a>
               );

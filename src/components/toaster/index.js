@@ -103,9 +103,7 @@ class Toaster extends React.Component {
 
       const close_icon_img = document.createElement('img');
       close_icon_img.classList.add(style['toaster-toast-right']);
-      close_icon_img.src =
-        'https://www.nicepng.com/png/detail/52-521935_close-white-close-button-png.png';
-
+      close_icon_img.src = "/images/cross_white.png";
       close_icon_img.addEventListener('click', () => {
         const toasts_filtered = [];
 
@@ -135,12 +133,12 @@ class Toaster extends React.Component {
       switch (toasts_global[i].type) {
         case 'success':
           icon_img.src =
-            'https://toppng.com/uploads/preview/white-check-mark-symbol-11549993297psg7f12raf.png';
+            '/images/thick_white.png';
           toast_div.classList.add(style['toaster-toastsuccess']);
           break;
         case 'error':
           icon_img.src =
-            'https://mpng.subpng.com/20191107/uvs/transparent-circle-icon-cross-icon-5dc42f7ebdd1a2.4642042115731383027775.jpg';
+            '/images/cross_white.png';
           toast_div.classList.add(style['toaster-toasterror']);
           break;
         case 'info':

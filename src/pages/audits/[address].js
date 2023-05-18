@@ -577,7 +577,7 @@ class Comp_scores extends React.Component {
               <div
                 className={cn(style['compscores-bottom-right-barctr-label'])}
               >
-                <span>0</span> Info
+                <span>0</span> Ineffective
               </div>
 
               <div className={cn(style['compscores-bottom-right-barctr-bar'])}>
@@ -962,6 +962,72 @@ class Comp_info_boxes2 extends React.Component {
           <div className={cn(style['compinfoboxes2-titles-value'])}>VALUE</div>
         </div>
 
+
+        <div className={cn(style['compinfoboxes2-box'])}>
+          <div className={cn(style['compinfoboxes2-box-title'])}>Address</div>
+          <div className={cn(style['compinfoboxes2-box-desc'])}>
+            Indicates the token's address
+          </div>
+          <div className={cn(style['compinfoboxes2-box-value'], 'flxctrctr')}>
+            {UTILS.str_reduce(this.props.data.address, 8) + '...'}
+
+            <Icon_copy
+              onClick={async () => {
+                await UTILS.str_copy(this.props.data.address);
+
+                this.context.set_state({
+                  ...this.context.state,
+                  ui_toasts: [
+                    ...this.context.state.ui_toasts,
+                    {
+                      type: 'success',
+                      message: 'Address copied to clipboard',
+                      created_at: new Date(),
+                    },
+                  ],
+                });
+              }}
+            />
+          </div>
+        </div>
+
+        <div className={cn(style['compinfoboxes2-box'])}>
+          <div className={cn(style['compinfoboxes2-box-title'])}>Buy Tax</div>
+          <div className={cn(style['compinfoboxes2-box-desc'])}>
+            Buy tax of the token
+          </div>
+          <div className={cn(style['compinfoboxes2-box-value'], 'flxctrctr')}>
+            {Number(this.props.data.buy_tax || 0).toFixed(2)}
+          </div>
+        </div>
+
+        <div className={cn(style['compinfoboxes2-box'])}>
+          <div className={cn(style['compinfoboxes2-box-title'])}>Sell Tax</div>
+          <div className={cn(style['compinfoboxes2-box-desc'])}>
+            Sell tax of the token
+          </div>
+          <div className={cn(style['compinfoboxes2-box-value'], 'flxctrctr')}>
+            {Number(this.props.data.sell_tax || 0).toFixed(2)}
+          </div>
+        </div>
+
+        <div
+          className={cn(
+            style['compinfoboxes2-box'],
+            this.props.data.is_mintable === '1'
+              ? style['compinfoboxes2-boxredbg']
+              : style['compinfoboxes2-boxgreenbg']
+          )}
+        >
+          <div className={cn(style['compinfoboxes2-box-title'])}>Mintable</div>
+          <div className={cn(style['compinfoboxes2-box-desc'])}>
+            Shows if the token is mintable
+          </div>
+          <div className={cn(style['compinfoboxes2-box-value'], 'flxctrctr')}>
+            {this.props.data.is_mintable === '1' ? 'Yes' : 'No'}
+          </div>
+        </div>
+
         <div
           className={cn(
             style['compinfoboxes2-box'],
@@ -1000,33 +1066,6 @@ class Comp_info_boxes2 extends React.Component {
           </div>
         </div>
 
-        <div className={cn(style['compinfoboxes2-box'])}>
-          <div className={cn(style['compinfoboxes2-box-title'])}>Address</div>
-          <div className={cn(style['compinfoboxes2-box-desc'])}>
-            Indicates the token's address
-          </div>
-          <div className={cn(style['compinfoboxes2-box-value'], 'flxctrctr')}>
-            {UTILS.str_reduce(this.props.data.address, 8) + '...'}
-
-            <Icon_copy
-              onClick={async () => {
-                await UTILS.str_copy(this.props.data.address);
-
-                this.context.set_state({
-                  ...this.context.state,
-                  ui_toasts: [
-                    ...this.context.state.ui_toasts,
-                    {
-                      type: 'success',
-                      message: 'Address copied to clipboard',
-                      created_at: new Date(),
-                    },
-                  ],
-                });
-              }}
-            />
-          </div>
-        </div>
 
         <div
           className={cn(
@@ -1045,25 +1084,7 @@ class Comp_info_boxes2 extends React.Component {
           </div>
         </div>
 
-        <div className={cn(style['compinfoboxes2-box'])}>
-          <div className={cn(style['compinfoboxes2-box-title'])}>Buy Tax</div>
-          <div className={cn(style['compinfoboxes2-box-desc'])}>
-            Buy tax of the token
-          </div>
-          <div className={cn(style['compinfoboxes2-box-value'], 'flxctrctr')}>
-            {Number(this.props.data.buy_tax || 0).toFixed(2)}
-          </div>
-        </div>
-
-        <div className={cn(style['compinfoboxes2-box'])}>
-          <div className={cn(style['compinfoboxes2-box-title'])}>Sell Tax</div>
-          <div className={cn(style['compinfoboxes2-box-desc'])}>
-            Sell tax of the token
-          </div>
-          <div className={cn(style['compinfoboxes2-box-value'], 'flxctrctr')}>
-            {Number(this.props.data.sell_tax || 0).toFixed(2)}
-          </div>
-        </div>
+        
 
         <div
           className={cn(
@@ -1084,22 +1105,7 @@ class Comp_info_boxes2 extends React.Component {
           </div>
         </div>
 
-        <div
-          className={cn(
-            style['compinfoboxes2-box'],
-            this.props.data.is_mintable === '1'
-              ? style['compinfoboxes2-boxredbg']
-              : style['compinfoboxes2-boxgreenbg']
-          )}
-        >
-          <div className={cn(style['compinfoboxes2-box-title'])}>Mintable</div>
-          <div className={cn(style['compinfoboxes2-box-desc'])}>
-            Shows if the token is mintable
-          </div>
-          <div className={cn(style['compinfoboxes2-box-value'], 'flxctrctr')}>
-            {this.props.data.is_mintable === '1' ? 'Yes' : 'No'}
-          </div>
-        </div>
+        
       </div>
     );
   }

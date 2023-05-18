@@ -131,7 +131,7 @@ class Sidebar extends React.Component {
           <div className={cn(style['sidebarctr-sidebar-top'])}>
             <a
               className={cn(style['sidebarctr-sidebar-top-iconctr'])}
-              href="https://dev.safubase.com"
+              href="https://docs.safubase.com/safubase-api/quick-start"
               target="_blank"
             >
               <Icon_braces />
@@ -212,7 +212,7 @@ class Sidebar extends React.Component {
                         : null
                     )}
                   >
-                    Logout
+                    Disconnect
                   </span>
                 </>
               ) : (
@@ -225,7 +225,7 @@ class Sidebar extends React.Component {
                         : null
                     )}
                   >
-                    Login
+                    Connect
                   </span>
                 </>
               )}
