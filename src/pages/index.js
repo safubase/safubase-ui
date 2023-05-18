@@ -1048,7 +1048,7 @@ class Comp_whale_tracker extends React.Component {
         {
           img: '/bnb_chain.png',
           name: 'BNB Chain',
-          chain: 'bsc',
+          chain: 'binancechain',
           chain_id: 56,
         },
         { img: '/eth.png', name: 'Ethereum', chain: 'eth', chain_id: 1 },
@@ -1056,7 +1056,7 @@ class Comp_whale_tracker extends React.Component {
           img: '/polygon.png',
           name: 'Polygon',
           chain: 'polygon',
-          chain_id: null,
+          chain_id: 137,
         },
         {
           img: '/avalanche.png',
@@ -1328,11 +1328,7 @@ class Comp_whale_tracker extends React.Component {
                       style['compwhaletracker-rows-row-imgnamesymbol']
                     )}
                   >
-                    <img
-                      src={
-                        "/images/tokens/" + curr.symbol + ".png"
-                      }
-                    />
+                    <img src={'/images/tokens/' + curr.symbol + '.png'} />
 
                     <div
                       className={cn(
@@ -1444,7 +1440,7 @@ class Comp_whale_tracker extends React.Component {
                       curr.maker[curr.maker.length - 2] +
                       curr.maker[curr.maker.length - 1]
                      */}
-                    {curr.date.split("T")[0]}
+                    {curr.date.split('T')[0]}
                   </div>
                 </div>
               );
@@ -1848,13 +1844,12 @@ class Comp_upcoming_unlocks extends React.Component {
                   <div
                     className={cn(style['compupcomingunlocks-rows-row-date'])}
                   >
-                    {
-                    
-                    /*
+                    {/*
                     this.date_display(
                       curr.unlock_date - parseInt(Date.now() / 1000)
                     )
-                    */}-
+                    */}
+                    -
                   </div>
                 </a>
               );
