@@ -1039,7 +1039,7 @@ class Comp_whale_tracker extends React.Component {
       chains_dd_open: false,
       chain: {
         // selected chain
-        img: '/images/tokens/bnb.png',
+        img: '/images/bnb.png',
         name: 'BNB Chain',
         chain: 'binancechain',
         chain_id: 56,
@@ -1058,12 +1058,17 @@ class Comp_whale_tracker extends React.Component {
           chain_id: 1,
         },
         {
-          img: '/images/tokens/bnb.png',
+          img: '/images/bnb.png',
           name: 'BNB Chain',
           chain: 'binancechain',
           chain_id: 56,
         },
-        { img: '/eth.png', name: 'Ethereum', chain: 'eth', chain_id: 1 },
+        {
+          img: '/images/tokens/eth.png',
+          name: 'Ethereum',
+          chain: 'ethereum',
+          chain_id: 1,
+        },
       ],
       api_data: [],
       api_loading: false,
@@ -1120,8 +1125,6 @@ class Comp_whale_tracker extends React.Component {
 
       return;
     }
-
-    console.log(res);
 
     this.setState({
       ...this.state,
