@@ -53,6 +53,16 @@ class Layout_user extends React.Component {
         </main>
 
         <Script src="https://js.hcaptcha.com/1/api.js" async defer></Script>
+        <Script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-F28TSKZ877"
+        ></Script>
+        <Script
+          dangerouslySetInnerHTML={{
+            __html:
+              "window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-F28TSKZ877');",
+          }}
+        ></Script>
       </>
     );
   }

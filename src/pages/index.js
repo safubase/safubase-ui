@@ -1989,18 +1989,6 @@ class Home extends React.Component {
           desc="Contract audit and investment security with artificial intelligence. Safubase is a security company."
         />
 
-        <script
-          async
-          src="https://www.googletagmanager.com/gtag/js?id=G-F28TSKZ877"
-        ></script>
-
-        <script
-          dangerouslySetInnerHTML={{
-            __html:
-              "window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-F28TSKZ877');",
-          }}
-        ></script>
-
         <Layout_user>
           <section className={cn('section', style['sectiondash'])}>
             <div className={cn(style['sectiondash-left'])}>
