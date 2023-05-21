@@ -1126,6 +1126,22 @@ class Comp_whale_tracker extends React.Component {
       return;
     }
 
+    for (let i = 0; i < res.data.length; i++) {
+      for (let j = 0; j < res.data.length; j++) {
+        if (res.data[j + 1]) {
+          const current = res.data[j];
+          const next = res.data[j + 1];
+
+          if (
+            new Date(current.date).valueOf() < new Date(next.date).valueOf()
+          ) {
+            res.data[j] = next;
+            res.data[j + 1] = current;
+          }
+        }
+      }
+    }
+
     this.setState({
       ...this.state,
       chains: [...this.state.chains],
@@ -1244,6 +1260,23 @@ class Comp_whale_tracker extends React.Component {
                         });
 
                         return;
+                      }
+
+                      for (let i = 0; i < res.data.length; i++) {
+                        for (let j = 0; j < res.data.length; j++) {
+                          if (res.data[j + 1]) {
+                            const current = res.data[j];
+                            const next = res.data[j + 1];
+
+                            if (
+                              new Date(current.date).valueOf() <
+                              new Date(next.date).valueOf()
+                            ) {
+                              res.data[j] = next;
+                              res.data[j + 1] = current;
+                            }
+                          }
+                        }
                       }
 
                       this.setState({
@@ -1955,6 +1988,18 @@ class Home extends React.Component {
           title="Safubase.com | Blockchain Security with AI"
           desc="Contract audit and investment security with artificial intelligence. Safubase is a security company."
         />
+
+        <script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-F28TSKZ877"
+        ></script>
+
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-F28TSKZ877');",
+          }}
+        ></script>
 
         <Layout_user>
           <section className={cn('section', style['sectiondash'])}>
