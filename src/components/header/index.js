@@ -37,6 +37,12 @@ class Header extends React.Component {
     return (
       <header className={cn(style['header'])}>
         <div
+          onClick={() => {
+            this.setState({
+              ...this.state,
+              nav_open: false,
+            });
+          }}
           className={cn(
             style['header-navshadow'],
             this.state.nav_open ? style['header-navshadowopen'] : null
