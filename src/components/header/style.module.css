@@ -78,7 +78,7 @@
 .header-nav-item {
   width: 100%;
   display: flex; justify-content: flex-start; align-items: center;
-  margin-bottom: .7rem;
+  margin-bottom: .9rem;
   font-size: 18px;
   color: rgba(255, 255, 255, 0.7);
   border-radius: var(--border-radius-small);

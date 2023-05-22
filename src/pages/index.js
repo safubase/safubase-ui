@@ -545,7 +545,7 @@ class Comp_last_adts extends React.Component {
 
   render() {
     return (
-      <div className={cn(style['complastadts'])}>
+      <div id="complastadts" className={cn(style['complastadts'])}>
         <div className={cn(style['comlastadts-title'])}>LATEST AUDITS</div>
 
         <div className={cn(style['complastadts-cats'])}>

@@ -10,6 +10,7 @@ import Icon_braces from '../icons/braces';
 import Icon_chart from '../icons/chart';
 import Icon_stock from '../icons/stock';
 import Icon_lock from '../icons/lock';
+import Icon_security from '../icons/security';
 
 // CONTEXT
 import { Context } from '../../context';
@@ -87,6 +88,20 @@ class Header extends React.Component {
           </a>
 
           <label className={cn(style['header-nav-label'])}>CONTENT</label>
+
+          <a
+            onClick={() => {
+              this.setState({
+                ...this.state,
+                nav_open: false,
+              });
+            }}
+            href="#complastadts"
+            target="_self"
+            className={cn(style['header-nav-item'])}
+          >
+            <Icon_security active /> <span>Latest Audits</span>
+          </a>
 
           <a
             onClick={() => {
