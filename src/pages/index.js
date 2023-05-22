@@ -1165,7 +1165,7 @@ class Comp_whale_tracker extends React.Component {
 
   render() {
     return (
-      <div className={cn(style['compwhaletracker'])}>
+      <div id="compwhaletracker" className={cn(style['compwhaletracker'])}>
         <div className={cn(style['compwhaletracker-config'])}>
           <div className={cn(style['compwhaletracker-config-title'])}>
             Whales Tracker
@@ -1723,7 +1723,10 @@ class Comp_upcoming_unlocks extends React.Component {
 
   render() {
     return (
-      <div className={cn(style['compupcomingunlocks'])}>
+      <div
+        id="compupcomingunlocks"
+        className={cn(style['compupcomingunlocks'])}
+      >
         <div className={cn(style['compupcomingunlocks-config'])}>
           <div className={cn(style['compupcomingunlocks-config-title'])}>
             Upcoming Token Unlocks

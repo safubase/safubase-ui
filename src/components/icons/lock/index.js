@@ -1,6 +1,6 @@
 // MODULES
 import React from 'react';
-import { FaLock } from 'react-icons/fa';
+import { BsUnlockFill } from 'react-icons/bs';
 
 class Lock extends React.Component {
   constructor(props) {
@@ -9,7 +9,7 @@ class Lock extends React.Component {
   }
 
   render() {
-    return <FaLock />;
+    return <BsUnlockFill />;
   }
 }
 

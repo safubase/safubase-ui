@@ -8,6 +8,8 @@ import Icon_notification from '../icons/notification';
 import Icon_docs from '../icons/doc';
 import Icon_braces from '../icons/braces';
 import Icon_chart from '../icons/chart';
+import Icon_stock from '../icons/stock';
+import Icon_lock from '../icons/lock';
 
 // CONTEXT
 import { Context } from '../../context';
@@ -76,6 +78,36 @@ class Header extends React.Component {
             className={cn(style['header-nav-item'])}
           >
             <Icon_chart active /> <span>Presale</span>
+          </a>
+
+          <label className={cn(style['header-nav-label'])}>CONTENT</label>
+
+          <a
+            onClick={() => {
+              this.setState({
+                ...this.state,
+                nav_open: false,
+              });
+            }}
+            href="#compwhaletracker"
+            target="_self"
+            className={cn(style['header-nav-item'])}
+          >
+            <Icon_stock active /> <span>Whale Alerts</span>
+          </a>
+
+          <a
+            onClick={() => {
+              this.setState({
+                ...this.state,
+                nav_open: false,
+              });
+            }}
+            href="#compupcomingunlocks"
+            target="_self"
+            className={cn(style['header-nav-item'])}
+          >
+            <Icon_lock active /> <span>Upcoming Unlocks</span>
           </a>
         </div>
 
