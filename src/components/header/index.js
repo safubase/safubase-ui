@@ -25,12 +25,20 @@ class Header extends React.Component {
     super(props);
     this.state = {
       nav_open: false,
+      not_open: false,
+      not_opened: false,
     };
+
+    this.notificationmenu_ref = React.createRef();
   }
 
   componentDidMount() {}
 
-  componentDidUpdate() {}
+  componentDidUpdate() {
+    if (this.state.not_opened && !this.state.not_open) {
+      console.log((this.notificationmenu_ref.current.innerHTML = null));
+    }
+  }
 
   componentWillUnmount() {}
 
@@ -157,6 +165,7 @@ class Header extends React.Component {
             this.setState({
               ...this.state,
               nav_open: !this.state.nav_open,
+              not_open: false,
             });
           }}
           className={cn(style['header-hamburgericon'])}
@@ -169,10 +178,54 @@ class Header extends React.Component {
         </a>
 
         <div
-          onClick={() => {}}
+          onClick={(e) => {
+            this.setState({
+              ...this.state,
+              nav_open: false,
+              not_open: !this.state.not_open,
+              not_opened: true,
+            });
+          }}
           className={cn(style['header-notificationicon'])}
         >
+          <div
+            className={cn(
+              style['header-notification-dot'],
+              this.state.not_opened
+                ? style['header-notification-dotinactive']
+                : null
+            )}
+          ></div>
+
           <Icon_notification />
+        </div>
+
+        <div
+          ref={this.notificationmenu_ref}
+          className={cn(
+            style['header-notificationmenu'],
+            this.state.not_open ? style['header-notificationmenuopen'] : null
+          )}
+        >
+          <a
+            onClick={(e) => {
+              e.preventDefault();
+            }}
+            href="https://www.pinksale.finance/launchpad/0x6fC397ddF50A70817b41dF1BAb806C1A68fA7Ae1?chain=BSC"
+            className={cn(style['header-notificationmenu-item'])}
+          >
+            <div className={cn(style['header-notificationmenu-item-date'])}>
+              {new Date().toDateString()}
+            </div>
+            Safubase in Presale, BUY NOW!!!
+          </a>
+
+          <a
+            onClick={(e) => {
+              e.preventDefault();
+            }}
+            className={cn(style['header-notificationmenu-item'])}
+          ></a>
         </div>
       </header>
     );

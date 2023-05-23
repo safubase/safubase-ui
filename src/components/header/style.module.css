@@ -28,7 +28,6 @@
   transition: all .3s ease-in;
 }
 
-
 @media only screen and (max-width: 650px) {
   .header-navshadowopen {
     display: block;
@@ -65,8 +64,8 @@
 }
 
 .header-nav-label {
-  color: rgba(255, 255, 255, 0.6);
-  font-size: 12px;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 11px;
   margin-top: 2rem;
   margin-bottom: 1rem;
   display: block;
@@ -76,7 +75,7 @@
   width: 100%;
   display: flex; justify-content: flex-start; align-items: center;
   margin-bottom: .9rem;
-  font-size: 18px;
+  font-size: 16px;
   color: rgba(255, 255, 255, 0.7);
   border-radius: var(--border-radius-small);
 }
@@ -110,9 +109,56 @@
 
 .header-notificationicon {
   display: flex; justify-content: center; align-items: center;
+  position: relative;
+  cursor: pointer;
 }
 
-.header-notificationicon  > svg {
+.header-notificationmenu {
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: -1;
+  position: fixed;
+  width: 100%; height: 100%;
+  top: -100%; left: 0;
+  transition: all .4s ease-out;
+  padding: 1rem;
+}
+
+.header-notificationmenuopen {
+  top: var(--comp-header-height);
+}
+
+.header-notificationmenu-item {
+  display: block;
+  width: 100%;
+  padding: 1rem;
+  border-radius: var(--border-radius-small);
+  background-color: black;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 14px;
+  position: relative;
+  margin-bottom: 1rem;
+
+}
+
+.header-notificationmenu-item-date { 
+  font-size: 10px;
+  margin-bottom: .6rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.header-notification-dot {
+  background-color: var(--red);
+  border-radius: 50%;
+  width: 10px; height: 10px;
+  position: absolute;
+  top: 70%; left: 70%;
+}
+
+.header-notification-dotinactive {
+  display: none;
+}
+
+.header-notificationicon > svg {
   font-size: 1.6rem; font-weight: bold;
   cursor: pointer;
   color: white;

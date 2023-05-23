@@ -1101,6 +1101,57 @@ class Comp_info_boxes2 extends React.Component {
             {this.props.data.is_open_source === '1' ? 'Yes' : 'No'}
           </div>
         </div>
+
+        <div
+          className={cn(
+            style['compinfoboxes2-box'],
+            this.props.data.is_honeypot === '0'
+              ? style['compinfoboxes2-boxredbg']
+              : style['compinfoboxes2-boxgreenbg']
+          )}
+        >
+          <div className={cn(style['compinfoboxes2-box-title'])}>Honeypot</div>
+          <div className={cn(style['compinfoboxes2-box-desc'])}>
+            Shows if a token has Honeypot
+          </div>
+          <div className={cn(style['compinfoboxes2-box-value'], 'flxctrctr')}>
+            {this.props.data.is_honeypot === '1' ? 'Yes' : 'No'}
+          </div>
+        </div>
+
+        <div
+          className={cn(
+            style['compinfoboxes2-box'],
+            this.props.data.is_in_dex === '0'
+              ? style['compinfoboxes2-boxredbg']
+              : style['compinfoboxes2-boxgreenbg']
+          )}
+        >
+          <div className={cn(style['compinfoboxes2-box-title'])}>Honeypot</div>
+          <div className={cn(style['compinfoboxes2-box-desc'])}>
+            Shows if the token is in DEX
+          </div>
+          <div className={cn(style['compinfoboxes2-box-value'], 'flxctrctr')}>
+            {this.props.data.is_in_dex === '1' ? 'Yes' : 'No'}
+          </div>
+        </div>
+
+        <div
+          className={cn(
+            style['compinfoboxes2-box'],
+            this.props.data.is_whitelisted === '0'
+              ? style['compinfoboxes2-boxredbg']
+              : style['compinfoboxes2-boxgreenbg']
+          )}
+        >
+          <div className={cn(style['compinfoboxes2-box-title'])}>Honeypot</div>
+          <div className={cn(style['compinfoboxes2-box-desc'])}>
+            Shows if the token is Whitelisted
+          </div>
+          <div className={cn(style['compinfoboxes2-box-value'], 'flxctrctr')}>
+            {this.props.data.is_whitelisted === '1' ? 'Yes' : 'No'}
+          </div>
+        </div>
       </div>
     );
   }
