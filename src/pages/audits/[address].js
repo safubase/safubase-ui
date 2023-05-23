@@ -530,8 +530,10 @@ class Comp_scores extends React.Component {
     const warnings_percent = 100 / (8 / warnings_count);
     const passed_percent = 100 / (8 / passed_count);
 
-    warnings_div.style.width = warnings_percent + '%';
-    passed_div.style.width = passed_percent + '%';
+    setTimeout(() => {
+      warnings_div.style.width = warnings_percent + '%';
+      passed_div.style.width = passed_percent + '%';
+    }, 100);
   }
 
   componentDidUpdate() {}
@@ -555,6 +557,7 @@ class Comp_scores extends React.Component {
             Holders: <Comp_scroll_number data={this.props.data.holder_count} />
           </div>
         </div>
+
         <div className={cn(style['compscores-bottom'])}>
           <div className={cn(style['compscores-bottom-left'])}>
             <Comp_circle data={this.props.data.score} />
