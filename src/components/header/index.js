@@ -211,6 +211,7 @@ class Header extends React.Component {
             onClick={(e) => {
               //e.preventDefault();
             }}
+            target="_blank"
             href="https://www.pinksale.finance/launchpad/0x6fC397ddF50A70817b41dF1BAb806C1A68fA7Ae1?chain=BSC"
             className={cn(style['header-notificationmenu-item'])}
           >

@@ -1127,7 +1127,7 @@ class Comp_info_boxes2 extends React.Component {
               : style['compinfoboxes2-boxgreenbg']
           )}
         >
-          <div className={cn(style['compinfoboxes2-box-title'])}>Honeypot</div>
+          <div className={cn(style['compinfoboxes2-box-title'])}>in DEX</div>
           <div className={cn(style['compinfoboxes2-box-desc'])}>
             Shows if the token is in DEX
           </div>
@@ -1144,7 +1144,9 @@ class Comp_info_boxes2 extends React.Component {
               : style['compinfoboxes2-boxgreenbg']
           )}
         >
-          <div className={cn(style['compinfoboxes2-box-title'])}>Honeypot</div>
+          <div className={cn(style['compinfoboxes2-box-title'])}>
+            Whitelisted
+          </div>
           <div className={cn(style['compinfoboxes2-box-desc'])}>
             Shows if the token is Whitelisted
           </div>
