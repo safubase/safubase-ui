@@ -583,7 +583,7 @@ class Comp_last_adts extends React.Component {
             }}
             className={cn(
               style['complastadts-cats-item'],
-              this.state.chain_id === '`ethereum`'
+              this.state.chain_id === '1'
                 ? style['complastadts-cats-itemactive']
                 : null
             )}

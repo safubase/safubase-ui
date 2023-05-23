@@ -90,11 +90,17 @@ class Header extends React.Component {
           <label className={cn(style['header-nav-label'])}>CONTENT</label>
 
           <a
-            onClick={() => {
+            onClick={(e) => {
               this.setState({
                 ...this.state,
                 nav_open: false,
               });
+
+              if (window.location.pathname !== '/') {
+                e.preventDefault();
+
+                window.location.replace('http://safubase.com#complastadts');
+              }
             }}
             href="#complastadts"
             target="_self"
@@ -109,6 +115,12 @@ class Header extends React.Component {
                 ...this.state,
                 nav_open: false,
               });
+
+              if (window.location.pathname !== '/') {
+                e.preventDefault();
+
+                window.location.replace('http://safubase.com#compwhaletracker');
+              }
             }}
             href="#compwhaletracker"
             target="_self"
@@ -123,6 +135,14 @@ class Header extends React.Component {
                 ...this.state,
                 nav_open: false,
               });
+
+              if (window.location.pathname !== '/') {
+                e.preventDefault();
+
+                window.location.replace(
+                  'http://safubase.com#compupcomingunlocks'
+                );
+              }
             }}
             href="#compupcomingunlocks"
             target="_self"
