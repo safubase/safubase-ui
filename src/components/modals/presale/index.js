@@ -14,13 +14,11 @@ class Modal_presale extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      open: true
+      open: true,
     };
   }
 
-  componentDidMount() {
-
-  }
+  componentDidMount() {}
 
   componentDidUpdate() {}
 
@@ -28,27 +26,45 @@ class Modal_presale extends React.Component {
 
   render() {
     return this.state.open ? (
-      <div className={cn(style["modalpresale"])}>
-        <div className={cn(style["modalpresale-content"])}>
-            <img onClick={(e) => {
-                this.setState({
-                    ...this.state,
-                    open: false
-                })
-            }} src="/images/cross_white.png" className={cn(style["modalpresale-content-closebtn"])}></img>
-            <div className={cn(style["modalpresale-content-logoctr"])}>
-                <img src="/favicon.ico" className={cn(style["modalpresale-content-logoctr-logo"])} />
-            </div>
+      <div className={cn(style['modalpresale'])}>
+        <div className={cn(style['modalpresale-content'])}>
+          <img
+            onClick={(e) => {
+              this.setState({
+                ...this.state,
+                open: false,
+              });
+            }}
+            src="/images/cross_white.png"
+            className={cn(style['modalpresale-content-closebtn'])}
+          />
 
-            <div className={cn(style["modalpresale-content-title"])}>
-               SAFUBASE <span>PRESALE</span>
-            </div>
+          <div className={cn(style['modalpresale-content-logoctr'])}>
+            <img
+              src="/favicon.ico"
+              className={cn(style['modalpresale-content-logoctr-logo'])}
+            />
+          </div>
 
-            <div className={cn(style["modalpresale-content-desc"])}>Safubase's official token is on Presale between june 2nd and 5th. Check out and participate in the presale of the most innovative project of 2023, which has big goals after the presale</div>
-            
-            <div className={cn(style["modalpresale-content-btnctr"])}>
-                <a href="https://www.pinksale.finance/launchpad/0x6fC397ddF50A70817b41dF1BAb806C1A68fA7Ae1?chain=BSC" target="_blank" className={cn(style["modalpresale-content-btnctr-btn"])}>JOIN PRESALE</a>
-            </div>
+          <div className={cn(style['modalpresale-content-title'])}>
+            SAFUBASE <span>PRESALE</span>
+          </div>
+
+          <div className={cn(style['modalpresale-content-desc'])}>
+            Safubase's official token is on Presale between june 2nd and 5th.
+            Check out and participate in the presale of the most innovative
+            project of 2023, which has big goals after the presale
+          </div>
+
+          <div className={cn(style['modalpresale-content-btnctr'])}>
+            <a
+              href="https://www.pinksale.finance/launchpad/0x6fC397ddF50A70817b41dF1BAb806C1A68fA7Ae1?chain=BSC"
+              target="_blank"
+              className={cn(style['modalpresale-content-btnctr-btn'])}
+            >
+              JOIN PRESALE
+            </a>
+          </div>
         </div>
       </div>
     ) : null;

@@ -40,7 +40,6 @@
     display: block;
     width: 140px;
     margin: 0 auto;
-    
 }
 
 .modalpresale-content-title {
@@ -49,6 +48,14 @@
     color: white;
     text-align: center;
 }
+
+
+@media only screen and (max-width: 750px) {
+    .modalpresale-content-title {
+        font-size: 28px;
+    }
+}
+
 
 .modalpresale-content-title > span {
     font-weight: bold;
@@ -61,6 +68,13 @@
     text-align: center;
     font-size: 24px;
     font-weight: 400;
+}
+
+
+@media only screen and (max-width: 750px) {
+    .modalpresale-content-desc {
+        font-size: 16px;
+    }
 }
 
 .modalpresale-content-btnctr {
@@ -77,6 +91,12 @@
     background-color: rgb(149, 31, 31);
     color: white;
     text-align: center;
+}
+
+@media only screen and (max-width: 750px) {
+    .modalpresale-content-btnctr-btn {
+        font-size: 24px;
+    }
 }
 
 

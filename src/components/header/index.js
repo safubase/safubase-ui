@@ -32,14 +32,14 @@ class Header extends React.Component {
       not_opened: false,
     };
 
-    this.notificationmenu_ref = React.createRef();
+    this.ref_notificationmenu = React.createRef();
   }
 
   componentDidMount() {}
 
   componentDidUpdate() {
     if (this.state.not_opened && !this.state.not_open) {
-      //this.notificationmenu_ref.current.innerHTML = null;
+      //this.ref_notificationmenu.current.innerHTML = null;
     }
   }
 
@@ -218,7 +218,7 @@ class Header extends React.Component {
         </div>
 
         <div
-          ref={this.notificationmenu_ref}
+          ref={this.ref_notificationmenu}
           className={cn(
             style['header-notificationmenu'],
             this.state.not_open ? style['header-notificationmenuopen'] : null
