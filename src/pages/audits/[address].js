@@ -1204,7 +1204,7 @@ class Audits extends React.Component {
     return (
       <>
         <Head
-          title="Safubase.com | Blockchain Security with AI"
+          title={(this.props.name || this.props.token_name) + " (" + (this.props.symbol || this.props.token_symbol) + ") | Blockchain Security with AI"}
           desc="Contract audit and investment security with artificial intelligence. Safubase is a security company."
         />
 

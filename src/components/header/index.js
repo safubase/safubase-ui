@@ -36,7 +36,7 @@ class Header extends React.Component {
 
   componentDidUpdate() {
     if (this.state.not_opened && !this.state.not_open) {
-      console.log((this.notificationmenu_ref.current.innerHTML = null));
+      //this.notificationmenu_ref.current.innerHTML = null;
     }
   }
 
@@ -158,6 +158,8 @@ class Header extends React.Component {
           >
             <Icon_lock active /> <span>Upcoming Unlocks</span>
           </a>
+
+          <div className={cn(style[""])}></div>
         </div>
 
         <div

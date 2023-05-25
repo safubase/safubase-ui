@@ -5,6 +5,7 @@ import cn from 'classnames';
 // COMPONENTS
 import Head from '../components/head';
 import Layout_user from '../components/layouts/user';
+import Modal_presale from "../components/modals/presale";
 
 // COMPONENTS > ICONS (SVGS)
 import Icon_search from '../components/icons/search';
@@ -1904,7 +1905,9 @@ class Home extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      modal_presale_open: false
+    };
 
     this.init = this.init.bind(this);
   }
@@ -1914,6 +1917,16 @@ class Home extends React.Component {
       ...this.context.state,
       ui_toasts: [],
     };
+
+    /*
+      TIMER FUNCTIONS
+    */ 
+    setTimeout(() => {
+      this.setState({
+        ...this.state,
+        modal_presale_open: true
+      })
+    }, 5000);
 
     /**
      *
@@ -1980,7 +1993,8 @@ class Home extends React.Component {
     this.init();
   }
 
-  componentDidUpdate() {}
+  componentDidUpdate() {
+  }
 
   componentWillUnmount() {}
 
@@ -1994,6 +2008,8 @@ class Home extends React.Component {
 
         <Layout_user>
           <section className={cn('section', style['sectiondash'])}>
+            {this.state.modal_presale_open ? <Modal_presale /> : null}
+
             <div className={cn(style['sectiondash-left'])}>
               <Comp_profile_input_mobile />
               <Comp_hello />
