@@ -88,6 +88,21 @@
   margin-right: .5rem;
 }
 
+.header-nav-socials {
+  margin-top: 3rem;
+}
+
+.header-nav-socials a {
+  color: white;
+}
+
+.header-nav-socials svg {
+  color: white;
+  font-size: 32px;
+  width: 32px;
+  margin-right: 1.4rem;
+}
+
 .header-hamburgericon {
   display: flex; justify-content: center; align-items: center;
 }

@@ -11,6 +11,9 @@ import Icon_chart from '../icons/chart';
 import Icon_stock from '../icons/stock';
 import Icon_lock from '../icons/lock';
 import Icon_security from '../icons/security';
+import Icon_telegram from '../icons/telegram';
+import Icon_instagram from '../icons/instagram';
+import Icon_twitter from '../icons/twitter';
 
 // CONTEXT
 import { Context } from '../../context';
@@ -159,7 +162,19 @@ class Header extends React.Component {
             <Icon_lock active /> <span>Upcoming Unlocks</span>
           </a>
 
-          <div className={cn(style[""])}></div>
+          <div className={cn(style['header-nav-socials'])}>
+            <a href="https://t.me/safubase" target="_blank">
+              <Icon_telegram />
+            </a>
+
+            <a href="https://instagram.com/safubase" target="_blank">
+              <Icon_instagram />
+            </a>
+
+            <a href="https://twitter.com/safubase" target="_blank">
+              <Icon_twitter />
+            </a>
+          </div>
         </div>
 
         <div
