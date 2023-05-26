@@ -91,12 +91,9 @@
     text-align: center;
 }
 
-
 @media only screen and (max-width: 750px) {
-
     .modalpresale-content-btnctr {
         margin-top: 2rem;
-
     }
 
     .modalpresale-content-btnctr-btn {

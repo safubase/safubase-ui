@@ -1121,7 +1121,7 @@ class Comp_info_boxes2 extends React.Component {
         <div
           className={cn(
             style['compinfoboxes2-box'],
-            this.props.data.is_honeypot === '0'
+            this.props.data.is_honeypot === '1'
               ? style['compinfoboxes2-boxredbg']
               : style['compinfoboxes2-boxgreenbg']
           )}
@@ -1155,7 +1155,7 @@ class Comp_info_boxes2 extends React.Component {
         <div
           className={cn(
             style['compinfoboxes2-box'],
-            this.props.data.is_whitelisted === '0'
+            this.props.data.is_whitelisted === '1'
               ? style['compinfoboxes2-boxredbg']
               : style['compinfoboxes2-boxgreenbg']
           )}
