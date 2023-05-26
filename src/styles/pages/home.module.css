@@ -995,6 +995,26 @@
   border-radius: var(--border-radius-small);
 }
 
+.compwhaletracker-config-chaindd-selected-imgctr {
+  position: relative;
+  width: 26px; height: 20px;
+}
+
+.compwhaletracker-config-chaindd-selected-imgctr > img {
+  display: block;
+  width: 20px;
+  position: absolute;
+  left: 0; top: 0;
+}
+
+.compwhaletracker-config-chaindd-selected-imgctr > img:nth-child(2) {
+  left: 5px
+}
+
+.compwhaletracker-config-chaindd-selected-imgctr > img:nth-child(3) {
+  left: 10px
+}
+
 .compwhaletracker-config-chaindd-selected > img {
   display: block;
   width: 20px;
@@ -1025,11 +1045,35 @@
   display: flex; justify-content: flex-start; align-items: center;
   padding: .6rem .6rem;
   cursor: pointer;
+  position: relative;
 }
 
 .compwhaletracker-config-chaindd-options-item:hover {
   background-color: rgb(231, 231, 231);
 }
+
+.compwhaletracker-config-chaindd-options-item-imgctr {
+    width: 18px; height: 18px;
+    position: relative;
+}
+
+.compwhaletracker-config-chaindd-options-item-imgctr > img {
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+  position: absolute;
+  left: -5px;
+}
+
+.compwhaletracker-config-chaindd-options-item-imgctr > img:nth-child(2) {
+  left: 0px;
+}
+
+.compwhaletracker-config-chaindd-options-item-imgctr > img:last-child {
+  left: 5px;
+}
+
 
 .compwhaletracker-config-chaindd-options-item > img {
   width: 18px; height: 18px;

@@ -5,7 +5,7 @@ import cn from 'classnames';
 // COMPONENTS
 import Head from '../components/head';
 import Layout_user from '../components/layouts/user';
-import Modal_presale from "../components/modals/presale";
+import Modal_presale from '../components/modals/presale';
 
 // COMPONENTS > ICONS (SVGS)
 import Icon_search from '../components/icons/search';
@@ -1039,11 +1039,10 @@ class Comp_whale_tracker extends React.Component {
       info_main_hover: false,
       chains_dd_open: false,
       chain: {
-        // selected chain
-        img: '/images/tokens/bnb.png',
-        name: 'BNB Chain',
-        chain: 'binancechain',
-        chain_id: 56,
+        img: '/images/tokens/btc.png',
+        name: 'All chain',
+        chain: 'all',
+        chain_id: 0,
       },
       chains: [
         {
@@ -1054,13 +1053,13 @@ class Comp_whale_tracker extends React.Component {
         },
         {
           img: '/images/tokens/btc.png',
-          name: 'Bitcoin chain',
+          name: 'Bitcoin',
           chain: 'bitcoin',
           chain_id: 1,
         },
         {
           img: '/images/tokens/bnb.png',
-          name: 'BNB Chain',
+          name: 'BSC',
           chain: 'binancechain',
           chain_id: 56,
         },
@@ -1212,7 +1211,20 @@ class Comp_whale_tracker extends React.Component {
               }}
               className={cn(style['compwhaletracker-config-chaindd-selected'])}
             >
-              <img src={this.state.chain.img} />{' '}
+              {this.state.chain.chain === 'all' ? (
+                <div
+                  className={cn(
+                    style['compwhaletracker-config-chaindd-selected-imgctr']
+                  )}
+                >
+                  <img src="/images/tokens/btc.png" />
+                  <img src="/images/tokens/eth.png" />
+                  <img src="/images/tokens/bnb.png" />
+                </div>
+              ) : (
+                <img src={this.state.chain.img} />
+              )}
+
               {this.state.chains_dd_open ? (
                 <Icon_arrow dir="up" />
               ) : (
@@ -1289,7 +1301,21 @@ class Comp_whale_tracker extends React.Component {
                       });
                     }}
                   >
-                    <img src={curr.img} />
+                    {curr.chain === 'all' ? (
+                      <div
+                        className={cn(
+                          style[
+                            'compwhaletracker-config-chaindd-options-item-imgctr'
+                          ]
+                        )}
+                      >
+                        <img src="/images/tokens/btc.png" />
+                        <img src="/images/tokens/eth.png" />
+                        <img src="/images/tokens/bnb.png" />
+                      </div>
+                    ) : (
+                      <img src={curr.img} />
+                    )}
 
                     <div
                       className={cn(
@@ -1906,7 +1932,7 @@ class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      modal_presale_open: false
+      modal_presale_open: false,
     };
 
     this.init = this.init.bind(this);
@@ -1920,12 +1946,12 @@ class Home extends React.Component {
 
     /*
       TIMER FUNCTIONS
-    */ 
+    */
     setTimeout(() => {
       this.setState({
         ...this.state,
-        modal_presale_open: true
-      })
+        modal_presale_open: true,
+      });
     }, 5000);
 
     /**
@@ -1993,8 +2019,7 @@ class Home extends React.Component {
     this.init();
   }
 
-  componentDidUpdate() {
-  }
+  componentDidUpdate() {}
 
   componentWillUnmount() {}
 

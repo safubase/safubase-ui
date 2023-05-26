@@ -93,17 +93,15 @@
 
 .sidebarctr-sidebar-socials-iconctr {
   display: block;
-  margin-right: 50%; margin-left: 50%;
-  margin-top: 1rem;
-  transform: translate(-50%, -50%);
-  width: 30px;
-
+  margin-top: 1.2rem;
+  width: 100%;
 }
 
 .sidebarctr-sidebar-socials-iconctr > svg {
   width: 100%;
   font-size: 24px;
   color: white;
+  display: block;
 }
 
 .sidebarctr-sidebar-bottom {
