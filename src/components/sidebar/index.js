@@ -15,6 +15,9 @@ import Icon_doc from '../icons/doc';
 import Icon_map from '../icons/map';
 import Icon_braces from '../icons/braces';
 import Icon_chart from '../icons/chart';
+import Icon_telegram from '../icons/telegram';
+import Icon_twitter from '../icons/twitter';
+import Icon_instagram from '../icons/instagram';
 
 // UTILS
 import UTILS from '../../utils/index';
@@ -27,9 +30,7 @@ class Sidebar extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      pathname: '',
-    };
+    this.state = {};
   }
 
   componentDidMount() {
@@ -105,29 +106,6 @@ class Sidebar extends React.Component {
             </a>
           </div>
 
-          {/**
-             * 
-             *           <div className={cn(style['sidebarctr-sidebar-top'])}>
-            <a
-              className={cn(style['sidebarctr-sidebar-top-iconctr'])}
-              href="https://google.com"
-              target="_blank"
-            >
-              <Icon_map />
-
-              <span
-                className={cn(
-                  this.context.state.ui_sidebar_open
-                    ? style['sidebarctr-sidebar-top-iconctr-spanactive']
-                    : null
-                )}
-              >
-                Roadmap
-              </span>
-            </a>
-          </div>
-             */}
-
           <div className={cn(style['sidebarctr-sidebar-top'])}>
             <a
               className={cn(style['sidebarctr-sidebar-top-iconctr'])}
@@ -169,6 +147,32 @@ class Sidebar extends React.Component {
               >
                 DOCS
               </span>
+            </a>
+          </div>
+
+          <div className={cn(style['sidebarctr-sidebar-socials'])}>
+            <a
+              className={cn(style['sidebarctr-sidebar-socials-iconctr'])}
+              href="https://t.me/safubase"
+              target="_blank"
+            >
+              <Icon_telegram />
+            </a>
+
+            <a
+              className={cn(style['sidebarctr-sidebar-socials-iconctr'])}
+              href="https://instagram.com/safubase"
+              target="_blank"
+            >
+              <Icon_instagram />
+            </a>
+
+            <a
+              className={cn(style['sidebarctr-sidebar-socials-iconctr'])}
+              href="https://twitter.com/safubase"
+              target="_blank"
+            >
+              <Icon_twitter />
             </a>
           </div>
 

@@ -51,9 +51,9 @@ class Modal_presale extends React.Component {
           </div>
 
           <div className={cn(style['modalpresale-content-desc'])}>
-            Safubase's official token is on Presale between june 2nd and 5th.
-            Check out and participate in the presale of the most innovative
-            project of 2023, which has big goals after the presale
+            Safubase's official token is on Presale between june 2nd <br /> and
+            5th. Check out and participate in the <br /> presale of the most
+            innovative project of 2023, which has big goals after the presale
           </div>
 
           <div className={cn(style['modalpresale-content-btnctr'])}>

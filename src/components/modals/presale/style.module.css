@@ -8,9 +8,9 @@
 }
 
 .modalpresale-content {
-    width: 700px; height: 700px;
+    width: 450px; height: 450px;
     background-color: black;
-    padding: 5rem 3.6rem;
+    padding: 2rem;
     position: absolute;
     left: 50%; top: 50%;
     transform: translate(-50%, -50%);
@@ -19,9 +19,8 @@
 
 @media only screen and (max-width: 750px) {
     .modalpresale-content {
-        width: 100%; height: 100%;
-        padding: 2rem;
-        border-radius: 0;
+        width: 90%; height: 40%;
+        padding: 1rem;
     }
 }
 
@@ -38,47 +37,48 @@
 
 .modalpresale-content-logoctr-logo {
     display: block;
-    width: 140px;
+    width: 80px;
     margin: 0 auto;
 }
 
 .modalpresale-content-title {
-    margin-top: 1rem;
-    font-size: 36px;
+    margin-top: 2rem;
+    font-size: 28px;
     color: white;
     text-align: center;
 }
 
-
 @media only screen and (max-width: 750px) {
     .modalpresale-content-title {
-        font-size: 28px;
+        font-size: 19px;
+        margin-top: 1.6rem;
     }
 }
 
-
 .modalpresale-content-title > span {
     font-weight: bold;
-    margin-left: .4rem;
+    margin-left: 0rem;
 }
 
 .modalpresale-content-desc {
     margin-top: 2rem;
     color: white;
     text-align: center;
-    font-size: 24px;
-    font-weight: 400;
+    font-size: 16px;
+    font-weight: 300;
+
 }
 
-
 @media only screen and (max-width: 750px) {
+
     .modalpresale-content-desc {
-        font-size: 16px;
+        margin-top: .5rem;
+        font-size: 12px;
     }
 }
 
 .modalpresale-content-btnctr {
-    margin-top: 3rem;
+    margin-top: 2rem;
     display: flex; justify-content: center; align-items: center;
 }
 
@@ -86,17 +86,26 @@
     display: block;
     padding: .6rem 4rem;
     border-radius: var(--border-radius-large);
-    font-size: 30px;
+    font-size: 22px;
     cursor: pointer;
     background-color: rgb(149, 31, 31);
     color: white;
     text-align: center;
 }
 
+
 @media only screen and (max-width: 750px) {
+
+    .modalpresale-content-btnctr {
+        margin-top: 2rem;
+
+    }
+
     .modalpresale-content-btnctr-btn {
-        font-size: 24px;
+        padding: .6rem 4rem;
+        font-size: 16px;
+        border-radius: var(--border-radius-small);
+
     }
 }
-
 
