@@ -548,11 +548,24 @@ class Comp_scores extends React.Component {
             <div className={cn(style['compscores-top-left-title'])}>
               {this.props.data.name || this.props.data.token_name} (
               {this.props.data.symbol || this.props.data.token_symbol})
+              {this.props.data.chain_id === '56' ? (
+                <img src="/images/tokens/bnb.png" />
+              ) : null}
+              {this.props.data.chain_id === '1' ? (
+                <img src="/images/tokens/eth.png" />
+              ) : null}
+              {this.props.data.chain_id === '137' ? (
+                <img src="/images/polygon.png" />
+              ) : null}
+              {this.props.data.chain_id === '' ? (
+                <img src="/images/tokens/" />
+              ) : null}
             </div>
             <div className={cn(style['compscores-top-left-address'])}>
               {this.props.data.address}
             </div>
           </div>
+
           <div className={cn(style['compscores-top-right'])}>
             Holders: <Comp_scroll_number data={this.props.data.holder_count} />
           </div>
@@ -1204,7 +1217,12 @@ class Audits extends React.Component {
     return (
       <>
         <Head
-          title={(this.props.name || this.props.token_name) + " (" + (this.props.symbol || this.props.token_symbol) + ") | Blockchain Security with AI"}
+          title={
+            (this.props.name || this.props.token_name) +
+            ' (' +
+            (this.props.symbol || this.props.token_symbol) +
+            ') | Blockchain Security with AI'
+          }
           desc="Contract audit and investment security with artificial intelligence. Safubase is a security company."
         />
 

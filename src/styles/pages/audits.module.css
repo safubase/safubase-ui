@@ -134,6 +134,13 @@ COMPONENT CIRCLE
 
 .compscores-top-left-title {
   font-size: 17px; font-weight: 600;
+  display: flex; justify-content: flex-start; align-items: center;
+}
+
+.compscores-top-left-title > img {
+  width: 20px;
+  margin-left: .8rem;
+  display: block;
 }
 
 .compscores-top-left-address {
