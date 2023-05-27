@@ -521,6 +521,10 @@ class Comp_scores extends React.Component {
     const warnings_div = this.progress_warnings_ref.current;
     const passed_div = this.progress_passed_ref.current;
 
+    const neutral_count = this.props.data.neutral
+      ? this.props.data.neutral.split('_').length
+      : 0;
+
     const passed_count = this.props.data.passed
       ? this.props.data.passed.split('_').length
       : 0;
@@ -529,10 +533,12 @@ class Comp_scores extends React.Component {
       ? this.props.data.warnings.split('_').length
       : 0;
 
+    const neutral_percent = 100 / (8 / neutral_count);
     const warnings_percent = 100 / (8 / warnings_count);
     const passed_percent = 100 / (8 / passed_count);
 
     setTimeout(() => {
+      neutral_div.style.width = neutral_percent + '%';
       warnings_div.style.width = warnings_percent + '%';
       passed_div.style.width = passed_percent + '%';
     }, 100);
