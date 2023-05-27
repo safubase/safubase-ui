@@ -602,7 +602,12 @@ class Comp_scores extends React.Component {
               <div
                 className={cn(style['compscores-bottom-right-barctr-label'])}
               >
-                <span>0</span> Ineffective
+                <span>
+                  {this.props.data.neutral
+                    ? this.props.data.neutral.split('_').length
+                    : 0}
+                </span>
+                Ineffective
               </div>
 
               <div className={cn(style['compscores-bottom-right-barctr-bar'])}>
