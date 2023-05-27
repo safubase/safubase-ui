@@ -150,9 +150,21 @@ class Sidebar extends React.Component {
             </a>
           </div>
 
-          <div className={cn(style['sidebarctr-sidebar-socials'])}>
+          <div
+            className={cn(
+              style['sidebarctr-sidebar-socials'],
+              this.context.state.ui_sidebar_open
+                ? style['sidebarctr-sidebar-socialsopen']
+                : null
+            )}
+          >
             <a
-              className={cn(style['sidebarctr-sidebar-socials-iconctr'])}
+              className={cn(
+                style['sidebarctr-sidebar-socials-iconctr'],
+                this.context.state.ui_sidebar_open
+                  ? style['sidebarctr-sidebar-socials-iconctropen']
+                  : null
+              )}
               href="https://t.me/safubase"
               target="_blank"
             >
@@ -160,7 +172,12 @@ class Sidebar extends React.Component {
             </a>
 
             <a
-              className={cn(style['sidebarctr-sidebar-socials-iconctr'])}
+              className={cn(
+                style['sidebarctr-sidebar-socials-iconctr'],
+                this.context.state.ui_sidebar_open
+                  ? style['sidebarctr-sidebar-socials-iconctropen']
+                  : null
+              )}
               href="https://instagram.com/safubase"
               target="_blank"
             >
@@ -168,7 +185,12 @@ class Sidebar extends React.Component {
             </a>
 
             <a
-              className={cn(style['sidebarctr-sidebar-socials-iconctr'])}
+              className={cn(
+                style['sidebarctr-sidebar-socials-iconctr'],
+                this.context.state.ui_sidebar_open
+                  ? style['sidebarctr-sidebar-socials-iconctropen']
+                  : null
+              )}
               href="https://twitter.com/safubase"
               target="_blank"
             >

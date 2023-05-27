@@ -91,10 +91,21 @@
   width: 100%;
 }
 
+.sidebarctr-sidebar-socialsopen {
+  display: flex; justify-content: center; align-items: center;
+}
+
 .sidebarctr-sidebar-socials-iconctr {
   display: block;
   margin-top: 1.2rem;
   width: 100%;
+
+}
+
+.sidebarctr-sidebar-socials-iconctropen {
+  margin: 0 .4rem;
+  width: auto;
+
 }
 
 .sidebarctr-sidebar-socials-iconctr > svg {
