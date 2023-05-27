@@ -511,11 +511,13 @@ class Comp_scores extends React.Component {
     super(props);
     this.state = {};
 
+    this.progress_neutral_ref = React.createRef();
     this.progress_warnings_ref = React.createRef();
     this.progress_passed_ref = React.createRef();
   }
 
   componentDidMount() {
+    const neutral_div = this.progress_neutral_ref.current;
     const warnings_div = this.progress_warnings_ref.current;
     const passed_div = this.progress_passed_ref.current;
 
@@ -599,6 +601,7 @@ class Comp_scores extends React.Component {
 
               <div className={cn(style['compscores-bottom-right-barctr-bar'])}>
                 <div
+                  ref={this.progress_neutral_ref}
                   className={cn(
                     style['compscores-bottom-right-barctr-bar-progressfailed']
                   )}
@@ -617,6 +620,7 @@ class Comp_scores extends React.Component {
                 </span>{' '}
                 Warnings
               </div>
+
               <div className={cn(style['compscores-bottom-right-barctr-bar'])}>
                 <div
                   ref={this.progress_warnings_ref}
@@ -1047,7 +1051,7 @@ class Comp_info_boxes2 extends React.Component {
         <div
           className={cn(
             style['compinfoboxes2-box'],
-            this.props.is_anti_whale === '0'
+            this.props.data.is_anti_whale === '0'
               ? style['compinfoboxes2-boxredbg']
               : style['compinfoboxes2-boxgreenbg']
           )}
@@ -1059,14 +1063,14 @@ class Comp_info_boxes2 extends React.Component {
             Indicates wether a token has anti whale protection or not.
           </div>
           <div className={cn(style['compinfoboxes2-box-value'])}>
-            {this.props.is_anti_whale === '1' ? 'Yes' : 'No'}
+            {this.props.data.is_anti_whale === '1' ? 'Yes' : 'No'}
           </div>
         </div>
 
         <div
           className={cn(
             style['compinfoboxes2-box'],
-            this.props.is_blacklisted === '1'
+            this.props.data.is_blacklisted === '1'
               ? style['compinfoboxes2-boxredbg']
               : style['compinfoboxes2-boxgreenbg']
           )}
@@ -1078,7 +1082,7 @@ class Comp_info_boxes2 extends React.Component {
             Indicates wether a token is blacklisted or not
           </div>
           <div className={cn(style['compinfoboxes2-box-value'])}>
-            {this.props.is_blacklisted === '1' ? 'Yes' : 'No'}
+            {this.props.data.is_blacklisted === '1' ? 'Yes' : 'No'}
           </div>
         </div>
 
