@@ -606,7 +606,7 @@ class Comp_scores extends React.Component {
                   {this.props.data.neutral
                     ? this.props.data.neutral.split('_').length
                     : 0}
-                </span>
+                </span>{' '}
                 Ineffective
               </div>
 
