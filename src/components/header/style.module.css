@@ -93,11 +93,15 @@
 }
 
 .header-nav-socials a {
-  color: white;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.header-nav-socials a:hover {
+  color: rgba(255, 255, 255, 1);
 }
 
 .header-nav-socials svg {
-  color: white;
+
   font-size: 26px;
   width: 26px;
   margin-right: 1.4rem;
