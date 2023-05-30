@@ -1154,7 +1154,7 @@ class Comp_info_boxes2 extends React.Component {
           className={cn(
             style['compinfoboxes2-box'],
             this.props.data.is_in_dex === '0'
-              ? style['compinfoboxes2-boxredbg']
+              ? null
               : style['compinfoboxes2-boxgreenbg']
           )}
         >
