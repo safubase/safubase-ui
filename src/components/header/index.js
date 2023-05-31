@@ -110,7 +110,7 @@ class Header extends React.Component {
               if (window.location.pathname !== '/') {
                 e.preventDefault();
 
-                window.location.replace('http://safubase.com#complastadts');
+                window.location.replace('https://safubase.com#complastadts');
               }
             }}
             href="#complastadts"
@@ -130,7 +130,9 @@ class Header extends React.Component {
               if (window.location.pathname !== '/') {
                 e.preventDefault();
 
-                window.location.replace('http://safubase.com#compwhaletracker');
+                window.location.replace(
+                  'https://safubase.com#compwhaletracker'
+                );
               }
             }}
             href="#compwhaletracker"
@@ -151,7 +153,7 @@ class Header extends React.Component {
                 e.preventDefault();
 
                 window.location.replace(
-                  'http://safubase.com#compupcomingunlocks'
+                  'https://safubase.com#compupcomingunlocks'
                 );
               }
             }}
