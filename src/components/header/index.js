@@ -121,7 +121,7 @@ class Header extends React.Component {
           </a>
 
           <a
-            onClick={() => {
+            onClick={(e) => {
               this.setState({
                 ...this.state,
                 nav_open: false,
@@ -143,7 +143,7 @@ class Header extends React.Component {
           </a>
 
           <a
-            onClick={() => {
+            onClick={(e) => {
               this.setState({
                 ...this.state,
                 nav_open: false,
