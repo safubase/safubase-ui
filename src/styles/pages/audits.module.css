@@ -271,7 +271,7 @@ COMPONENT CIRCLE
   width: 0%; height: 100%;
   position: absolute;
   background-color: var(--blue);
-  transition: all 2s ease-in;
+  transition: all 2s ease;
 }
 
 .compscores-bottom-right-barctr-bar-progresspassed {
