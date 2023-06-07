@@ -66,7 +66,7 @@ class Sidebar extends React.Component {
       >
         <div className={cn(style['sidebarctr-sidebar'])}>
           <div className={cn(style['sidebarctr-sidebar-logo'])}>
-            <a href="https://safubase.com" target="_self">
+            <a href="https://quontral.com" target="_self">
               <img src="/images/quontral.png" />
             </a>
           </div>
@@ -109,7 +109,7 @@ class Sidebar extends React.Component {
           <div className={cn(style['sidebarctr-sidebar-top'])}>
             <a
               className={cn(style['sidebarctr-sidebar-top-iconctr'])}
-              href="https://docs.safubase.com/safubase-api/quick-start"
+              href="https://docs.quontral.com/quontral-api/quick-start"
               target="_blank"
             >
               <Icon_braces />
@@ -129,12 +129,12 @@ class Sidebar extends React.Component {
           <div className={cn(style['sidebarctr-sidebar-top'])}>
             <a
               className={cn(style['sidebarctr-sidebar-top-iconctr'])}
-              href="https://docs.safubase.com"
+              href="https://docs.quontral.com"
               target="_blank"
             >
               <Icon_doc
                 active={
-                  this.state.pathname === 'docs.safubase.com' ? true : false
+                  this.state.pathname === 'docs.quontral.com' ? true : false
                 }
               />
 
@@ -165,7 +165,7 @@ class Sidebar extends React.Component {
                   ? style['sidebarctr-sidebar-socials-iconctropen']
                   : null
               )}
-              href="https://t.me/safubase"
+              href="https://t.me/quontral"
               target="_blank"
             >
               <Icon_telegram />
@@ -178,7 +178,7 @@ class Sidebar extends React.Component {
                   ? style['sidebarctr-sidebar-socials-iconctropen']
                   : null
               )}
-              href="https://instagram.com/safubase"
+              href="https://instagram.com/quontral"
               target="_blank"
             >
               <Icon_instagram />
@@ -191,7 +191,7 @@ class Sidebar extends React.Component {
                   ? style['sidebarctr-sidebar-socials-iconctropen']
                   : null
               )}
-              href="https://twitter.com/safubase"
+              href="https://twitter.com/quontral"
               target="_blank"
             >
               <Icon_twitter />

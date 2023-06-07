@@ -81,7 +81,7 @@ class Header extends React.Component {
           </a>
 
           <a
-            href="https://docs.safubase.com"
+            href="https://docs.quontral.com"
             target="_blank"
             className={cn(style['header-nav-item'])}
           >
@@ -110,7 +110,7 @@ class Header extends React.Component {
               if (window.location.pathname !== '/') {
                 e.preventDefault();
 
-                window.location.replace('https://safubase.com#complastadts');
+                window.location.replace('https://quontral.com#complastadts');
               }
             }}
             href="#complastadts"
@@ -131,7 +131,7 @@ class Header extends React.Component {
                 e.preventDefault();
 
                 window.location.replace(
-                  'https://safubase.com#compwhaletracker'
+                  'https://quontral.com#compwhaletracker'
                 );
               }
             }}
@@ -153,7 +153,7 @@ class Header extends React.Component {
                 e.preventDefault();
 
                 window.location.replace(
-                  'https://safubase.com#compupcomingunlocks'
+                  'https://quontral.com#compupcomingunlocks'
                 );
               }
             }}
@@ -165,15 +165,15 @@ class Header extends React.Component {
           </a>
 
           <div className={cn(style['header-nav-socials'])}>
-            <a href="https://t.me/safubase" target="_blank">
+            <a href="https://t.me/quontral" target="_blank">
               <Icon_telegram />
             </a>
 
-            <a href="https://instagram.com/safubase" target="_blank">
+            <a href="https://instagram.com/quontral" target="_blank">
               <Icon_instagram />
             </a>
 
-            <a href="https://twitter.com/safubase" target="_blank">
+            <a href="https://twitter.com/quontral" target="_blank">
               <Icon_twitter />
             </a>
           </div>
@@ -227,9 +227,6 @@ class Header extends React.Component {
           )}
         >
           <a
-            onClick={(e) => {
-              //e.preventDefault();
-            }}
             target="_blank"
             href="https://www.pinksale.finance/launchpad/0x6fC397ddF50A70817b41dF1BAb806C1A68fA7Ae1?chain=BSC"
             className={cn(style['header-notificationmenu-item'])}

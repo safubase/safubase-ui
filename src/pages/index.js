@@ -708,7 +708,7 @@ class Comp_last_adts extends React.Component {
 
                   <a
                     href={
-                      'https://safubase.com/audits/' +
+                      'https://quontral.com/audits/' +
                       curr.address +
                       '?chain_id=' +
                       curr.chain_id
