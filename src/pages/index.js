@@ -278,7 +278,7 @@ class Comp_input extends React.Component {
 
     // Modal progress bar done...
     window.location.replace(
-      'https://safubase.com/audits/' +
+      'https://quontral.com/audits/' +
         this.state.address +
         '?chain_id=' +
         this.state.network.chain_id
