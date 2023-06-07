@@ -29,7 +29,7 @@ class Header extends React.Component {
     this.state = {
       nav_open: false,
       not_open: false,
-      not_opened: false,
+      not_opened: true,
     };
 
     this.ref_notificationmenu = React.createRef();
@@ -37,11 +37,7 @@ class Header extends React.Component {
 
   componentDidMount() {}
 
-  componentDidUpdate() {
-    if (this.state.not_opened && !this.state.not_open) {
-      //this.ref_notificationmenu.current.innerHTML = null;
-    }
-  }
+  componentDidUpdate() {}
 
   componentWillUnmount() {}
 
@@ -226,7 +222,9 @@ class Header extends React.Component {
             this.state.not_open ? style['header-notificationmenuopen'] : null
           )}
         >
-          <a
+          {/**
+             * 
+             *           <a
             target="_blank"
             href="https://www.pinksale.finance/launchpad/0x6fC397ddF50A70817b41dF1BAb806C1A68fA7Ae1?chain=BSC"
             className={cn(style['header-notificationmenu-item'])}
@@ -236,6 +234,7 @@ class Header extends React.Component {
             </div>
             Safubase in Presale, BUY NOW!!!
           </a>
+             */}
         </div>
       </header>
     );

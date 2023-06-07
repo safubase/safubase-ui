@@ -1,5 +1,6 @@
 // MODULES
 import React from 'react';
+import axios from 'axios';
 import cn from 'classnames';
 
 // COMPONENTS
@@ -780,6 +781,7 @@ class Comp_profile_input extends React.Component {
     this.state = {
       search_value: '',
       address: '',
+      price: 0,
     };
 
     this.address_set = this.address_set.bind(this);
@@ -815,11 +817,37 @@ class Comp_profile_input extends React.Component {
     }
   }
 
+  componentDidMount() {
+    axios
+      .get(
+        'https://bsc.api.0x.org/swap/v1/price?sellToken=0x8F5A25BFA6cE7bcF1517148724beB3649aC49d64&buyToken=BUSD&sellAmount=1000000000000000000'
+      )
+      .then((res) => {
+        this.setState({
+          ...this.state,
+          price: Number(res.data.price).toFixed(2),
+        });
+      });
+
+    setInterval(() => {
+      axios
+        .get(
+          'https://bsc.api.0x.org/swap/v1/price?sellToken=0x8F5A25BFA6cE7bcF1517148724beB3649aC49d64&buyToken=BUSD&sellAmount=1000000000000000000'
+        )
+        .then((res) => {
+          this.setState({
+            ...this.state,
+            price: Number(res.data.price).toFixed(2),
+          });
+        });
+    }, 4000);
+  }
+
   componentDidUpdate() {
     this.address_set();
   }
 
-  componentDidMount() {}
+  componentWillUnmount() {}
 
   render() {
     return (
@@ -843,7 +871,7 @@ class Comp_profile_input extends React.Component {
 
         <div className={cn(style['compprofileinput-right'])}>
           <a
-            href="https://www.pinksale.finance/launchpad/0x6fC397ddF50A70817b41dF1BAb806C1A68fA7Ae1?chain=BSC"
+            href="https://cryptoralia.com/quontral"
             target="_blank"
             className={cn(style['compprofileinput-right-buynow'])}
           >
@@ -851,13 +879,13 @@ class Comp_profile_input extends React.Component {
               <span
                 className={cn(style['compprofileinput-right-buynow-top-token'])}
               >
-                SAFUBASE
+                QUONTRAL
               </span>
 
               <span
                 className={cn(style['compprofileinput-right-buynow-top-price'])}
               >
-                Presale
+                ${this.state.price}
               </span>
             </div>
 
@@ -919,6 +947,7 @@ class Comp_profile_input_mobile extends React.Component {
     this.state = {
       search_value: '',
       address: '',
+      price: 0,
     };
 
     this.address_set = this.address_set.bind(this);
@@ -954,17 +983,43 @@ class Comp_profile_input_mobile extends React.Component {
     }
   }
 
+  componentDidMount() {
+    axios
+      .get(
+        'https://bsc.api.0x.org/swap/v1/price?sellToken=0x8F5A25BFA6cE7bcF1517148724beB3649aC49d64&buyToken=BUSD&sellAmount=1000000000000000000'
+      )
+      .then((res) => {
+        this.setState({
+          ...this.state,
+          price: Number(res.data.price).toFixed(2),
+        });
+      });
+
+    setInterval(() => {
+      axios
+        .get(
+          'https://bsc.api.0x.org/swap/v1/price?sellToken=0x8F5A25BFA6cE7bcF1517148724beB3649aC49d64&buyToken=BUSD&sellAmount=1000000000000000000'
+        )
+        .then((res) => {
+          this.setState({
+            ...this.state,
+            price: Number(res.data.price).toFixed(2),
+          });
+        });
+    }, 4000);
+  }
+
   componentDidUpdate() {
     this.address_set();
   }
 
-  componentDidMount() {}
+  componentWillUnmount() {}
 
   render() {
     return (
       <div className={cn(style['compprofileinputmobile'])}>
         <a
-          href="https://www.pinksale.finance/launchpad/0x6fC397ddF50A70817b41dF1BAb806C1A68fA7Ae1?chain=BSC"
+          href="https://cryptoralia.com/quontral"
           target="_blank"
           className={cn(style['compprofileinputmobile-buynow'])}
         >
@@ -972,13 +1027,13 @@ class Comp_profile_input_mobile extends React.Component {
             <span
               className={cn(style['compprofileinputmobile-buynow-top-token'])}
             >
-              SAFUBASE
+              QUONTRAL
             </span>
 
             <span
               className={cn(style['compprofileinputmobile-buynow-top-price'])}
             >
-              Presale
+              ${this.state.price}
             </span>
           </div>
 
