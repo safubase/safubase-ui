@@ -1944,16 +1944,6 @@ class Home extends React.Component {
       ui_toasts: [],
     };
 
-    /*
-      TIMER FUNCTIONS
-    */
-    setTimeout(() => {
-      this.setState({
-        ...this.state,
-        modal_presale_open: true,
-      });
-    }, 5000);
-
     /**
      *
      * ASYNC PROMISE CALLS
@@ -2027,14 +2017,12 @@ class Home extends React.Component {
     return (
       <>
         <Head
-          title="Safubase.com | Blockchain Security with AI"
+          title="Quontral.com | Blockchain Security with AI"
           desc="Contract audit and investment security with artificial intelligence. Safubase is a security company."
         />
 
         <Layout_user>
           <section className={cn('section', style['sectiondash'])}>
-            {this.state.modal_presale_open ? <Modal_presale /> : null}
-
             <div className={cn(style['sectiondash-left'])}>
               <Comp_profile_input_mobile />
               <Comp_hello />
