@@ -89,7 +89,7 @@ class Sidebar extends React.Component {
           <div className={cn(style['sidebarctr-sidebar-top'])}>
             <a
               className={cn(style['sidebarctr-sidebar-top-iconctr'])}
-              href="https://docs.quontral.com/quontral-api/quick-start"
+              href="https://docs.quontral.com/quontral-swap-api/quick-start"
               target="_blank"
             >
               <Icon_braces />
