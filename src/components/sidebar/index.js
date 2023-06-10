@@ -89,26 +89,6 @@ class Sidebar extends React.Component {
           <div className={cn(style['sidebarctr-sidebar-top'])}>
             <a
               className={cn(style['sidebarctr-sidebar-top-iconctr'])}
-              href="https://www.pinksale.finance/launchpad/0x6fC397ddF50A70817b41dF1BAb806C1A68fA7Ae1?chain=BSC"
-              target="_blank"
-            >
-              <Icon_chart />
-
-              <span
-                className={cn(
-                  this.context.state.ui_sidebar_open
-                    ? style['sidebarctr-sidebar-top-iconctr-spanactive']
-                    : null
-                )}
-              >
-                Presale
-              </span>
-            </a>
-          </div>
-
-          <div className={cn(style['sidebarctr-sidebar-top'])}>
-            <a
-              className={cn(style['sidebarctr-sidebar-top-iconctr'])}
               href="https://docs.quontral.com/quontral-api/quick-start"
               target="_blank"
             >

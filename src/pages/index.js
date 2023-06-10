@@ -2073,7 +2073,7 @@ class Home extends React.Component {
       <>
         <Head
           title="Quontral.com | Blockchain Security with AI"
-          desc="Contract audit and investment security with artificial intelligence. Safubase is a security company."
+          desc="Contract audit and investment security with artificial intelligence. Quontral is a security company."
         />
 
         <Layout_user>

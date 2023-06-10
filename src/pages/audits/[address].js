@@ -1238,7 +1238,7 @@ class Audits extends React.Component {
             (this.props.symbol || this.props.token_symbol) +
             ') | Blockchain Security with AI'
           }
-          desc="Contract audit and investment security with artificial intelligence. Safubase is a security company."
+          desc="Contract audit and investment security with artificial intelligence. Quontral is a security company."
         />
 
         <Layout_user height="auto">

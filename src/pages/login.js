@@ -307,8 +307,8 @@ class Login extends React.Component {
     return (
       <>
         <Head
-          title="Safubase.com | Blockchain Security with AI"
-          desc="Contract audit and investment security with artificial intelligence. Safubase is a security company."
+          title="Quontral.com | Blockchain Security with AI"
+          desc="Contract audit and investment security with artificial intelligence. Quontral is a security company."
         />
 
         <Layout_login>
