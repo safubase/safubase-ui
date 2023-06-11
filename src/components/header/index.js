@@ -84,15 +84,6 @@ class Header extends React.Component {
             <Icon_docs active /> <span>DOCS</span>
           </a>
 
-          <label className={cn(style['header-nav-label'])}>FINANCE</label>
-
-          <a
-            href="https://www.pinksale.finance/launchpad/0x6fC397ddF50A70817b41dF1BAb806C1A68fA7Ae1?chain=BSC"
-            target="_blank"
-            className={cn(style['header-nav-item'])}
-          >
-            <Icon_chart active /> <span>Presale</span>
-          </a>
 
           <label className={cn(style['header-nav-label'])}>CONTENT</label>
 
