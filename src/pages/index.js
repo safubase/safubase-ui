@@ -81,7 +81,7 @@ export async function getServerSideProps({ req }) {
 
   return {
     props: {
-      audits: [],
+      audits: api_res_get_audits.data,
     },
   };
 }
