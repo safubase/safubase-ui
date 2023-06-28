@@ -44,7 +44,8 @@ class Profile extends React.Component {
   render() {
     return (
       <>
-        <Head title="safubase" desc="safubase" />
+        <Head title="quontral" desc="quontral" />
+
         <UserLayout
           element={
             <section className={cn('section', style['sectionprofile'])}>

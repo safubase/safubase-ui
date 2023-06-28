@@ -58,13 +58,15 @@ function global_sort_audits_by_date(data) {
  *
  */
 export async function getServerSideProps({ req }) {
+  const props = {
+    audits: [],
+  };
+
   const api_res_get_audits = await UTILS_API.blockchain_get_audits(1);
 
   if (api_res_get_audits.code) {
     return {
-      props: {
-        audits: [],
-      },
+      props: props,
     };
   }
 
@@ -79,10 +81,10 @@ export async function getServerSideProps({ req }) {
       .split('T')[0];
   }
 
+  props.audits = api_res_get_audits.data;
+
   return {
-    props: {
-      audits: api_res_get_audits.data,
-    },
+    props: props,
   };
 }
 

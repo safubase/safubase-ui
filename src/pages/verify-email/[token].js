@@ -66,7 +66,7 @@ class Comp_verify_email extends React.Component {
     });
 
     setTimeout(() => {
-      window.location.replace('https://safubase.com');
+      window.location.replace('https://quontral.com');
     }, 1500);
   }
 

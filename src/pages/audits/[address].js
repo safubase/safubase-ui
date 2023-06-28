@@ -595,7 +595,7 @@ class Comp_scores extends React.Component {
               detailed examination, <strong>3 important issues</strong> were
               discovered. <strong>Found 1 bug</strong> that is easy to fix. You
               can get information about these issues and get a service offer by
-              contacting Safubase!
+              contacting Quontral!
             </div>
 
             <div className={cn(style['compscores-bottom-right-barctr'])}>

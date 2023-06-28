@@ -69,7 +69,7 @@ class Header extends React.Component {
           <label className={cn(style['header-nav-label'])}>DEVELOPER</label>
 
           <a
-            href="https://docs.safubase.com/safubase-developer/quick-start"
+            href="https://docs.quontral.com/quontral-developer/quick-start"
             target="_blank"
             className={cn(style['header-nav-item'])}
           >
@@ -83,7 +83,6 @@ class Header extends React.Component {
           >
             <Icon_docs active /> <span>DOCS</span>
           </a>
-
 
           <label className={cn(style['header-nav-label'])}>CONTENT</label>
 
