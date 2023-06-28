@@ -1997,8 +1997,6 @@ class Comp_upcoming_unlocks extends React.Component {
  * * * PAGE
  *
  */
-
-//
 class Home extends React.Component {
   static contextType = Context;
 
