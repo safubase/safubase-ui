@@ -192,7 +192,7 @@ class Comp_modal_login extends React.Component {
               });
 
               setTimeout(() => {
-                window.location.replace('https://safubase.com');
+                window.location.replace('https://quontral.com');
               }, 1500);
             }}
             className={cn(
@@ -283,7 +283,7 @@ class Login extends React.Component {
       context_state.user_role = null;
       context_state.user_img = null;
     } else if (api_res_get_profile.data) {
-      window.location.replace('https://safubase.com');
+      window.location.replace('https://quontral.com');
       return;
     }
 

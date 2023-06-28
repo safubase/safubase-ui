@@ -58,7 +58,17 @@ function global_sort_audits_by_date(data) {
  *
  */
 export async function getServerSideProps({ req }) {
-  const api_res_get_audits = await UTILS_API.blockchain_get_audits(1);
+  /**
+   * 
+   *   const api_res_get_audits = await UTILS_API.blockchain_get_audits(1);
+
+  if (api_res_get_audits.code) {
+    return {
+      props: {
+        audits: [],
+      },
+    };
+  }
 
   global_sort_audits_by_date(api_res_get_audits.data);
 
@@ -70,10 +80,12 @@ export async function getServerSideProps({ req }) {
       .toISOString()
       .split('T')[0];
   }
+   * 
+   */
 
   return {
     props: {
-      audits: api_res_get_audits.data,
+      audits: [],
     },
   };
 }
@@ -502,6 +514,10 @@ class Comp_last_adts extends React.Component {
   async api_get_audits() {
     setInterval(async () => {
       const api_res_audits = await UTILS_API.blockchain_get_audits(1);
+
+      if (api_res_audits.code) {
+        return;
+      }
 
       global_sort_audits_by_date(api_res_audits.data);
 
@@ -2004,6 +2020,7 @@ class Home extends React.Component {
      * ASYNC PROMISE CALLS
      *
      */ // [get_profile(), another_async_func()]
+
     const api_responses = await Promise.all([UTILS_API.get_profile(1)]);
     const api_res_get_profile = api_responses[0];
 
@@ -2040,6 +2057,7 @@ class Home extends React.Component {
      * WALLET CONFIG
      *
      */
+
     UTILS.wallet_add_listeners(this.context);
     const wallet_accounts = await UTILS.wallet_req_accounts();
 
@@ -2047,7 +2065,7 @@ class Home extends React.Component {
       context_state.wallet_address = wallet_accounts[0];
     }
 
-    /**
+    /*
      *
      * CONTEXT UPDATE
      *

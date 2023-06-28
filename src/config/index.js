@@ -3,7 +3,7 @@ const CONFIG = {
     NODE_ENV: 'production',
     CAPTCHA_SITE_KEY: '481f6c60-f60b-453c-9510-fc777f1a671d',
   },
-  api_url: 'https://api.safubase.com',
+  api_url: 'https://api.quontral.com',
 };
 
 export default CONFIG;
